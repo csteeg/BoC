@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.0">
+	<class name="Diggero.Model.Comment, Diggero" table="comment" dynamic-update="true">
+		<id name="Id" unsaved-value="0">
+			<generator class="native" />
+		</id>
+		<property name="Text" type="StringClob" not-null="true" />
+		<property name="PostedAt" not-null="true" />
+		<many-to-one name="Author" class="Steeg.Framework.Security.User, Steeg.Framework" />
+    <many-to-one name="CommentFor" class="Diggero.Model.Diggable, Diggero" />
+  </class>
+</hibernate-mapping>
+

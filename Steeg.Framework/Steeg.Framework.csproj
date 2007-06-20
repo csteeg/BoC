@@ -1,0 +1,119 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AE09A0BD-BE87-4606-95F2-C4E765F2A346}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Steeg.Framework</RootNamespace>
+    <AssemblyName>Steeg.Framework</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=0.0.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL" />
+    <Reference Include="Castle.DynamicProxy, Version=1.1.5.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\experimentals\CastleProject\build\net-2.0\Castle.DynamicProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Facilities.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\experimentals\CastleProject\build\net-2.0\Castle.Facilities.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Facilities.NHibernateIntegration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\experimentals\CastleProject\build\net-2.0\Castle.Facilities.NHibernateIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.MicroKernel, Version=1.0.0.2, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\experimentals\CastleProject\build\net-2.0\Castle.MicroKernel.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=1.0.0.2, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\experimentals\CastleProject\build\net-2.0\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=1.2.0.1001, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CastleExt\Facilities\NHibernateIntegration\AutoSessionStore.cs" />
+    <Compile Include="Dao\IRoleDao.cs" />
+    <Compile Include="Dao\DaoException.cs" />
+    <Compile Include="Dao\IGenericDao.cs" />
+    <Compile Include="Dao\NHibernateDao\RoleDao.cs" />
+    <Compile Include="Helpers\Encryption.cs" />
+    <Compile Include="Helpers\Transactions.cs" />
+    <Compile Include="Security\RoleInUseException.cs" />
+    <Compile Include="Security\RoleExistsException.cs" />
+    <Compile Include="Security\RoleNotFoundException.cs" />
+    <Compile Include="Security\Role.cs" />
+    <Compile Include="Security\LoginInUseException.cs" />
+    <Compile Include="Security\EmailInUseException.cs" />
+    <Compile Include="Security\UserServiceException.cs" />
+    <Compile Include="Dao\IUserDao.cs" />
+    <Compile Include="Dao\NHibernateDao\INHiberNateGenericDao.Generic.cs" />
+    <Compile Include="Dao\NHibernateDao\NHibernateGenericDao.Generic.cs" />
+    <Compile Include="Dao\NHibernateDao\UserDao.cs" />
+    <Compile Include="InvalidDataException.cs" />
+    <Compile Include="Security\User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\UserNotFoundException.cs" />
+    <Compile Include="Security\IUserService.cs" />
+    <Compile Include="Security\DefaultUserService.cs" />
+    <Compile Include="SteegWindsorContainer.cs" />
+    <Compile Include="Web\Security\MemberShipProvider.cs" />
+    <Compile Include="Security\Roles.cs" />
+    <Compile Include="Web\Security\RoleProvider.cs" />
+    <Compile Include="Web\UI\Helpers\XmlHelper\XmlHelper.cs" />
+    <Compile Include="Web\SteegApplicationModule.cs" />
+    <Compile Include="Web\UI\ServicedControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\ServicedPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\Helpers\WebServices\ServicedWebService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Dao\NHibernateDao\Hbm\User.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Dao\NHibernateDao\Hbm\Role.hbm.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

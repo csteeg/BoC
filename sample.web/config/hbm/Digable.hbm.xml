@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.0">
+	<class name="Diggero.Model.Diggable, Diggero" table="profile" dynamic-update="true">
+		<id name="Id" column="id" unsaved-value="0">
+			<generator class="native" />
+		</id>
+    <discriminator column="ContentType" />
+    <subclass name="Diggero.Model.Profile, Diggero" discriminator-value="Profile">
+      <property name="Nick" />
+      <property name="SexualPreference" />
+      <property name="Ethnicity" />
+      <property name="BodyType" />
+      <property name="CupSize" length="2" />
+      <property name="RemoteId" />
+      <property name="Description" length="4000" />
+      <property name="Fantasy" length="4000" />
+      <property name="Age" />
+      <property name="Gender" />
+      <property name="HasAudio" />
+      <property name="HasPhone" />
+      <property name="LastSeen" />
+      <many-to-one name="FromProfileSite" column="site_id" class="Diggero.Model.ProfileSite, Diggero" />
+    </subclass>
+  </class>
+</hibernate-mapping>
+

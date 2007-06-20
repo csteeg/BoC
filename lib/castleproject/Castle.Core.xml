@@ -1,0 +1,1533 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Castle.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Castle.Core.CastleComponentAttribute">
+            <summary>
+            This attribute is usefull only when you want to register all components
+            on an assembly as a batch process. 
+            By doing so, the batch register will look 
+            for this attribute to distinguish components from other classes.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.LifestyleAttribute">
+            <summary>
+            Base for Attributes that want to express lifestyle
+            chosen by the component.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.InterceptorAttribute">
+            <summary>
+            Used to declare that a component wants interceptors acting on it.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.InterceptorAttribute.#ctor(System.String)">
+            <summary>
+            Constructs the InterceptorAttribute pointing to
+            a key to a interceptor
+            </summary>
+            <param name="componentKey"></param>
+        </member>
+        <member name="M:Castle.Core.InterceptorAttribute.#ctor(System.Type)">
+            <summary>
+            Constructs the InterceptorAttribute pointing to
+            a service
+            </summary>
+            <param name="interceptorType"></param>
+        </member>
+        <member name="T:Castle.Core.SingletonAttribute">
+            <summary>
+            Indicates that the target components wants a
+            singleton lifestyle.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.TransientAttribute">
+            <summary>
+            Indicates that the target components wants a
+            transient lifestyle.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.PerThreadAttribute">
+            <summary>
+            Indicates that the target components wants a
+            per thread lifestyle.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.PooledAttribute">
+            <summary>
+            Indicates that the target components wants a
+            pooled lifestyle.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.CustomLifestyleAttribute">
+            <summary>
+            Indicates that the target components wants a
+            custom lifestyle.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Interceptor.IInvocation.SetArgumentValue(System.Int32,System.Object)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Interceptor.IInvocation.GetArgumentValue(System.Int32)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Interceptor.IInvocation.Proceed">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Castle.Core.Interceptor.IInvocation.TargetType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Castle.Core.Interceptor.IInvocation.Arguments">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Castle.Core.Interceptor.IInvocation.ReturnValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Castle.Core.Interceptor.IInvocation.Method">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Castle.Core.Interceptor.IInvocation.MethodInvocationTarget">
+            <summary>
+            Returns the method on the target of invocation, 
+            which can be for example the method defined on an
+            interface, if dealing with an interface proxy
+            </summary>
+        </member>
+        <member name="T:Castle.Core.Interceptor.IMethodInterceptor">
+            <summary>
+            Interface that should be implemented 
+            by any component that wishes to be referenced as interceptor.
+            </summary>
+            <remarks>
+            This interface will be replaced by IInterceptor
+            </remarks>
+        </member>
+        <member name="M:Castle.Core.Interceptor.IMethodInterceptor.Intercept(Castle.Core.Interceptor.IMethodInvocation,System.Object[])">
+            <summary>
+            Method invoked by the proxy in order to allow
+            the interceptor to do its work before and after
+            the actual invocation.
+            </summary>
+            <param name="invocation">The invocation holds the details of this interception</param>
+            <param name="args">The original method arguments</param>
+            <returns>The return value of this invocation</returns>
+        </member>
+        <member name="T:Castle.Core.Interceptor.IMethodInvocation">
+            <summary>
+            Supply information about the current method invocation.
+            </summary>
+            <remarks>
+            This interface will be replaced by IInvocation
+            </remarks>
+        </member>
+        <member name="M:Castle.Core.Interceptor.IMethodInvocation.Proceed(System.Object[])">
+            <summary>
+            The Proceed go on with the actual invocation.
+            </summary>
+            <param name="args">The arguments of the method</param>
+            <returns></returns>
+        </member>
+        <member name="P:Castle.Core.Interceptor.IMethodInvocation.Proxy">
+            <summary>
+            The proxy instance.
+            </summary>
+        </member>
+        <member name="P:Castle.Core.Interceptor.IMethodInvocation.InvocationTarget">
+            <summary>
+            The target of this invocation, which usually is the
+            instance of the class being proxy. 
+            You might change the target, but be aware of the 
+            implications.
+            </summary>
+        </member>
+        <member name="P:Castle.Core.Interceptor.IMethodInvocation.Method">
+            <summary>
+            The Method being invoked.
+            </summary>
+        </member>
+        <member name="P:Castle.Core.Interceptor.IMethodInvocation.MethodInvocationTarget">
+            <summary>
+            The Method being invoked on the target.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.Interceptor.IOnBehalfAware">
+            <summary>
+            Interceptors might implement this to receive the
+            ComponentModel ob behalf of the component where the
+            interceptor is acting.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.IVertex">
+            <summary>
+            Abstract representation of a vertex.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.GraphNode.#ctor(Castle.Core.GraphNode)">
+            <summary>
+            Kind of copy constructor
+            </summary>
+            <param name="copy"></param>
+        </member>
+        <member name="P:Castle.Core.GraphNode.Dependers">
+            <summary>
+            The nodes that dependes on this node
+            </summary>
+        </member>
+        <member name="P:Castle.Core.GraphNode.Dependents">
+            <summary>
+            The nodes that this node depends
+            </summary>
+        </member>
+        <member name="T:Castle.Core.Internal.ColorsSet">
+            <summary>
+            Represents a collection of objects
+            which are guaranted to be unique 
+            and holds a color for them
+            </summary>
+        </member>
+        <member name="T:Castle.Core.Internal.TimestampSet">
+            <summary>
+            Holds a timestamp (integer) 
+            for a given item
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Internal.LinkedList.GetNode(System.Int32)">
+            <summary>
+            Returns the node at the specified index.
+            </summary>
+            <param name="index">The lookup index.</param>
+            <returns>The node at the specified index.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            If the specified <paramref name="index"/> is greater than the
+            number of objects within the list.
+            </exception>
+        </member>
+        <member name="M:Castle.Core.Internal.LinkedList.ValidateIndex(System.Int32)">
+            <summary>
+            Validates the specified index.
+            </summary>
+            <param name="index">The lookup index.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            If the index is invalid.
+            </exception>
+        </member>
+        <member name="T:Castle.Core.IInitializable">
+            <summary>
+            Lifecycle interface. If implemented by a component,
+            the method Initialized will be invoked by the container
+            before making the component available to the external world.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.IInitializable.Initialize">
+            <summary>
+            Implementors should perform any initialization logic.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.IRecyclable">
+            <summary>
+            Only called for components that 
+            belongs to a pool when the component
+            comes back to the pool.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.IRecyclable.Recycle">
+            <summary>
+            Implementors should perform any 
+            initialization/clean up.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.IStartable">
+            <summary>
+            Interface for components that wish to be started by the container
+            </summary>
+        </member>
+        <member name="T:Castle.Core.Logging.ILoggerFactory">
+            <summary>
+            Manages the instantiation of <see cref="T:Castle.Core.Logging.ILogger"/>s.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Logging.ILoggerFactory.Create(System.Type)">
+            <summary>
+            Creates a new logger, getting the logger name from the specified type.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Logging.ILoggerFactory.Create(System.String)">
+            <summary>
+            Creates a new logger.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Logging.ILoggerFactory.Create(System.Type,Castle.Core.Logging.LoggerLevel)">
+            <summary>
+            Creates a new logger, getting the logger name from the specified type.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Logging.ILoggerFactory.Create(System.String,Castle.Core.Logging.LoggerLevel)">
+            <summary>
+            Creates a new logger.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Logging.AbstractLoggerFactory.GetConfigFile(System.String)">
+            <summary>
+            Gets the configuration file.
+            </summary>
+            <param name="filename">i.e. log4net.config</param>
+            <returns></returns>
+        </member>
+        <member name="T:Castle.Core.Logging.ConsoleFactory">
+            <summary>
+            Summary description for ConsoleFactory.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.Logging.NullLogFactory">
+            <summary>
+            NullLogFactory used when logging is turned off.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Logging.NullLogFactory.Create(System.String)">
+            <summary>
+            Creates an instance of ILogger with the specified name.
+            </summary>
+            <param name="name">Name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Castle.Core.Logging.NullLogFactory.Create(System.String,Castle.Core.Logging.LoggerLevel)">
+            <summary>
+            Creates an instance of ILogger with the specified name and LoggerLevel.
+            </summary>
+            <param name="name">Name.</param>
+            <param name="level">Level.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Castle.Core.Logging.StreamLoggerFactory">
+            <summary>
+            Creates <see cref="T:Castle.Core.Logging.StreamLogger"/> outputing 
+            to files. The name of the file is derived from the log name
+            plus the 'log' extension.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.Logging.ConsoleLogger">
+            <summary>
+            The Logger sending everything to the standard output streams.
+            This is mainly for the cases when you have a utility that
+            does not have a logger to supply.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.Logging.LevelFilteredLogger">
+            <summary>
+            The Level Filtered Logger class.  This is a base clase which
+            provides a LogLevel attribute and reroutes all functions into
+            one Log method.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.Logging.ILogger">
+            <summary>
+            Manages logging.
+            </summary>
+            <remarks>
+            This is a facade for the different logging subsystems.
+            It offers a simplified interface that follows IOC patterns
+            and a simplified priority/level/severity abstraction. 
+            </remarks>
+        </member>
+        <member name="M:Castle.Core.Logging.ILogger.Debug(System.String)">
+            <summary>
+            Logs a debug message.
+            </summary>
+            <param name="message">The Message</param>
+        </member>
+        <member name="M:Castle.Core.Logging.ILogger.Debug(System.String,System.Exception)">
+            <summary>
+            Logs a debug message. 
+            </summary>
+            <param name="message">The Message</param>
+            <param name="exception">The Exception</param>
+        </member>
+        <member name="M:Castle.Core.Logging.ILogger.Debug(System.String,System.Object[])">
+            <summary>
+            Logs a debug message.
+            </summary>
+            <param name="format">Message format</param>
+            <param name="args">Array of objects to write using format</param>
+        </member>
+        <member name="M:Castle.Core.Logging.ILogger.Info(System.String)">
+            <summary>
+            Logs an info message.
+            </summary>
+            <param name="message">The Message</param>
+        </member>
+        <member name="M:Castle.Core.Logging.ILogger.Info(System.String,System.Exception)">
+            <summary>
+            Logs an info message. 
+            </summary>
+            <param name="message">The Message</param>
+            <param name="exception">The Exception</param>
+        </member>
+        <member name="M:Castle.Core.Logging.ILogger.Info(System.String,System.Object[])">
+            <summary>
+            Logs an info message.
+            </summary>
+            <param name="format">Message format</param>
+            <param name="args">Array of objects to write using format</param>
+        </member>
+        <member name="M:Castle.Core.Logging.ILogger.Warn(System.String)">
+            <summary>
+            Logs a warn message.
+            </summary>
+            <param name="message">The Message</param>
+        </member>
+        <member name="M:Castle.Core.Logging.ILogger.Warn(System.String,System.Exception)">
+            <summary>
+            Logs a warn message. 
+            </summary>
+            <param name="message">The Message</param>
+            <param name="exception">The Exception</param>
+        </member>
+        <member name="M:Castle.Core.Logging.ILogger.Warn(System.String,System.Object[])">
+            <summary>
+            Logs a warn message.
+            </summary>
+            <param name="format">Message format</param>
+            <param name="args">Array of objects to write using format</param>
+        </member>
+        <member name="M:Castle.Core.Logging.ILogger.Error(System.String)">
+            <summary>
+            Logs an error message.
+            </summary>
+            <param name="message">The Message</param>
+        </member>
+        <member name="M:Castle.Core.Logging.ILogger.Error(System.String,System.Exception)">
+            <summary>
+            Logs an error message. 
+            </summary>
+            <param name="message">The Message</param>
+            <param name="exception">The Exception</param>
+        </member>
+        <member name="M:Castle.Core.Logging.ILogger.Error(System.String,System.Object[])">
+            <summary>
+            Logs an error message.
+            </summary>
+            <param name="format">Message format</param>
+            <param name="args">Array of objects to write using format</param>
+        </member>
+        <member name="M:Castle.Core.Logging.ILogger.FatalError(System.String)">
+            <summary>
+            Logs a fatal error message.
+            </summary>
+            <param name="message">The Message</param>
+        </member>
+        <member name="M:Castle.Core.Logging.ILogger.FatalError(System.String,System.Exception)">
+            <summary>
+            Logs a fatal error message.
+            </summary>
+            <param name="message">The Message</param>
+            <param name="exception">The Exception</param>
+        </member>
+        <member name="M:Castle.Core.Logging.ILogger.FatalError(System.String,System.Object[])">
+            <summary>
+            Logs a fatal error message.
+            </summary>
+            <param name="format">Message format</param>
+            <param name="args">Array of objects to write using format</param>
+        </member>
+        <member name="M:Castle.Core.Logging.ILogger.CreateChildLogger(System.String)">
+            <summary>
+            Create a new child logger.
+            The name of the child logger is [current-loggers-name].[passed-in-name]
+            </summary>
+            <param name="name">The Subname of this logger.</param>
+            <returns>The New ILogger instance.</returns> 
+            <exception cref="T:System.ArgumentException">If the name has an empty element name.</exception>
+        </member>
+        <member name="P:Castle.Core.Logging.ILogger.IsDebugEnabled">
+            <summary>
+            Determines if messages of priority "debug" will be logged.
+            </summary>
+            <value>True if "debug" messages will be logged.</value> 
+        </member>
+        <member name="P:Castle.Core.Logging.ILogger.IsInfoEnabled">
+            <summary>
+            Determines if messages of priority "info" will be logged.
+            </summary>
+            <value>True if "info" messages will be logged.</value>
+        </member>
+        <member name="P:Castle.Core.Logging.ILogger.IsWarnEnabled">
+            <summary>
+            Determines if messages of priority "warn" will be logged.
+            </summary>
+            <value>True if "warn" messages will be logged.</value>
+        </member>
+        <member name="P:Castle.Core.Logging.ILogger.IsErrorEnabled">
+            <summary>
+            Determines if messages of priority "error" will be logged.
+            </summary>
+            <value>True if "error" messages will be logged.</value>
+        </member>
+        <member name="P:Castle.Core.Logging.ILogger.IsFatalErrorEnabled">
+            <summary>
+            Determines if messages of priority "fatalError" will be logged.
+            </summary>
+            <value>True if "fatalError" messages will be logged.</value>
+        </member>
+        <member name="M:Castle.Core.Logging.LevelFilteredLogger.#ctor">
+            <summary>
+            Creates a new <c>LevelFilteredLogger</c>.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Logging.LevelFilteredLogger.InitializeLifetimeService">
+            <summary>
+            Keep the instance alive in a remoting scenario
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Castle.Core.Logging.LevelFilteredLogger.Debug(System.String)">
+            <summary>
+            Logs a debug message.
+            </summary>
+            <param name="message">The Message</param>
+        </member>
+        <member name="M:Castle.Core.Logging.LevelFilteredLogger.Debug(System.String,System.Exception)">
+            <summary>
+            Logs a debug message. 
+            </summary>
+            <param name="message">The Message</param>
+            <param name="exception">The Exception</param>
+        </member>
+        <member name="M:Castle.Core.Logging.LevelFilteredLogger.Debug(System.String,System.Object[])">
+            <summary>
+            Logs a debug message.
+            </summary>
+            <param name="format">Message format</param>
+            <param name="args">Array of objects to write using format</param>
+        </member>
+        <member name="M:Castle.Core.Logging.LevelFilteredLogger.Info(System.String)">
+            <summary>
+            Logs an info message.
+            </summary>
+            <param name="message">The Message</param>
+        </member>
+        <member name="M:Castle.Core.Logging.LevelFilteredLogger.Info(System.String,System.Exception)">
+            <summary>
+            Logs an info message. 
+            </summary>
+            <param name="message">The Message</param>
+            <param name="exception">The Exception</param>
+        </member>
+        <member name="M:Castle.Core.Logging.LevelFilteredLogger.Info(System.String,System.Object[])">
+            <summary>
+            Logs an info message.
+            </summary>
+            <param name="format">Message format</param>
+            <param name="args">Array of objects to write using format</param>
+        </member>
+        <member name="M:Castle.Core.Logging.LevelFilteredLogger.Warn(System.String)">
+            <summary>
+            Logs a warn message.
+            </summary>
+            <param name="message">The Message</param>
+        </member>
+        <member name="M:Castle.Core.Logging.LevelFilteredLogger.Warn(System.String,System.Exception)">
+            <summary>
+            Logs a warn message. 
+            </summary>
+            <param name="message">The Message</param>
+            <param name="exception">The Exception</param>
+        </member>
+        <member name="M:Castle.Core.Logging.LevelFilteredLogger.Warn(System.String,System.Object[])">
+            <summary>
+            Logs an warn message.
+            </summary>
+            <param name="format">Message format</param>
+            <param name="args">Array of objects to write using format</param>
+        </member>
+        <member name="M:Castle.Core.Logging.LevelFilteredLogger.Error(System.String)">
+            <summary>
+            Logs an error message.
+            </summary>
+            <param name="message">The Message</param>
+        </member>
+        <member name="M:Castle.Core.Logging.LevelFilteredLogger.Error(System.String,System.Exception)">
+            <summary>
+            Logs an error message. 
+            </summary>
+            <param name="message">The Message</param>
+            <param name="exception">The Exception</param>
+        </member>
+        <member name="M:Castle.Core.Logging.LevelFilteredLogger.Error(System.String,System.Object[])">
+            <summary>
+            Logs an error message.
+            </summary>
+            <param name="format">Message format</param>
+            <param name="args">Array of objects to write using format</param>
+        </member>
+        <member name="M:Castle.Core.Logging.LevelFilteredLogger.FatalError(System.String)">
+            <summary>
+            Logs a fatal error message.
+            </summary>
+            <param name="message">The Message</param>
+        </member>
+        <member name="M:Castle.Core.Logging.LevelFilteredLogger.FatalError(System.String,System.Exception)">
+            <summary>
+            Logs a fatal error message.
+            </summary>
+            <param name="message">The Message</param>
+            <param name="exception">The Exception</param>
+        </member>
+        <member name="M:Castle.Core.Logging.LevelFilteredLogger.FatalError(System.String,System.Object[])">
+            <summary>
+            Logs a fatal error message.
+            </summary>
+            <param name="format">Message format</param>
+            <param name="args">Array of objects to write using format</param>
+        </member>
+        <member name="M:Castle.Core.Logging.LevelFilteredLogger.Log(Castle.Core.Logging.LoggerLevel,System.String,System.String,System.Exception)">
+            <summary>
+            Implementors output the log content by implementing this method only.
+            Note that exception can be null
+            </summary>
+            <param name="level"></param>
+            <param name="name"></param>
+            <param name="message"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="P:Castle.Core.Logging.LevelFilteredLogger.Level">
+            <value>
+            The <c>LoggerLevel</c> that this logger
+            will be using. Defaults to <c>LoggerLevel.Off</c>
+            </value>
+        </member>
+        <member name="P:Castle.Core.Logging.LevelFilteredLogger.Name">
+            <value>
+            The name that this logger will be using. 
+            Defaults to <c>String.Empty</c>
+            </value>
+        </member>
+        <member name="P:Castle.Core.Logging.LevelFilteredLogger.IsDebugEnabled">
+            <summary>
+            Determines if messages of priority "debug" will be logged.
+            </summary>
+            <value><c>true</c> if log level flags include the <see cref="F:Castle.Core.Logging.LoggerLevel.Debug"/> bit</value> 
+        </member>
+        <member name="P:Castle.Core.Logging.LevelFilteredLogger.IsInfoEnabled">
+            <summary>
+            Determines if messages of priority "info" will be logged.
+            </summary>
+            <value><c>true</c> if log level flags include the <see cref="F:Castle.Core.Logging.LoggerLevel.Info"/> bit</value> 
+        </member>
+        <member name="P:Castle.Core.Logging.LevelFilteredLogger.IsWarnEnabled">
+            <summary>
+            Determines if messages of priority "warn" will be logged.
+            </summary>
+            <value><c>true</c> if log level flags include the <see cref="F:Castle.Core.Logging.LoggerLevel.Warn"/> bit</value> 
+        </member>
+        <member name="P:Castle.Core.Logging.LevelFilteredLogger.IsErrorEnabled">
+            <summary>
+            Determines if messages of priority "error" will be logged.
+            </summary>
+            <value><c>true</c> if log level flags include the <see cref="F:Castle.Core.Logging.LoggerLevel.Error"/> bit</value> 
+        </member>
+        <member name="P:Castle.Core.Logging.LevelFilteredLogger.IsFatalErrorEnabled">
+            <summary>
+            Determines if messages of priority "fatal" will be logged.
+            </summary>
+            <value><c>true</c> if log level flags include the <see cref="F:Castle.Core.Logging.LoggerLevel.Fatal"/> bit</value> 
+        </member>
+        <member name="M:Castle.Core.Logging.ConsoleLogger.#ctor">
+            <summary>
+            Creates a new ConsoleLogger with the <c>Level</c>
+            set to <c>LoggerLevel.Debug</c> and the <c>Name</c>
+            set to <c>String.Empty</c>.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Logging.ConsoleLogger.#ctor(Castle.Core.Logging.LoggerLevel)">
+            <summary>
+            Creates a new ConsoleLogger with the <c>Name</c>
+            set to <c>String.Empty</c>.
+            </summary>
+            <param name="logLevel">The logs Level.</param>
+        </member>
+        <member name="M:Castle.Core.Logging.ConsoleLogger.#ctor(System.String)">
+            <summary>
+            Creates a new ConsoleLogger with the <c>Level</c>
+            set to <c>LoggerLevel.Debug</c>.
+            </summary>
+            <param name="name">The logs Name.</param>
+        </member>
+        <member name="M:Castle.Core.Logging.ConsoleLogger.#ctor(System.String,Castle.Core.Logging.LoggerLevel)">
+            <summary>
+            Creates a new ConsoleLogger.
+            </summary>
+            <param name="name">The logs Name.</param>
+            <param name="logLevel">The logs Level.</param>
+        </member>
+        <member name="M:Castle.Core.Logging.ConsoleLogger.Log(Castle.Core.Logging.LoggerLevel,System.String,System.String,System.Exception)">
+            <summary>
+            A Common method to log.
+            </summary>
+            <param name="level">The level of logging</param>
+            <param name="name">The name of the logger</param>
+            <param name="message">The Message</param>
+            <param name="exception">The Exception</param>
+        </member>
+        <member name="M:Castle.Core.Logging.ConsoleLogger.CreateChildLogger(System.String)">
+            <summary>
+            Returns a new <c>ConsoleLogger</c> with the name
+            added after this loggers name, with a dot in between.
+            </summary>
+            <param name="newName">The added hierarchical name.</param>
+            <returns>A new <c>ConsoleLogger</c>.</returns> 
+        </member>
+        <member name="T:Castle.Core.Logging.DiagnosticsLogger">
+            <summary>
+            The Logger using standart Diagnostics namespace.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Logging.DiagnosticsLogger.#ctor(System.String)">
+            <summary>
+            Creates a logger based on <see cref="T:System.Diagnostics.EventLog"/>.
+            </summary>
+            <param name="logName"><see cref="P:System.Diagnostics.EventLog.Log"/></param>
+        </member>
+        <member name="M:Castle.Core.Logging.DiagnosticsLogger.#ctor(System.String,System.String)">
+            <summary>
+            Creates a logger based on <see cref="T:System.Diagnostics.EventLog"/>.
+            </summary>
+            <param name="logName"><see cref="P:System.Diagnostics.EventLog.Log"/></param>
+            <param name="source"><see cref="P:System.Diagnostics.EventLog.Source"/></param>
+        </member>
+        <member name="M:Castle.Core.Logging.DiagnosticsLogger.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Creates a logger based on <see cref="T:System.Diagnostics.EventLog"/>.
+            </summary>
+            <param name="logName"><see cref="P:System.Diagnostics.EventLog.Log"/></param>
+            <param name="machineName"><see cref="P:System.Diagnostics.EventLog.MachineName"/></param>
+            <param name="source"><see cref="P:System.Diagnostics.EventLog.Source"/></param>
+        </member>
+        <member name="T:Castle.Core.Logging.NullLogger">
+            <summary>
+            The Null Logger class.  This is useful for implementations where you need
+            to provide a logger to a utility class, but do not want any output from it.
+            It also helps when you have a utility that does not have a logger to supply.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Logging.NullLogger.#ctor">
+            <summary>
+            Creates a new <c>NullLogger</c>.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Logging.NullLogger.Debug(System.String)">
+            <summary>
+            No-op.
+            </summary>
+            <param name="message">Ignored</param>
+        </member>
+        <member name="M:Castle.Core.Logging.NullLogger.Debug(System.String,System.Exception)">
+            <summary>
+            No-op.
+            </summary>
+            <param name="message">Ignored</param>
+            <param name="exception">Ignored</param>
+        </member>
+        <member name="M:Castle.Core.Logging.NullLogger.Debug(System.String,System.Object[])">
+            <summary>
+            No-op.
+            </summary>
+            <param name="format">Ignored</param>
+            <param name="args">Ignored</param>
+        </member>
+        <member name="M:Castle.Core.Logging.NullLogger.Info(System.String)">
+            <summary>
+            No-op.
+            </summary>
+            <param name="message">Ignored</param>
+        </member>
+        <member name="M:Castle.Core.Logging.NullLogger.Info(System.String,System.Exception)">
+            <summary>
+            No-op.
+            </summary>
+            <param name="message">Ignored</param>
+            <param name="exception">Ignored</param>
+        </member>
+        <member name="M:Castle.Core.Logging.NullLogger.Info(System.String,System.Object[])">
+            <summary>
+            No-op.
+            </summary>
+            <param name="format">Ignored</param>
+            <param name="args">Ignored</param>
+        </member>
+        <member name="M:Castle.Core.Logging.NullLogger.Warn(System.String)">
+            <summary>
+            No-op.
+            </summary>
+            <param name="message">Ignored</param>
+        </member>
+        <member name="M:Castle.Core.Logging.NullLogger.Warn(System.String,System.Exception)">
+            <summary>
+            No-op.
+            </summary>
+            <param name="message">Ignored</param>
+            <param name="exception">Ignored</param>
+        </member>
+        <member name="M:Castle.Core.Logging.NullLogger.Warn(System.String,System.Object[])">
+            <summary>
+            No-op.
+            </summary>
+            <param name="format">Ignored</param>
+            <param name="args">Ignored</param>
+        </member>
+        <member name="M:Castle.Core.Logging.NullLogger.Error(System.String)">
+            <summary>
+            No-op.
+            </summary>
+            <param name="message">Ignored</param>
+        </member>
+        <member name="M:Castle.Core.Logging.NullLogger.Error(System.String,System.Exception)">
+            <summary>
+            No-op.
+            </summary>
+            <param name="message">Ignored</param>
+            <param name="exception">Ignored</param>
+        </member>
+        <member name="M:Castle.Core.Logging.NullLogger.Error(System.String,System.Object[])">
+            <summary>
+            No-op.
+            </summary>
+            <param name="format">Ignored</param>
+            <param name="args">Ignored</param>
+        </member>
+        <member name="M:Castle.Core.Logging.NullLogger.FatalError(System.String)">
+            <summary>
+            No-op.
+            </summary>
+            <param name="message">Ignored</param>
+        </member>
+        <member name="M:Castle.Core.Logging.NullLogger.FatalError(System.String,System.Exception)">
+            <summary>
+            No-op.
+            </summary>
+            <param name="message">Ignored</param>
+            <param name="exception">Ignored</param>
+        </member>
+        <member name="M:Castle.Core.Logging.NullLogger.FatalError(System.String,System.Object[])">
+            <summary>
+            No-op.
+            </summary>
+            <param name="format">Ignored</param>
+            <param name="args">Ignored</param>
+        </member>
+        <member name="M:Castle.Core.Logging.NullLogger.CreateChildLogger(System.String)">
+            <summary>
+            Returns this <c>NullLogger</c>.
+            </summary>
+            <param name="name">Ignored</param>
+            <returns>This ILogger instance.</returns> 
+        </member>
+        <member name="P:Castle.Core.Logging.NullLogger.IsDebugEnabled">
+            <summary>
+            No-op.
+            </summary>
+            <value>false</value> 
+        </member>
+        <member name="P:Castle.Core.Logging.NullLogger.IsInfoEnabled">
+            <summary>
+            No-op.
+            </summary>
+            <value>false</value> 
+        </member>
+        <member name="P:Castle.Core.Logging.NullLogger.IsWarnEnabled">
+            <summary>
+            No-op.
+            </summary>
+            <value>false</value> 
+        </member>
+        <member name="P:Castle.Core.Logging.NullLogger.IsErrorEnabled">
+            <summary>
+            No-op.
+            </summary>
+            <value>false</value> 
+        </member>
+        <member name="P:Castle.Core.Logging.NullLogger.IsFatalErrorEnabled">
+            <summary>
+            No-op.
+            </summary>
+            <value>false</value> 
+        </member>
+        <member name="T:Castle.Core.Logging.StreamLogger">
+            <summary>
+            The Stream Logger class.  This class can stream log information
+            to any stream, it is suitable for storing a log file to disk,
+            or to a <c>MemoryStream</c> for testing your components.
+            </summary>
+            <remarks>
+            This logger is not thread safe.
+            </remarks>
+        </member>
+        <member name="M:Castle.Core.Logging.StreamLogger.#ctor(System.String,System.IO.Stream)">
+            <summary>
+            Creates a new <c>StreamLogger</c> with default encoding 
+            and buffer size. Initial Level is set to Debug.
+            </summary>
+            <param name="name">
+            The name of the log.
+            </param>
+            <param name="stream">
+            The stream that will be used for logging,
+            seeking while the logger is alive 
+            </param>
+        </member>
+        <member name="M:Castle.Core.Logging.StreamLogger.#ctor(System.String,System.IO.Stream,System.Text.Encoding)">
+            <summary>
+            Creates a new <c>StreamLogger</c> with default buffer size.
+            Initial Level is set to Debug.
+            </summary>
+            <param name="name">
+            The name of the log.
+            </param>
+            <param name="stream">
+            The stream that will be used for logging,
+            seeking while the logger is alive 
+            </param>
+            <param name="encoding">
+            The encoding that will be used for this stream.
+            <see cref="T:System.IO.StreamWriter"/>
+            </param>
+        </member>
+        <member name="M:Castle.Core.Logging.StreamLogger.#ctor(System.String,System.IO.Stream,System.Text.Encoding,System.Int32)">
+            <summary>
+            Creates a new <c>StreamLogger</c>. 
+            Initial Level is set to Debug.
+            </summary>
+            <param name="name">
+            The name of the log.
+            </param>
+            <param name="stream">
+            The stream that will be used for logging,
+            seeking while the logger is alive 
+            </param>
+            <param name="encoding">
+            The encoding that will be used for this stream.
+            <see cref="T:System.IO.StreamWriter"/>
+            </param>
+            <param name="bufferSize">
+            The buffer size that will be used for this stream.
+            <see cref="T:System.IO.StreamWriter"/>
+            </param>
+        </member>
+        <member name="M:Castle.Core.Logging.StreamLogger.#ctor(System.String,System.IO.StreamWriter)">
+            <summary>
+            Creates a new <c>StreamLogger</c> with 
+            Debug as default Level.
+            </summary>
+            <param name="name">The name of the log.</param>
+            <param name="writer">The <c>StreamWriter</c> the log will write to.</param>
+        </member>
+        <member name="T:Castle.Core.Logging.WebLogger">
+            <summary>
+            The WebLogger sends everything to the HttpContext.Trace 
+            </summary>
+            <remarks>
+            Trace must be enabled on the Asp.Net configuration file (web.config or machine.config)
+            </remarks>
+        </member>
+        <member name="M:Castle.Core.Logging.WebLogger.#ctor">
+            <summary>
+            Creates a new WebLogger with the priority set to DEBUG.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Logging.WebLogger.#ctor(Castle.Core.Logging.LoggerLevel)">
+            <summary>
+            Creates a new WebLogger.
+            </summary>
+            <param name="logLevel">The Log level typecode.</param>
+        </member>
+        <member name="M:Castle.Core.Logging.WebLogger.#ctor(System.String)">
+            <summary>
+            Creates a new WebLogger.
+            </summary>
+            <param name="name">The Log name.</param>
+        </member>
+        <member name="M:Castle.Core.Logging.WebLogger.#ctor(System.String,Castle.Core.Logging.LoggerLevel)">
+            <summary>
+            Creates a new WebLogger.
+            </summary>
+            <param name="name">The Log name.</param>
+            <param name="logLevel">The Log level typecode.</param>
+        </member>
+        <member name="M:Castle.Core.Logging.WebLogger.Log(Castle.Core.Logging.LoggerLevel,System.String,System.String,System.Exception)">
+            <summary>
+            A Common method to log.
+            </summary>
+            <param name="level">The level of logging</param>
+            <param name="message">The Message</param>
+            <param name="exception">The Exception</param>
+        </member>
+        <member name="M:Castle.Core.Logging.WebLogger.CreateChildLogger(System.String)">
+            <summary>
+            Just returns this logger (<c>WebLogger</c> is not hierarchical).
+            </summary>
+            <param name="newName">Ignored</param>
+            <returns>This ILogger instance.</returns> 
+        </member>
+        <member name="T:Castle.Core.Logging.LoggerLevel">
+            <summary>
+            Supporting Logger levels.
+            </summary>
+        </member>
+        <member name="F:Castle.Core.Logging.LoggerLevel.Off">
+            <summary>
+            Logging will be off
+            </summary>
+        </member>
+        <member name="F:Castle.Core.Logging.LoggerLevel.Fatal">
+            <summary>
+            Fatal logging level
+            </summary>
+        </member>
+        <member name="F:Castle.Core.Logging.LoggerLevel.Error">
+            <summary>
+            Error logging level
+            </summary>
+        </member>
+        <member name="F:Castle.Core.Logging.LoggerLevel.Info">
+            <summary>
+            Info logging level
+            </summary>
+        </member>
+        <member name="F:Castle.Core.Logging.LoggerLevel.Warn">
+            <summary>
+            Warn logging level
+            </summary>
+        </member>
+        <member name="F:Castle.Core.Logging.LoggerLevel.Debug">
+            <summary>
+            Debug logging level
+            </summary>
+        </member>
+        <member name="T:Castle.Core.Configuration.AbstractConfiguration">
+            <summary>
+            This is an abstract <see cref="T:Castle.Core.Configuration.IConfiguration"/> implementation
+            that deals with methods that can be abstracted away
+            from underlying implementations.
+            </summary>
+            <remarks>
+            <para><b>AbstractConfiguration</b> makes easier to implementers 
+            to create a new version of <see cref="T:Castle.Core.Configuration.IConfiguration"/></para>
+            </remarks>
+        </member>
+        <member name="T:Castle.Core.Configuration.IConfiguration">
+            <summary>
+            Summary description for IConfiguration.
+            </summary>
+            <summary>
+            <see cref="T:Castle.Core.Configuration.IConfiguration"/> is a interface encapsulating a configuration node
+            used to retrieve configuration values.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Configuration.IConfiguration.GetValue(System.Type,System.Object)">
+            <summary>
+            Gets the value of the node and converts it 
+            into specified <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/></param>
+            <param name="defaultValue">
+            The Default value returned if the convertion fails.
+            </param>
+            <returns>The Value converted into the specified type.</returns>
+        </member>
+        <member name="P:Castle.Core.Configuration.IConfiguration.Name">
+            <summary>
+            Gets the name of the node.
+            </summary>
+            <value>
+            The Name of the node.
+            </value> 
+        </member>
+        <member name="P:Castle.Core.Configuration.IConfiguration.Value">
+            <summary>
+            Gets the value of the node.
+            </summary>
+            <value>
+            The Value of the node.
+            </value> 
+        </member>
+        <member name="P:Castle.Core.Configuration.IConfiguration.Children">
+            <summary>
+            Gets an <see cref="T:Castle.Core.Configuration.ConfigurationCollection"/> of <see cref="T:Castle.Core.Configuration.IConfiguration"/>
+            elements containing all node children.
+            </summary>
+            <value>The Collection of child nodes.</value>
+        </member>
+        <member name="P:Castle.Core.Configuration.IConfiguration.Attributes">
+            <summary>
+            Gets an <see cref="T:System.Collections.IDictionary"/> of the configuration attributes.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Configuration.AbstractConfiguration.GetValue(System.Type,System.Object)">
+            <summary>
+            Gets the value of the node and converts it
+            into specified <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/></param>
+            <param name="defaultValue">
+            The Default value returned if the convertion fails.
+            </param>
+            <returns>The Value converted into the specified type.</returns>
+        </member>
+        <member name="P:Castle.Core.Configuration.AbstractConfiguration.Name">
+            <summary>
+            Gets the name of the <see cref="T:Castle.Core.Configuration.IConfiguration"/>.
+            </summary>
+            <value>
+            The Name of the <see cref="T:Castle.Core.Configuration.IConfiguration"/>.
+            </value>
+        </member>
+        <member name="P:Castle.Core.Configuration.AbstractConfiguration.Value">
+            <summary>
+            Gets the value of <see cref="T:Castle.Core.Configuration.IConfiguration"/>.
+            </summary>
+            <value>
+            The Value of the <see cref="T:Castle.Core.Configuration.IConfiguration"/>.
+            </value>
+        </member>
+        <member name="P:Castle.Core.Configuration.AbstractConfiguration.Children">
+            <summary>
+            Gets all child nodes.
+            </summary>
+            <value>The <see cref="T:Castle.Core.Configuration.ConfigurationCollection"/> of child nodes.</value>
+        </member>
+        <member name="P:Castle.Core.Configuration.AbstractConfiguration.Attributes">
+            <summary>
+            Gets node attributes.
+            </summary>
+            <value>
+            All attributes of the node.
+            </value>
+        </member>
+        <member name="T:Castle.Core.Configuration.ConfigurationCollection">
+            <summary>
+            A collection of <see cref="T:Castle.Core.Configuration.IConfiguration"/> objects.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Configuration.ConfigurationCollection.#ctor">
+            <summary>
+            Creates a new instance of <c>ConfigurationCollection</c>.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Configuration.ConfigurationCollection.#ctor(Castle.Core.Configuration.ConfigurationCollection)">
+            <summary>
+            Creates a new instance of <c>ConfigurationCollection</c>.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Configuration.ConfigurationCollection.#ctor(Castle.Core.Configuration.IConfiguration[])">
+            <summary>
+            Creates a new instance of <c>ConfigurationCollection</c>.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Configuration.ConfigurationCollection.Add(Castle.Core.Configuration.IConfiguration)">
+            <summary>
+            Adds an <see cref="T:Castle.Core.Configuration.IConfiguration"/>.
+            </summary>
+            <param name="value">The <see cref="T:Castle.Core.Configuration.IConfiguration"/> to add.</param>
+            <returns>
+            The index at which the new element was inserted.
+            </returns>
+        </member>
+        <member name="M:Castle.Core.Configuration.ConfigurationCollection.AddRange(Castle.Core.Configuration.IConfiguration[])">
+            <summary>
+            Adds an array of <see cref="T:Castle.Core.Configuration.IConfiguration"/>.
+            </summary>
+            <param name="value">The Array of <see cref="T:Castle.Core.Configuration.IConfiguration"/> to add.</param>
+        </member>
+        <member name="M:Castle.Core.Configuration.ConfigurationCollection.AddRange(Castle.Core.Configuration.ConfigurationCollection)">
+            <summary>
+            Adds a <see cref="T:Castle.Core.Configuration.ConfigurationCollection"/>.
+            </summary>
+            <param name="value">The <see cref="T:Castle.Core.Configuration.ConfigurationCollection"/> to add.</param>
+        </member>
+        <member name="M:Castle.Core.Configuration.ConfigurationCollection.CopyTo(Castle.Core.Configuration.IConfiguration[],System.Int32)">
+            <summary>
+            Copies the elements to a one-dimensional <see cref="T:System.Array"/> instance at the specified index.
+            </summary>
+            <param name="array">
+            The one-dimensional <see cref="T:System.Array"/> must have zero-based indexing.
+            </param>
+            <param name="index">The zero-based index in array at which copying begins.</param>
+        </member>
+        <member name="M:Castle.Core.Configuration.ConfigurationCollection.Contains(Castle.Core.Configuration.IConfiguration)">
+            <summary>
+            Gets a value indicating whether the <see cref="T:Castle.Core.Configuration.IConfiguration"/> contains
+            in the collection.
+            </summary>
+            <param name="value">The <see cref="T:Castle.Core.Configuration.IConfiguration"/> to locate.</param>
+            <returns>
+            <see langword="true"/> if the <see cref="T:Castle.Core.Configuration.IConfiguration"/> is contained in the collection; 
+            otherwise, <see langword="false"/>.
+            </returns>
+        </member>
+        <member name="M:Castle.Core.Configuration.ConfigurationCollection.Remove(Castle.Core.Configuration.IConfiguration)">
+            <summary>
+            Removes a specific <see cref="T:Castle.Core.Configuration.IConfiguration"/> from the 
+            collection.   
+            </summary>
+            <param name="value">The <see cref="T:Castle.Core.Configuration.IConfiguration"/> to remove from the collection.</param>
+            <exception cref="T:System.ArgumentException">
+            <paramref name="value"/> is not found in the collection.
+            </exception>
+        </member>
+        <member name="P:Castle.Core.Configuration.ConfigurationCollection.Item(System.Int32)">
+            <summary>
+            Represents the entry at the specified index of the <see cref="T:Castle.Core.Configuration.IConfiguration"/>.
+            </summary>
+            <param name="index">
+            The zero-based index of the entry to locate in the collection.
+            </param>
+            <value>
+            The entry at the specified index of the collection.
+            </value>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            <paramref name="index"/> is outside the valid range of indexes for the collection.
+            </exception>
+        </member>
+        <member name="T:Castle.Core.Configuration.MutableConfiguration">
+            <summary>
+            Summary description for MutableConfiguration.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.LifestyleType">
+            <summary>
+            Enumeration used to mark the component's lifestyle.
+            </summary>
+        </member>
+        <member name="F:Castle.Core.LifestyleType.Undefined">
+            <summary>
+            No lifestyle specified.
+            </summary>
+        </member>
+        <member name="F:Castle.Core.LifestyleType.Singleton">
+            <summary>
+            Singleton components are instantiated once, and shared
+            between all clients.
+            </summary>
+        </member>
+        <member name="F:Castle.Core.LifestyleType.Thread">
+            <summary>
+            Thread components have a unique instance per thread.
+            </summary>
+        </member>
+        <member name="F:Castle.Core.LifestyleType.Transient">
+            <summary>
+            Transient components are created on demand.
+            </summary>
+        </member>
+        <member name="F:Castle.Core.LifestyleType.Pooled">
+            <summary>
+            Optimization of transient components that keeps
+            instance in a pool instead of always creating them.
+            </summary>
+        </member>
+        <member name="F:Castle.Core.LifestyleType.Custom">
+            <summary>
+            Any other logic to create/release components.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.PropertiesInspectionBehavior">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Castle.Core.ComponentModel">
+            <summary>
+            Represents the collection of information and
+            meta information collected about a component.
+            </summary>
+        </member>
+        <member name="F:Castle.Core.ComponentModel.name">
+            <summary>Name (key) of the component</summary>
+        </member>
+        <member name="F:Castle.Core.ComponentModel.service">
+            <summary>Service exposed</summary>
+        </member>
+        <member name="F:Castle.Core.ComponentModel.implementation">
+            <summary>Implementation for the service</summary>
+        </member>
+        <member name="F:Castle.Core.ComponentModel.extended">
+            <summary>Extended properties</summary>
+        </member>
+        <member name="F:Castle.Core.ComponentModel.lifestyleType">
+            <summary>Lifestyle for the component</summary>
+        </member>
+        <member name="F:Castle.Core.ComponentModel.customLifestyle">
+            <summary>Custom lifestyle, if any</summary>
+        </member>
+        <member name="F:Castle.Core.ComponentModel.customComponentActivator">
+            <summary>Custom activator, if any</summary>
+        </member>
+        <member name="F:Castle.Core.ComponentModel.dependencies">
+            <summary>Dependencies the kernel must resolve</summary>
+        </member>
+        <member name="F:Castle.Core.ComponentModel.constructors">
+            <summary>All available constructors</summary>
+        </member>
+        <member name="F:Castle.Core.ComponentModel.properties">
+            <summary>All potential properties that can be setted by the kernel</summary>
+        </member>
+        <member name="F:Castle.Core.ComponentModel.lifecycleSteps">
+            <summary>Steps of lifecycle</summary>
+        </member>
+        <member name="F:Castle.Core.ComponentModel.parameters">
+            <summary>External parameters</summary>
+        </member>
+        <member name="F:Castle.Core.ComponentModel.configuration">
+            <summary>Configuration node associated</summary>
+        </member>
+        <member name="F:Castle.Core.ComponentModel.interceptors">
+            <summary>Interceptors associated</summary>
+        </member>
+        <member name="M:Castle.Core.ComponentModel.#ctor(System.String,System.Type,System.Type)">
+            <summary>
+            Constructs a ComponentModel
+            </summary>
+        </member>
+        <member name="P:Castle.Core.ComponentModel.Name">
+            <summary>
+            Sets or returns the component key
+            </summary>
+        </member>
+        <member name="P:Castle.Core.ComponentModel.InspectionBehavior">
+            <summary>
+            Gets or sets the strategy for
+            inspecting public properties 
+            on the components
+            </summary>
+        </member>
+        <member name="P:Castle.Core.ComponentModel.Dependencies">
+            <summary>
+            Dependencies are kept within constructors and
+            properties. Others dependencies must be 
+            registered here, so the kernel (as a matter 
+            of fact the handler) can check them
+            </summary>
+        </member>
+        <member name="T:Castle.Core.ConstructorCandidate">
+            <summary>
+            Represents a constructor of the component 
+            that the container can use to initialize it properly.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.ConstructorCandidateCollection">
+            <summary>
+            Collection of <see cref="T:Castle.Core.ConstructorCandidate"/>
+            </summary>
+        </member>
+        <member name="T:Castle.Core.DependencyModel">
+            <summary>
+            Represents a dependency (other component or a 
+            fixed value available through external configuration).
+            </summary>
+        </member>
+        <member name="T:Castle.Core.DependencyModelCollection">
+            <summary>
+            Collection of <see cref="T:Castle.Core.DependencyModel"/>.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.InterceptorReference">
+            <summary>
+            Represents an reference to a Interceptor component.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.InterceptorReferenceCollection">
+            <summary>
+            Collection of <see cref="T:Castle.Core.InterceptorReference"/>
+            </summary>
+        </member>
+        <member name="T:Castle.Core.LifecycleStepCollection">
+            <summary>
+            Represents a collection of ordered lifecycle steps.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.LifecycleStepCollection.GetCommissionSteps">
+            <summary>
+            Returns all steps for the commission phase
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Castle.Core.LifecycleStepCollection.GetDecommissionSteps">
+            <summary>
+            Returns all steps for the decommission phase
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Castle.Core.LifecycleStepCollection.Add(Castle.Core.LifecycleStepType,System.Object)">
+            <summary>
+            Adds a step to the commission or decomission phases.
+            </summary>
+            <param name="type"></param>
+            <param name="stepImplementation"></param>
+        </member>
+        <member name="T:Castle.Core.ParameterModel">
+            <summary>
+            Represents a parameter. Usually the parameter
+            comes from the external world, ie, an external configuration.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.ParameterModelCollection">
+            <summary>
+            Collection of <see cref="T:Castle.Core.ParameterModel"/>
+            </summary>
+        </member>
+        <member name="T:Castle.Core.PropertySet">
+            <summary>
+            Represents a property and the respective dependency.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.PropertySetCollection">
+            <summary>
+            Collection of <see cref="T:Castle.Core.PropertySet"/>
+            </summary>
+        </member>
+        <member name="T:Castle.Core.Resource.IResource">
+            <summary>
+            Represents a 'streamable' resource. Can
+            be a file, a resource in an assembly.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Resource.IResource.GetStreamReader">
+            <summary>
+            Returns a reader for the stream
+            </summary>
+            <remarks>
+            It's up to the caller to dispose the reader.
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Castle.Core.Resource.IResource.GetStreamReader(System.Text.Encoding)">
+            <summary>
+            Returns a reader for the stream
+            </summary>
+            <remarks>
+            It's up to the caller to dispose the reader.
+            </remarks>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Castle.Core.Resource.IResource.CreateRelative(System.String)">
+            <summary>
+            Returns an instance of <see cref="T:Castle.Core.Resource.IResource"/>
+            created according to the <c>relativePath</c>
+            using itself as the root.
+            </summary>
+            <param name="relativePath"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Castle.Core.Resource.IResource.FileBasePath">
+            <summary>
+            
+            </summary>
+            <remarks>
+            Only valid for resources that
+            can be obtained through relative paths
+            </remarks>
+        </member>
+        <member name="T:Castle.Core.Resource.AbstractStreamResource">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Castle.Core.Resource.AbstractStreamResource.StreamHideCloseDelegate">
+            <summary>
+            Do not allow closing and disposal of the 
+            underlying <see cref="P:Castle.Core.Resource.AbstractStreamResource.Stream"/>.
+            </summary>
+        </member>
+        <member name="T:Castle.Core.Resource.AssemblyResourceFactory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Castle.Core.Resource.IResourceFactory">
+            <summary>
+            Depicts the contract for resource factories.
+            </summary>
+        </member>
+        <member name="M:Castle.Core.Resource.IResourceFactory.Accept(Castle.Core.Resource.CustomUri)">
+            <summary>
+            Used to check whether the resource factory
+            is able to deal with the given resource
+            identifier.
+            </summary>
+            <remarks>
+            Implementors should return <c>true</c>
+            only if the given identificator is supported
+            by the resource factory
+            </remarks>
+            <param name="uri"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Castle.Core.Resource.IResourceFactory.Create(Castle.Core.Resource.CustomUri)">
+            <summary>
+            Creates an <see cref="T:Castle.Core.Resource.IResource"/> instance
+            for the given resource identifier
+            </summary>
+            <param name="uri"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Castle.Core.Resource.IResourceFactory.Create(Castle.Core.Resource.CustomUri,System.String)">
+            <summary>
+            Creates an <see cref="T:Castle.Core.Resource.IResource"/> instance
+            for the given resource identifier
+            </summary>
+            <param name="uri"></param>
+            <param name="basePath"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Castle.Core.Resource.FileResource">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Castle.Core.Resource.FileResourceFactory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Castle.Core.Resource.StaticContentResource">
+            <summary>
+            Adapts a static string content as an <see cref="T:Castle.Core.Resource.IResource"/>
+            </summary>
+        </member>
+        <member name="T:Castle.Core.Resource.UncResource">
+            <summary>
+            Enable access to files on network shares
+            </summary>
+        </member>
+        <member name="T:Castle.Core.IServiceEnabledComponent">
+            <summary>
+            Defines that the implementation wants a 
+            <see cref="T:System.IServiceProvider"/> in order to 
+            access other components. The creator must be aware
+            that the component might (or might not) implement 
+            the interface.
+            </summary>
+            <remarks>
+            Used by Castle Project components to, for example, 
+            gather logging factories
+            </remarks>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.0">
+	<class name="Steeg.Framework.Security.User, Steeg.Framework" table="user">
+		<id name="Id" column="id" unsaved-value="0">
+			<generator class="native" />
+		</id>
+		<property name="Name" />
+		<property name="Login" not-null="true" unique="true" index="login" />
+		<property name="Password" />
+    <property name="Email" not-null="false" unique="true" />
+    <property name="IsApproved" />
+    <property name="LastActivity" />
+    <property name="LastLogin" />
+    <property name="LastPasswordChange" />
+    <property name="CreationDate" />
+    <property name="IsOnLine" />
+    <property name="IsLockedOut" />
+    <property name="LastLockedOut" />
+    <property name="FailedPasswordAttemptCount" />
+    <property name="FailedPasswordAttemptWindowStart" />
+    <property name="FailedPasswordAnswerAttemptCount" />
+    <property name="FailedPasswordAnswerAttemptWindowStart" />
+    <property name="PasswordQuestion" />
+    <property name="PasswordAnswer" />
+  </class>
+</hibernate-mapping>
+

@@ -1,0 +1,77 @@
+﻿body 
+{
+}
+.subtext
+{
+	font-size: xx-small;
+}
+/* template */
+.main-content
+{
+	width: 360px;
+	float: left;
+	display: inline;
+}
+.sidebar
+{
+	border: 2px solid red;
+	width: 200px;
+	display: inline;
+}
+/*profiles*/
+.listofprofiles
+{
+	list-style-image: none;
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
+.profile-photo
+{
+	float: right;
+	height: 50px;
+	width: 50px;
+}
+.profile-voter
+{
+	font-weight: bold;
+	font-size: larger;
+	float:left;
+	width: 50px;
+	text-align: center;
+}
+li.profile label, li.profile .subtext
+{
+	font-style: italic;
+	font-weight: normal;
+}
+li.profile
+{
+	font-size: smaller;
+	clear: both;
+}
+.profile h4
+{
+	display: inline;
+}
+.profilesgrid-pager .previous
+{
+	float: left;
+}
+.profilesgrid-pager .next
+{
+	float: right;
+}
+.profilesgrid-pager
+{
+	clear: both;
+}
+.profilegridholder
+{
+	width: 300px;
+}
+.profile-voter a
+{
+	font-size: smaller;
+	text-decoration: none;
+}
