@@ -1,0 +1,325 @@
+;###########################################
+;Catalan Translation by Blas López
+;###########################################
+
+[frmMain]
+tsSQL=Consulta SQL
+tsResult=Resultat
+tsEdit=Editar Dades
+pEditTop=
+lblTable=Taula:
+lblFilterField=CampFiltre:
+lblFilter=Filtre:
+miDatabase=Base de Dades
+miNew=Nou
+miOpen=Obrir
+miCleanUp=Netejar
+miClose=Tancar
+miCreationSQL=SQL Base de Dades
+miMigrate=Migrar a SQLite3
+miRecentList=Recents
+miExit=Sortir
+miTable=Taula
+miNewTable=Nova
+miEditTable=Editar
+miDeleteTable=Eliminar
+miIndex=Index
+miNewIndex=Nou
+miEditIndex=Editar
+miDeleteIndex=Eliminar
+miView=Veure
+miNewView=Nova
+miEditView=Editar
+miDeleteView=Eliminar
+miTrigger=Trigger
+miNewTrigger=Nou
+miEditTrigger=Editar
+miDeleteTrigger=Eliminar
+Abfrage1=Consulta
+miAddQuery=Afegir
+miShowQuery=Obrir
+miSaveQueryMain=Desar
+miDelQuery=Eliminar
+miOpenSQL=Executar amb Resultats
+miExecSQL=Executar sense Resultats
+miInsertInNewViewMain=Utilitzar en Vista Nova
+miInsertInNewTriggerMain=Utilitzar en Trigger Nou
+Daten1=Dades
+miExport=Exportar
+miSendToExcel=Enviar a Excel
+miImport=Importar Dades
+miHelp=Ajuda
+miInfo=Info
+Fehlerbericht1=Log
+pmiRefresh=Actualitzar
+pmiShowSQL=Mostrar SQL
+pmiNewTable=Crear Taula
+pmiEditTable=Editar Taula
+pmiDelTable=Eliminar Taula
+pmiNewIndex=Crear Index
+pmiEditIndex=Editar Index
+pmiDelIndex=Eliminar Index
+pmiNewView=Crear Vista
+pmiEditView=Editar Vista
+pmiDelView=Eliminar Vista
+pmiNewTrigger=Crear Trigger
+pmiEditTrigger=Editar Trigger
+pmiDelTrigger=Eliminar Trigger
+pmiFindQuery=Buscar Consulta
+pmiAddQuery=Afegir Consulta
+pmiShowQuery=Obrir Consulta
+pmiDelQuery=Eliminar Consulta
+miAddTab=Crear Nova Consulta
+miSaveQuery=Desar a la Base de Dades
+miSaveToFile=Desar en Arxiu
+miUndo=Desfer
+miRedo=Refer
+miCut=Tallar
+miCopy=Copiar
+miPaste=Enganxar
+miSelAll=Seleccionar Tot
+miCopyToDelphi=Copiar com Font per Delphi
+miComment=Comentar
+miInsertInNewView=Inserir en Vista Nova
+miInsertInNewTrigger=Inserir en Trigger Nou
+miDeleteTab=Tancar Tab
+miMemo=Mostrar Memo
+miPicture=Mostrar Imatge
+tbbNewDatabase=Crear Base de Dades
+tbbOpenDatabase=Obrir Base de Dades ( Recent )
+tbbCleanUp=Netejar Base de Dades
+tbbCloseDatabase=Tancar Base de Dades
+tbbNewTable=Crear Taula
+tbbEditTable=Editar Taula
+tbbDeleteTable=Eliminar Taula
+tbbNewIndex=Crear Indice
+tbbEditIndex=Editar Indice
+tbbDeleteIndex=Eliminar Indice
+tbbNewView=Crear Vista
+tbbEditView=Editar Vista
+tbbDeleteView=Eliminar Vista
+tbbNewTrigger=Crear Trigger
+tbbEditTrigger=Editar Trigger
+tbbDeleteTrigger=Eliminar Trigger
+tbbAddSQL=Afegir Nova Consulta
+tbbSaveSQL=Desar Consulta en Base de Dades
+tbbOpenSQL=Executar Consulta SQL amb Resultat (select) F9
+tbbExecSQL=Executar Consulta SQL sense Resultat (insert,update,delete) F8 
+
+tbbViewHierarchy=Vista Jerarquica
+tbbShowTables=Mostrar Taules
+tbbShowFields=Mostrar Camps
+tbbShowTriggers=Mostrar Triggers
+tbbShowIndexes=Mostrar Indexos
+tbbShowViews=Mostrar Vistes
+tbbShowSysEntrys=Mostrar Accessos al Sistema
+tbbShowQueries=Mostrar Consultes
+
+[frmTable]
+lblTablename=Nom Taula:
+gbFields="     Camps Taula"
+btnAdd=Afegir Camp
+btnDel=Eliminar Camp
+btnChange=Editar Camp
+btnOK=Crear
+btnCancel=Cancel.lar
+btnPrimaryKey=Clau Primaria
+
+[frmField]
+lblFieldName=Nom Camp:
+lblFieldType=Tipus Camp:
+lblDefaultValue=Valor per defete:
+cbUnique=Unic
+cbNotNull=No NULL
+cbPrimaryKey=Clau Primaria
+cbAutoInc=Autoincrementar
+btnAdd=Afegir
+btnCancel=Cancel·lar
+
+[frmIndex]
+lblIndexName=Nom Index:
+lblTable=Taula:
+cbUnique=Unic
+gbFields="     Camps"
+lblSrcFields=Camps Disponibles:
+lblDestFields=Camps Index:
+btnCreate=Crear
+btnCancel=Cancel·lar
+
+[frmView]
+lblViewName=Nom Vista:
+gbSQL="     SQL Select"
+btnCreate=Crear
+btnCancel=Cancel·lar
+[frmPicture]
+btnPic=Canviar Imatge
+btnDel=Eliminar imatge
+btnSave=Desar Imatge com a...
+
+[frmTrigger]
+lblTriggername=NomTrigger:
+tsEvent=Event Trigger
+lblTable=Taula:
+lblView=Vista:
+gbFields="     Camps"
+lblSrcFields=Camps Disponibles:
+lblDestFields=Camp Event:
+gbTriggerEvent=Event Trigger
+rbBefore=Abans
+rbAfter=Després
+rbInsteadOf=Per comptes de
+gbEvents=Event
+gbFOR=Accio
+rbEachRow=Cada X Registre
+rbEachStatement=Cada X Sentencia
+tsSQL=SQL del Trigger
+gbTriggerSQL="     Codi SQL que s'ha d'executar per l'event del Trigger (OLD. / NEW. = Ref)"
+lblCondition=Condició:
+btnCreate=Crear
+btnCancel=Cancel·lar
+
+[frmImport]
+Caption=Importar Dades
+gbMapping=Correspondencia de Camps
+lblSourceFields=Camps Origen:
+lblTargetFields=Camps Desti:
+lblDestTable=Taula Objectiu:
+cbClearTable=Netejar la Taula Abans d'Importar
+btnLoadFile=Obrir Arxiu
+btnImport=Importar Dades
+btnClose=Tancar
+
+[frmLog]
+Caption=Registre d'Errades
+
+[frmMemoEdit]
+Caption=Editar Memo
+
+[MessageStrings]
+lngInfo=Info
+lngWarning=Advertencia:
+lngCreate=Crear
+lngEdit=Editar
+lngAdd=Afegir
+
+lngNameAlreadyExists=El nom ja hi es!
+lngInvalidChars=El nom no pot contenir 'sqlite_' , qualsevol caracter especial o espais! 
+lngEnterSQLSource=Indiqueu la sentencia SQL
+
+lngCreateView=Crear Vista
+lngEditView=Editar Vista
+lngEnterViewName=Indiqueu el Nom de la Vista!
+lngEnterTriggerName=Indiqueu el nom del Trigger!
+lngSelectTable=Seleccioneu una Taula!
+lngSelectView=Seleccioneu una Vista!
+lngSelectEvent=Seleccioneu un Event!
+lngSelectFields=Seleccioneu els Camps!
+lngSemiNotFound=No hi es el punt i coma al final de la sentencia!
+lngCreateTrigger=Crear Trigger
+lngEditTrigger=Editar Trigger
+lngBlobFileSize=Per raons de seguretat, el tamany màxim de l'arxiu no pot ser superior a 500kb. SQLite 2.8 x soporta maxim 1 MB per registre de dades
+lngSeperator=Separador
+lngEnterSeperatorChar=Indiqueu el Caracter Separador!
+lngContainsHeaderFieldNames=Es troba el nom dels camps a la primera fila?
+lngFieldAlreadyChoosen=El Camp ja es troba seleccionat!
+lngSeperatedValues=Separar Valors
+lngEnterFieldName=Indiqueu el Nom del Camp!
+lngEnterFieldType=Indiqueu o Seleccioneu el Tipus de Camp!
+lngPKAlreadyExist=La clau primaria ja esta definida
+lngFieldSize=Tamany Camp:
+lngEnterFieldSize=Indiqueu el Tamany del Camp:
+lngEditField=Editar Camp
+lngAddField=Agregar Camp
+lngEnterIndexName=Indiqueu el Nom de l'Index!
+lngEditIndex=Editar Index
+lngCreateIndex=Crear Index
+lngEnterTableName=Indiqueu el nom de la taula!
+lngAddTableFields=Afegiu camps a la Taula!
+lngEditTable=Editar Taula
+lngCreateTable=Crear Taula
+lngTableFieldName=Nom Camp
+lngTableFieldType=Tipus Camp
+lngTableFieldConstraint=Restriccions del Camp
+lngSendToExcelSuccess=Enviament de dades a Excel correcte
+lngSendToExcelWait=Enviant dades a Excel. Espereu...
+lngNoDataToSend=No hi ha dades per a enviar !
+lngFailToSave=L'arxiu no s'ha desat !
+lngError=Error:
+lngNoDataToExport=No hi ha dades per exportar!
+lngExcelFormat=Format Compatible amb Excel
+lngCSVFormat=Format Separat Per Comes
+lngXMLFormat=Format XML
+lngHTMLFormat=Format HTML
+lngCCFunction= "Funció "
+lngCCField=    "Camp   "
+lngCCTable=    "Taula  "
+lngCCView=     "Vista  "
+lngCCIndex=    "Index  "
+lngCCTrigger=  "Trigger"
+lngReservedWordQuery=%s és una Paraula Reservada
+lngQueryIdent=Consulta
+lngEnterName=Indiqueu el nom
+lngSaveQuery=Desar Consulta:
+lngEnterQueryNamePrompt=Indiqueu un nom per aquesta consulta:
+lngCleanUpMessage=S'ha netejat de la Base de Dades %s de dades innecesaries. 
+lngDeleteConfirmation=¿Realment vol Eliminar?
+lngConfirmation=Confirmació:
+lngDBDisconnected=Base de Dades Desconnectada
+lngDBConnected=Base de Dades Connectada
+lngDisconnected=No Connectat
+lngOpenDatabase=Obrir Base de Dades:
+lngTVQueries=Consultes
+lngTVTriggers=Triggers
+lngTVViews=Vistes
+lngTVIndexes=Indexos
+lngTVTables=Taules
+lngTVFields=Camps
+lngQueryExecTime=La Consulta s'Executà en %dms
+lngQueryExecuted=Consulta Executada
+lngDBCreated=Base de Dades Creada
+lngSelectDBSaveTarget=Seleccioneu Destí per Nova Base de Dades:
+lngTableFieldDefault=Valor per defecte
+lngMultiPrimaryKey=La clau Primaria Multi-camp només es pot utilitzar si no heu triat una Clau Primaria d'un sol Camp! 
+lngMigrationSuccess=Migració de la Base de Dades finalitzada correctament!
+lngMigrationInProgress=La Taula "%s" s'està migrant, espereu...
+
+;##############################################
+;########## Begin Language Updates ############
+;## Send updates to "sqliteadmin@orbmu2k.de" ##
+;##############################################
+
+lngSQLiteDB=SQLite Database
+lngAnyFile=Any File
+lngImportDone=Importaci feta!
+lngBtnFirst=Primer
+lngBtnPrev=Anterior
+lngBtnLast=Ultim
+lngBtnNext=Següent
+lngBtnAdd=Inserir
+lngBtnRemove=Esborrar
+lngBtnEdit=Editar
+lngBtnApply=Desar
+lngBtnCancel=Cancel·lar
+lngBtnRefresh=Refrescar
+
+;##############################################
+;########### End Language Updates #############
+;##############################################
+
+[StrfTimeHint]
+Line0=
+Line1=Constants de Format:
+Line2=
+Line3=%d   dia del Mes
+Line4=%f   ** fracció de segons  SS.SSS
+Line5=%H   hora 00-24
+Line6=%j   día de l'any 001-366
+Line7=%J   ** Nímero de Dia en format Julià
+Line8=%m   mes 01-12
+Line9=%M   minut 00-59
+Line10=%s   segons transcurreguts des de 1970-01-01
+Line11=%S   segons 00-59
+Line12=%w   dia de la setmana 0-6  Diumenge==0
+Line13=%W   Setmana de l'any 00-53
+Line14=%Y   Any 000-9999
+Line15=%%   %

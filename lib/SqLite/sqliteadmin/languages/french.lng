@@ -1,0 +1,326 @@
+;#########################################
+;French Translation by Stephane Wierzbicki 
+;#########################################
+
+[frmMain]
+tsSQL=Requête SQL
+tsResult=Résultat
+tsEdit=Données
+pEditTop=
+lblTable=Table:
+lblFilterField=Filtrer sur:
+lblFilter=Filtre:
+miDatabase=Base de Donnée
+miNew=Nouvelle
+miOpen=Ouvrir
+miCleanUp=Nettoyer
+miClose=Fermer
+miCreationSQL=Export Base de Donnée au format SQL
+miMigrate=Migrer vers SQLite3
+miRecentList=Récent
+miExit=Quitter
+miTable=Table
+miNewTable=Nouvelle
+miEditTable=Editer
+miDeleteTable=Supprimer
+miIndex=Index
+miNewIndex=Nouveau
+miEditIndex=Editer
+miDeleteIndex=Supprimer
+miView=Vue
+miNewView=Nouvelle
+miEditView=Editer
+miDeleteView=Supprimer
+miTrigger=Trigger
+miNewTrigger=Nouveau
+miEditTrigger=Editer
+miDeleteTrigger=Supprimer
+Abfrage1=Requête
+miAddQuery=Ajouter
+miShowQuery=Ouvrir
+miSaveQueryMain=Sauver
+miDelQuery=Supprimer
+miOpenSQL=Exécuter avec Résultats
+miExecSQL=Exécuter sans Résultats
+miInsertInNewViewMain=Insérer dans une nouvelle Vue
+miInsertInNewTriggerMain=Insérer dans un nouveau Trigger
+Daten1=Données
+miExport=Export
+miSendToExcel=Exporter vers Excel
+miImport=Importer des données
+miHelp=Aide
+miInfo=Info
+Fehlerbericht1=Log
+pmiRefresh=Rafraichir
+pmiShowSQL=Montrer SQL
+pmiNewTable=Créer Table
+pmiEditTable=Editer Table
+pmiDelTable=Supprimer Table
+pmiNewIndex=Créer Index
+pmiEditIndex=Editer Index
+pmiDelIndex=Supprimer Index
+pmiNewView=Créer Vue
+pmiEditView=Editer Vue
+pmiDelView=Supprimer Vue
+pmiNewTrigger=Créer Trigger
+pmiEditTrigger=Editer Trigger
+pmiDelTrigger=Supprimer Trigger
+pmiFindQuery=Trouver Requête
+pmiAddQuery=Ajouter Requête
+pmiShowQuery=Ouvrir Requête
+pmiDelQuery=Supprimer Requête
+miAddTab=Créer nouvelle Requête
+miSaveQuery=Sauver Requête
+miSaveToFile=Sauver dans un Fichier
+miUndo=Annuler
+miRedo=Retablir
+miCut=Couper
+miCopy=Copier
+miPaste=Coller
+miSelAll=Tout Selectionner
+miCopyToDelphi=Copier en tant que source Delphi
+miComment=Basculer les Commentaires
+miInsertInNewView=Insérer dans une nouvelle Vue
+miInsertInNewTrigger=Insérer dans un nouveau Trigger
+miDeleteTab=Fermer Requête
+miMemo=Montrer Mémo
+miPicture=Montrer Image
+tbbNewDatabase=Nouvelle Base de Donnée
+tbbOpenDatabase=Ouvrir ( Récent ) Base de Donnée
+tbbCleanUp=Nettoyer Base de Donnée
+tbbCloseDatabase=Fermer Base de Donnée
+tbbNewTable=Créer Table
+tbbEditTable=Editer Table
+tbbDeleteTable=Supprimer Table
+tbbNewIndex=Créer Index
+tbbEditIndex=Editer Index
+tbbDeleteIndex=Suppimer Index
+tbbNewView=Créer Vue
+tbbEditView=Editer Vue
+tbbDeleteView=Supprimer Vue
+tbbNewTrigger=Créer Trigger
+tbbEditTrigger=Editer Trigger
+tbbDeleteTrigger=Supprimer Trigger
+tbbAddSQL=Ajouter nouvelle Requête
+tbbSaveSQL=Sauver requête
+tbbOpenSQL=Exécuter la Requête SQL avec Résultats (select) F9
+tbbExecSQL=Exécuter la Requête SQL sans Résultats (insert,update,delete) F8 
+
+tbbViewHierarchy=Vue Hierarchie
+tbbShowTables=Montrer Tables
+tbbShowFields=Montrer Champs
+tbbShowTriggers=Montrer Triggers
+tbbShowIndexes=Montrer Index
+tbbShowViews=Montrer Vues
+tbbShowSysEntrys=Montrer Entrées système
+tbbShowQueries=Montrer Requêtes
+
+[frmTable]
+lblTablename=Nom Table:
+gbFields="     Champs Table"
+btnAdd=Ajouter Champs
+btnDel=Supprimer Champs
+btnChange=Editer Champs
+btnOK=Valider
+btnCancel=Annuler
+btnPrimaryKey=Clé Primaire
+
+[frmField]
+lblFieldName=Nom Champ:
+lblFieldType=Type Champ:
+lblDefaultValue=Valeur Défaut:
+cbUnique=Unique
+cbNotNull=non NULL
+cbPrimaryKey=Clé Primaire
+cbAutoInc=Auto Increment
+btnAdd=Ajouter
+btnCancel=Annuler
+
+[frmIndex]
+lblIndexName=Nom Index:
+lblTable=Table:
+cbUnique=Unique
+gbFields="     Champs"
+lblSrcFields=Champs disponibles:
+lblDestFields=Champs Indexés:
+btnCreate=Créer
+btnCancel=Annuler
+
+[frmView]
+lblViewName=Nom Vue:
+gbSQL="     SQL Select"
+btnCreate=Créer
+btnCancel=Annuler
+[frmPicture]
+btnPic=Changer Image
+btnDel=Supprimer Image
+btnSave=Sauver Image sous
+
+[frmTrigger]
+lblTriggername=Nom Trigger:
+tsEvent=Événement Du Trigger
+lblTable=Table:
+lblView=Vue:
+gbFields="     Champs"
+lblSrcFields=Champs disponibles:
+lblDestFields=Événement des Champs:
+gbTriggerEvent=Événement du Trigger
+rbBefore=Avant
+rbAfter=Après
+rbInsteadOf=A la place de
+gbEvents=Événement
+gbFOR=Action
+rbEachRow=chaque Ligne
+rbEachStatement=Chaque Requête
+tsSQL=Trigger SQL
+gbTriggerSQL="     Source SQL qui s'exécute à l'événement du Trigger (OLD. / NEW. = Ref)"
+lblCondition=Condition:
+btnCreate=Créer
+btnCancel=Annuler
+
+[frmImport]
+Caption=Importer Données
+gbMapping=Relations Champs
+lblSourceFields=Champs Source:
+lblTargetFields=Champs Destination:
+lblDestTable=Table Dest.:
+cbClearTable=Vider Table avant Import
+btnLoadFile=Ouvrir fichier
+btnImport=Importer Données
+btnClose=Fermer
+
+[frmLog]
+Caption=Log Erreurs
+
+[frmMemoEdit]
+Caption=Editer Mémo 
+
+[MessageStrings]
+lngInfo=Info
+lngWarning=Attention:
+lngCreate=Créer
+lngEdit=Valider
+lngAdd=Ajouter
+lngNameAlreadyExists=Le nom est déjà alloué!
+lngInvalidChars=Le nom ne peut pas avoir comme préfix 'sqlite_', des caractères spéciaux ou vides! 
+lngEnterSQLSource=Merci d'entrer une requête SQL
+lngCreateView=Créer Vue
+lngEditView=Editer Vue
+lngEnterViewName=Merci d'entrer un nom de Vue!
+lngEnterTriggerName=Merci d'entrer un nom de Trigger!
+lngSelectTable=Merci de Choisir une Table!
+lngSelectView=Merci de Choisir une Vue!
+lngSelectEvent=Merci de Choisir un Evenement!
+lngSelectFields=Merci de Choisir des Champs!
+lngSemiNotFound=Point virgule manquant après la requête SQL! 
+lngCreateTrigger=Créer Trigger
+lngEditTrigger=Editer Trigger
+lngBlobFileSize=Pour des raisons de sécurité la taille de fichier maximum est
+limitée à 500kb. SQLite 2.8 x supporte 1 MB max. par enregistrement
+lngSeperator=Séparateur
+lngEnterSeperatorChar=Merci d'entrer le Caractère de séparation!
+lngContainsHeaderFieldNames=La première ligne contient-elle les noms des Champs?
+lngFieldAlreadyChoosen=Le Champs a déjà été choisi!
+lngSeperatedValues=Fichier CSV
+lngEnterFieldName=Merci d'entrer un nom de Champs!
+lngEnterFieldType=Merci d'entrer ou de choisir un Type de Champs!
+lngPKAlreadyExist=La Clé Primaire est déjà allouée!
+lngFieldSize=Taille Champ:
+lngEnterFieldSize=Merci d'entrer la taille du Champs:
+lngEditField=Editer Champs
+lngAddField=Ajouter Champs
+lngEnterIndexName=Merci d'entrer un nom d'Index!
+lngEditIndex=Editer Index
+lngCreateIndex=Créer Index
+lngEnterTableName=Merci d'entrer le nom de la Table!
+lngAddTableFields=Merci d'entrer les Champs de la Table!
+lngEditTable=Editer Table
+lngCreateTable=Créer Table
+lngTableFieldName=Nom Champs
+lngTableFieldType=Type Champs
+lngTableFieldConstraint=Contrainte Champs
+lngSendToExcelSuccess=Envoi des données vers Excel réussi.
+lngSendToExcelWait=Envoi des données vers Excel, merci de patienter ...
+lngNoDataToSend=Il n'y a pas de données à envoyer!
+lngFailToSave=Le fichier n'a pu être sauvé!
+lngError=Erreur:
+lngNoDataToExport=Il n'y a pas de données à Exporter!
+lngExcelFormat=Format compatible Excel
+lngCSVFormat=Format de séparation des valeurs
+lngXMLFormat=Format XML
+lngHTMLFormat=Format HTML
+lngCCFunction="Fonction"
+lngCCField=   "Champs  "
+lngCCTable=   "Table   "
+lngCCView=    "Vue     "
+lngCCIndex=   "Index   "
+lngCCTrigger= "Trigger "
+lngReservedWordQuery=%s est un mot réservé
+lngQueryIdent=Requête
+lngEnterName=Entrer un nom!
+lngSaveQuery=Sauver la requête:
+lngEnterQueryNamePrompt=Merci d'entrer un nom pour cette requête:
+lngCleanUpMessage=La base de Donnée a étée vidée de %s inutiles. 
+lngDeleteConfirmation=Vraiment Effacer?
+lngConfirmation=Confirmation:
+lngDBDisconnected=Base de Donnée Déconnectée
+lngDBConnected=Base de Donnée Connectée
+lngDisconnected=Non connecté
+lngOpenDatabase=Ouvrir la Base de Donnée:
+lngTVQueries=Requêtes
+lngTVTriggers=Triggers
+lngTVViews=Vues
+lngTVIndexes=Index
+lngTVTables=Tables
+lngTVFields=Champs
+lngQueryExecTime=Requête éxécutée en %dms
+lngQueryExecuted=Requête éxécutée
+lngDBCreated=Base de Donnée Créée
+lngSelectDBSaveTarget=Choisir la Base de Donnée de Destination:
+lngTableFieldDefault=Valeur Défaut
+lngMultiPrimaryKey=Les Clés Primaires Multiples sont uniquement utilisables
+lorsqu'une Clé Primaire simple a été selectionnée! 
+lngMigrationSuccess=Migration de la Base de Donnée Réussie!
+lngMigrationInProgress=La Table "%s" est en cours de migration, merci de patienter...
+
+;##############################################
+;########## Begin Language Updates ############
+;## Send updates to "sqliteadmin@orbmu2k.de" ##
+;##############################################
+
+lngSQLiteDB=SQLite Database
+lngAnyFile=Any File
+lngImportDone=Import done!
+lngBtnFirst=First
+lngBtnPrev=Previos
+lngBtnLast=Last
+lngBtnNext=Next
+lngBtnAdd=Insert
+lngBtnRemove=Delete
+lngBtnEdit=Edit
+lngBtnApply=Post
+lngBtnCancel=Cancel
+lngBtnRefresh=Refresh
+
+;##############################################
+;########### End Language Updates #############
+;##############################################
+
+
+[StrfTimeHint]
+Line0=
+Line1=Formatconstants:
+Line2=
+Line3=%d   jour du mois
+Line4=%f   ** secondes fractionnées SS.SSS
+Line5=%H   heure 00-24
+Line6=%j   jour de l'année 001-366
+Line7=%J   ** Numéro du Jour Julian
+Line8=%m   mois 01-12
+Line9=%M   minute 00-59
+Line10=%s   secondes depuis 1970-01-01
+Line11=%S   secondes 00-59
+Line12=%w   jour de la semaine 0-6  dimanche==0
+Line13=%W   semaine de l'année 00-53
+Line14=%Y   année 0000-9999
+Line15=%%   %

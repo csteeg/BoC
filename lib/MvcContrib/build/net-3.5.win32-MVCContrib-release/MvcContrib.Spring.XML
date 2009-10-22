@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MvcContrib.Spring</name>
+    </assembly>
+    <members>
+        <member name="T:MvcContrib.Spring.SpringControllerFactory">
+            <summary>
+            Controller Factory implementation for Spring.net
+            </summary>
+        </member>
+        <member name="M:MvcContrib.Spring.SpringControllerFactory.Configure(Spring.Objects.Factory.IObjectFactory)">
+            <summary>
+            Configures the controller factory to use the 
+            given spring.net IObjectFactory for controller lookup.
+            If you call Configure multiple times, the last call will prevail.
+            </summary>
+            <param name="objectFactory">IObjectFactory instance to use for lookups.</param>
+        </member>
+        <member name="M:MvcContrib.Spring.SpringControllerFactory.Configure(Spring.Context.IApplicationContext)">
+            <summary>
+            Configures the controller factory to use the
+            given spring.net IApplicationContext for controller
+            lookup.  If you call Configure multiple times, the 
+            last call will prevail.
+            </summary>
+            <param name="ctx"></param>
+        </member>
+    </members>
+</doc>

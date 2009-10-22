@@ -1,0 +1,782 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>System.Web.DomainServices.Providers</name>
+    </assembly>
+    <members>
+        <member name="T:System.Web.DomainServices.LinqToEntities.AssociationInfo">
+            <summary>
+            Information about an Association
+            </summary>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToEntities.AssociationInfo.Name">
+            <summary>
+            The name of the association
+            </summary>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToEntities.AssociationInfo.ThisKey">
+            <summary>
+            The key members on the FK side of the association
+            </summary>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToEntities.AssociationInfo.OtherKey">
+            <summary>
+            The key members on the non-FK side of the association
+            </summary>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToEntities.AssociationInfo.FKRole">
+            <summary>
+            The foreign key role name for this association
+            </summary>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToEntities.AssociationInfo.IsRequired">
+            <summary>
+            Gets or sets a value indicating whether this association can have a
+            multiplicity of zero
+            </summary>
+        </member>
+        <member name="T:System.Web.DomainServices.LinqToEntities.LinqToEntitiesDomainService`1">
+            <summary>
+            Base class for DomainServices operating on LINQ To Entities data models
+            </summary>
+            <typeparam name="TContext">The Type of the LINQ To Entities ObjectContext</typeparam>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesDomainService`1.#ctor">
+            <summary>
+            Protected constructor because this is an abstract class
+            </summary>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesDomainService`1.CreateContext">
+            <summary>
+            Creates and returns the <see cref="T:System.Data.Objects.ObjectContext"/> instance that will
+            be used by this provider.
+            </summary>
+            <returns>The ObjectContext</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesDomainService`1.Dispose(System.Boolean)">
+            <summary>
+            See <see cref="T:System.IDisposable"/>.
+            </summary>
+            <param name="disposing">A <see cref="T:System.Boolean"/> indicating whether or not the instance is currently disposing.</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesDomainService`1.Count``1(System.Linq.IQueryable{``0})">
+            <summary>
+            Gets the number of rows in an <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <typeparam name="T">The element Type of the query.</typeparam>
+            <param name="query">The query for which the count should be returned.</param>
+            <returns>The total number of rows.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesDomainService`1.ExecuteChangeSet(System.Web.DomainServices.ChangeSet)">
+            <summary>
+            This method is called to invoke the <see cref="T:System.Web.DomainServices.DomainOperationEntry"/> for each operation in the changeset.
+            </summary>
+            <param name="changeSet">The changeset to execute.</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesDomainService`1.Resolve(System.Object,System.Object,System.Object,System.Web.DomainServices.ResolveOption)">
+            <summary>
+            This method resolves the conflicts for a single entity.
+            </summary>
+            <param name="current">The entity with current values</param>
+            <param name="original">The entity with original values</param>
+            <param name="store">The entity with the current store values</param>
+            <param name="resolveOption"><see cref="T:System.Web.DomainServices.ResolveOption"/> to use to resolve the conflicts</param>
+            <returns>True if the conflicts were successfully resolved, false otherwise</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesDomainService`1.PersistChangeSet(System.Web.DomainServices.ChangeSet)">
+            <summary>
+            This method is called to finalize changes after all the operations in the specified changeset
+            have been invoked. All changes are committed to the ObjectContext, and any resulting optimistic
+            concurrency errors are processed.
+            </summary>
+            <param name="changeSet">The changeset to persist</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesDomainService`1.GetSerializableProperties(System.Type)">
+            <summary>
+            Returns the base set of properties to be considered for serialization, filtering out EntityReferences
+            and properties that are not simple scalars.
+            </summary>
+            <param name="objectType">The type of the object being serialized</param>
+            <returns>The set of serializable properties</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesDomainService`1.OnDeserializingObject(System.Object,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Called after an object has been deserialized, this method can be overridden to modify the deserialized
+            state as required.
+            </summary>
+            <param name="target">The object being deserialized</param>
+            <param name="state">The state used to deserialize the object</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesDomainService`1.IsSimpleScalar(System.Data.Metadata.Edm.EdmProperty)">
+            <summary>
+            Returns true if the specified property is a simple scalar
+            </summary>
+            <param name="edmProperty">The entity property</param>
+            <returns>True if the specified property is a simple scalar</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesDomainService`1.ProcessConcurrencyErrors(System.Web.DomainServices.ChangeSet,System.Data.OptimisticConcurrencyException)">
+            <summary>
+            For the specified concurrency exception, inspect the concurrency errors and update the
+            changeset operations with the error info
+            </summary>
+            <param name="changeSet">The changeset being processed</param>
+            <param name="e">The concurrency exception</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesDomainService`1.SetEntityReferences(System.Data.Objects.DataClasses.EntityObject,System.Data.Metadata.Edm.EntityType,System.Collections.Generic.IEnumerable{System.Web.DomainServices.EntityOperation},System.Collections.Generic.Dictionary{System.Data.Objects.DataClasses.EntityObject,System.Collections.Generic.Dictionary{System.ComponentModel.PropertyDescriptor,System.Data.Objects.DataClasses.EntityObject}})">
+            <summary>
+            Reestablish EntityReferences for the specified entity by constructing new EntityReferences for each
+            association member and setting it with an EntityKey
+            TODO : Is there a better way to do this? Are there EF APIs I should be using?
+            </summary>
+            <param name="entity">The entity</param>
+            <param name="entityType">The EDM EntityType</param>
+            <param name="entityOperations">The changeset operations</param>
+            <param name="entityReferenceMap">Map of entity references that have been temporarily nulled out to work
+            around EF Add/Attach API issues. TODO : remove this param when the workaround is no longer needed.</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesDomainService`1.SetEntityKey(System.Data.Objects.DataClasses.EntityObject)">
+            <summary>
+            Sets the EntityKey for the specified entity
+            </summary>
+            <param name="entity">The entity</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesDomainService`1.GetEntitySetName(System.Type)">
+            <summary>
+            Get the fully qualified EntitySet name for the specified entity type
+            </summary>
+            <param name="entityType">The entity type</param>
+            <returns>The EntitySet name</returns>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToEntities.LinqToEntitiesDomainService`1.UsesUtcDateTimes">
+            <summary>
+            Gets a value indicating whether DateTimes returned by this DomainService should be
+            interpreted as DateTimeKind.Utc.
+            </summary>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToEntities.LinqToEntitiesDomainService`1.Context">
+            <summary>
+            Gets the <see cref="T:System.Data.Objects.ObjectContext"/>
+            </summary>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToEntities.LinqToEntitiesDomainService`1.RefreshContext">
+            <summary>
+            Gets the <see cref="T:System.Data.Objects.ObjectContext"/> used by retrieving store values
+            </summary>
+        </member>
+        <member name="T:System.Web.DomainServices.LinqToEntities.LinqToEntitiesMetadataProviderAttribute">
+            <summary>
+            Attribute applied to a <see cref="T:System.Web.DomainServices.DomainService"/> that exposes LINQ to Entities mapped
+            Types.
+            </summary>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesMetadataProviderAttribute.#ctor">
+            <summary>
+            Default constructor. Using this constructor, the Type of the LINQ To Entities
+            ObjectContext will be inferred from the <see cref="T:System.Web.DomainServices.DomainService"/> the
+            attribute is applied to.
+            </summary>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesMetadataProviderAttribute.#ctor(System.Type)">
+            <summary>
+            Constructs an attribute for the specified LINQ To Entities
+            ObjectContext Type.
+            </summary>
+            <param name="objectContextType">The LINQ To Entities ObjectContext Type.</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesMetadataProviderAttribute.CreateProvider(System.ComponentModel.TypeDescriptionProvider,System.Type)">
+            <summary>
+            This method creates an instance of the <see cref="T:System.ComponentModel.TypeDescriptionProvider"/>.
+            </summary>
+            <param name="existingProvider">The existing <see cref="T:System.ComponentModel.TypeDescriptionProvider"/> for the Type the returned
+            provider will be registered for.</param>
+            <param name="domainServiceType">The <see cref="T:System.Web.DomainServices.DomainService"/> Type metadata is being provided for.</param>
+            <returns>The <see cref="T:System.ComponentModel.TypeDescriptionProvider"/> instance.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesMetadataProviderAttribute.GetContextType(System.Type)">
+            <summary>
+            Extracts the context type from the specified <paramref name="domainServiceType"/>.
+            </summary>
+            <param name="domainServiceType">A LINQ to Entities domain service type.</param>
+            <returns>The type of the object context.</returns>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToEntities.LinqToEntitiesMetadataProviderAttribute.ObjectContextType">
+            <summary>
+            The Linq To Entities ObjectContext Type.
+            </summary>
+        </member>
+        <member name="T:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptionContext">
+            <summary>
+            Metadata context for LINQ To Entities domain services
+            </summary>
+        </member>
+        <member name="T:System.Web.DomainServices.TypeDescriptionContextBase">
+            <summary>
+            Base class for LTS and EF type description contexts
+            </summary>
+        </member>
+        <member name="M:System.Web.DomainServices.TypeDescriptionContextBase.MakeUniqueName(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Given a suggested name and a collection of existing names, this method
+            creates a unique name by appending a numerix suffix as required.
+            </summary>
+            <param name="suggested">The desired name</param>
+            <param name="existing">Collection of existing names</param>
+            <returns>The unique name</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.TypeDescriptionContextBase.FormatMemberList(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Comma delimits the specified member name collection
+            </summary>
+            <param name="members">A collection of members.</param>
+            <returns>A comma delimited list of member names.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptionContext.#ctor(System.Type)">
+            <summary>
+            Constructor that accepts a LINQ To Entities domain service type
+            </summary>
+            <param name="objectContextType">The ObjectContext Type</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptionContext.GetEntityType(System.Type)">
+            <summary>
+            Returns the <see cref="T:System.Data.Metadata.Edm.EntityType"/> that corresponds to the given CLR type
+            </summary>
+            <param name="clrType">The CLR type</param>
+            <returns>The entity type that correspond to the given CLR type</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptionContext.GetEntitySetName(System.Type)">
+            <summary>
+            Gets the fully qualified <see cref="T:System.Data.Metadata.Edm.EntitySet"/> name for the specified entity type.
+            </summary>
+            <param name="entityType">A entity type to examine.</param>
+            <returns>A fully qualified <see cref="T:System.Data.Metadata.Edm.EntitySet"/> name.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptionContext.GetAssociationInfo(System.Data.Metadata.Edm.NavigationProperty)">
+            <summary>
+            Returns the association information for the specified navigation property by querying EF metadata.
+            This method uses the FK constraint name of the navigation property to query the metadata workspace
+            for the corresponding AssociationType. It then pulls out the information it needs to create our
+            AssociationInfo.
+            </summary>
+            <remarks>To debug issues with this code, start by examining the actual ssdl/msl/csdl xml by reading
+            it from the embedded resource or external mapping files. From that, you can see the structure we're
+            working with here.</remarks>
+            <param name="navigationProperty">The navigation property to return association information for</param>
+            <returns>The association info</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptionContext.CreateAssociationAttribute(System.Data.Metadata.Edm.NavigationProperty)">
+            <summary>
+            Creates an [Association] attribute for the specified navigation property
+            </summary>
+            <param name="navigationProperty">The navigation property that corresponds to the association (it identifies the end points)</param>
+            <returns>A new AssociationAttribute that describes the given navigation property association</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptionContext.NormalizeMetadataName(System.String)">
+            <summary>
+            Names in the EF metadata are normalized by the metadata APIs at various levels,
+            meaning if we wish to compare names (for example CSDL names and MSL names), we
+            must normalize them prior by replacing invalid characters with an underscore.
+            </summary>
+            <param name="name">The name to be normalized.</param>
+            <returns>The unique association name.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptionContext.CreateMetadataWorkspace">
+            <summary>
+            Creates the MetadataWorkspace to use to acquire metadata about the domain service.
+            We are creating the metadata workspace manually in this way since our custom type
+            descriptors need to query the SSpace DataSpace, meaning we need to load all the
+            metadata not normally loaded.
+            </summary>
+            <returns>A new MetadataWorkspace</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptionContext.FindMetadataFiles">
+            <summary>
+            Locates and returns all the metadata files associated with the ObjectContext.
+            These files might be embedded -- this helper method exists merely to locate them
+            if they are not embedded.  If an empty collection is returned, it probably means
+            the metadata was embedded.
+            </summary>
+            <returns>The absolute paths to the metadata files if present</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptionContext.GetAssociationName(System.Data.Metadata.Edm.NavigationProperty,System.String)">
+            <summary>
+            Returns a unique association name for the specified navigation property.
+            </summary>
+            <param name="navigationProperty">The navigation property</param>
+            <param name="foreignKeyRoleName">The foreign key role name for the property's association</param>
+            <returns>A unique association name for the specified navigation property.</returns>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptionContext.MetadataWorkspace">
+            <summary>
+            Gets the MetadataWorkspace for the ObjectContext
+            </summary>
+        </member>
+        <member name="T:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptionProvider">
+            <summary>
+            TypeDescriptionProvider for LINQ To Entities
+            </summary>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptionProvider.#ctor(System.ComponentModel.TypeDescriptionProvider,System.Type,System.Type)">
+            <summary>
+            Constructor that takes the metadata context and an existing type description provider
+            </summary>
+            <param name="existingProvider">The parent TDP instance</param>
+            <param name="domainServiceType">The DomainService Type exposing the entity Types this provider will be registered for</param>
+            <param name="objectContextType">The ObjectContext Type that exposes the Types this provider will be registered for</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptionProvider.GetTypeDescriptor(System.Type,System.Object)">
+            <summary>
+            Returns a custom type descriptor for the specified entity type
+            </summary>
+            <param name="objectType">Type of object for which we need the descriptor</param>
+            <param name="instance">Instance of that object (alternate way to ask for information)</param>
+            <returns>custom type description for the specified entity type</returns>
+        </member>
+        <member name="T:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor">
+            <summary>
+            CustomTypeDescriptor for LINQ To Entities
+            </summary>
+        </member>
+        <member name="T:System.Web.DomainServices.TypeDescriptorBase">
+            <summary>
+            CustomTypeDescriptor base type shared by LINQ To SQL and LINQ To Entities
+            </summary>
+        </member>
+        <member name="M:System.Web.DomainServices.TypeDescriptorBase.#ctor(System.ComponentModel.ICustomTypeDescriptor)">
+            <summary>
+            Main constructor that accepts the parent custom type descriptor
+            </summary>
+            <param name="parent">The parent custom type descriptor.</param>
+        </member>
+        <member name="M:System.Web.DomainServices.TypeDescriptorBase.GetProperties">
+            <summary>
+            Override of the <see cref="M:System.ComponentModel.CustomTypeDescriptor.GetProperties"/> to obtain the list
+            of properties for this type.
+            </summary>
+            <remarks>
+            This method is overridden so that it can merge this class's parent attributes with those
+            it infers from the DAL-specific attributes.
+            </remarks>
+            <returns>A list of properties for this type</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.TypeDescriptorBase.GetEntityMemberAttributes(System.ComponentModel.PropertyDescriptor)">
+            <summary>
+            Abstract method specific DAL implementations must override to return the
+            list of RIA <see cref="T:System.Attribute"/>s implied by their DAL-specific attributes
+            </summary>
+            <param name="pd">A <see cref="T:System.ComponentModel.PropertyDescriptor"/> to examine.</param>
+            <returns>A list of RIA attributes implied by the DAL specific attributes</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.#ctor(System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptionContext,System.Data.Metadata.Edm.EntityType,System.ComponentModel.ICustomTypeDescriptor)">
+            <summary>
+            Constructor taking a metadata context, an entity type, and a parent custom type descriptor
+            </summary>
+            <param name="typeDescriptionContext">The <see cref="T:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptionContext"/> context.</param>
+            <param name="entityType">The <see cref="P:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.EntityType"/> type.</param>
+            <param name="parent">The parent custom type descriptor.</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.GetProperties">
+            <summary>
+            Override of standard GetProperties
+            </summary>
+            <remarks>
+            This method is overridden in order to add a post-processing pass that
+            synthesizes <see cref="T:System.ComponentModel.PropertyDescriptor"/>s for every property we need
+            to satisfy the [Association] attributes generated by our own <see cref="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.GetEntityMemberAttributes(System.ComponentModel.PropertyDescriptor)"/>
+            </remarks>
+            <returns>a list of property descriptors with existing properties plus ones that are generated for the association attributes</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.GetEntityMemberAttributes(System.ComponentModel.PropertyDescriptor)">
+            <summary>
+            Returns a collection of all the <see cref="T:System.Attribute"/>s we infer from the metadata associated
+            with the metadata member corresponding to the given property descriptor
+            </summary>
+            <param name="pd">A <see cref="T:System.ComponentModel.PropertyDescriptor"/> to examine</param>
+            <returns>A collection of attributes inferred from the metadata in the given descriptor.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.AddAssociationAttributes(System.ComponentModel.PropertyDescriptor,System.Collections.Generic.List{System.Attribute})">
+            <summary>
+            Add AssociationAttribute if required for the specified property
+            </summary>
+            <param name="pd">The property</param>
+            <param name="attributes">The list of attributes to append to</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.CreateAssociationProperties(System.ComponentModel.PropertyDescriptorCollection)">
+            <summary>
+            Creates all "synthesized" properties necessary for the [Association] attributes
+            </summary>
+            <remarks>Since EF includes all FK members of EntitiyReferences in its optimistic concurrency update 
+            checks, we have to expand all these members.</remarks>
+            <param name="existingProperties">Currently known set of properties</param>
+            <returns>A collection of new synthesized properties that must be added to the list of known properties</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.AddAssociationProperties(System.ComponentModel.PropertyDescriptor,System.Collections.Generic.List{System.ComponentModel.PropertyDescriptor},System.ComponentModel.PropertyDescriptorCollection)">
+            <summary>
+            Creates a new <see cref="T:System.ComponentModel.PropertyDescriptor"/> for the current entity type for every field we need to synthesize
+            to satisfy the [Association] attribute.
+            </summary>
+            <param name="pd">The current property descriptor we have determined has an [Association] attribute</param>
+            <param name="newProperties">The list of new property descriptors to which to add the new one</param>
+            <param name="existingProperties">The list of existing property descriptors we retrieved from our base class</param>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.TypeDescriptionContext">
+            <summary>
+            Gets the metadata context
+            </summary>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.EntityType">
+            <summary>
+            Gets the entity type
+            </summary>
+        </member>
+        <member name="T:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.AssociationPropertyTypeDescriptor">
+            <summary>
+            Private PropertyDescriptor implementation for new synthesized properties
+            we create here to satisfy the [Association] attributes
+            </summary>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.AssociationPropertyTypeDescriptor.#ctor(System.String,System.String,System.String,System.Type,System.ComponentModel.PropertyDescriptor)">
+            <summary>
+            Main constructor
+            </summary>
+            <param name="thisKeyName">The local key name.</param>
+            <param name="otherKeyName">The remote key name.</param>
+            <param name="entitySetName">The entity set name.</param>
+            <param name="propertyType">The property <see cref="T:System.Type"/>.</param>
+            <param name="navigationProperty">The navigation property <see cref="T:System.ComponentModel.PropertyDescriptor"/>.</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.AssociationPropertyTypeDescriptor.CanResetValue(System.Object)">
+            <summary>
+            Returns whether resetting an object changes its value.
+            </summary>
+            <param name="component">The component to test for reset capability.</param>
+            <returns>True if resetting the component changes its value; otherwise, false.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.AssociationPropertyTypeDescriptor.GetValue(System.Object)">
+            <summary>
+            Gets the current value of the property on a component.
+            </summary>
+            <param name="component">The component with the property for which to retrieve the value.</param>
+            <returns>The value of a property for a given component.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.AssociationPropertyTypeDescriptor.ResetValue(System.Object)">
+            <summary>
+            Resets the value for this property of the component to the default value.
+            </summary>
+            <param name="component">The component with the property value that is to be reset to the default value.</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.AssociationPropertyTypeDescriptor.SetValue(System.Object,System.Object)">
+            <summary>
+            Sets the value of the component to a different value.
+            </summary>
+            <param name="component">The component with the property value that is to be set.</param>
+            <param name="value">The new value.</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.AssociationPropertyTypeDescriptor.ShouldSerializeValue(System.Object)">
+            <summary>
+            Determines a value indicating whether the value of this property needs to be persisted.
+            </summary>
+            <param name="component">The component with the property to be examined for persistence.</param>
+            <returns>True if the property should be persisted; otherwise, false.</returns>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.AssociationPropertyTypeDescriptor.IsReadOnly">
+            <summary>
+            Gets a value indicating whether this is readonly
+            </summary>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.AssociationPropertyTypeDescriptor.PropertyType">
+            <summary>
+            Gets the property type
+            </summary>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToEntities.LinqToEntitiesTypeDescriptor.AssociationPropertyTypeDescriptor.ComponentType">
+            <summary>
+            Gets the type of the component
+            </summary>
+        </member>
+        <member name="T:System.Web.DomainServices.LinqToEntities.ObjectContextExtensions">
+            <summary>
+            ObjectContext extension methods useful to LinqToEntitiesDomainService authors
+            </summary>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.ObjectContextExtensions.AttachAsModified(System.Data.Objects.ObjectContext,System.Data.Objects.DataClasses.EntityObject,System.Data.Objects.DataClasses.EntityObject)">
+            <summary>
+            Extension method used to attach the specified entity as modified,
+            with the specified original state
+            </summary>
+            <param name="context">The ObjectContext</param>
+            <param name="current">The current entity state</param>
+            <param name="original">The original entity state</param>
+        </member>
+        <member name="T:System.Web.DomainServices.LinqToEntities.ObjectContextUtilities">
+            <summary>
+            Internal utility functions for dealing with EF types and metadata
+            </summary>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.ObjectContextUtilities.GetEntityType(System.Data.Metadata.Edm.MetadataWorkspace,System.Type)">
+            <summary>
+            Retrieves the <see cref="T:System.Data.Metadata.Edm.EntityType"/> corresponding to the given CLR type of an entity
+            </summary>
+            <param name="workspace">The MetadataWorkspace</param>
+            <param name="clrType">The CLR type of the entity</param>
+            <returns>The <see cref="T:System.Data.Metadata.Edm.EntityType"/> corresponding to that CLR type, or null if the Type
+            is not an EntityType.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.ObjectContextUtilities.TryGetEntityType(System.Data.Objects.ObjectContext,System.Type,System.Data.Metadata.Edm.EntityType@)">
+            <summary>
+            Attempts to get an EntityType from the given CLR type, returning false if it cannot
+            </summary>
+            <param name="context">Current object context</param>
+            <param name="clrType">CLR type of entity</param>
+            <param name="entityType">Resulting EntityType for this CLR type</param>
+            <returns><c>true</c> if the given CLR Type could be mapped to an EntityType</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.ObjectContextUtilities.GetReferenceProperty(System.ComponentModel.PropertyDescriptor)">
+            <summary>
+            Given a navigation property, return the corresponding EntityReference property
+            </summary>
+            <param name="propertyDescriptor">Navigation <see cref="T:System.ComponentModel.PropertyDescriptor"/>.</param>
+            <returns>A <see cref="T:System.Data.Objects.DataClasses.EntityReference"/> <see cref="T:System.ComponentModel.PropertyDescriptor"/>.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToEntities.ObjectContextUtilities.GetReferenceProperty(System.ComponentModel.PropertyDescriptor,System.Collections.Generic.IEnumerable{System.ComponentModel.PropertyDescriptor})">
+            <summary>
+            Given a navigation property and set of property descriptors for the type the property is defined on,
+            return the corresponding EntityReference property
+            </summary>
+            <param name="propertyDescriptor">A navigation <see cref="T:System.ComponentModel.PropertyDescriptor"/>.</param>
+            <param name="properties">A collection of <see cref="T:System.ComponentModel.PropertyDescriptor"/> items for the <see cref="T:System.Type"/> <paramref name="propertyDescriptor"/> is defined on.</param>
+            <returns>The corresponding EntityReference property.</returns>
+        </member>
+        <member name="T:System.Web.DomainServices.LinqToSql.DataContextExtensions">
+            <summary>
+            DataContext extension methods useful to LinqToSqlDomainService authors
+            </summary>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToSql.DataContextExtensions.IsAttached(System.Data.Linq.ITable,System.Object)">
+            <summary>
+            Extension method used to determine if the specified entity is currently attached
+            </summary>
+            <param name="table">The entity table</param>
+            <param name="entity">The entity to check</param>
+            <returns>True if the entity is currently attached, false otherwise</returns>
+        </member>
+        <member name="T:System.Web.DomainServices.LinqToSql.LinqToSqlDomainService`1">
+            <summary>
+            Base class for DomainServices operating on LINQ To SQL data models
+            </summary>
+            <typeparam name="TContext">Type of DomainContext to instantiate the LinqToSqlDomainService with</typeparam>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToSql.LinqToSqlDomainService`1.#ctor">
+            <summary>
+            Protected constructor
+            </summary>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToSql.LinqToSqlDomainService`1.Count``1(System.Linq.IQueryable{``0})">
+            <summary>
+            Gets the number of rows in an <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <typeparam name="T">The element Type of the query.</typeparam>
+            <param name="query">The query for which the count should be returned.</param>
+            <returns>The total number of rows.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToSql.LinqToSqlDomainService`1.Dispose(System.Boolean)">
+            <summary>
+            See <see cref="T:System.IDisposable"/>
+            </summary>
+            <param name="disposing">A <see cref="T:System.Boolean"/> indicating whether or not the instance is being disposed.</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToSql.LinqToSqlDomainService`1.PersistChangeSet(System.Web.DomainServices.ChangeSet)">
+            <summary>
+            This method is called to finalize changes after all the operations in the specified changeset
+            have been invoked. All changes are committed to the DataContext, and any resulting optimistic
+            concurrency errors are processed.
+            </summary>
+            <param name="changeSet">The changeset to submit</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToSql.LinqToSqlDomainService`1.Resolve(System.Object,System.Object,System.Object,System.Web.DomainServices.ResolveOption)">
+            <summary>
+            This method resolves the conflicts for a single entity.
+            </summary>
+            <param name="current">The entity with current values</param>
+            <param name="original">The entity with original values</param>
+            <param name="store">The entity with current store values</param>
+            <param name="resolveOption">The <see cref="T:System.Web.DomainServices.ResolveOption"/> to use to resolve the conflicts</param>
+            <returns>True if the conflicts were successfully resolved, false otherwise</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToSql.LinqToSqlDomainService`1.CreateContext">
+            <summary>
+            Creates and returns the DataContext instance that will be used by this service.
+            </summary>
+            <returns>The DomainContext</returns>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToSql.LinqToSqlDomainService`1.UsesUtcDateTimes">
+            <summary>
+            Gets a value indicating whether DateTimes returned by this DomainService should be
+            interpreted as DateTimeKind.Utc.
+            </summary>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToSql.LinqToSqlDomainService`1.Context">
+            <summary>
+            Gets the DataContext for this service
+            </summary>
+            <value>This property always gets the current DataContext.  If it has not yet been created,
+            it will create one.
+            </value>
+        </member>
+        <member name="T:System.Web.DomainServices.LinqToSql.LinqToSqlMetadataProviderAttribute">
+            <summary>
+            Attribute applied to a <see cref="T:System.Web.DomainServices.DomainService"/> that exposes LINQ to SQL mapped
+            Types.
+            </summary>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToSql.LinqToSqlMetadataProviderAttribute.#ctor">
+            <summary>
+            Default constructor. Using this constructor, the Type of the LINQ to SQL
+            DataContext will be inferred from the <see cref="T:System.Web.DomainServices.DomainService"/> the
+            attribute is applied to.
+            </summary>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToSql.LinqToSqlMetadataProviderAttribute.#ctor(System.Type)">
+            <summary>
+            Constructs an attribute for the specified LINQ to SQL
+            DataContext Type.
+            </summary>
+            <param name="dataContextType">The LINQ to SQL DataContext Type.</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToSql.LinqToSqlMetadataProviderAttribute.CreateProvider(System.ComponentModel.TypeDescriptionProvider,System.Type)">
+            <summary>
+            This method creates an instance of the <see cref="T:System.ComponentModel.TypeDescriptionProvider"/>.
+            </summary>
+            <param name="existingProvider">The existing <see cref="T:System.ComponentModel.TypeDescriptionProvider"/> for the Type the returned
+            provider will be registered for.</param>
+            <param name="domainServiceType">The <see cref="T:System.Web.DomainServices.DomainService"/> Type metadata is being provided for.</param>
+            <returns>The <see cref="T:System.ComponentModel.TypeDescriptionProvider"/> instance.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToSql.LinqToSqlMetadataProviderAttribute.GetContextType(System.Type)">
+            <summary>
+            Extracts the context type from the specified <paramref name="domainServiceType"/>.
+            </summary>
+            <param name="domainServiceType">A LINQ to SQL domain service type.</param>
+            <returns>The type of the data context.</returns>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToSql.LinqToSqlMetadataProviderAttribute.DataContextType">
+            <summary>
+            The LINQ to SQL DataContext Type.
+            </summary>
+        </member>
+        <member name="T:System.Web.DomainServices.LinqToSql.LinqToSqlTypeDescriptionContext">
+            <summary>
+            Class that provides the basic metadata interface to a LINQ To SQL data context.
+            </summary>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToSql.LinqToSqlTypeDescriptionContext.#ctor(System.Type)">
+            <summary>
+            Constructor that creates a metadata context for the specified LINQ To SQL domain service type
+            </summary>
+            <param name="dataContextType">The DataContext type</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToSql.LinqToSqlTypeDescriptionContext.CreateAssociationAttribute(System.Data.Linq.Mapping.MetaDataMember)">
+            <summary>
+            Returns an AssociationAttribute for the specified association member
+            </summary>
+            <param name="member">The metadata member corresponding to the association member</param>
+            <returns>The Association attribute</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToSql.LinqToSqlTypeDescriptionContext.GetAssociationName(System.Data.Linq.Mapping.MetaAssociation)">
+            <summary>
+            Returns a unique association name for the specified MetaAssociation
+            </summary>
+            <param name="metaAssociation">A <see cref="T:System.Data.Linq.Mapping.MetaAssociation"/>.</param>
+            <returns>A <see cref="T:System.String"/> containing the association name.</returns>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToSql.LinqToSqlTypeDescriptionContext.MetaModel">
+            <summary>
+            Gets the MetaModel containing the metadata
+            </summary>
+        </member>
+        <member name="T:System.Web.DomainServices.LinqToSql.LinqToSqlTypeDescriptionProvider">
+            <summary>
+            TypeDescriptionProvider for LINQ To SQL
+            </summary>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToSql.LinqToSqlTypeDescriptionProvider.#ctor(System.ComponentModel.TypeDescriptionProvider,System.Type,System.Type)">
+            <summary>
+            Constructor that accepts a metadata context to use when generating custom type descriptors
+            </summary>
+            <param name="existingProvider">The parent TDP instance</param>
+            <param name="domainServiceType">The DomainService Type exposing the entity Types this provider will be registered for</param>
+            <param name="dataContextType">The DataContext Type that exposes the Types this provider will be registered for</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToSql.LinqToSqlTypeDescriptionProvider.GetTypeDescriptor(System.Type,System.Object)">
+            <summary>
+            Returns a custom type descriptor for the specified entity type
+            </summary>
+            <param name="objectType">Type of object for which we need the descriptor</param>
+            <param name="instance">Instance of that object (alternate way to ask for information)</param>
+            <returns>a custom type descriptor for the specified entity type</returns>
+        </member>
+        <member name="T:System.Web.DomainServices.LinqToSql.LinqToSqlTypeDescriptor">
+            <summary>
+            CustomTypeDescriptor for LINQ To SQL entities
+            </summary>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToSql.LinqToSqlTypeDescriptor.#ctor(System.Web.DomainServices.LinqToSql.LinqToSqlTypeDescriptionContext,System.Data.Linq.Mapping.MetaType,System.ComponentModel.ICustomTypeDescriptor)">
+            <summary>
+            Constructor that takes the metadata context, a metadata type and a parent custom type descriptor
+            </summary>
+            <param name="typeDescriptionContext">The <see cref="T:System.Web.DomainServices.LinqToSql.LinqToSqlTypeDescriptionContext"/> context.</param>
+            <param name="metaType">The <see cref="T:System.Data.Linq.Mapping.MetaType"/> type.</param>
+            <param name="parent">The parent custom type descriptor.</param>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToSql.LinqToSqlTypeDescriptor.GetEntityMemberAttributes(System.ComponentModel.PropertyDescriptor)">
+            <summary>
+            Returns a collection of all the <see cref="T:System.Attribute"/>s we infer from the metadata associated
+            with the metadata member corresponding to the given property descriptor
+            </summary>
+            <param name="propertyDescriptor">A <see cref="T:System.ComponentModel.PropertyDescriptor"/>.</param>
+            <returns>A collection of attributes inferred from metadata in the given descriptor.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.LinqToSql.LinqToSqlTypeDescriptor.InferStringLengthAttribute(System.String,System.Collections.Generic.List{System.Attribute})">
+            <summary>
+            Parse the DbType to determine whether a StringLengthAttribute should be added.
+            </summary>
+            <param name="dbType">The DbType from the MetaDataMember.</param>
+            <param name="attributes">The list of attributes to append to.</param>
+        </member>
+        <member name="P:System.Web.DomainServices.LinqToSql.LinqToSqlTypeDescriptor.TypeDescriptionContext">
+            <summary>
+            Gets the metadata context
+            </summary>
+        </member>
+        <member name="T:System.Web.DomainServices.Providers.Resource">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:System.Web.DomainServices.Providers.Resource.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:System.Web.DomainServices.Providers.Resource.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:System.Web.DomainServices.Providers.Resource.InvalidMetadataProviderSpecification">
+            <summary>
+              Looks up a localized string similar to &apos;{0}&apos; cannot be applied to DomainService Type &apos;{1}&apos; because &apos;{1}&apos; does not derive from &apos;{2}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.DomainServices.Providers.Resource.LinqToEntitiesProvider_UnableToRetrieveAssociationInfo">
+            <summary>
+              Looks up a localized string similar to Unable to retrieve AssociationType for association &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Web.DomainServices.Providers.Resource.LinqToEntitiesProvider_UnableToRetrieveNavigationProperty">
+            <summary>
+              Looks up a localized string similar to Unable to retrieve NavigationProperty for association &apos;{0}&apos;..
+            </summary>
+        </member>
+    </members>
+</doc>

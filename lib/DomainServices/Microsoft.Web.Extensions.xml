@@ -1,0 +1,2240 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Web.Extensions</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.Web.Data.UI.WebControls.IQueryableDataSource.RaiseViewChanged">
+            <summary>
+            Raises OnDataSourceViewChanged
+            </summary>
+        </member>
+        <member name="T:System.Web.Resources.AtlasWeb">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ApplicationServiceManager_Path">
+            <summary>
+              Looks up a localized string similar to Specifies the path to the web service..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.AppService_Disabled">
+            <summary>
+              Looks up a localized string similar to {0} is disabled..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.AppService_MultiplePaths">
+            <summary>
+              Looks up a localized string similar to Cannot specify more than one unique path..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.AppService_RequiredSSL">
+            <summary>
+              Looks up a localized string similar to SSL is required for this operation..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.AppService_UnknownProfileProperty">
+            <summary>
+              Looks up a localized string similar to Unknown profile property &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ArgumentMustBeCurrentUser">
+            <summary>
+              Looks up a localized string similar to Argument must be null, empty or same as the current user..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ArgumentMustBeNull">
+            <summary>
+              Looks up a localized string similar to Argument must be null or empty..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.AsyncPostBackTrigger_CannotFindEvent">
+            <summary>
+              Looks up a localized string similar to Could not find an event named &apos;{0}&apos; on associated control &apos;{1}&apos; for the trigger in UpdatePanel &apos;{2}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.AsyncPostBackTrigger_EventName">
+            <summary>
+              Looks up a localized string similar to The event that the trigger will hook up to determine whether to refresh the UpdatePanel. If the property is not set then the UpdatePanel will be refreshed only if the postback was initiated by the target control..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.AsyncPostBackTrigger_InvalidEvent">
+            <summary>
+              Looks up a localized string similar to The &apos;{0}&apos; event on associated control &apos;{1}&apos; for the trigger in UpdatePanel &apos;{2}&apos; does not match the standard event handler signature..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.AttributeNotRecognized">
+            <summary>
+              Looks up a localized string similar to The following configuration attribute was not recognized: &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.Category_Sorting">
+            <summary>
+              Looks up a localized string similar to Sorting.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ClientService_BadJsonResponse">
+            <summary>
+              Looks up a localized string similar to The server method returned invalid data..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.Common_ArgumentInvalidType">
+            <summary>
+              Looks up a localized string similar to Value must be of type &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.Common_GreaterThanOrEqualToZero">
+            <summary>
+              Looks up a localized string similar to Value must be greater than or equal to 0..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.Common_GreaterThanOrEqualToZeroAndLessThanOrEqualToOne">
+            <summary>
+              Looks up a localized string similar to Value must be greater than or equal to 0 and less than or equal to 1..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.Common_NullOrEmpty">
+            <summary>
+              Looks up a localized string similar to Value cannot be null or empty..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.Common_PageCannotBeNull">
+            <summary>
+              Looks up a localized string similar to Page cannot be null. Please ensure that this operation is being performed in the context of an ASP.NET request..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.Common_ScriptManagerRequired">
+            <summary>
+              Looks up a localized string similar to The control with ID &apos;{0}&apos; requires a ScriptManager on the page. The ScriptManager must appear before any controls that need it..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.CompositeScriptReference_Scripts">
+            <summary>
+              Looks up a localized string similar to A collection of script references that the CompositeScriptReference should include in the page..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ConvertersCollection_NotJavaScriptConverter">
+            <summary>
+              Looks up a localized string similar to Type: &apos;{0}&apos; does not inherits from JavaScriptConverter..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ConvertersCollection_UnknownType">
+            <summary>
+              Looks up a localized string similar to Type: &apos;{0}&apos; cannot be found..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DataBoundControlHelper_NoNamingContainer">
+            <summary>
+              Looks up a localized string similar to The {0} control &apos;{1}&apos; does not have a naming container.  Ensure that the control is added to the page before calling DataBind..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DataPager_ControlIsntPageable">
+            <summary>
+              Looks up a localized string similar to Control &apos;{0}&apos; does not implement IPageableItemContainer..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DataPager_Fields">
+            <summary>
+              Looks up a localized string similar to The collection of DataPagerFields..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DataPager_NoNamingContainer">
+            <summary>
+              Looks up a localized string similar to The DataPager control &apos;{0}&apos; does not have a naming container.  Ensure that the DataPager is added to the page before calling DataBind..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DataPager_NoPageableItemContainer">
+            <summary>
+              Looks up a localized string similar to No IPageableItemContainer was found. Verify that either the DataPager is inside an IPageableItemContainer or PagedControlID is set to the control ID of an IPageableItemContainer..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DataPager_PageableItemContainerNotFound">
+            <summary>
+              Looks up a localized string similar to IPageableItemContainer &apos;{0}&apos; not found..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DataPager_PagedControlID">
+            <summary>
+              Looks up a localized string similar to The ID of the control this DataPager should page..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DataPager_PagePropertiesCannotBeSet">
+            <summary>
+              Looks up a localized string similar to Page properties cannot be set because no IPageableItemContainer has been found..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DataPager_PageSize">
+            <summary>
+              Looks up a localized string similar to The number of records displayed in a page by the paged control..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DataPager_QueryStringField">
+            <summary>
+              Looks up a localized string similar to The name of the query string field for the current page index. The pager will use the query string when this property is set..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DataPagerField_Visible">
+            <summary>
+              Looks up a localized string similar to Whether the data pager field is visible..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DataSourceControlExtender_TargetControlIDMustBeSpecified">
+            <summary>
+              Looks up a localized string similar to TargetControlID must be specified..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DataSourceControlExtender_TargetControlMustImplementIDataSource">
+            <summary>
+              Looks up a localized string similar to TargetControl &apos;{0}&apos; must implement IDataSource..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DynamicControlBase_ConvertEmptyStringToNull">
+            <summary>
+              Looks up a localized string similar to Specifies whether the field value should be converted to a null reference..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DynamicControlBase_DataField">
+            <summary>
+              Looks up a localized string similar to Specifies the name of the data field to which the DynamicControl will bind..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DynamicControlBase_DataFormatString">
+            <summary>
+              Looks up a localized string similar to Specifies the display format for the field value..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DynamicControlBase_HtmlEncode">
+            <summary>
+              Looks up a localized string similar to Specifies whether the field value is HTML-encoded before it is displayed..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DynamicControlBase_NullDisplayText">
+            <summary>
+              Looks up a localized string similar to Specifies the caption displayed when the field value is null..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DynamicControlBase_UIHint">
+            <summary>
+              Looks up a localized string similar to Specifies the user control with which the field should be rendered..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DynamicControlBase_ValidationGroup">
+            <summary>
+              Looks up a localized string similar to Specifies the name of the validation group to which validation controls in the DynamicControl belong..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DynamicFilterRepeater_DynamicFilterContainerId">
+            <summary>
+              Looks up a localized string similar to The ID of the DynamicFilter control that exists in the ItemTemplate..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DynamicNavigatorDataSource_NoAccessibleTablesFound">
+            <summary>
+              Looks up a localized string similar to No accessible tables found. Make sure scaffolds are enabled or custom templates exist for your model..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DynamicNavigatorDataSource_NoModelsRegistered">
+            <summary>
+              Looks up a localized string similar to No data models have been registered..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.DynamicNavigatorDataSource_NoTablesInModels">
+            <summary>
+              Looks up a localized string similar to There are no tables defined in the registered data models..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_AmbiguousConstructorInvocation">
+            <summary>
+              Looks up a localized string similar to Ambiguous invocation of &apos;{0}&apos; constructor.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_AmbiguousIndexerInvocation">
+            <summary>
+              Looks up a localized string similar to Ambiguous invocation of indexer in type &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_AmbiguousMethodInvocation">
+            <summary>
+              Looks up a localized string similar to Ambiguous invocation of method &apos;{0}&apos; in type &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_ArgsIncompatibleWithLambda">
+            <summary>
+              Looks up a localized string similar to Argument list incompatible with lambda expression.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_BothTypesConvertToOther">
+            <summary>
+              Looks up a localized string similar to Both of the types &apos;{0}&apos; and &apos;{1}&apos; convert to the other.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_CannotConvertValue">
+            <summary>
+              Looks up a localized string similar to A value of type &apos;{0}&apos; cannot be converted to type &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_CannotIndexMultipleDimensionalArray">
+            <summary>
+              Looks up a localized string similar to Indexing of multiple-dimensional arrays is not supported.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_CloseBracketOrCommaExpected">
+            <summary>
+              Looks up a localized string similar to &apos;]&apos; or &apos;,&apos; expected.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_CloseParenOrCommaExpected">
+            <summary>
+              Looks up a localized string similar to &apos;)&apos; or &apos;,&apos; expected.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_CloseParenOrOperatorExpected">
+            <summary>
+              Looks up a localized string similar to &apos;)&apos; or operator expected.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_ColonExpected">
+            <summary>
+              Looks up a localized string similar to &apos;:&apos; expected.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_DigitExpected">
+            <summary>
+              Looks up a localized string similar to Digit expected.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_DotOrOpenParenExpected">
+            <summary>
+              Looks up a localized string similar to &apos;.&apos; or &apos;(&apos; expected.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_DuplicateIdentifier">
+            <summary>
+              Looks up a localized string similar to The identifier &apos;{0}&apos; was defined more than once.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_ExpressionExpected">
+            <summary>
+              Looks up a localized string similar to Expression expected.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_ExpressionTypeMismatch">
+            <summary>
+              Looks up a localized string similar to Expression of type &apos;{0}&apos; expected.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_FirstExprMustBeBool">
+            <summary>
+              Looks up a localized string similar to The first expression must be of type &apos;Boolean&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_IdentifierExpected">
+            <summary>
+              Looks up a localized string similar to Identifier expected.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_IifRequiresThreeArgs">
+            <summary>
+              Looks up a localized string similar to The &apos;iif&apos; function requires three arguments.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_IncompatibleOperand">
+            <summary>
+              Looks up a localized string similar to Operator &apos;{0}&apos; incompatible with operand type &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_IncompatibleOperands">
+            <summary>
+              Looks up a localized string similar to Operator &apos;{0}&apos; incompatible with operand types &apos;{1}&apos; and &apos;{2}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_InvalidCharacter">
+            <summary>
+              Looks up a localized string similar to Syntax error &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_InvalidCharacterLiteral">
+            <summary>
+              Looks up a localized string similar to Character literal must contain exactly one character.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_InvalidIndex">
+            <summary>
+              Looks up a localized string similar to Array index must be an integer expression.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_InvalidIntegerLiteral">
+            <summary>
+              Looks up a localized string similar to Invalid integer literal &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_InvalidRealLiteral">
+            <summary>
+              Looks up a localized string similar to Invalid real literal &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_MethodIsVoid">
+            <summary>
+              Looks up a localized string similar to Method &apos;{0}&apos; in type &apos;{1}&apos; does not return a value.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_MethodsAreInaccessible">
+            <summary>
+              Looks up a localized string similar to Methods on type &apos;{0}&apos; are not accessible.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_MissingAsClause">
+            <summary>
+              Looks up a localized string similar to Expression is missing an &apos;as&apos; clause.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_NeitherTypeConvertsToOther">
+            <summary>
+              Looks up a localized string similar to Neither of the types &apos;{0}&apos; and &apos;{1}&apos; converts to the other.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_NoApplicableAggregate">
+            <summary>
+              Looks up a localized string similar to No applicable aggregate method &apos;{0}&apos; exists.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_NoApplicableIndexer">
+            <summary>
+              Looks up a localized string similar to No applicable indexer exists in type &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_NoApplicableMethod">
+            <summary>
+              Looks up a localized string similar to No applicable method &apos;{0}&apos; exists in type &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_NoItInScope">
+            <summary>
+              Looks up a localized string similar to No &apos;it&apos; is in scope.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_NoMatchingConstructor">
+            <summary>
+              Looks up a localized string similar to No matching constructor in type &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_OpenBracketExpected">
+            <summary>
+              Looks up a localized string similar to &apos;[&apos; expected.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_OpenParenExpected">
+            <summary>
+              Looks up a localized string similar to &apos;(&apos; expected.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_SyntaxError">
+            <summary>
+              Looks up a localized string similar to Syntax error.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_TokenExpected">
+            <summary>
+              Looks up a localized string similar to {0} expected.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_TypeHasNoNullableForm">
+            <summary>
+              Looks up a localized string similar to Type &apos;{0}&apos; has no nullable form.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_UnknownIdentifier">
+            <summary>
+              Looks up a localized string similar to Unknown identifier &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_UnknownPropertyOrField">
+            <summary>
+              Looks up a localized string similar to No property or field &apos;{0}&apos; exists in type &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExpressionParser_UnterminatedStringLiteral">
+            <summary>
+              Looks up a localized string similar to Unterminated string literal.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.Expressions_DataFieldRequired">
+            <summary>
+              Looks up a localized string similar to DataField must be specified..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExtenderControl_TargetControlDifferentUpdatePanel">
+            <summary>
+              Looks up a localized string similar to An extender can&apos;t be in a different UpdatePanel than the control it extends..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExtenderControl_TargetControlID">
+            <summary>
+              Looks up a localized string similar to Identifies the control to extend..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExtenderControl_TargetControlIDEmpty">
+            <summary>
+              Looks up a localized string similar to The TargetControlID of &apos;{0}&apos; is not valid. The value cannot be null or empty..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ExtenderControl_TargetControlIDInvalid">
+            <summary>
+              Looks up a localized string similar to The TargetControlID of &apos;{0}&apos; is not valid. A control with ID &apos;{1}&apos; could not be found..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.FilterRepeater_TableName">
+            <summary>
+              Looks up a localized string similar to Specifies an override for the table name used by the FilterRepeater. By default the table is inferred from the page URL..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_ArrayTypeNotSupported">
+            <summary>
+              Looks up a localized string similar to Type &apos;{0}&apos; is not supported for deserialization of an array..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_BadEscape">
+            <summary>
+              Looks up a localized string similar to Unrecognized escape sequence..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_CannotConvertObjectToType">
+            <summary>
+              Looks up a localized string similar to Cannot convert object of type &apos;{0}&apos; to type &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_CannotCreateListType">
+            <summary>
+              Looks up a localized string similar to Cannot create instance of {0}..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_CircularReference">
+            <summary>
+              Looks up a localized string similar to A circular reference was detected while serializing an object of type &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_DepthLimitExceeded">
+            <summary>
+              Looks up a localized string similar to RecursionLimit exceeded..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_DeserializerTypeMismatch">
+            <summary>
+              Looks up a localized string similar to Cannot deserialize object graph into type of &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_DictionaryTypeNotSupported">
+            <summary>
+              Looks up a localized string similar to Type &apos;{0}&apos; is not supported for serialization/deserialization of a dictionary, keys must be strings or objects..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_ExpectedOpenBrace">
+            <summary>
+              Looks up a localized string similar to Invalid object passed in, &apos;{&apos; expected..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_IllegalPrimitive">
+            <summary>
+              Looks up a localized string similar to Invalid JSON primitive: {0}..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_InvalidArrayEnd">
+            <summary>
+              Looks up a localized string similar to Invalid array passed in, &apos;]&apos; expected..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_InvalidArrayExpectComma">
+            <summary>
+              Looks up a localized string similar to Invalid array passed in, &apos;,&apos; expected..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_InvalidArrayExtraComma">
+            <summary>
+              Looks up a localized string similar to Invalid array passed in, extra trailing &apos;,&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_InvalidArrayStart">
+            <summary>
+              Looks up a localized string similar to Invalid array passed in, &apos;[&apos; expected..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_InvalidEnumType">
+            <summary>
+              Looks up a localized string similar to Enums based on System.Int64 or System.UInt64 are not JSON-serializable because JavaScript does not support the necessary precision..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_InvalidMaxJsonLength">
+            <summary>
+              Looks up a localized string similar to Value must be a positive integer..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_InvalidMemberName">
+            <summary>
+              Looks up a localized string similar to Invalid object passed in, member name expected..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_InvalidObject">
+            <summary>
+              Looks up a localized string similar to Invalid object passed in, &apos;:&apos; or &apos;}&apos; expected..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_InvalidRecursionLimit">
+            <summary>
+              Looks up a localized string similar to RecursionLimit must be a positive integer..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_MaxJsonLengthExceeded">
+            <summary>
+              Looks up a localized string similar to Error during serialization or deserialization using the JSON JavaScriptSerializer. The length of the string exceeds the value set on the maxJsonLength property..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_NoConstructor">
+            <summary>
+              Looks up a localized string similar to No parameterless constructor defined for type of &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_StringNotQuoted">
+            <summary>
+              Looks up a localized string similar to Invalid string passed in, &apos;\&quot;&apos; expected..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_UnterminatedString">
+            <summary>
+              Looks up a localized string similar to Unterminated string passed in..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.JSON_ValueTypeCannotBeNull">
+            <summary>
+              Looks up a localized string similar to Cannot convert null to a value type..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_AutoGenerateOrderByClause">
+            <summary>
+              Looks up a localized string similar to Specifies whether to automatically generate the OrderBy clause from the OrderByParameters..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_AutoGenerateWhereClause">
+            <summary>
+              Looks up a localized string similar to Specifies whether to automatically generate the Where clause from the WhereParameters..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_AutoPage">
+            <summary>
+              Looks up a localized string similar to Specifies whether data is automatically paged..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_AutoSort">
+            <summary>
+              Looks up a localized string similar to Specifies whether data is automatically sorted..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_ContextCreated">
+            <summary>
+              Looks up a localized string similar to Event raised after the context is created unless a query result is specified during the Selecting event..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_ContextCreating">
+            <summary>
+              Looks up a localized string similar to Event raised before the context is created unless a query result is specified during the Selecting event..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_ContextDisposing">
+            <summary>
+              Looks up a localized string similar to Event raised before the context is disposed..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_ContextTypeName">
+            <summary>
+              Looks up a localized string similar to The data context type that contains the table property..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_Deleted">
+            <summary>
+              Looks up a localized string similar to Event raised after the Delete operation is completed..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_DeleteParameters">
+            <summary>
+              Looks up a localized string similar to Collection of parameters used during the Delete operation. These parameters are merged with the parameters provided by data-bound controls..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_Deleting">
+            <summary>
+              Looks up a localized string similar to Event raised before the Delete operation is executed..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_Description">
+            <summary>
+              Looks up a localized string similar to Use LINQ to connect to a DataContext or object in the Bin or App_Code directory for the application..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_DisplayName">
+            <summary>
+              Looks up a localized string similar to LINQ.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_EnableDelete">
+            <summary>
+              Looks up a localized string similar to Specifies whether the Delete operation is enabled..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_EnableInsert">
+            <summary>
+              Looks up a localized string similar to Specifies whether the Insert operation is enabled..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_EnableObjectTracking">
+            <summary>
+              Looks up a localized string similar to Specifies whether ObjectTracking should be disabled on read-only Linq to SQL data contexts..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_EnableUpdate">
+            <summary>
+              Looks up a localized string similar to Specifies whether the Update operation is enabled..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_GroupBy">
+            <summary>
+              Looks up a localized string similar to The expression passed to the GroupBy operator during the Select query..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_GroupByParameters">
+            <summary>
+              Looks up a localized string similar to Collection of parameters used for the GroupBy operator during the Select query..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_Inserted">
+            <summary>
+              Looks up a localized string similar to Event raised after the Insert operation is completed..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_Inserting">
+            <summary>
+              Looks up a localized string similar to Event raised before the Insert operation is executed..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_InsertParameters">
+            <summary>
+              Looks up a localized string similar to Collection of parameters used during the Insert operation. These parameters are merged with the parameters provided by data-bound controls..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_InvalidViewName">
+            <summary>
+              Looks up a localized string similar to LinqDataSource &apos;{0}&apos; only supports a single view named &apos;{1}&apos;. You may also leave the view name empty for the default view to be chosen..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_OrderBy">
+            <summary>
+              Looks up a localized string similar to The expression passed to the OrderBy operator during the Select query..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_OrderByParameters">
+            <summary>
+              Looks up a localized string similar to Collection of parameters used for the OrderBy operator during the Select query..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_OrderGroupsBy">
+            <summary>
+              Looks up a localized string similar to The expression passed to the OrderBy operator used for ordering groups after a GroupBy has been performed during the Select query..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_OrderGroupsByParameters">
+            <summary>
+              Looks up a localized string similar to Collection of parameters used for the OrderGroupsBy operator during the Select query..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_Select">
+            <summary>
+              Looks up a localized string similar to The expression defining a projection used during the Select query..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_Selected">
+            <summary>
+              Looks up a localized string similar to Event raised after the Select operation is completed..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_Selecting">
+            <summary>
+              Looks up a localized string similar to Event raised before the Select operation is executed..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_SelectParameters">
+            <summary>
+              Looks up a localized string similar to Collection of parameters used in the projection during the Select query..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_StoreOriginalValuesInViewState">
+            <summary>
+              Looks up a localized string similar to Specifies whether to store original data values in ViewState.  This property is used for conflict detection during Update and Delete operations..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_TableName">
+            <summary>
+              Looks up a localized string similar to The name of the table property on the data context..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_Updated">
+            <summary>
+              Looks up a localized string similar to Event raised after the Update operation is completed..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_UpdateParameters">
+            <summary>
+              Looks up a localized string similar to Collection of parameters used during the Update operation. These parameters are merged with the parameters provided by data-bound controls..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_Updating">
+            <summary>
+              Looks up a localized string similar to Event raised before the Update operation is executed..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_Where">
+            <summary>
+              Looks up a localized string similar to The expression passed to the Where operator during the Select query..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSource_WhereParameters">
+            <summary>
+              Looks up a localized string similar to Collection of parameters used for the Where operator during the Select query..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceValidationException_ValidationFailed">
+            <summary>
+              Looks up a localized string similar to Failed to set one or more properties on the data object.  Ensure that the input values are valid and can be converted to the corresponding property types..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_CannotConvertType">
+            <summary>
+              Looks up a localized string similar to Cannot convert value of parameter &apos;{0}&apos; from &apos;{1}&apos; to &apos;{2}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_ContextTypeNameChanged">
+            <summary>
+              Looks up a localized string similar to The ContextTypeName property of LinqDataSource &apos;{0}&apos; cannot be changed after the data context has been created..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_ContextTypeNameNotFound">
+            <summary>
+              Looks up a localized string similar to Could not find the type specified in the ContextTypeName property of LinqDataSource &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_ContextTypeNameNotSpecified">
+            <summary>
+              Looks up a localized string similar to The ContextTypeName property of LinqDataSource &apos;{0}&apos; must specify a data context type..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_DeleteNotSupported">
+            <summary>
+              Looks up a localized string similar to LinqDataSource &apos;{0}&apos; does not support the Delete operation unless EnableDelete is true..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_EnableObjectTrackingChanged">
+            <summary>
+              Looks up a localized string similar to The EnableObjectTracking property of LinqDataSource &apos;{0}&apos; cannot be changed after the data context has been created..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_GroupByNotSupportedOnEdit">
+            <summary>
+              Looks up a localized string similar to LinqDataSource &apos;{0}&apos; does not support the GroupBy property when the Delete, Insert or Update operations are enabled..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_InsertNotSupported">
+            <summary>
+              Looks up a localized string similar to LinqDataSource &apos;{0}&apos; does not support the Insert operation unless EnableInsert is true..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_InsertRequiresValues">
+            <summary>
+              Looks up a localized string similar to LinqDataSource &apos;{0}&apos; has no values to insert. Check that the &apos;values&apos; dictionary contains values..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_InvalidContextType">
+            <summary>
+              Looks up a localized string similar to The data context used by LinqDataSource &apos;{0}&apos; must extend DataContext when the Delete, Insert or Update operations are enabled..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_InvalidOrderByFieldName">
+            <summary>
+              Looks up a localized string similar to The value &apos;{0}&apos; for parameter &apos;{1}&apos; is not a valid OrderBy field name..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_InvalidParameterName">
+            <summary>
+              Looks up a localized string similar to The name for parameter &apos;{0}&apos; on LinqDataSource &apos;{1}&apos; is not a valid identifier name..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_InvalidTablePropertyType">
+            <summary>
+              Looks up a localized string similar to The table property used by LinqDataSource &apos;{0}&apos; must be a generic type with one parameter that extends ITable, when the Delete, Insert or Update operations are enabled..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_OrderByAlreadySpecified">
+            <summary>
+              Looks up a localized string similar to LinqDataSource &apos;{0}&apos; does not support the OrderBy property when AutoGenerateOrderByClause is true..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_OrderGroupsByRequiresGroupBy">
+            <summary>
+              Looks up a localized string similar to LinqDataSource &apos;{0}&apos; does not support the OrderGroupsBy property when the GroupsBy property has not been set..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_OriginalValuesNotFound">
+            <summary>
+              Looks up a localized string similar to Could not find a row that matches the given keys in the original values stored in ViewState.  Ensure that the &apos;keys&apos; dictionary contains unique key values that correspond to a row returned from the previous Select operation..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_PagingNotHandled">
+            <summary>
+              Looks up a localized string similar to AutoPage is disabled on LinqDataSource {0} but paging has not been handled.  Ensure you have set the LinqDataSourceSelectArguments.Arguments.TotalRowCount property to the total number of rows..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_ParametersMustBeNamed">
+            <summary>
+              Looks up a localized string similar to Parameters for LinqDataSource &apos;{0}&apos; that are not used for AutoGenerateOrderBy must be named..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_SelectNewNotSupportedOnEdit">
+            <summary>
+              Looks up a localized string similar to LinqDataSource &apos;{0}&apos; does not support the Select property when the Delete, Insert or Update operations are enabled..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_TableCannotBeStatic">
+            <summary>
+              Looks up a localized string similar to Member &apos;{0}&apos; on the data context type &apos;{1}&apos; of LinqDataSource &apos;{2}&apos; is not a valid table. For Insert, Update and Delete the table must not be a static member..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_TableNameChanged">
+            <summary>
+              Looks up a localized string similar to The TableName property of LinqDataSource &apos;{0}&apos; cannot be changed after the data context has been created..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_TableNameNotFound">
+            <summary>
+              Looks up a localized string similar to Could not find a property or field called &apos;{0}&apos; on the data context type &apos;{1}&apos; of LinqDataSource &apos;{2}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_TableNameNotSpecified">
+            <summary>
+              Looks up a localized string similar to The TableName property of LinqDataSource &apos;{0}&apos; must specify a table property or field on the data context type..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_UpdateNotSupported">
+            <summary>
+              Looks up a localized string similar to LinqDataSource &apos;{0}&apos; does not support the Update operation unless EnableUpdate is true..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_ValidationFailed">
+            <summary>
+              Looks up a localized string similar to Failed to set one or more properties on type {0}.  {1}.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.LinqDataSourceView_WhereAlreadySpecified">
+            <summary>
+              Looks up a localized string similar to LinqDataSource &apos;{0}&apos; does not support the Where property when AutoGenerateWhereClause is true..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_AlternatingItemTemplate">
+            <summary>
+              Looks up a localized string similar to The template used for alternating items..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_ContainerNameMustNotBeEmpty">
+            <summary>
+              Looks up a localized string similar to The value of {0} must not be empty..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_ConvertEmptyStringToNull">
+            <summary>
+              Looks up a localized string similar to Whether the ListView treats empty strings as null when the value is extracted from the item..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_DataKeyNames">
+            <summary>
+              Looks up a localized string similar to A comma-separated list of key fields in the data source..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_DataKeyNamesMustBeSpecified">
+            <summary>
+              Looks up a localized string similar to Data keys must be specified on ListView &apos;{0}&apos; before the selected data keys can be retrieved.  Use the DataKeyNames property to specify data keys..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_DataKeys">
+            <summary>
+              Looks up a localized string similar to The collection of data key field values..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_DataSourceDoesntSupportPaging">
+            <summary>
+              Looks up a localized string similar to The data source &apos;{0}&apos; does not support server-side paging and it returned non-ICollection.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_DataSourceMustBeCollectionWhenNotDataBinding">
+            <summary>
+              Looks up a localized string similar to Data source must implement ICollection when calling CreateChildControls with dataBinding=false..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_EditIndex">
+            <summary>
+              Looks up a localized string similar to The index of the item shown in edit mode..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_EditItem">
+            <summary>
+              Looks up a localized string similar to The ListViewItem that is currently being edited..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_EditItemTemplate">
+            <summary>
+              Looks up a localized string similar to The template used for items in edit mode..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_EmptyDataTemplate">
+            <summary>
+              Looks up a localized string similar to The template used when no data is returned from the data source. This template replaces the LayoutTemplate when used..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_EmptyItemTemplate">
+            <summary>
+              Looks up a localized string similar to The template used in the GroupTemplate when the number of remaining data items is less than the GroupItemCount..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_EnableDataBoundControlManager">
+            <summary>
+              Looks up a localized string similar to Whether the data bound control will register itself with a data bound control manager on the page..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_EnableModelValidation">
+            <summary>
+              Looks up a localized string similar to Whether page validation will be performed after validation is done in the model..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_EnablePersistedSelection">
+            <summary>
+              Looks up a localized string similar to Whether selection should be based on DataKeys or row index..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_GroupContainerID">
+            <summary>
+              Looks up a localized string similar to The ID of the server control that will be replaced with instances of the GroupTemplate..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_GroupItemCount">
+            <summary>
+              Looks up a localized string similar to The number of items that are rendered inside the GroupTemplate..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_GroupItemCountNoGroupTemplate">
+            <summary>
+              Looks up a localized string similar to ListView &apos;{0}&apos; has a GroupItemCount specified on it but no GroupTemplate. A GroupTemplate must be present for ListView to render groups..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_GroupSeparatorTemplate">
+            <summary>
+              Looks up a localized string similar to The template used for group separators between GroupTemplates..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_GroupTemplate">
+            <summary>
+              Looks up a localized string similar to The template used for item groups..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_InsertItem">
+            <summary>
+              Looks up a localized string similar to The ListViewItem that is currently being inserted..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_InsertItemPosition">
+            <summary>
+              Looks up a localized string similar to The position of the insert item within the ListView..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_InsertItemTemplate">
+            <summary>
+              Looks up a localized string similar to The template used for items in insert mode..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_InsertTemplateRequired">
+            <summary>
+              Looks up a localized string similar to An InsertItemTemplate must be defined on ListView &apos;{0}&apos; if InsertItemPosition is set to FirstItem or LastItem..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_InvalidCancel">
+            <summary>
+              Looks up a localized string similar to Cancel can only be called from the currently-edited record or an insert item..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_InvalidDelete">
+            <summary>
+              Looks up a localized string similar to Delete can only be called on a valid data item..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_InvalidEdit">
+            <summary>
+              Looks up a localized string similar to Edit can only be called on a valid data item..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_InvalidInsert">
+            <summary>
+              Looks up a localized string similar to Insert can only be called on an insert item. Ensure only the InsertTemplate has a button with CommandName=Insert..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_InvalidSelect">
+            <summary>
+              Looks up a localized string similar to Select can only be called on a valid data item..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_InvalidUpdate">
+            <summary>
+              Looks up a localized string similar to Update can only be called on a valid data item..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_ItemPlaceholderID">
+            <summary>
+              Looks up a localized string similar to The ID of the server control that will be replaced with instances of the ItemTemplate..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_Items">
+            <summary>
+              Looks up a localized string similar to The collection of visible items..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_ItemSeparatorTemplate">
+            <summary>
+              Looks up a localized string similar to The template used for separator items..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_ItemsNotDataItems">
+            <summary>
+              Looks up a localized string similar to ListViewItems that have type DataItem must be of type ListViewDataItem..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_ItemTemplate">
+            <summary>
+              Looks up a localized string similar to The template used for items..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_ItemTemplateRequired">
+            <summary>
+              Looks up a localized string similar to An ItemTemplate must be defined on ListView &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_LayoutTemplate">
+            <summary>
+              Looks up a localized string similar to The template used for the ListView layout..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_Missing_VirtualItemCount">
+            <summary>
+              Looks up a localized string similar to ListView with id &apos;{0}&apos; must have a data source that either implements ICollection or can perform data source paging if AllowPaging is true..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_NeedICollectionOrTotalRowCount">
+            <summary>
+              Looks up a localized string similar to If a data source does not return ICollection and cannot return the total row count, it cannot be used by the {0} to implement server-side paging..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_NoGroupPlaceholder">
+            <summary>
+              Looks up a localized string similar to A group placeholder must be specified on ListView &apos;{0}&apos; when the GroupTemplate is defined. Specify a group placeholder by setting its ID property to &quot;{1}&quot;. The group placeholder control must also specify runat=&quot;server&quot;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_NoInsertItem">
+            <summary>
+              Looks up a localized string similar to An insert item wasn&apos;t found..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_NoItemPlaceholder">
+            <summary>
+              Looks up a localized string similar to An item placeholder must be specified on ListView &apos;{0}&apos;. Specify an item placeholder by setting a control&apos;s ID property to &quot;{1}&quot;. The item placeholder control must also specify runat=&quot;server&quot;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_NullView">
+            <summary>
+              Looks up a localized string similar to The data source retrieved by &apos;{0}&apos; returned a null DataSourceView..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_OnItemCanceling">
+            <summary>
+              Looks up a localized string similar to Fires when a Cancel event is generated within the ListView..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_OnItemCommand">
+            <summary>
+              Looks up a localized string similar to Fires when an event is generated within the ListView..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_OnItemCreated">
+            <summary>
+              Looks up a localized string similar to Fires when an item is created..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_OnItemDataBound">
+            <summary>
+              Looks up a localized string similar to Fires after an item has been data-bound..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_OnItemDeleted">
+            <summary>
+              Looks up a localized string similar to Fires after a Delete Command is executed on the data source..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_OnItemDeleting">
+            <summary>
+              Looks up a localized string similar to Fires before a Delete Command is executed on the data source..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_OnItemEditing">
+            <summary>
+              Looks up a localized string similar to Fires when an Edit event is generated within the ListView..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_OnItemInserted">
+            <summary>
+              Looks up a localized string similar to Fires after an Insert Command is executed on the data source..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_OnItemInserting">
+            <summary>
+              Looks up a localized string similar to Fires before an Insert Command is executed on the data source..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_OnItemUpdated">
+            <summary>
+              Looks up a localized string similar to Fires after an Update Command is executed on the data source..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_OnItemUpdating">
+            <summary>
+              Looks up a localized string similar to Fires before an Update Command is executed on the data source..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_OnLayoutCreated">
+            <summary>
+              Looks up a localized string similar to Fires when the ListView&apos;s layout is created..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_OnPagePropertiesChanged">
+            <summary>
+              Looks up a localized string similar to Fires when the ListView&apos;s paging properties have changed..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_OnPagePropertiesChanging">
+            <summary>
+              Looks up a localized string similar to Fires when the ListView&apos;s paging properties are changing..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_OnSelectedIndexChanged">
+            <summary>
+              Looks up a localized string similar to Fires when an item is selected in the ListView, after the selection is complete..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_OnSelectedIndexChanging">
+            <summary>
+              Looks up a localized string similar to Fires when an item is selected in the ListView, before the item is selected..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_OnSorted">
+            <summary>
+              Looks up a localized string similar to Fires when a field is sorted in the ListView, after the sort is complete..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_OnSorting">
+            <summary>
+              Looks up a localized string similar to Fires when a field is sorted in the ListView, before the sort occurs..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_PersistedSelectionRequiresDataKeysNames">
+            <summary>
+              Looks up a localized string similar to DataKeyNames must be specified for persisted selection to work..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_SelectedIndex">
+            <summary>
+              Looks up a localized string similar to The index of the currently selected item..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_SelectedItemTemplate">
+            <summary>
+              Looks up a localized string similar to The template used for the currently selected item..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_SortDirection">
+            <summary>
+              Looks up a localized string similar to The direction in which to sort the field..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_SortExpression">
+            <summary>
+              Looks up a localized string similar to Sort expression used to sort the data source to which the ListView is binding..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_StyleNotSupported">
+            <summary>
+              Looks up a localized string similar to Style properties are not supported on ListView..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_StylePropertiesNotSupported">
+            <summary>
+              Looks up a localized string similar to Style properties are not supported on ListView.  Apply styling or CSS classes to the elements inside ListView&apos;s templates..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListView_UnhandledEvent">
+            <summary>
+              Looks up a localized string similar to The ListView &apos;{0}&apos; raised event {1} which wasn&apos;t handled..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListViewPagedDataSource_CannotGetCount">
+            <summary>
+              Looks up a localized string similar to Cannot compute Count for a data source that does not implement ICollection..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ListViewPagedDataSource_EnumeratorMoveNextNotCalled">
+            <summary>
+              Looks up a localized string similar to You must call MoveNext on IEnumerator before accessing the Current property..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.MethodExpression_ChangingTheReturnTypeIsNotAllowed">
+            <summary>
+              Looks up a localized string similar to Changing the type of result is not allowed..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.MethodExpression_DataSourceMustBeIDynamicDataSource">
+            <summary>
+              Looks up a localized string similar to The DataSource must implement IDynamicDataSource for a format string to be used..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.MethodExpression_FirstParamterMustBeCorrectType">
+            <summary>
+              Looks up a localized string similar to The first parameter of &apos;{0}&apos; must be of type &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.MethodExpression_MethodMustBeStatic">
+            <summary>
+              Looks up a localized string similar to Method &apos;{0}&apos; must be static..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.MethodExpression_MethodNameMustBeSpecified">
+            <summary>
+              Looks up a localized string similar to A MethodName must be specified..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.MethodExpression_MethodNotFound">
+            <summary>
+              Looks up a localized string similar to Method &apos;{0}&apos; was not found..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.MethodExpression_ParameterNotFound">
+            <summary>
+              Looks up a localized string similar to Unable to find parameter &apos;{0}&apos; for method &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPreviousPagerField_ButtonCssClass">
+            <summary>
+              Looks up a localized string similar to The CSS class applied to the next and previous buttons..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPreviousPagerField_ButtonType">
+            <summary>
+              Looks up a localized string similar to The type of button contained within the pager field..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPreviousPagerField_FirstPageImageUrl">
+            <summary>
+              Looks up a localized string similar to The URL of the image of the first page button if the ButtonType is Image..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPreviousPagerField_FirstPageText">
+            <summary>
+              Looks up a localized string similar to The text of the first page button..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPreviousPagerField_LastPageImageUrl">
+            <summary>
+              Looks up a localized string similar to The URL of the image of the last page button if the ButtonType is Image..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPreviousPagerField_LastPageText">
+            <summary>
+              Looks up a localized string similar to The text of the last page button..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPreviousPagerField_NextPageImageUrl">
+            <summary>
+              Looks up a localized string similar to The URL of the image of the next page button if the ButtonType is Image..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPreviousPagerField_NextPageText">
+            <summary>
+              Looks up a localized string similar to The text of the next page button..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPreviousPagerField_PreviousPageImageUrl">
+            <summary>
+              Looks up a localized string similar to The URL of the image of the previous page button if the ButtonType is Image..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPreviousPagerField_PreviousPageText">
+            <summary>
+              Looks up a localized string similar to The text of the previous page button..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPreviousPagerField_RenderDisabledButtonsAsLabels">
+            <summary>
+              Looks up a localized string similar to Whether disabled pager links should be rendered as labels rather than buttons..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPreviousPagerField_RenderNonBreakingSpacesBetweenControls">
+            <summary>
+              Looks up a localized string similar to Whether non-breaking spaces should be rendered between pager controls..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPreviousPagerField_ShowFirstPageButton">
+            <summary>
+              Looks up a localized string similar to Whether the pager field should display the first page button..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPreviousPagerField_ShowLastPageButton">
+            <summary>
+              Looks up a localized string similar to Whether the pager field should display the last page button..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPreviousPagerField_ShowNextPageButton">
+            <summary>
+              Looks up a localized string similar to Whether the pager field should display the next page button..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPreviousPagerField_ShowPreviousPageButton">
+            <summary>
+              Looks up a localized string similar to Whether the pager field should display the previous page button..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPrevPagerField_DefaultFirstPageText">
+            <summary>
+              Looks up a localized string similar to First.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPrevPagerField_DefaultLastPageText">
+            <summary>
+              Looks up a localized string similar to Last.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPrevPagerField_DefaultNextPageText">
+            <summary>
+              Looks up a localized string similar to Next.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NextPrevPagerField_DefaultPreviousPageText">
+            <summary>
+              Looks up a localized string similar to Previous.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NumericPagerField_ButtonCount">
+            <summary>
+              Looks up a localized string similar to The maximum number of page number buttons that can be displayed by the pager field..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NumericPagerField_ButtonType">
+            <summary>
+              Looks up a localized string similar to The type of button contained within the pager field..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NumericPagerField_CurrentPageLabelCssClass">
+            <summary>
+              Looks up a localized string similar to The CSS class applied to the label containing the current page number..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NumericPagerField_DefaultNextPageText">
+            <summary>
+              Looks up a localized string similar to ....
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NumericPagerField_DefaultPreviousPageText">
+            <summary>
+              Looks up a localized string similar to ....
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NumericPagerField_NextPageImageUrl">
+            <summary>
+              Looks up a localized string similar to The URL of the image of the next page button if the ButtonType is Image..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NumericPagerField_NextPageText">
+            <summary>
+              Looks up a localized string similar to The text of the next page button..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NumericPagerField_NextPreviousButtonCssClass">
+            <summary>
+              Looks up a localized string similar to The CSS class applied to the next and previous buttons..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NumericPagerField_NumericButtonCssClass">
+            <summary>
+              Looks up a localized string similar to The CSS class applied to the numeric pager buttons..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NumericPagerField_PreviousPageImageUrl">
+            <summary>
+              Looks up a localized string similar to The URL of the image of the previous page button if the ButtonType is Image..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NumericPagerField_PreviousPageText">
+            <summary>
+              Looks up a localized string similar to The text of the previous page button..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.NumericPagerField_RenderNonBreakingSpacesBetweenControls">
+            <summary>
+              Looks up a localized string similar to Whether non-breaking spaces should be rendered between pager controls..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.PageRequestManager_RegisterDataItemInNonAsyncRequest">
+            <summary>
+              Looks up a localized string similar to RegisterDataItem can only be called during an async postback..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.PageRequestManager_RegisterDataItemTwice">
+            <summary>
+              Looks up a localized string similar to The control &apos;{0}&apos; already has a data item registered..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.PagerFieldCollection_InvalidType">
+            <summary>
+              Looks up a localized string similar to Object is not a DataPagerField..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.PagerFieldCollection_InvalidTypeIndex">
+            <summary>
+              Looks up a localized string similar to Type index is out of bounds..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ParseException_ParseExceptionFormat">
+            <summary>
+              Looks up a localized string similar to {0} (at index {1}).
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ProfileServiceManager_LoadProperitesWithNonDefaultPath">
+            <summary>
+              Looks up a localized string similar to The attribute &apos;LoadProperties&apos; can only be used when using the default ProfileService..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ProfileServiceManager_LoadProperties">
+            <summary>
+              Looks up a localized string similar to Specifies profile properties that should be rendered inline with the page..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ProxyGenerator_UnsupportedType">
+            <summary>
+              Looks up a localized string similar to Type {0} is not supported..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ProxyHelper_BadStatusCode">
+            <summary>
+              Looks up a localized string similar to Error status code returned by the Web Service: {0}. Error details from service: {1}.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.QueryExtender_DataSourceMustBeIQueryableDataSource">
+            <summary>
+              Looks up a localized string similar to DataSource &apos;{0}&apos; must implement IQueryableDataSource..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.RangeExpression_MaximumValueRequired">
+            <summary>
+              Looks up a localized string similar to A maximum value must be specified..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.RangeExpression_MinimumValueRequired">
+            <summary>
+              Looks up a localized string similar to A minimum value must be specified..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.RangeExpression_RangeTypeMustBeSpecified">
+            <summary>
+              Looks up a localized string similar to A minimum and maximum RangeType must be specified..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.RoleService_RoleProviderNotFound">
+            <summary>
+              Looks up a localized string similar to Role Provider could not be found..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.RoleService_RolesFeatureNotEnabled">
+            <summary>
+              Looks up a localized string similar to The Role Manager feature has not been enabled..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.RoleServiceManager_LoadRoles">
+            <summary>
+              Looks up a localized string similar to Indicates whether user roles are rendered inline with the page..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.RoleServiceManager_LoadRolesWithNonDefaultPath">
+            <summary>
+              Looks up a localized string similar to For RoleService, &apos;loadRoles&apos; property must be set to false when the &apos;path&apos; property is set to a value different from the default value..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptControlDescriptor_IDNotSettable">
+            <summary>
+              Looks up a localized string similar to The &apos;ID&apos; property on ScriptControlDescriptor is not settable. The client ID of a script control is always equal to its element ID..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptControlManager_ExtenderControlNotRegistered">
+            <summary>
+              Looks up a localized string similar to Extender control &apos;{0}&apos; is not a registered extender control. Extender controls must be registered using RegisterExtenderControl() before calling RegisterScriptDescriptors()..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptControlManager_NoTargetControlTypes">
+            <summary>
+              Looks up a localized string similar to Extender control type &apos;{0}&apos; does not have any attributes of type &apos;{1}&apos;. Extender control types must have at least one attribute of type &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptControlManager_RegisterExtenderControlTooEarly">
+            <summary>
+              Looks up a localized string similar to Extender controls may not be registered before PreRender..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptControlManager_RegisterExtenderControlTooLate">
+            <summary>
+              Looks up a localized string similar to Extender controls may not be registered after PreRender..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptControlManager_RegisterScriptControlTooEarly">
+            <summary>
+              Looks up a localized string similar to Script controls may not be registered before PreRender..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptControlManager_RegisterScriptControlTooLate">
+            <summary>
+              Looks up a localized string similar to Script controls may not be registered after PreRender..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptControlManager_ScriptControlNotRegistered">
+            <summary>
+              Looks up a localized string similar to Script control &apos;{0}&apos; is not a registered script control. Script controls must be registered using RegisterScriptControl() before calling RegisterScriptDescriptors()..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptControlManager_TargetControlTypeInvalid">
+            <summary>
+              Looks up a localized string similar to Extender control &apos;{0}&apos; cannot extend &apos;{1}&apos;. Extender controls of type &apos;{2}&apos; cannot extend controls of type &apos;{3}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_AllowCustomErrorsRedirect">
+            <summary>
+              Looks up a localized string similar to Indicates whether custom error redirects will occur during an async postback..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_ApplicationServicesNotLoaded">
+            <summary>
+              Looks up a localized string similar to The Application Services feature requires that you have included a script reference to MicrosoftAjaxApplicationServices.js..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_AsyncPostBackError">
+            <summary>
+              Looks up a localized string similar to This event is raised to allow customization of the error message sent to the client during an async postback..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_AsyncPostBackErrorMessage">
+            <summary>
+              Looks up a localized string similar to The error message to be sent to the client when an unhandled exception occurs on the server. The property can be set declaratively in the page markup or during the ScriptManager&apos;s AsyncPostBackError event. If the value is empty the exception&apos;s message will be used..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_AsyncPostBackNotInPartialRenderingMode">
+            <summary>
+              Looks up a localized string similar to The page is performing an async postback but the ScriptManager.SupportsPartialRendering property is set to false. Ensure that the property is set to true during an async postback..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_AsyncPostBackTimeout">
+            <summary>
+              Looks up a localized string similar to The timeout period in seconds for async postbacks. A value of zero indicates no timeout..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_AuthenticationService">
+            <summary>
+              Looks up a localized string similar to Contains preferences for the client side authentication service..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_CannotAddHistoryPointOutsideOfAsyncPostBack">
+            <summary>
+              Looks up a localized string similar to A history point can only be created during an asynchronous postback..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_CannotAddHistoryPointWithHistoryDisabled">
+            <summary>
+              Looks up a localized string similar to A history point can only be added if EnableHistory is set to true..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_CannotChangeEnableHistory">
+            <summary>
+              Looks up a localized string similar to The EnableHistory property cannot be changed after the Init event..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_CannotChangeEnablePartialRendering">
+            <summary>
+              Looks up a localized string similar to The EnablePartialRendering property cannot be changed after the Init event..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_CannotChangeEnableScriptGlobalization">
+            <summary>
+              Looks up a localized string similar to The EnableScriptGlobalization property cannot be changed during async postbacks or after the Init event..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_CannotChangeMicrosoftAjaxMode">
+            <summary>
+              Looks up a localized string similar to The MicrosoftAjaxMode property cannot be changed after the Init event..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_CannotChangeSupportsPartialRendering">
+            <summary>
+              Looks up a localized string similar to The SupportsPartialRendering property cannot be changed after the Init event..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_CannotRegisterBothPostBacks">
+            <summary>
+              Looks up a localized string similar to Control with ID &apos;{0}&apos; cannot be registered through both RegisterAsyncPostBackControl and RegisterPostBackControl. This can happen if you have conflicting triggers associated with the target control..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_CannotRegisterScriptInMultipleCompositeReferences">
+            <summary>
+              Looks up a localized string similar to A script reference cannot be included multiple times in composite script references..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_CannotSetSupportsPartialRenderingWhenDisabled">
+            <summary>
+              Looks up a localized string similar to The SupportsPartialRendering property cannot be set when EnablePartialRendering is false..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_ClientElementsToActivate">
+            <summary>
+              Looks up a localized string similar to A comma-separated list of element IDs to activate..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_ClientNavigateHandler">
+            <summary>
+              Looks up a localized string similar to Specifies a client-side event handler name for the navigate event..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_ComponentModelNotLoaded">
+            <summary>
+              Looks up a localized string similar to The History feature requires that you have included a script reference to MicrosoftAjaxComponentModel.js..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_CompositeScript">
+            <summary>
+              Looks up a localized string similar to Enables the composition of individual script references into one to minimize the number of requests to the server..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_EmptyPageUrl">
+            <summary>
+              Looks up a localized string similar to The URL of an empty page that will be used to manage history on Internet Explorer. The script manager uses a built-in, resource-based page if this property is unspecified..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_EnableHistory">
+            <summary>
+              Looks up a localized string similar to Enables ScriptManager to manage browser history on supported browsers..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_EnablePageMethods">
+            <summary>
+              Looks up a localized string similar to Enables page methods..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_EnablePartialRendering">
+            <summary>
+              Looks up a localized string similar to Enables asynchronous postbacks for the UpdatePanel control on supported browsers. To override the default browser support detection you can set the SupportsPartialRendering property..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_EnableScriptGlobalization">
+            <summary>
+              Looks up a localized string similar to Enables ScriptManager to add client-side globalization information to the page for the current culture..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_EnableScriptLocalization">
+            <summary>
+              Looks up a localized string similar to Enables ScriptManager to generate localized versions of script files if they are available..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_EnableSecureHistoryState">
+            <summary>
+              Looks up a localized string similar to When true, the server-side history state is hashed using the same settings as ViewState. When false, the server history state is a clear-text string dictionary that can be modified by the end user by modifying the url..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_FrameworkFailedToLoad">
+            <summary>
+              Looks up a localized string similar to ASP.NET Ajax client-side framework failed to load..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_GlobalizationNotLoaded">
+            <summary>
+              Looks up a localized string similar to The Globalization feature requires that you have included a script reference to MicrosoftAjaxGlobalization.js..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_InvalidControlRegistration">
+            <summary>
+              Looks up a localized string similar to Control with ID &apos;{0}&apos; being registered through RegisterAsyncPostBackControl or RegisterPostBackControl must implement either INamingContainer, IPostBackDataHandler, or IPostBackEventHandler..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_LoadScriptsBeforeUI">
+            <summary>
+              Looks up a localized string similar to Specifies that script references should be loaded before the UI is rendered in the browser..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_Navigate">
+            <summary>
+              Looks up a localized string similar to This event is raised during asynchronous postbacks when the server-side history state changes..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_OnlyOneScriptManager">
+            <summary>
+              Looks up a localized string similar to Only one instance of a ScriptManager can be added to the page..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_PageUntitled">
+            <summary>
+              Looks up a localized string similar to Untitled Page.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_ProfileService">
+            <summary>
+              Looks up a localized string similar to Contains preferences for the client side profile service..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_ResolveCompositeScriptReference">
+            <summary>
+              Looks up a localized string similar to This event is raised to allow modifications to composite script references before they are rendered..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_ResolveScriptReference">
+            <summary>
+              Looks up a localized string similar to This event is raised to allow modifications to script references before they are rendered..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_RoleService">
+            <summary>
+              Looks up a localized string similar to Contains preferences for the client side authentication service..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_ScriptMode">
+            <summary>
+              Looks up a localized string similar to Indicates the type of scripts to load when more than one type is available..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_ScriptPath">
+            <summary>
+              Looks up a localized string similar to Specifies that scripts should be loaded from this path instead of from assembly web resources..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_Scripts">
+            <summary>
+              Looks up a localized string similar to A collection of script references that the ScriptManager should include in the page. The Scripts collections on the ScriptManager and ScriptManagerProxy controls are merged at runtime..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_Services">
+            <summary>
+              Looks up a localized string similar to A collection of service references that the ScriptManager should include in the page. The Services collections on the ScriptManager and ScriptManagerProxy controls are merged at runtime..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_TemplateScriptNotLoaded">
+            <summary>
+              Looks up a localized string similar to The ClientElementsToActivate feature requires that you have included a script reference to MicrosoftAjaxTemplates.js..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManager_UpdatePanelNotRegistered">
+            <summary>
+              Looks up a localized string similar to Cannot unregister UpdatePanel with ID &apos;{0}&apos; since it was not registered with the ScriptManager. This might occur if the UpdatePanel was removed from the control tree and later added again, which is not supported..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptManagerProxy_ClientElementsToActivate">
+            <summary>
+              Looks up a localized string similar to A comma-separated list of element IDs to activate..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptReference_Assembly">
+            <summary>
+              Looks up a localized string similar to The assembly that contains the script as a web resource..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptReference_AssemblyRequiresName">
+            <summary>
+              Looks up a localized string similar to Assembly cannot be defined without Name..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptReference_IgnoreScriptPath">
+            <summary>
+              Looks up a localized string similar to Indicates whether this script reference should ignore the ScriptManager.ScriptPath property..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptReference_InvalidReleaseScriptName">
+            <summary>
+              Looks up a localized string similar to &apos;{0}&apos; is not a valid script name.  The name must end in &apos;.js&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptReference_InvalidReleaseScriptPath">
+            <summary>
+              Looks up a localized string similar to &apos;{0}&apos; is not a valid script path.  The path must end in &apos;.js&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptReference_Name">
+            <summary>
+              Looks up a localized string similar to The name of the web resource..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptReference_NameAndPathCannotBeEmpty">
+            <summary>
+              Looks up a localized string similar to Name and Path cannot both be empty..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptReference_NotifyScriptLoaded">
+            <summary>
+              Looks up a localized string similar to Specifies if the script resource loader should automatically append a script loaded notification statement..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptReference_Path">
+            <summary>
+              Looks up a localized string similar to The path to the script..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptReference_ResourceUICultures">
+            <summary>
+              Looks up a localized string similar to A comma-delimited string of valid UI cultures supported by the path. ResourceUICultures is only valid with Path..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptReference_ScriptMode">
+            <summary>
+              Looks up a localized string similar to Specifies the algorithm for choosing between the debug and release scripts..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptReference_ScriptPath">
+            <summary>
+              Looks up a localized string similar to Specifies that this script should be loaded from this path instead of from an assembly web resource..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptRegistrationManager_ControlNotOnPage">
+            <summary>
+              Looks up a localized string similar to The control must be in the control tree of a page..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptRegistrationManager_InvalidChars">
+            <summary>
+              Looks up a localized string similar to The script tag registered for type &apos;{0}&apos; and key &apos;{1}&apos; has invalid characters outside of the script tags: {2}. Only properly formatted script tags can be registered..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptRegistrationManager_NoCloseTag">
+            <summary>
+              Looks up a localized string similar to The script tag registered for type &apos;{0}&apos; and key &apos;{1}&apos; is missing a matching close tag..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptRegistrationManager_NoTags">
+            <summary>
+              Looks up a localized string similar to The script tag registered for type &apos;{0}&apos; and key &apos;{1}&apos; does not contain any valid script tags..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptResourceHandler_DuplicateScriptResources">
+            <summary>
+              Looks up a localized string similar to More than one ScriptResourceAttribute points to script &apos;{0}&apos; in assembly &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptResourceHandler_InvalidRequest">
+            <summary>
+              Looks up a localized string similar to This is an invalid script resource request..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptResourceHandler_ResourceUrlLongerThan1024Characters">
+            <summary>
+              Looks up a localized string similar to The resource URL cannot be longer than 1024 characters. If using a CompositeScriptReference, reduce the number of ScriptReferences it contains, or combine them into a single static file and set the Path property to the location of it..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptResourceHandler_TypeNameMismatch">
+            <summary>
+              Looks up a localized string similar to The type names for the debug and release versions of resource {0} don&apos;t match..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ScriptResourceHandler_UnknownResource">
+            <summary>
+              Looks up a localized string similar to Web resource &apos;{0}&apos; was not found..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.SearchExpression_ParameterRequired">
+            <summary>
+              Looks up a localized string similar to A search parameter is required..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ServiceReference_InlineScript">
+            <summary>
+              Looks up a localized string similar to Indicates whether this service reference should have its proxy script rendered inline in the page..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ServiceReference_Path">
+            <summary>
+              Looks up a localized string similar to The path to the service being referenced..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ServiceReference_PathCannotBeEmpty">
+            <summary>
+              Looks up a localized string similar to Path cannot be empty..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.ServiceUriNotFound">
+            <summary>
+              Looks up a localized string similar to The serviceUri configuration setting was not found..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.SqlHelper_SqlEverywhereNotInstalled">
+            <summary>
+              Looks up a localized string similar to Unable to connect to the Microsoft SQL Everywhere Service using the specified connection string. Make sure that Microsoft SQL Server Everywhere is correctly installed on this computer..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.TemplatePagerField_OnPagerCommand">
+            <summary>
+              Looks up a localized string similar to Fires when an event is generated within the pager field..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.TemplatePagerField_PagerTemplate">
+            <summary>
+              Looks up a localized string similar to The template used in the pager field..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.TemplatePagerField_UnhandledEvent">
+            <summary>
+              Looks up a localized string similar to The TemplatePagerField raised event {0} which wasn&apos;t handled..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.Timer_IntervalMustBeGreaterThanZero">
+            <summary>
+              Looks up a localized string similar to The interval must be greater than zero..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.Timer_TimerEnable">
+            <summary>
+              Looks up a localized string similar to Enables raising of Tick events..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.Timer_TimerInterval">
+            <summary>
+              Looks up a localized string similar to The duration between Tick events in milliseconds..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.Timer_TimerTick">
+            <summary>
+              Looks up a localized string similar to Occurs whenever the specified interval time elapses..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UnhandledExceptionEventLogMessage">
+            <summary>
+              Looks up a localized string similar to An unhandled exception has occurred..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UpdatePanel_CannotModifyControlCollection">
+            <summary>
+              Looks up a localized string similar to The Controls property of UpdatePanel with ID &apos;{0}&apos; cannot be modified directly. To change the contents of the UpdatePanel modify the child controls of the ContentTemplateContainer property..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UpdatePanel_CannotSetContentTemplate">
+            <summary>
+              Looks up a localized string similar to The ContentTemplate of UpdatePanel with ID &apos;{0}&apos; cannot be changed after it has been instantiated..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UpdatePanel_ChildrenAsTriggers">
+            <summary>
+              Looks up a localized string similar to Indicates whether postbacks coming from the UpdatePanel&apos;s child controls will cause the UpdatePanel to refresh..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UpdatePanel_ChildrenTriggersAndUpdateAlways">
+            <summary>
+              Looks up a localized string similar to ChildrenAsTriggers cannot be set to false when UpdateMode is set to Always on UpdatePanel &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UpdatePanel_RenderMode">
+            <summary>
+              Looks up a localized string similar to Indicates whether the UpdatePanel should render as a block tag (&lt;div&gt;) or an inline tag (&lt;span&gt;)..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UpdatePanel_SetPartialRenderingModeCalledOnce">
+            <summary>
+              Looks up a localized string similar to SetPartialRenderingMode can only be called once..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UpdatePanel_Triggers">
+            <summary>
+              Looks up a localized string similar to A collection of triggers that can cause the UpdatePanel to be updated..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UpdatePanel_UpdateConditional">
+            <summary>
+              Looks up a localized string similar to The Update method can only be called on UpdatePanel with ID &apos;{0}&apos; when UpdateMode is set to Conditional..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UpdatePanel_UpdateMode">
+            <summary>
+              Looks up a localized string similar to Indicates whether the UpdatePanel will refresh on every asynchronous postback or only as the result of a specific action, such as a call to UpdatePanel.Update()..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UpdatePanel_UpdateTooLate">
+            <summary>
+              Looks up a localized string similar to The Update method can only be called on UpdatePanel with ID &apos;{0}&apos; before Render..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UpdatePanelControlTrigger_ControlID">
+            <summary>
+              Looks up a localized string similar to The trigger&apos;s target control ID..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UpdatePanelControlTrigger_ControlNotFound">
+            <summary>
+              Looks up a localized string similar to A control with ID &apos;{0}&apos; could not be found for the trigger in UpdatePanel &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UpdatePanelControlTrigger_NoControlID">
+            <summary>
+              Looks up a localized string similar to The ControlID property must be set on the trigger in UpdatePanel &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UpdateProgress_AssociatedUpdatePanelID">
+            <summary>
+              Looks up a localized string similar to UpdatePanel that this UpdateProgress is associated with..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UpdateProgress_DisplayAfter">
+            <summary>
+              Looks up a localized string similar to Time in ms after which the ProgressTemplate is displayed..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UpdateProgress_DisplayAfterInvalid">
+            <summary>
+              Looks up a localized string similar to DisplayAfter must be a non negative integer..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UpdateProgress_DynamicLayout">
+            <summary>
+              Looks up a localized string similar to Determines whether the progress template is dynamically rendered..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UpdateProgress_NoUpdatePanel">
+            <summary>
+              Looks up a localized string similar to No UpdatePanel found for AssociatedUpdatePanelID &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UpdateProgress_ProgressTemplate">
+            <summary>
+              Looks up a localized string similar to ProgressTemplate which is displayed during async postbacks..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.UserIsNotAuthenticated">
+            <summary>
+              Looks up a localized string similar to You must log on to call this method..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.WebResourceUtil_AssemblyDoesNotContainDebugWebResource">
+            <summary>
+              Looks up a localized string similar to Assembly &apos;{0}&apos; does not contain a Web resource with name &apos;{1}&apos;.  Setting the ScriptReference.ScriptMode property to ScriptMode.Auto or ScriptMode.Release will cause the release script to be used..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.WebResourceUtil_AssemblyDoesNotContainEmbeddedResource">
+            <summary>
+              Looks up a localized string similar to Assembly &apos;{0}&apos; contains a Web resource with name &apos;{1}&apos;, but does not contain an embedded resource with name &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.WebResourceUtil_AssemblyDoesNotContainReleaseWebResource">
+            <summary>
+              Looks up a localized string similar to Assembly &apos;{0}&apos; does not contain a Web resource with name &apos;{1}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.WebService_Error">
+            <summary>
+              Looks up a localized string similar to There was an error processing the request..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.WebService_InvalidGenerateScriptType">
+            <summary>
+              Looks up a localized string similar to Using the GenerateScriptTypes attribute is not supported for types in the following categories: primitive types; DateTime; generic types taking more than one parameter; types implementing IEnumerable or IDictionary; interfaces; Abstract classes; classes without a public default constructor..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.WebService_InvalidInlineVirtualPath">
+            <summary>
+              Looks up a localized string similar to The path &quot;{0}&quot; is not supported. When InlineScript=true, the path should be a relative path pointing to the same web application as the current page..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.WebService_InvalidVerbRequest">
+            <summary>
+              Looks up a localized string similar to An attempt was made to call the method &apos;{0}&apos; using a {1} request, which is not allowed..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.WebService_InvalidWebServiceCall">
+            <summary>
+              Looks up a localized string similar to Invalid web service call, expected path info of /js/&lt;Method&gt;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.WebService_InvalidXmlReturnType">
+            <summary>
+              Looks up a localized string similar to The method &apos;{0}&apos; returns a value of type &apos;{1}&apos;, which cannot be serialized as Xml. Original error: {2}.
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.WebService_MissingArg">
+            <summary>
+              Looks up a localized string similar to Invalid web service call, missing value for parameter: &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.WebService_NoScriptServiceAttribute">
+            <summary>
+              Looks up a localized string similar to Only Web services with a [ScriptService] attribute on the class definition can be called from script..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.WebService_NoWebServiceData">
+            <summary>
+              Looks up a localized string similar to No web service found at: {0}..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.WebService_NoWebServiceDataInlineScript">
+            <summary>
+              Looks up a localized string similar to No web service found at: {0}. This error can occur if a ServiceReference to a WCF service has InlineScript set to &apos;true&apos;. For WCF services InlineScript should be &apos;false&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.WebService_RedirectError">
+            <summary>
+              Looks up a localized string similar to Authentication failed..
+            </summary>
+        </member>
+        <member name="P:System.Web.Resources.AtlasWeb.WebService_UnknownWebMethod">
+            <summary>
+              Looks up a localized string similar to Unknown web method {0}..
+            </summary>
+        </member>
+        <member name="M:Microsoft.Web.Data.UI.WebControls.QueryableDataSourceView.GetSource(Microsoft.Web.Data.UI.WebControls.QueryContext)">
+            <summary>
+            Gets the result to apply query
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Web.Data.UI.WebControls.QueryableDataSourceView.BuildQuery(System.Web.UI.DataSourceSelectArguments)">
+            <summary>
+            Creates a select expression based on parameters and properties
+            </summary>       
+        </member>
+        <member name="M:System.Web.UI.DataSourceExtensions.FindControl(System.Web.UI.Control,System.String)">
+            <devdoc>
+            Walks up the stack of NamingContainers starting at 'control' to find a control with the ID 'controlID'.
+            </devdoc>
+        </member>
+        <member name="P:Microsoft.Web.Data.UI.WebControls.ContextDataSourceView.Context">
+            <summary>
+            Current Context
+            </summary>
+        </member>
+        <member name="P:Microsoft.Web.Data.UI.WebControls.ContextDataSourceView.EntitySet">
+            <summary>
+            Current EntitySet
+            </summary>
+        </member>
+    </members>
+</doc>

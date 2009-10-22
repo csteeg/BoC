@@ -1,0 +1,327 @@
+;######################################
+;Polish Translation by Piotr Drozdowski
+;######################################
+
+[frmMain]
+tsSQL=zapytanie SQL
+tsResult=dane wyjœciowe
+tsEdit=edycja danych
+pEditTop=
+lblTable=Tabela:
+lblFilterField=Filtruj po:
+lblFilter=Filtr:
+miDatabase=Baza danych
+miNew=Nowa
+miOpen=Otwórz
+miCleanUp=Wyczyœæ
+miClose=Zamknij
+miCreationSQL=Kod SQL Bazy danych
+miMigrate=Migruj do SQLite3 
+miRecentList=Ostatnio otwarte
+miExit=Zakoñcz
+miTable=Tabela
+miNewTable=Nowa
+miEditTable=Edytuj
+miDeleteTable=Usuñ
+miIndex=Indeks
+miNewIndex=Nowy
+miEditIndex=Edytuj
+miDeleteIndex=Usuñ
+miView=Widok
+miNewView=Nowy
+miEditView=Edytuj
+miDeleteView=Usuñ
+miTrigger=Wyzwalacz
+miNewTrigger=Nowy
+miEditTrigger=Edytuj
+miDeleteTrigger=Usuñ
+Abfrage1=Zapytanie
+miAddQuery=Dodaj
+miShowQuery=Otwórz
+miSaveQueryMain=Zapisz
+miDelQuery=Usuñ
+miOpenSQL=Wykonaj z wynikiem (SELECT)
+miExecSQL=Wykonaj bez wyniku (INSERT, UPDATE, DELETE)
+miInsertInNewViewMain=U¿yj dla nowego Widoku
+miInsertInNewTriggerMain=U¿yj dla nowego Wyzwalacza
+Daten1=Dane
+miExport=Eksportuj
+miSendToExcel=Zapisz do formatu Excel
+miImport=Importuj dane
+miHelp=Pomoc
+miInfo=O...
+Fehlerbericht1=Log
+pmiRefresh=Odœwie¿
+pmiShowSQL=Poka¿ kod SQL
+pmiNewTable=Utwórz Tabelê
+pmiEditTable=Edytuj Tabelê
+pmiDelTable=Usuñ Tabelê
+pmiNewIndex=Utwórz Indeks
+pmiEditIndex=Edytuj Indeks
+pmiDelIndex=Usuñ Indeks
+pmiNewView=Utwórz Widok
+pmiEditView=Edytuj Widok
+pmiDelView=Usuñ Widok
+pmiNewTrigger=Utwórz Wyzwalacz
+pmiEditTrigger=Edytuj Wyzwalacz
+pmiDelTrigger=Usuñ Wyzwalacz
+pmiFindQuery=ZnajdŸ Zapytanie SQL
+pmiAddQuery=Dodaj zapytanie SQL
+pmiShowQuery=Otwórz Zapytanie SQL
+pmiDelQuery=Usuñ Zapytanie SQL
+miAddTab=Utwórz nowe Zapytanie SQL
+miSaveQuery=Zapisz do bazy
+miSaveToFile=Zapisz do pliku
+miUndo=Cofnij
+miRedo=Ponów
+miCut=Wytnij
+miCopy=Kopiuj
+miPaste=Wklej
+miSelAll=Zaznacz wszystko
+miCopyToDelphi=Skopiuj jako kod Delphi
+miComment=W³¹cz/wy³¹cz komentarz
+miInsertInNewView=U¿yj dla nowego Widoku
+miInsertInNewTrigger=U¿yj dla nowego Wyzwalacza
+miDeleteTab=Zamknij Zapytanie
+miMemo=Poka¿ pole Memo
+miPicture=Poka¿ obrazek
+tbbNewDatabase=Utwórz Bazê danych
+tbbOpenDatabase=Otwórz ( ponownie ) Bazê danych
+tbbCleanUp=Oczyœæ Bazê danych
+tbbCloseDatabase=Zamknij Bazê danych
+tbbNewTable=Utwórz Tabelê
+tbbEditTable=Edytuj Tabelê
+tbbDeleteTable=Usuñ Tabelê
+tbbNewIndex=Utwórz Indeks
+tbbEditIndex=Edytuj Indeks
+tbbDeleteIndex=Usuñ Indeks
+tbbNewView=Utwórz Widok
+tbbEditView=Edytuj Widok
+tbbDeleteView=Usuñ Widok
+tbbNewTrigger=Utwórz Wyzwalacz
+tbbEditTrigger=Edytuj Wyzwalacz
+tbbDeleteTrigger=Usuñ Wyzwalacz
+tbbAddSQL=Dodaj nowe zapytanie SQL
+tbbSaveSQL=Zapisz zapytanie SQL do bazy
+tbbOpenSQL=F9 - Wykonaj zapytanie SQL z rezultatem (SELECT)
+tbbExecSQL=F8 - Wykonaj zapytanie SQL (INSERT, UPDATE, DELETE) 
+tbbViewHierarchy=Widok hierarchiczny
+tbbShowTables=Poka¿ Tabele
+tbbShowFields=Poka¿ Pola
+tbbShowTriggers=Poka¿ Wyzwalacze
+tbbShowIndexes=Poka¿ Indeksy
+tbbShowViews=Poka¿ Widoki
+tbbShowSysEntrys=Poka¿ Zapisy Systemowe
+tbbShowQueries=Poka¿ Zapytania
+
+[frmTable]
+lblTablename=Nazwa Tabeli:
+gbFields="     Pola Tabeli"
+btnAdd=Dodaj Pole
+btnDel=Usun Pole
+btnChange=Edytuj Pole
+btnOK=Utwórz
+btnCancel=Anuluj
+btnPrimaryKey=Klucz Podstawowy
+
+[frmField]
+lblFieldName=Nazwa Pola:
+lblFieldType=Typ Pola:
+lblDefaultValue=Wart. domyslna:
+cbUnique=Unikalne
+cbNotNull=Not NULL
+cbPrimaryKey=Klucz Podstawowy
+cbAutoInc=Auto Increment
+btnAdd=Dodaj
+btnCancel=Anuluj
+
+[frmIndex]
+lblIndexName=Nazwa Indeksu:
+lblTable=Tabela:
+cbUnique=Uniklany
+gbFields="     Pola"
+lblSrcFields=Dostepne pola:
+lblDestFields=Wybrane pola:
+btnCreate=Utwórz
+btnCancel=Anuluj
+
+[frmView]
+lblViewName=Nazwa Widoku:
+gbSQL="     SQL Select"
+btnCreate=Utwórz
+btnCancel=Anuluj
+
+[frmPicture]
+btnPic=Zmieñ obrazek
+btnDel=Usuñ obrazek
+btnSave=Zapisz obrazek jako
+
+[frmTrigger]
+lblTriggername=Nazwa:
+tsEvent=Zdarzenie Wyzwalacza
+lblTable=Tabela:
+lblView=Widok:
+gbFields="     Pola"
+lblSrcFields=Dostepne pola:
+lblDestFields=Pola zdarzenia:
+gbTriggerEvent=Zdarzenie Wyzwalacza
+rbBefore=Przed
+rbAfter=Po
+rbInsteadOf=Zamiast
+gbEvents=Zdarzenie
+gbFOR=Akcja
+rbEachRow=Ka¿dy wiersz
+
+rbEachStatement=Ka¿de dane
+tsSQL=Zapytanie SQL Wyzwalacza
+gbTriggerSQL="     kod SQL który zostanie wykonany na zdarzenie Wyzwalacza (OLD. / NEW. = Ref)"
+lblCondition=Warunek:
+btnCreate=Utwórz
+btnCancel=Anuluj
+
+[frmImport]
+Caption=Importuj dane
+gbMapping=Mapowanie pól
+lblSourceFields=Pola Ÿród³owe:
+lblTargetFields=Pola docelowe:
+lblDestTable=Tab. docelowa:
+cbClearTable=Przed importem wyczyœæ tabelê 
+btnLoadFile=Otwórz plik
+btnImport=Importuj dane
+btnClose=Zamknij
+
+[frmLog]
+Caption=Error Log
+
+[frmMemoEdit]
+Caption=Edytuj pole Memo 
+
+[MessageStrings]
+lngInfo=Informacja
+lngWarning=Uwaga:
+lngCreate=Utwórz
+lngEdit=Edytuj
+lngAdd=Dodaj
+
+lngNameAlreadyExists=Taka Nazwa ju¿ istnieje!
+lngInvalidChars=Nazwa nie mo¿e zawieraæ przedrostka 'sqlite_', znaków specjalnych oraz spacji! 
+lngEnterSQLSource=Podaj kod SQL
+
+lngCreateView=Utwórz Widok
+lngEditView=Edytuj Widok
+lngEnterViewName=Podaj nazwê Widoku!
+lngEnterTriggerName=Podaj nazwê Wyzwalacza!
+lngSelectTable=Wybierz Tabelê!
+lngSelectView=Wybierz Widok!
+lngSelectEvent=Wybierz Zdarzenie!
+lngSelectFields=Wybierz Pola!
+lngSemiNotFound=Nie znaleziono œrednika po Zapytaniu SQL! 
+lngCreateTrigger=Utwórz Wyzwalacz
+lngEditTrigger=Edytuj Wyzwalacz
+lngBlobFileSize=Ze wzglêdów bezpieczeñstwa dozowlona wielkoœæ pliku to 500kb. SQLite 2.8 x obs³uguje max. 1 MB dla ka¿dego wiersza.
+lngSeperator=Separator
+lngEnterSeperatorChar=Podaj znak Separatora!
+lngContainsHeaderFieldNames=Czy pierwszy wiersz zawiera nazy pól?
+lngFieldAlreadyChoosen=Pole zosta³o ju¿ wybrane!
+lngSeperatedValues=Plik z roŸdzielonymi wartoœciami
+lngEnterFieldName=Podaj nazwê Pola!
+lngEnterFieldType=Podaj lub wybierz typ Pola!
+lngPKAlreadyExist=Klucz Podstawowy juz istnieje!
+lngFieldSize=Rozmiar pola:
+lngEnterFieldSize=Podaj wielkoœæ Pola:
+lngEditField=Edytuj Pole
+lngAddField=Dodaj Pole
+lngEnterIndexName=Podaj nazwê Indeksu!
+lngEditIndex=Edytuj Indeks
+lngCreateIndex=Utwórz Indeks
+lngEnterTableName=Podaj nazwê Tabeli!
+lngAddTableFields=Dodaj Pola tabeli!
+lngEditTable=Edytuj Tabelê
+lngCreateTable=Utwórz Tabelê
+lngTableFieldName=Nazwa Pola
+lngTableFieldType=Typ Pola
+lngTableFieldConstraint=Ograniczenia
+lngSendToExcelSuccess=Dane do Excela zosta³y wys³ane.
+lngSendToExcelWait=Wysy³am dane do Excela, prosze czekaæ...
+lngNoDataToSend=Brak danych do wys³ania!
+lngFailToSave=B³¹d zapisu pliku!
+lngError=B³¹d:
+lngNoDataToExport=Brak danych do eksportu!
+lngExcelFormat=Format XLS
+lngCSVFormat=Format CSV
+lngXMLFormat=Format XML
+lngHTMLFormat=Format HTML
+lngCCFunction="Funkcja  "
+lngCCField=   "Pole     "
+lngCCTable=   "Tabela   "
+lngCCView=    "Widok    "
+lngCCIndex=   "Indeks   "
+lngCCTrigger= "Wyzwalacz"
+lngReservedWordQuery=%s jest s³owem zarezerwowanym
+lngQueryIdent=Zapytanie
+lngEnterName=Podaj nazwê!
+lngSaveQuery=Zapisz Zapytanie SQL:
+lngEnterQueryNamePrompt=Podaj nazwê Zapytania SQL:
+lngCleanUpMessage=Baza danych zosta³a oczyszczona z %s nadmiarowych danych. 
+lngDeleteConfirmation=Jesteœ pewnien ¿e chcesz usun¹æ?
+lngConfirmation=Potwierdzenie:
+lngDBDisconnected=Brak po³¹czenia z baz¹ danych
+lngDBConnected=Po³¹czono z baz¹ danych
+lngDisconnected=Brak po³¹czenia
+lngOpenDatabase=Otwórz Bazê danych:
+lngTVQueries=Zapytania
+lngTVTriggers=Wyzwalacze
+lngTVViews=Widoki
+lngTVIndexes=Indeksy
+lngTVTables=Tabele
+lngTVFields=Pola
+lngQueryExecTime=Zapytanie SQL wykonano w %d ms
+lngQueryExecuted=Zapytanie SQL zosta³o wykonane
+lngDBCreated=Utworzono Bazê danych
+lngSelectDBSaveTarget=Zapisz now¹ Bazê danych:
+lngTableFieldDefault=Wartoœæ domyœlna
+lngMultiPrimaryKey=Wielopolowy Klucz g³ówny mo¿e byæ u¿yty jedynie gdy nie zaznaczono pojedyñczego pola!
+lngMigrationSuccess=Migracja Bazy danych zosta³a zakoñczona!
+lngMigrationInProgress=Trwa migracja Tabeli "%s", proszê czekaæ...
+lngSQLiteDB=Baza danych SQLite
+lngAnyFile=dowolny plik
+
+;##############################################
+;########## Begin Language Updates ############
+;## Send updates to "sqliteadmin@orbmu2k.de" ##
+;##############################################
+
+lngImportDone=Import done!
+lngBtnFirst=First
+lngBtnPrev=Previos
+lngBtnLast=Last
+lngBtnNext=Next
+lngBtnAdd=Insert
+lngBtnRemove=Delete
+lngBtnEdit=Edit
+lngBtnApply=Post
+lngBtnCancel=Cancel
+lngBtnRefresh=Refresh
+
+;##############################################
+;########### End Language Updates #############
+;##############################################
+
+
+[StrfTimeHint]
+Line0=
+Line1=Formatconstants:
+Line2=
+Line3=%d   dzieñ miesi¹ca
+Line4=%f   ** u³amki sekund  SS.SSS
+Line5=%H   godzina 00-24
+Line6=%j   dzieñ roku 001-366
+Line7=%J   ** Juliañski numer dnia
+Line8=%m   miesi¹c 01-12
+Line9=%M   minuta 00-59
+Line10=%s   sekund od 1970-01-01
+Line11=%S   sekunda 00-59
+Line12=%w   dzieñ tygodnia 0-6  niedziela==0
+Line13=%W   tydzieñ roku 00-53
+Line14=%Y   rok 0000-9999
+Line15=%%   %

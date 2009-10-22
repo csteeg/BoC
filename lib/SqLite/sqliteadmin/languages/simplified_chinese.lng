@@ -1,0 +1,325 @@
+;#############################################
+;Simplified Chinese Translation by Zuo Weiming
+;#############################################
+
+[frmMain]
+tsSQL=SQL 查询
+tsResult=结果
+tsEdit=编辑数据
+pEditTop=
+lblTable=表:
+lblFilterField=过滤器列:
+lblFilter=过滤器:
+miDatabase=数据库
+miNew=新建
+miOpen=打开
+miCleanUp=清理
+miClose=关闭
+miCreationSQL=数据库 SQL
+miMigrate=迁移到 SQLite3
+miRecentList=最近打开的数据库
+miExit=退出
+miTable=表
+miNewTable=新建
+miEditTable=编辑
+miDeleteTable=删除
+miIndex=索引
+miNewIndex=新建
+miEditIndex=编辑
+miDeleteIndex=删除
+miView=视图
+miNewView=新建
+miEditView=编辑
+miDeleteView=删除
+miTrigger=触发器
+miNewTrigger=新建
+miEditTrigger=编辑
+miDeleteTrigger=删除
+Abfrage1=查询
+miAddQuery=添加
+miShowQuery=打开
+miSaveQueryMain=保存
+miDelQuery=删除
+miOpenSQL=查询并返回结果集
+miExecSQL=查询不返回结果集
+miInsertInNewViewMain=在新视图中使用
+miInsertInNewTriggerMain=在新触发器中使用
+Daten1=数据
+miExport=导出
+miSendToExcel=发送到 Excel
+miImport=导入数据
+miHelp=帮助
+miInfo=信息
+Fehlerbericht1=日志
+pmiRefresh=刷新
+pmiShowSQL=显示 SQL
+pmiNewTable=创建表
+pmiEditTable=编辑表
+pmiDelTable=删除表
+pmiNewIndex=创建索引
+pmiEditIndex=编辑索引
+pmiDelIndex=删除索引
+pmiNewView=创建视图
+pmiEditView=编辑视图
+pmiDelView=删除视图
+pmiNewTrigger=创建触发器
+pmiEditTrigger=编辑触发器
+pmiDelTrigger=删除触发器
+pmiFindQuery=查找查询
+pmiAddQuery=添加查询
+pmiShowQuery=打开查询
+pmiDelQuery=删除查询
+miAddTab=创建新的查询
+miSaveQuery=保存到数据库
+miSaveToFile=保存到文件
+miUndo=撤销
+miRedo=重复
+miCut=剪切
+miCopy=复制
+miPaste=粘贴
+miSelAll=全部选定
+miCopyToDelphi=复制为 Delphi 代码
+miComment=切换代码注释
+miInsertInNewView=在新视图中使用
+miInsertInNewTrigger=在新触发器中使用
+miDeleteTab=关闭查询
+miMemo=显示备注
+miPicture=显示图片
+tbbNewDatabase=创建数据库
+tbbOpenDatabase=打开（最近使用的）数据库
+tbbCleanUp=清理数据库
+tbbCloseDatabase=关闭数据库
+tbbNewTable=创建表
+tbbEditTable=编辑表
+tbbDeleteTable=删除表
+tbbNewIndex=创建索引
+tbbEditIndex=编辑索引
+tbbDeleteIndex=删除索引
+tbbNewView=创建视图
+tbbEditView=编辑视图
+tbbDeleteView=删除视图
+tbbNewTrigger=创建触发器
+tbbEditTrigger=编辑触发器
+tbbDeleteTrigger=删除触发器
+tbbAddSQL=添加新的查询
+tbbSaveSQL=保存查询到数据库
+tbbOpenSQL=执行返回结果的 SQL 查询 (SELECT) F9
+tbbExecSQL=执行不返回结果的 SQL 查询 (INSERT,UPDATE,DELETE) F8 
+
+tbbViewHierarchy=树状视图
+tbbShowTables=显示表
+tbbShowFields=显示字段
+tbbShowTriggers=显示触发器
+tbbShowIndexes=显示索引
+tbbShowViews=显示视图
+tbbShowSysEntrys=显示系统记录
+tbbShowQueries=显示查询
+
+[frmTable]
+lblTablename=表名称:
+gbFields="    表字段"
+btnAdd=添加字段
+btnDel=删除字段
+btnChange=编辑字段
+btnOK=创建
+btnCancel=取消
+btnPrimaryKey=主键
+
+[frmField]
+lblFieldName=字段名称:
+lblFieldType=字段类别:
+lblDefaultValue=默认值:
+cbUnique=惟一值
+cbNotNull=非空
+cbPrimaryKey=主键
+cbAutoInc=自动递增
+btnAdd=添加
+btnCancel=取消
+
+[frmIndex]
+lblIndexName=索引名称:
+lblTable=表:
+cbUnique=惟一索引
+gbFields="    字段"
+lblSrcFields=可用字段:
+lblDestFields=索引字段:
+btnCreate=创建
+btnCancel=取消
+
+[frmView]
+lblViewName=视图名称:
+gbSQL="     SQL 选择语句"
+btnCreate=创建
+btnCancel=取消
+[frmPicture]
+btnPic=更改图片
+btnDel=删除图片
+btnSave=保存图片...
+
+[frmTrigger]
+lblTriggername=触发器名称:
+tsEvent=触发器事件
+lblTable=表:
+lblView=视图:
+gbFields="    字段"
+lblSrcFields=可用字段:
+lblDestFields=事件字段:
+gbTriggerEvent=触发器事件
+rbBefore=语句执行前触发
+rbAfter=语句执行后触发
+rbInsteadOf=替代执行语句
+gbEvents=事件
+gbFOR=动作
+rbEachRow=每行
+rbEachStatement=每个语句
+tsSQL=触发器 SQL
+gbTriggerSQL="     在触发器事件发生时执行的 SQL 语句 (OLD. / NEW. = Ref)"
+lblCondition=条件:
+btnCreate=创建
+btnCancel=取消
+
+[frmImport]
+Caption=导入数据
+gbMapping=数据列映射
+lblSourceFields=源字段:
+lblTargetFields=目的字段:
+lblDestTable=目的表:
+cbClearTable=在导入前清空表
+btnLoadFile=打开文件
+btnImport=导入数据
+btnClose=关闭
+
+[frmLog]
+Caption=错误日志
+
+[frmMemoEdit]
+Caption=编辑备注
+
+[MessageStrings]
+lngInfo=信息
+lngWarning=警告:
+lngCreate=创建
+lngEdit=编辑
+lngAdd=添加
+
+lngNameAlreadyExists=已存在相同名称的对象
+lngInvalidChars=名称不能包含“sqlite_”前缀、任何符号和空格
+lngEnterSQLSource=请输入 SQL 语句
+
+lngCreateView=创建视图
+lngEditView=编辑视图
+lngEnterViewName=请输入视图名称
+lngEnterTriggerName=请输入触发器名称
+lngSelectTable=请选择表
+lngSelectView=请选择视图
+lngSelectEvent=请选择事件
+lngSelectFields=请选择字段
+lngSemiNotFound=在 SQL 语句后缺少分号
+lngCreateTrigger=创建触发器
+lngEditTrigger=编辑触发器
+lngBlobFileSize=基于安全性的原因，最大的文件大小限制为 500KB. SQLite 2.8 x 则支持每数据行最大 1 MB 的数据。
+lngSeperator=分隔符
+lngEnterSeperatorChar=请输入分隔符字符
+lngContainsHeaderFieldNames=第一行是否包含字段名称?
+lngFieldAlreadyChoosen=不要重复选择字段
+lngSeperatedValues=符号分隔数值
+lngEnterFieldName=请输入字段名称
+lngEnterFieldType=请输入或选择字段类型
+lngPKAlreadyExist=不能重复指派主键
+lngFieldSize=列大小:
+lngEnterFieldSize=请输入字段大小:
+lngEditField=编辑字段
+lngAddField=添加字段
+lngEnterIndexName=请输入索引名称
+lngEditIndex=编辑索引
+lngCreateIndex=创建索引
+lngEnterTableName=请输入表名
+lngAddTableFields=请添加表字段
+lngEditTable=编辑表
+lngCreateTable=创建表
+lngTableFieldName=列名
+lngTableFieldType=数据类型
+lngTableFieldConstraint=约束
+lngSendToExcelSuccess=已成功将数据导出到 Excel。
+lngSendToExcelWait=正在将数据导出到 Excel，请稍候……
+lngNoDataToSend=没有可以导出的数据
+lngFailToSave=不能保存文件
+lngError=错误:
+lngNoDataToExport=没有可以导出的数据
+lngExcelFormat=Excel 兼容格式
+lngCSVFormat=符号分隔数值的格式
+lngXMLFormat=XML 格式
+lngHTMLFormat=HTML 格式
+lngCCFunction="函数  "
+lngCCField=   "字段  "
+lngCCTable=   "表    "
+lngCCView=    "视图  "
+lngCCIndex=   "索引  "
+lngCCTrigger= "触发器"
+lngReservedWordQuery=%s 是保留字
+lngQueryIdent=查询
+lngEnterName=请输入名称
+lngSaveQuery=保存查询:
+lngEnterQueryNamePrompt=请输入此查询的名称:
+lngCleanUpMessage=数据库在整理后删除了 %s 无用的数据 
+lngDeleteConfirmation=是否确定要删除?
+lngConfirmation=请确定:
+lngDBDisconnected=已经断开和数据库的连接
+lngDBConnected=已经连接数据库
+lngDisconnected=尚未连到数据库
+lngOpenDatabase=打开数据库:
+lngTVQueries=查询
+lngTVTriggers=触发器
+lngTVViews=视图
+lngTVIndexes=索引
+lngTVTables=表
+lngTVFields=字段
+lngQueryExecTime=查询耗时 %d 毫秒
+lngQueryExecuted=查询已完成
+lngDBCreated=已创建数据库
+lngSelectDBSaveTarget=请选择新数据库的目标位置:
+lngTableFieldDefault=默认值
+lngMultiPrimaryKey=要使用多字段主键，则不能使用单字段的主键
+lngMigrationSuccess=已经成功完成数据库迁移
+lngMigrationInProgress=正在迁移名称为“%s”的表，请稍候……
+
+;##############################################
+;########## Begin Language Updates ############
+;## Send updates to "sqliteadmin@orbmu2k.de" ##
+;##############################################
+
+lngSQLiteDB=SQLite Database
+lngAnyFile=Any File
+lngImportDone=Import done!
+lngBtnFirst=First
+lngBtnPrev=Previos
+lngBtnLast=Last
+lngBtnNext=Next
+lngBtnAdd=Insert
+lngBtnRemove=Delete
+lngBtnEdit=Edit
+lngBtnApply=Post
+lngBtnCancel=Cancel
+lngBtnRefresh=Refresh
+
+;##############################################
+;########### End Language Updates #############
+;##############################################
+
+[StrfTimeHint]
+Line0=
+Line1=格式约束:
+Line2=
+Line3=%d   当月中的天数
+Line4=%f   ** 带小数的秒  SS.SSS
+Line5=%H   小时 00-24
+Line6=%j   年内的天数 001-366
+Line7=%J   ** Julian 日期
+Line8=%m   月份 01-12
+Line9=%M   分 00-59
+Line10=%s   在 1970-01-01 以后经历的秒数
+Line11=%S   秒 00-59
+Line12=%w   星期中的天数 0-6  星期天==0
+Line13=%W   年内的星期数 00-53
+Line14=%Y   年份 0000-9999
+Line15=%%   %
