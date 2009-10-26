@@ -91,7 +91,7 @@ namespace BoC.Web.Mvc.Binders
                     return Activator.CreateInstance(type);
                 }
             }
-            return IoC.Resolve(type);
+            return Activator.CreateInstance(type);
         }
 
         protected override void SetProperty(ControllerContext controllerContext, ModelBindingContext bindingContext, PropertyDescriptor propertyDescriptor, object value)
@@ -148,10 +148,10 @@ namespace BoC.Web.Mvc.Binders
                         var serviceType = typeof (IModelService<>).MakeGenericType(modelType);
                         if (IoC.IsRegistered(serviceType))
                         {
-                            var service = IoC.Resolve(serviceType) as IRepository;
+                            var service = IoC.Resolve(serviceType) as IModelService;
                             if (service != null)
                             {
-                                bindingContext.Model = service.Get(pkValue);
+                                bindingContext.ModelMetadata.Model = service.Get(pkValue);
                             }
                         }
                     }
