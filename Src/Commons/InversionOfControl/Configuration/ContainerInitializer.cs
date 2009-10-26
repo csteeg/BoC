@@ -13,7 +13,14 @@ namespace BoC.InversionOfControl.Configuration
     {
         public static void Execute()
         {
-            string binPath = AppDomain.CurrentDomain.SetupInformation.PrivateBinPath ?? AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+            string binPath = AppDomain.CurrentDomain.SetupInformation.PrivateBinPath;
+
+            // In the context of a unit test the privatebinpath is an empty string.
+            if(String.IsNullOrEmpty(binPath))
+            {
+                binPath = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+            }
+
             foreach (var dir in binPath.Split(new [] { ';' }, StringSplitOptions.RemoveEmptyEntries))
             {
                 foreach (var file in Directory.GetFiles(dir, "*.dll"))
