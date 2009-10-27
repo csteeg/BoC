@@ -68,6 +68,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventAggregator\DefaultSetupTasks\InitEventAggregatorTask.cs" />
+    <Compile Include="Events\DeletedEvent.cs" />
+    <Compile Include="Events\DeletingEvent.cs" />
+    <Compile Include="Events\EventArgs.cs" />
+    <Compile Include="Events\InsertedEvent.cs" />
+    <Compile Include="Events\InsertingEvent.cs" />
+    <Compile Include="Events\UpdatedEvent.cs" />
+    <Compile Include="Events\UpdatingEvent.cs" />
     <Compile Include="Inflector.cs" />
     <Compile Include="InversionOfControl\Configuration\ContainerInitializer.cs" />
     <Compile Include="InversionOfControl\Configuration\IContainerInitializer.cs" />

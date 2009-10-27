@@ -5,6 +5,8 @@ using System.Text;
 using System.Transactions;
 using System.Web.DomainServices;
 using System.Web.Ria.Data;
+using BoC.EventAggregator;
+using BoC.Events;
 using BoC.Persistence;
 using BoC.Validation;
 
@@ -13,11 +15,16 @@ namespace BoC.Services
     public abstract class BaseModelService<TModel> : IModelService<TModel> where TModel : IBaseEntity
     {
         protected readonly IModelValidator validator;
+        private readonly IEventAggregator eventAggregator;
         protected readonly IRepository<TModel> repository;
         // Methods
-        public BaseModelService(IModelValidator validator, IRepository<TModel> repository)
+        public BaseModelService(
+            IModelValidator validator, 
+            IEventAggregator eventAggregator, 
+            IRepository<TModel> repository)
         {
             this.validator = validator;
+            this.eventAggregator = eventAggregator;
             this.repository = repository;
         }
 
@@ -33,34 +40,52 @@ namespace BoC.Services
 
         public virtual TModel Insert(TModel entity)
         {
+            OnInserting(entity);
+
+            TModel retValue = default(TModel);
+
             TransactionScope transaction = new TransactionScope(TransactionScopeOption.Required);
             using (transaction)
             {
-                TModel retValue = repository.Save(entity);
+                retValue = repository.Save(entity);
                 transaction.Complete();
-                return retValue;
             }
+
+            OnInserted(retValue);
+
+            return retValue;
         }
 
         public virtual void Delete(TModel entity)
         {
+            OnDeleting(entity);
+
             TransactionScope transaction = new TransactionScope(TransactionScopeOption.Required);
             using (transaction)
             {
                 repository.Delete(entity);
                 transaction.Complete();
             }
+
+            OnDeleted(entity);
         }
 
         public virtual TModel Update(TModel entity)
         {
+            OnUpdating(entity);
+
+            TModel retValue = default(TModel);
+
             TransactionScope transaction = new TransactionScope(TransactionScopeOption.Required);
             using (transaction)
             {
-                TModel retValue = repository.SaveOrUpdate(entity);
+                retValue = repository.SaveOrUpdate(entity);
                 transaction.Complete();
-                return retValue;
             }
+
+            OnUpdated(retValue);
+
+            return retValue;
         }
 
         public virtual void ValidateEntity(TModel entity)
@@ -74,5 +99,45 @@ namespace BoC.Services
         {
             return Get(id);
         }
+
+        #region Events
+
+        protected void OnInserting(TModel entity)
+        {
+            PublishEvent<InsertingEvent<TModel>>(entity);
+        }
+
+        protected void OnInserted(TModel entity)
+        {
+            PublishEvent<InsertedEvent<TModel>>(entity);
+        }
+
+        protected void OnUpdating(TModel entity)
+        {
+            PublishEvent<UpdatingEvent<TModel>>(entity);
+        }
+
+        protected void OnUpdated(TModel entity)
+        {
+            PublishEvent<UpdatedEvent<TModel>>(entity);
+        }
+
+        protected void OnDeleting(TModel entity)
+        {
+            PublishEvent<DeletingEvent<TModel>>(entity);
+        }
+
+        protected void OnDeleted(TModel entity)
+        {
+            PublishEvent<DeletedEvent<TModel>>(entity);
+        }
+
+        protected void PublishEvent<TEvent>(TModel entity) where TEvent : BaseEvent<EventArgs<TModel>>
+        {
+            EventArgs<TModel> args = new EventArgs<TModel>(entity);
+            eventAggregator.GetEvent<TEvent>().Publish(args);
+        }
+
+        #endregion
     }
 }
