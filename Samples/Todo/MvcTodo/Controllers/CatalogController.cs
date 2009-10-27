@@ -9,27 +9,19 @@ using MvcTodo.Models.Entity;
 
 namespace MvcTodo.Controllers
 {
-    public class TodoController : Controller
+    public class CatalogController : Controller
     {
-        private IRepository<Todo> _repositoryTodo;
-        private IRepository<Catalog> _repositoryCatalog;
-
-        public TodoController(IRepository<Todo> repositoryTodo, IRepository<Catalog> repositoryCatalog)
-        {
-            _repositoryTodo = repositoryTodo;
-            _repositoryCatalog = repositoryCatalog;
-        }
-
+        private IRepository<Catalog> _repository;
         //
-        // GET: /Todo/
+        // GET: /Catalog/
 
         public ActionResult Index()
         {
-            return View(_repositoryTodo.ToList());
+            return View();
         }
 
         //
-        // GET: /Todo/Details/5
+        // GET: /Catalog/Details/5
 
         public ActionResult Details(int id)
         {
@@ -37,27 +29,22 @@ namespace MvcTodo.Controllers
         }
 
         //
-        // GET: /Todo/Create
+        // GET: /Catalog/Create
 
         public ActionResult Create()
         {
-            ViewData["catalogs"] =
-               new SelectList(_repositoryCatalog.ToList(), "Id", "Name");
-
             return View();
         }
 
         //
-        // POST: /Todo/Create
+        // POST: /Catalog/Create
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Create(Todo todo)
+        public ActionResult Create(FormCollection collection)
         {
             try
             {
                 // TODO: Add insert logic here
-
-                _repositoryTodo.SaveOrUpdate(todo);
 
                 return RedirectToAction("Index");
             }
@@ -68,28 +55,21 @@ namespace MvcTodo.Controllers
         }
 
         //
-        // GET: /Todo/Edit/5
+        // GET: /Catalog/Edit/5
 
         public ActionResult Edit(int id)
         {
-            Todo todo = _repositoryTodo.Get(id);
-
-            ViewData["catalogs"] =
-                new SelectList(_repositoryCatalog.ToList(), "Id", "Name", todo.Catalog.Id);
-
-            return View(todo);
+            return View();
         }
 
         //
-        // POST: /Todo/Edit/5
+        // POST: /Catalog/Edit/5
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Edit(Todo entity)
+        public ActionResult Edit(int id, FormCollection collection)
         {
             try
             {
-                _repositoryTodo.SaveOrUpdate(entity);
-
                 // TODO: Add update logic here
 
                 return RedirectToAction("Index");

@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using BoC.InversionOfControl;
 using BoC.InversionOfControl.Unity;
+using BoC.Persistence;
 using BoC.Persistence.NHibernate;
 using BoC.Tasks;
 using BoC.Web.Mvc;
+using MvcTodo.Models.Entity;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
@@ -45,17 +47,28 @@ namespace MvcTodo
             {
                 try
                 {
-               //     RegisterRoutes(RouteTable.Routes);
+                    //     RegisterRoutes(RouteTable.Routes);
                     IoC.InitializeWith(new ExtendedUnityContainer());
                     Bootstrapper.RegisterAllTasksAndRunThem(type => true);
                     initialized = true;
 
-                    //ControllerBuilder.Current.SetControllerFactory(new IoCControllerFactory());
-
                     Configuration config =
                         IoC.Resolve(typeof(Configuration)) as Configuration;
 
-           //         new SchemaExport(config).Create(true, true);
+                    IRepository<Catalog> _repository = IoC.Resolve(typeof(IRepository<Catalog>)) as IRepository<Catalog>;
+
+                    try
+                    {
+                        int count = _repository.ToList().Count;
+
+                    }
+                    catch (Exception e)
+                    {
+                        new SchemaExport(config).Create(true, true);
+                        _repository.SaveOrUpdate(new Catalog { Name = "home", Description = "at home" });
+                        _repository.SaveOrUpdate(new Catalog { Name = "work", Description = "at work" });
+
+                    }
                 }
                 catch
                 {
@@ -67,7 +80,7 @@ namespace MvcTodo
 
         protected void Application_EndRequest()
         {
-            WebSessionManager.CleanUp(HttpContext.Current, IoC.Resolve<ISessionFactory>());
+            AutoContextSessionManager.CleanUp(IoC.Resolve<ISessionFactory>());
         }
     }
 }
