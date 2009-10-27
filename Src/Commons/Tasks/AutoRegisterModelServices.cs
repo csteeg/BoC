@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Web.DomainServices;
+using BoC.EventAggregator;
 using BoC.InversionOfControl;
 using BoC.Persistence;
 using BoC.Services;
@@ -67,8 +68,13 @@ namespace BoC.Tasks
                         mb = GetRepositoriesModuleBuilder();
                     var tb = mb.DefineType(name, TypeAttributes.AutoLayout | TypeAttributes.Public,
                                            serviceBaseType);
-                    var constructorParams =
-                        new[] {typeof (IModelValidator), typeof (IRepository<>).MakeGenericType(entityType)};
+                    var constructorParams = new[]
+                        {
+                            typeof (IModelValidator), 
+                            typeof (IEventAggregator),
+                            typeof (IRepository<>).MakeGenericType(entityType)
+                        };
+
                     var baseConstructor = serviceBaseType.GetConstructor(constructorParams);
                     var constructor = tb.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard,
                                                            constructorParams);
