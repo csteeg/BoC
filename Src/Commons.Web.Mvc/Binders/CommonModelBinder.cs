@@ -141,7 +141,8 @@ namespace BoC.Web.Mvc.Binders
                 ValueProviderResult value;
                 if (bindingContext.ValueProvider.TryGetValue(valueName, out value))
                 {
-                    object pkValue = value.ConvertTo(typeof(int));
+                    var toProp = modelType.GetProperty("Id");
+                    object pkValue = value.ConvertTo(toProp.PropertyType);
                     if (pkValue != null)
                     {
                         //we have a primary key value, let's get the service
