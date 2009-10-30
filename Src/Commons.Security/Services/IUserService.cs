@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Security.Permissions;
+using System.Web.DomainServices;
 using BoC.DomainServices;
 using BoC.Security;
 using BoC.Security.Model;
+using BoC.Services;
 
 namespace BoC.Security.Services
 {
@@ -16,9 +18,10 @@ namespace BoC.Security.Services
         Encrypted
     }
 
-    public interface IUserService : IRepositoryDomainService<User>
+    public interface IUserService : IModelService<User>
     {
         User FindUser(String login);
+        User CreateUser(User user, String password);
 
         Boolean UserExists(String login);
         Boolean ChangePassword(String userName, String oldPassword, String newPassword);

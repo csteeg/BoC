@@ -35,7 +35,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\DotNetOpenAuth.dll</HintPath>
     </Reference>
-    <Reference Include="jQueryMvc, Version=0.3.3414.37851, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="jQueryMvc, Version=0.3.3589.23087, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\jQueryMvc.dll</HintPath>
     </Reference>
@@ -49,9 +49,9 @@
       <HintPath>..\..\..\tubeproject\lib\aspnetmvc\System.Web.Abstractions.dll</HintPath>
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Microsoft ASP.NET\ASP.NET MVC RC\Assemblies\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\..\lib\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Routing, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -73,10 +73,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Commons.DomainServices\Commons.DomainServices.csproj">
-      <Project>{984BB052-F353-47AF-9FB6-0CA95804F714}</Project>
-      <Name>Commons.DomainServices</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Commons.Security\Commons.Security.csproj">
       <Project>{387BC181-5A33-4657-9C19-07A8FA48A916}</Project>
       <Name>Commons.Security</Name>

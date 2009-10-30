@@ -8,14 +8,16 @@ using System.Web.Configuration;
 using System.Web.DomainServices;
 using System.Web.Security;
 using BoC.DomainServices;
+using BoC.EventAggregator;
 using BoC.Extensions;
 using BoC.Security.Model;
 using BoC.Security.Repositories;
+using BoC.Services;
 using BoC.Validation;
 
 namespace BoC.Security.Services
 {
-    public class DefaultUserService : RepositoryDomainService<User>, IUserService
+    public class DefaultUserService : BaseModelService<User>, IUserService
     {
         private const Int32 SALT_BYTES = 16;
         private readonly IRoleRepository roleRepository;
@@ -23,7 +25,8 @@ namespace BoC.Security.Services
         private readonly IUserRepository userRepository;
         private const Int32 newPasswordLength = 8;
 
-        public DefaultUserService(IUserRepository userRepository, IRoleRepository roleRepository, IModelValidator modelValidator): base(modelValidator, userRepository)
+        public DefaultUserService(IEventAggregator eventAggregator, IUserRepository userRepository, IRoleRepository roleRepository, IModelValidator modelValidator) : 
+            base(modelValidator, eventAggregator, userRepository)
         {
             this.userRepository = userRepository;
             this.roleRepository = roleRepository;
@@ -184,7 +187,7 @@ namespace BoC.Security.Services
             }
         }
 
-        public override void Update(User user)
+        public override User Update(User user)
         {
             if (!String.IsNullOrEmpty(user.Email))
             {
@@ -198,7 +201,7 @@ namespace BoC.Security.Services
                 }
             }
 
-            base.Update(user);
+            return base.Update(user);
         }
 
         public void DeleteUser(String login)
@@ -365,8 +368,8 @@ namespace BoC.Security.Services
             User user = null;
             using (var scope = new TransactionScope())
             {
-                password = EncodePassword(password);
-                user = user = userRepository.FindOne(u =>
+                //password = EncodePassword(password);
+                user = userRepository.FindOne(u =>
                                     u.Login == login &&
                                     u.IsApproved && !u.IsLockedOut
                     );
