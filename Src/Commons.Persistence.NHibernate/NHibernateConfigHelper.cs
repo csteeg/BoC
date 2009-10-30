@@ -62,6 +62,8 @@ namespace BoC.Persistence.NHibernate
                 ass = assemblies;
             }
 
+            var autoPersistenceModel = new AutoPersistenceModel();
+
             foreach (var assembly in ass)
             {
                 try
@@ -75,26 +77,32 @@ namespace BoC.Persistence.NHibernate
                 if (assembly != null && assembly != typeof(AutoMap).Assembly)
                 {
                     Assembly automapper = assembly;
-                    automapper.GetTypes();
-                    config
-                        .Mappings(
-                            m => m.AutoMappings.Add(
-                                 new AutoPersistenceModel()
-                                     .AddEntityAssembly(automapper)
-                                     .Conventions.AddAssembly(automapper)
-                                     .Conventions.Add(stringPropertyconvention)
-                                     .Alterations(alterations => alterations.AddFromAssembly(automapper))
-                                     .Alterations(collection => collection.Add(new AutoMappingOverrideAlteration(automapper))) //same as: UseOverridesFromAssemblyOf<Tentity>()
-                                     .Setup(c => c.IsBaseType = isbasetype)
-                                     .Where(t => typeof(IBaseEntity).IsAssignableFrom(t))
-                                 )
-#if DEBUG
-                                 .ExportTo("c:\\temp")
-#endif
-                        )
-                        ;
+
+                    autoPersistenceModel.AddEntityAssembly(automapper)
+                        .Conventions.AddAssembly(automapper)
+                        .Conventions.Add(stringPropertyconvention)
+                        .Alterations(alterations => alterations.AddFromAssembly(automapper))
+                        //.Alterations(collection => collection.Add(new AutoMappingOverrideAlteration(automapper)))
+                        //same as: UseOverridesFromAssemblyOf<Tentity>()
+                        .Setup(c => c.IsBaseType = isbasetype)
+                        .Where(t => typeof (IBaseEntity).IsAssignableFrom(t));
+
+                    // MORE Evil hack, since adding to the Alterations does NOT work.
+                    new AutoMappingOverrideAlteration(automapper).Alter(autoPersistenceModel);
                 }
             }
+
+            // Evil hack, since adding to the Alterations does NOT work.
+            foreach (var overrideAssembly in ass)
+            {
+                new AutoMappingOverrideAlteration(overrideAssembly).Alter(autoPersistenceModel);
+            }
+
+            config.Mappings(m => m.AutoMappings.Add(autoPersistenceModel)
+#if DEBUG
+            .ExportTo(@"C:\temp\")
+#endif
+            );
 
             var nhconfig = config.BuildConfiguration();
             var sessionFactory = config.BuildSessionFactory();
