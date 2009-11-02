@@ -5,12 +5,14 @@ using System.Web.Mvc;
 using System.Web.Security;
 using BoC.Security.Model;
 using BoC.Security.Services;
+using BoC.Web.Mvc.Controllers;
 using JqueryMvc.Mvc;
 
 namespace BoC.Security.Mvc.Controllers
 {
     [HandleError]
-    public class AccountController : ExtController {
+    public class AccountController : CommonBaseController
+    {
         private readonly IUserService service;
 
         // This constructor is not used by the MVC framework but is instead provided for ease

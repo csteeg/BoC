@@ -16,7 +16,8 @@ using JqueryMvc.Mvc;
 namespace BoC.Web.Mvc.Controllers
 {
     [HandleError]
-    public class AuthController : ExtController {
+    public class AuthController : CommonBaseController
+    {
         public IFormsAuthentication FormsAuthentication { get; set; }
         private readonly IUserService service;
 
