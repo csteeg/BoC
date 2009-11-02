@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using BoC.Persistence;
 
 namespace BoC.Services
@@ -12,6 +13,7 @@ namespace BoC.Services
         void Delete(TModel entity);
         TModel Update(TModel entity);
         void ValidateEntity(TModel entity);
+        IEnumerable<TModel> ListAll();
     }
 
     public interface IModelService

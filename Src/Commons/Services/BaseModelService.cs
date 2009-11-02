@@ -33,6 +33,14 @@ namespace BoC.Services
             return repository.Get(id);
         }
 
+        public virtual IEnumerable<TModel> ListAll()
+        {
+            foreach (var entity in repository)
+            {
+                yield return entity;
+            }
+        }
+
         public virtual IQueryable<TModel> Query()
         {
             return repository;
