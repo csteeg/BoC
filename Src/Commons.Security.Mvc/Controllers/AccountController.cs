@@ -23,23 +23,23 @@ namespace BoC.Security.Mvc.Controllers
             this.service = service;
         }
 
-        public ActionResult Register() {
-
+        public virtual ActionResult Register()
+        {
             ViewData["PasswordLength"] = service.MinRequiredPasswordLength;
 
             return View();
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Register(User user, string password, string confirmPassword) {
-
+        public virtual ActionResult Register(User user, string password, string confirmPassword) 
+        {
             ViewData["PasswordLength"] = service.MinRequiredPasswordLength;
 
             if (ValidateRegistration(user.Login, user.Email, password, confirmPassword)) {
                 // Attempt to register the user
                 try
                 {
-                    //var user = service.CreateUser(userName, password, email, null, null, null, false);
+                    user = service.CreateUser(user, password);
                     if (user != null)
                     {
                         return View("RegisterSuccess");
@@ -56,8 +56,8 @@ namespace BoC.Security.Mvc.Controllers
         }
 
         [Authorize]
-        public ActionResult ChangePassword() {
-
+        public virtual ActionResult ChangePassword()
+        {
             ViewData["PasswordLength"] = service.MinRequiredPasswordLength;
 
             return View();
@@ -66,8 +66,8 @@ namespace BoC.Security.Mvc.Controllers
         [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exceptions result in password not being changed.")]
-        public ActionResult ChangePassword(string currentPassword, string newPassword, string confirmPassword) {
-
+        public virtual ActionResult ChangePassword(string currentPassword, string newPassword, string confirmPassword)
+        {
             ViewData["PasswordLength"] = service.MinRequiredPasswordLength;
 
             if (!ValidateChangePassword(currentPassword, newPassword, confirmPassword)) {
@@ -87,7 +87,8 @@ namespace BoC.Security.Mvc.Controllers
             }
         }
 
-        public ActionResult ChangePasswordSuccess() {
+        public virtual ActionResult ChangePasswordSuccess()
+        {
             return View();
         }
 
