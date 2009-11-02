@@ -75,10 +75,6 @@
     <Compile Include="UserServiceException.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Commons.DomainServices\Commons.DomainServices.csproj">
-      <Project>{984BB052-F353-47AF-9FB6-0CA95804F714}</Project>
-      <Name>Commons.DomainServices</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Commons\Commons.csproj">
       <Project>{25C350AF-4957-47E8-960A-6C59794C5DEF}</Project>
       <Name>Commons</Name>

@@ -7,7 +7,6 @@ using System.Transactions;
 using System.Web.Configuration;
 using System.Web.DomainServices;
 using System.Web.Security;
-using BoC.DomainServices;
 using BoC.EventAggregator;
 using BoC.Extensions;
 using BoC.Security.Model;

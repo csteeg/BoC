@@ -12,6 +12,7 @@ using NHibernate;
 using FluentNHibernate.Cfg;
 using NHibernate.Caches.SysCache;
 using NHibernate.Cfg;
+using NHibernate.Tool.hbm2ddl;
 
 namespace BoC.Persistence.NHibernate
 {
@@ -93,10 +94,10 @@ namespace BoC.Persistence.NHibernate
             }
 
             // Evil hack, since adding to the Alterations does NOT work.
-            foreach (var overrideAssembly in ass)
-            {
-                new AutoMappingOverrideAlteration(overrideAssembly).Alter(autoPersistenceModel);
-            }
+            //foreach (var overrideAssembly in ass)
+            //{
+            //    new AutoMappingOverrideAlteration(overrideAssembly).Alter(autoPersistenceModel);
+            //}
 
             config.Mappings(m => m.AutoMappings.Add(autoPersistenceModel)
 #if DEBUG
@@ -110,9 +111,7 @@ namespace BoC.Persistence.NHibernate
             IoC.RegisterInstance<Configuration>(nhconfig);
             IoC.RegisterInstance<ISessionFactory>(sessionFactory);
 
-            //new SchemaExport(config).Execute(true, true, false, false); //TODO: Find out how to detect a new DB so we don't have to swich manually
-            //new SchemaUpdate(nhconfig).Execute(true, true);
-
+            new SchemaUpdate(nhconfig).Execute(true, true);
         }
 
         public static bool CreateNonExistingRepositories = true;
