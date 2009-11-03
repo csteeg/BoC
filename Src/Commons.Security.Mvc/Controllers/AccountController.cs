@@ -23,7 +23,7 @@ namespace BoC.Security.Mvc.Controllers
             this.service = service;
         }
 
-        public virtual ActionResult Register()
+        public ActionResult Register()
         {
             ViewData["PasswordLength"] = service.MinRequiredPasswordLength;
 
@@ -31,7 +31,7 @@ namespace BoC.Security.Mvc.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public virtual ActionResult Register(User user, string password, string confirmPassword) 
+        public ActionResult Register(User user, string password, string confirmPassword) 
         {
             ViewData["PasswordLength"] = service.MinRequiredPasswordLength;
 
@@ -56,7 +56,7 @@ namespace BoC.Security.Mvc.Controllers
         }
 
         [Authorize]
-        public virtual ActionResult ChangePassword()
+        public ActionResult ChangePassword()
         {
             ViewData["PasswordLength"] = service.MinRequiredPasswordLength;
 
@@ -66,7 +66,7 @@ namespace BoC.Security.Mvc.Controllers
         [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exceptions result in password not being changed.")]
-        public virtual ActionResult ChangePassword(string currentPassword, string newPassword, string confirmPassword)
+        public ActionResult ChangePassword(string currentPassword, string newPassword, string confirmPassword)
         {
             ViewData["PasswordLength"] = service.MinRequiredPasswordLength;
 
@@ -87,7 +87,7 @@ namespace BoC.Security.Mvc.Controllers
             }
         }
 
-        public virtual ActionResult ChangePasswordSuccess()
+        public ActionResult ChangePasswordSuccess()
         {
             return View();
         }
@@ -100,7 +100,7 @@ namespace BoC.Security.Mvc.Controllers
 
         #region Validation Methods
 
-        private bool ValidateChangePassword(string currentPassword, string newPassword, string confirmPassword) {
+        protected bool ValidateChangePassword(string currentPassword, string newPassword, string confirmPassword) {
             if (String.IsNullOrEmpty(currentPassword)) {
                 ModelState.AddModelError("currentPassword", "You must specify a current password.");
             }
@@ -118,7 +118,7 @@ namespace BoC.Security.Mvc.Controllers
             return ModelState.IsValid;
         }
 
-        private bool ValidateRegistration(string userName, string email, string password, string confirmPassword) {
+        protected bool ValidateRegistration(string userName, string email, string password, string confirmPassword) {
             if (String.IsNullOrEmpty(userName)) {
                 ModelState.AddModelError("Login", "You must specify a username.");
             }
