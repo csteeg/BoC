@@ -123,7 +123,7 @@ namespace BoC.Security.Services
 
             using (var scope = new TransactionScope())
             {
-                user.Password = password;
+                user.Password = EncodePassword(password);
                 user.LastPasswordChange = DateTime.Now;
 
                 userRepository.SaveOrUpdate(user);
