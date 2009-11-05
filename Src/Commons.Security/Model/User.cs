@@ -24,7 +24,7 @@ namespace BoC.Security.Model
             bool isApproved)
         {
             CreationDate = DateTime.Now;
-            
+
             this.Login = login;
             this.Password = password;
             this.Email = email;
@@ -130,12 +130,8 @@ namespace BoC.Security.Model
 
         public override bool Equals(object obj)
         {
-            if (obj == null)
-                return false;
-            else if (obj is String)
+            if (obj is String)
                 return ((String)obj).Equals(this.Login, StringComparison.CurrentCultureIgnoreCase);
-            else if (obj is User)
-                return ((User)obj).Equals(this);
             else
                 return base.Equals(obj);
         }
