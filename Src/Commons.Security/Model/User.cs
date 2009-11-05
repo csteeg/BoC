@@ -135,7 +135,7 @@ namespace BoC.Security.Model
             else if (obj is String)
                 return ((String)obj).Equals(this.Login, StringComparison.CurrentCultureIgnoreCase);
             else if (obj is User)
-                return ((User)obj) == this;
+                return ((User)obj).Equals(this);
             else
                 return base.Equals(obj);
         }

@@ -14,7 +14,7 @@ namespace BoC.Security.Model
         }
 
         [Required]
-        virtual public string RoleName { get; protected set; }
+        virtual public string RoleName { get; set; }
         
         ICollection<User> users = new HashSet<User>();
         virtual public ICollection<User> Users
