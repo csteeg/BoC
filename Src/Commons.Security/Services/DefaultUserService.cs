@@ -203,7 +203,7 @@ namespace BoC.Security.Services
             return base.Update(user);
         }
 
-        public void DeleteUser(String login)
+        public virtual void DeleteUser(String login)
         {
             User user = FindUser(login);
             if (user == null)
@@ -296,7 +296,7 @@ namespace BoC.Security.Services
             }
         }
 
-        public void LockUser(String login)
+        public virtual void LockUser(String login)
         {
             using (var scope = new TransactionScope())
             {
@@ -400,7 +400,7 @@ namespace BoC.Security.Services
 
         #region roles
 
-        public void CreateRole(String roleName)
+        public virtual void CreateRole(String roleName)
         {
             if (!RoleExists(roleName))
             {
@@ -428,7 +428,7 @@ namespace BoC.Security.Services
             return roleRepository.FindByName(roleName);
         }
 
-        public void DeleteRole(String roleName)
+        public virtual void DeleteRole(String roleName)
         {
             Role role = FindRole(roleName);
             if (role == null)
@@ -451,7 +451,7 @@ namespace BoC.Security.Services
             DeleteRole(role, false);
         }
 
-        public void DeleteRole(String roleName, Boolean throwWhenUsed)
+        public virtual void DeleteRole(String roleName, Boolean throwWhenUsed)
         {
             Role role = FindRole(roleName);
             if (role == null)
@@ -502,7 +502,7 @@ namespace BoC.Security.Services
             }
         }
 
-        public void AddUsersToRoles(ICollection<String> logins, ICollection<String> roleNames)
+        public virtual void AddUsersToRoles(ICollection<String> logins, ICollection<String> roleNames)
         {
             User[] users = userRepository.FindByLogin(logins);
             if (users == null || users.Length != logins.Count)
@@ -519,7 +519,7 @@ namespace BoC.Security.Services
             AddUsersToRoles(users, roles);
         }
 
-        public void RemoveUsersFromRoles(ICollection<String> logins, ICollection<String> roleNames)
+        public virtual void RemoveUsersFromRoles(ICollection<String> logins, ICollection<String> roleNames)
         {
             User[] users = userRepository.FindByLogin(logins);
             if (users == null || users.Length != logins.Count)
