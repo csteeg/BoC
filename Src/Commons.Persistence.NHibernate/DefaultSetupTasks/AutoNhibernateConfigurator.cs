@@ -15,9 +15,6 @@ namespace BoC.Persistence.DefaultSetupTasks
     {
         public void Execute()
         {
-            //string currentSessionContextClass = HttpContext.Current != null ? "managed_web" : "thread_static";
-            string currentSessionContextClass = typeof(AutoContextSessionContext).FullName + ", Commons.Persistence.NHibernate";
-
             IPersistenceConfigurer db = null;
             if (!IoC.IsRegistered<IPersistenceConfigurer>())
             {
@@ -29,11 +26,11 @@ namespace BoC.Persistence.DefaultSetupTasks
 
                         if (providerName.IndexOf("sqlite", StringComparison.InvariantCultureIgnoreCase) >= 0)
                         {
-                            db = NHibernateConfigHelper.GetDefaultSQLiteConfig(connectionString.Name, currentSessionContextClass);
+                            db = NHibernateConfigHelper.GetDefaultSQLiteConfig(connectionString.Name);
                         }
                         else
                         {
-                            db = NHibernateConfigHelper.GetDefaultSqlServerConfig(connectionString.Name, currentSessionContextClass);
+                            db = NHibernateConfigHelper.GetDefaultSqlServerConfig(connectionString.Name);
                         }
                         break;
                     }

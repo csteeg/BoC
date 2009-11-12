@@ -15,6 +15,8 @@ namespace BoC.Persistence.NHibernate
 {
     public class AutoContextSessionContext : MapBasedSessionContext
     {
+        public static bool ThreadStatic = true;
+        protected static IDictionary staticMap;
         [ThreadStatic]
         protected static IDictionary map;
         private const string SessionFactoryMapKey = "NHibernate.Context.WebSessionContext.SessionFactoryMapKey";
@@ -30,16 +32,19 @@ namespace BoC.Persistence.NHibernate
         {
             if (HttpContext.Current != null)
                 return HttpContext.Current.Items[SessionFactoryMapKey] as IDictionary;
-            else
+            if (ThreadStatic)
                 return map;
+            return staticMap;
         }
 
         protected override void SetMap(IDictionary value)
         {
             if (HttpContext.Current != null)
                 HttpContext.Current.Items[SessionFactoryMapKey] = value;
-            else
+            else if (ThreadStatic)
                 map = value;
+            else
+                staticMap = value;
         }
 
         #endregion

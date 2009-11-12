@@ -18,7 +18,10 @@ namespace BoC.Persistence.NHibernate
 {
     public static class NHibernateConfigHelper
     {
-        public static IPersistenceConfigurer GetDefaultSqlServerConfig(string connectionStringKey, string currentSessionContextClass)
+        public static string CurrentSessionContextClass = typeof (AutoContextSessionContext).FullName +
+                                                          ", Commons.Persistence.NHibernate";
+
+        public static IPersistenceConfigurer GetDefaultSqlServerConfig(string connectionStringKey)
         {
             return MsSqlConfiguration.MsSql2005.ConnectionString(c => c.FromConnectionStringWithKey(connectionStringKey))
                 .UseReflectionOptimizer()
@@ -27,10 +30,10 @@ namespace BoC.Persistence.NHibernate
                 .ShowSql()
             #endif
                 .ProxyFactoryFactory("NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu")
-                .CurrentSessionContext(currentSessionContextClass);
+                .CurrentSessionContext(CurrentSessionContextClass);
         }
 
-        public static IPersistenceConfigurer GetDefaultSQLiteConfig(string connectionStringKey, string currentSessionContextClass)
+        public static IPersistenceConfigurer GetDefaultSQLiteConfig(string connectionStringKey)
         {
             return SQLiteConfiguration.Standard.ConnectionString(c => c.FromConnectionStringWithKey(connectionStringKey))
                 .UseReflectionOptimizer()
@@ -39,7 +42,7 @@ namespace BoC.Persistence.NHibernate
                 .ShowSql()
 #endif
                 .ProxyFactoryFactory("NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu")
-                .CurrentSessionContext(currentSessionContextClass);
+                .CurrentSessionContext(CurrentSessionContextClass);
         }
 
         public static void SetupAutoMapperForEntities(IPersistenceConfigurer database, params Assembly[] assemblies)

@@ -51,13 +51,7 @@ namespace BoC.Services
             OnInserting(entity);
 
             TModel retValue = default(TModel);
-
-            TransactionScope transaction = new TransactionScope(TransactionScopeOption.Required);
-            using (transaction)
-            {
-                retValue = repository.Save(entity);
-                transaction.Complete();
-            }
+            ExecuteInTransaction(() => { retValue = repository.Save(entity); });
 
             OnInserted(retValue);
 
@@ -68,12 +62,7 @@ namespace BoC.Services
         {
             OnDeleting(entity);
 
-            TransactionScope transaction = new TransactionScope(TransactionScopeOption.Required);
-            using (transaction)
-            {
-                repository.Delete(entity);
-                transaction.Complete();
-            }
+            ExecuteInTransaction(() => repository.Delete(entity));
 
             OnDeleted(entity);
         }
@@ -83,13 +72,7 @@ namespace BoC.Services
             OnUpdating(entity);
 
             TModel retValue = default(TModel);
-
-            TransactionScope transaction = new TransactionScope(TransactionScopeOption.Required);
-            using (transaction)
-            {
-                retValue = repository.SaveOrUpdate(entity);
-                transaction.Complete();
-            }
+            ExecuteInTransaction(() => { retValue = repository.SaveOrUpdate(entity); });
 
             OnUpdated(retValue);
 
@@ -106,6 +89,15 @@ namespace BoC.Services
         object IModelService.Get(object id)
         {
             return Get(id);
+        }
+
+        private void ExecuteInTransaction(Action action)
+        {
+            using(var transaction = new TransactionScope(TransactionScopeOption.Required))
+            {
+                action();
+                transaction.Complete();
+            }
         }
 
         #region Events
