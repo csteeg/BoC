@@ -12,7 +12,7 @@ namespace JqueryMvc.Attributes
             base.OnActionExecuted(filterContext);
             ViewResult result = filterContext.Result as ViewResult;
 
-            if (result == null && !(filterContext.HttpContext.Request.IsJqAjaxRequest() && filterContext.Exception != null))
+            if (result == null && (filterContext.HttpContext.Request.IsJqAjaxRequest() && filterContext.Exception != null))
             {
                 if (filterContext.Result is RedirectToRouteResult)
                 {
@@ -52,6 +52,8 @@ namespace JqueryMvc.Attributes
 
 					if (model is Exception)
 					{
+					    filterContext.Result = null;
+
 						Exception exc = ((Exception)model).InnerException ?? ((Exception)model);
 						if (exc is HttpException)
 						{
@@ -68,12 +70,15 @@ namespace JqueryMvc.Attributes
 
                     if (responseType == ResponseType.Json)
                     {
-                        filterContext.Result = new JsonResult()
-                                                   {
-                                                       Data = model
-                                                   };
+                        if (!(filterContext.Result is JsonResult))
+                        {
+                            filterContext.Result = new JsonResult()
+                                                       {
+                                                           Data = model
+                                                       };
+                        }
                     }
-                    else
+                    else if (!(filterContext.Result is XmlResult))
                     {
                         filterContext.Result = new XmlResult(model);
                     }
