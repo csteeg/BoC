@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using BoC.Security.Model;
 using BoC.Security.Services;
+using BoC.Validation;
 using DotNetOpenAuth.Messaging;
 using DotNetOpenAuth.OpenId;
 using DotNetOpenAuth.OpenId.RelyingParty;
@@ -139,7 +140,21 @@ namespace BoC.Web.Mvc.Controllers
                 return View();
             }
 
-            var user = service.Authenticate(userName, password);
+            User user = null;
+
+            try
+            {
+                service.Authenticate(userName, password);
+            }
+            catch (RulesException rulesException)
+            {
+                foreach (ErrorInfo info in rulesException.Errors)
+                {
+                    ModelState.AddModelError("_FORM", info.ErrorMessage);
+                }
+                return View();
+            }
+
             if (user == null)
             {
                 ModelState.AddModelError("_FORM", "The username or password provided is incorrect.");

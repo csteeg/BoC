@@ -394,7 +394,7 @@ namespace BoC.Security.Services
             }
             else
             {
-                throw new RulesException("Login", "Incorrect username or passord");
+                throw new RulesException("Login", "Incorrect username or password");
             }
         }
 
