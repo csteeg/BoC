@@ -144,7 +144,7 @@ namespace BoC.Web.Mvc.Controllers
 
             try
             {
-                service.Authenticate(userName, password);
+                user = service.Authenticate(userName, password);
             }
             catch (RulesException rulesException)
             {
