@@ -91,10 +91,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Build\Microsoft.Practices.Unity.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="MvcContrib, Version=1.0.0.99, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Build\MvcContrib.dll</HintPath>
-    </Reference>
     <Reference Include="NHibernate, Version=2.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Build\NHibernate.dll</HintPath>
@@ -112,9 +108,7 @@
       <HintPath>..\..\Build\NHibernate.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations, Version=99.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\DomainServices\System.ComponentModel.DataAnnotations.dll</HintPath>
+    <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
@@ -122,6 +116,9 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -176,6 +173,7 @@
     <Content Include="Views\Shared\FieldTemplates\Boolean.ascx" />
     <Content Include="Views\Shared\FieldTemplates\Boolean_Edit.ascx" />
     <Content Include="Views\Shared\FieldTemplates\Children.ascx" />
+    <Content Include="Views\Shared\DisplayTemplates\TableCell.ascx" />
     <Content Include="Views\Shared\FieldTemplates\DateTime.ascx" />
     <Content Include="Views\Shared\FieldTemplates\EmailAddress.ascx" />
     <Content Include="Views\Shared\FieldTemplates\ForeignKey.ascx" />
@@ -184,6 +182,7 @@
     <Content Include="Views\Shared\FieldTemplates\MultilineText_Edit.ascx" />
     <Content Include="Views\Shared\FieldTemplates\Text.ascx" />
     <Content Include="Views\Shared\FieldTemplates\Text_Edit.ascx" />
+    <Content Include="Views\Shared\PageTemplates\Copy %282%29 of List.aspx" />
     <Content Include="Views\Shared\PageTemplates\Copy of List.aspx" />
     <Content Include="Views\Shared\PageTemplates\Edit.aspx" />
     <Content Include="Views\Shared\PageTemplates\List.aspx" />

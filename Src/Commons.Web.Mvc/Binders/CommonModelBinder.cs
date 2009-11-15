@@ -102,6 +102,7 @@ namespace BoC.Web.Mvc.Binders
         public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
             var modelType = bindingContext.ModelType;
+            /*
             if (modelType.IsClass && IoC.IsRegistered<MetaModel>())
             {
                 var model = IoC.Resolve<MetaModel>();
@@ -133,7 +134,7 @@ namespace BoC.Web.Mvc.Binders
                     }
                 }
             }
-            else if (typeof(IBaseEntity).IsAssignableFrom(modelType))
+            else*/ if (typeof(IBaseEntity).IsAssignableFrom(modelType))
             {
                 var modelName = (bindingContext.ModelName == "entity") ? null : bindingContext.ModelName;
                 var valueName = CreateSubPropertyName(modelName, "Id");

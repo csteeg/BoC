@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 
 namespace MvcContrib.UI.Grid
 {
@@ -18,7 +19,7 @@ namespace MvcContrib.UI.Grid
         public DynamicDataGridRenderer(ViewEngineCollection engines) : base(engines) {}
         public DynamicDataGridRenderer() {}
 
-        protected override void RenderCellValue(GridColumn<T> column, GridRowViewData<T> rowData)
+        /*protected override void RenderCellValue(GridColumn<T> column, GridRowViewData<T> rowData)
         {
             if (!String.IsNullOrEmpty(column.Name))
             {
@@ -27,8 +28,8 @@ namespace MvcContrib.UI.Grid
 
                 if (cellValue != null)
                 {
-                    var template =
-                        MvcContrib.UI.InputBuilder.InputBuilder.Conventions.PartialNameConvention(
+                    var template = 
+                        MvcContrib.UI.InputBuilder.InputBuilder.Conventions..PartialNameConvention(
                             typeof (T).GetProperty(column.Name));
                     if (!String.IsNullOrEmpty(template))
                     {
@@ -40,7 +41,7 @@ namespace MvcContrib.UI.Grid
                 }
             }
             base.RenderCellValue(column, rowData);
-        }
+        }*/
 
         private bool TryRenderPartial(ViewContext viewContext, string partial, object model, string master)
         {

@@ -8,6 +8,7 @@ using BoC.Persistence;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Linq.Mapping;
 namespace <#=Namespace#>
 {   
 <#  foreach(Table tbl in tables){#>    
@@ -30,7 +31,7 @@ namespace <#=Namespace#>
 						name = fk.OtherClass;
 
  				if (!String.IsNullOrEmpty(fk.ConstraintName)) {#>
-		[Association("<#= fk.ConstraintName #>", "Id", "<#= tables.Where(t => t.Name == fk.OtherTable).FirstOrDefault().PK.FirstOrDefault().CleanName == fk.OtherColumn ? "Id" : fk.OtherColumn #>", IsForeignKey = true)]
+		[Association(Name="<#= fk.ConstraintName #>", ThisKey="Id", OtherKey="<#= tables.Where(t => t.Name == fk.OtherTable).FirstOrDefault().PK.FirstOrDefault().CleanName == fk.OtherColumn ? "Id" : fk.OtherColumn #>", IsForeignKey = true)]
 <# 				} #>
 		virtual public <#=fk.OtherClass #> <#= name #> {get; set;}
 <#
@@ -58,7 +59,7 @@ namespace <#=Namespace#>
 #>
         ICollection<<#=fk.OtherClass #>> _<#=propName #> = new HashSet<<#=fk.OtherClass #>>();
 <# 				if (!String.IsNullOrEmpty(fk.ConstraintName)) {#>
-		[Association("<#= fk.ConstraintName #>", "Id", "Id",IsForeignKey = true)]
+		[Association(Name="<#= fk.ConstraintName #>", ThisKey="Id", OtherKey="Id",IsForeignKey = true)]
 <# 				} #>
         virtual public ICollection<<#=fk.OtherClass #>> <#=propName #>
         {

@@ -9,13 +9,12 @@ using BoC.Persistence;
 using BoC.Tasks;
 using BoC.Web.Mvc.Binders;
 using MvcContrib.UI.InputBuilder;
+using MvcContrib.UI.InputBuilder.Conventions;
 
 namespace BoC.Web.Mvc.Init
 {
     public class SetDefaults : IBootstrapperTask
     {
-        private static Func<IModelPropertyConventions> _conventionProvider = () => new CustomConventions();
-
         public void Execute()
         {
             //MvcContrib.UI.InputBuilder.InputBuilder.BootStrap();
@@ -23,16 +22,22 @@ namespace BoC.Web.Mvc.Init
             ControllerBuilder.Current.SetControllerFactory(typeof(AutoScaffoldControllerFactory));
             ModelBinders.Binders.DefaultBinder = new CommonModelBinder();
 
-            MvcContrib.UI.InputBuilder.InputBuilder.SetConventionProvider(_conventionProvider);
+            MvcContrib.UI.InputBuilder.InputBuilder.Conventions.Add(new ForeignKeyPropertyConvention());
         }
     }
 
-    internal class CustomConventions: DefaultConventions
+    internal class ForeignKeyPropertyConvention : DefaultProperyConvention
     {
+        /*
         private static readonly Type baseRepository = typeof(IRepository<>);
+
+        public override bool CanHandle(PropertyInfo propertyInfo)
+        {
+            return (typeof(IBaseEntity).IsAssignableFrom(propertyInfo.PropertyType));
+        }
         public override InputModelProperty ModelPropertyBuilder(PropertyInfo propertyInfo, object value)
         {
-            if (typeof(IBaseEntity).IsAssignableFrom(propertyInfo.PropertyType))
+            if 
             {
                 var repository = IoC.Resolve(baseRepository.MakeGenericType(propertyInfo.PropertyType)) as IQueryable;
 
@@ -47,7 +52,7 @@ namespace BoC.Web.Mvc.Init
 
             return base.ModelPropertyBuilder(propertyInfo, value);
         }
-
+        
         public override string PartialNameConvention(PropertyInfo propertyInfo)
         {
             if (typeof(IBaseEntity).IsAssignableFrom(propertyInfo.PropertyType))
@@ -75,6 +80,6 @@ namespace BoC.Web.Mvc.Init
 
             return base.PartialNameConvention(propertyInfo);
         }
-
+        */
     }
 }
