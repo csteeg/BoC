@@ -5,7 +5,6 @@ namespace BoC.Persistence
     [Serializable]
     abstract public class BaseEntity<Tkey> : IEquatable<BaseEntity<Tkey>>, IBaseEntity
     {
-        
         public virtual Tkey Id { get; set; }
 
         public virtual bool Equals(BaseEntity<Tkey> obj)
