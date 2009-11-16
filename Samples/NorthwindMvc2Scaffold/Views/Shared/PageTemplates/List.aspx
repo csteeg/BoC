@@ -33,9 +33,9 @@
                             <%= Html.ActionLink("Details", "show", new { Id = rowId })%>
                         </td>
                         <% foreach (var prop in properties) {
-                                var metaData = ModelMetadataProviders.Current.GetMetadataForType(() => row, row.GetType());
+                                ViewData.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => row, row.GetType());
                                %>
-                        <td><%= prop.SimpleDisplayText%></td>
+                        <td><%= Html.Display(prop.PropertyName, "TableCell") %></td>
                         <% } %>
                     </tr>
                 <% } %>

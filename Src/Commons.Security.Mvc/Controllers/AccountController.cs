@@ -50,7 +50,6 @@ namespace BoC.Security.Mvc.Controllers
                     this.ModelState.AddModelError("_FORM", exc.Message);
                 }
             }
-
             // If we got this far, something failed, redisplay form
             return View();
         }
