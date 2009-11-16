@@ -5,7 +5,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Transactions;
 using System.Web.Configuration;
-using System.Web.DomainServices;
 using System.Web.Security;
 using BoC.EventAggregator;
 using BoC.Extensions;
@@ -53,7 +52,6 @@ namespace BoC.Security.Services
         public string PasswordStrengthRegularExpression { get; set; }
 
         #endregion
-        [Query(IsComposable = false)]
         public virtual User FindUser(String login)
         {
             return userRepository.FindByLogin(login);
@@ -131,7 +129,6 @@ namespace BoC.Security.Services
             }
         }
 
-        [Custom]
         public virtual User CreateUser(
             User user,
             String password)
@@ -165,7 +162,6 @@ namespace BoC.Security.Services
             var errors = modelValidator.Validate(user);
         }
 
-        [Custom]
         public virtual void UpdateUser(
             string login,
             string email,
@@ -331,8 +327,6 @@ namespace BoC.Security.Services
             return user != null ? user.Login : null;
         }
 
-
-        [Query]
         public virtual IQueryable<User> FindUsersByPartialLogin(String login)
         {
             return from u in userRepository
@@ -347,7 +341,6 @@ namespace BoC.Security.Services
                     select u).Count();
         }
 
-        [Query]
         public virtual IQueryable<User> FindUsersByPartialEmail(String email)
         {
             return from u in userRepository

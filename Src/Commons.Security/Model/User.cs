@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Principal;
-using System.Web.DomainServices;
 using BoC.Persistence;
 
 namespace BoC.Security.Model
@@ -89,7 +88,7 @@ namespace BoC.Security.Model
             return false;
         }
 
-        [ScaffoldColumn(false), Exclude]
+        [ScaffoldColumn(false)]
         virtual public IIdentity Identity
         {
             get { return new GenericIdentity(Login, "steeg.framework.authentication"); }
