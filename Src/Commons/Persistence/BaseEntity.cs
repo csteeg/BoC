@@ -1,13 +1,11 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Data.Linq.Mapping;
 
 namespace BoC.Persistence
 {
     [Serializable]
     abstract public class BaseEntity<Tkey> : IEquatable<BaseEntity<Tkey>>, IBaseEntity
     {
-        [Key]
+        
         public virtual Tkey Id { get; set; }
 
         public virtual bool Equals(BaseEntity<Tkey> obj)
