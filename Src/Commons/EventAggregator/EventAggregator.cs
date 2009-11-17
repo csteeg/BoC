@@ -10,13 +10,13 @@ namespace BoC.EventAggregator
         private readonly List<BaseEvent> _events = new List<BaseEvent>();
         private readonly ReaderWriterLockSlim _rwl = new ReaderWriterLockSlim();
 
-        public TEventType GetEvent<TEventType>() where TEventType : BaseEvent
+        public TEventType GetEvent<TEventType>() where TEventType : BaseEvent, new()
         {
             _rwl.EnterUpgradeableReadLock();
 
             try
             {
-                TEventType eventInstance = _events.SingleOrDefault(evt => evt.GetType() == typeof(TEventType)) as TEventType;
+                var eventInstance = _events.SingleOrDefault(evt => evt.GetType() == typeof(TEventType)) as TEventType;
 
                 if (eventInstance == null)
                 {
@@ -28,7 +28,7 @@ namespace BoC.EventAggregator
 
                         if (eventInstance == null)
                         {
-                            eventInstance = Activator.CreateInstance<TEventType>();
+                            eventInstance = new TEventType();
                             _events.Add(eventInstance);
                         }
                     }

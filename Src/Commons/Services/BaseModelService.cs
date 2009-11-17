@@ -129,7 +129,7 @@ namespace BoC.Services
             PublishEvent<DeletedEvent<TModel>>(entity);
         }
 
-        protected void PublishEvent<TEvent>(TModel entity) where TEvent : BaseEvent<EventArgs<TModel>>
+        protected void PublishEvent<TEvent>(TModel entity) where TEvent : BaseEvent<EventArgs<TModel>>, new()
         {
             EventArgs<TModel> args = new EventArgs<TModel>(entity);
             eventAggregator.GetEvent<TEvent>().Publish(args);
