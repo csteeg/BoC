@@ -168,8 +168,7 @@ namespace BoC.Persistence.NHibernate
                                 interfaceType.IsAssignableFrom(i)
                           select i).FirstOrDefault() ?? interfaceType;
 
-                var exists = IoC.Resolve(toFind);
-                if (exists != null)
+                if (IoC.IsRegistered(toFind))
                 {
                     //this repository is already registered, if you have multiple repositories implementing the same interface, 
                     //you'll have to register the correct one 'by hand'

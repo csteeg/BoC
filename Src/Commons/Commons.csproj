@@ -48,6 +48,9 @@
     </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Web.Extensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -118,8 +121,6 @@
     <Compile Include="Validation\RulesException.cs" />
     <Compile Include="Web\CommonHttpApplication.cs" />
     <Compile Include="Web\Events.cs" />
-    <Compile Include="Web\WebRequestEventArgs.cs" />
-    <Compile Include="Web\WebSessionEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />

@@ -19,17 +19,24 @@ namespace BoC.Tasks
         public void Execute()
         {
             var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
-            var domainservices = assemblies
+            var modelservices = assemblies
                 .SelectMany(s => s.GetTypes())
                 .Where(t => t.IsClass && !t.IsAbstract &&
-                            !t.IsGenericType &&
                             !t.Assembly.GetName().Name.StartsWith("Microsoft") && 
                             !t.Assembly.GetName().Name.StartsWith("System") 
                             && typeof(IModelService<>).IsAssignableFrom(t));
 
-            foreach (var service in domainservices)
+            foreach (var service in modelservices)
             {
-                //IoC.RegisterType<>();
+                var interfaces = service.GetInterfaces();
+                foreach (var @interface in interfaces)
+                {
+                    if (typeof(IModelService<>).IsAssignableFrom(@interface)
+                        && !IoC.IsRegistered(@interface))
+                    {
+                        IoC.RegisterType(@interface, service);
+                    }
+                }
             }
 
             if (CreateMissingModelServices)
@@ -43,8 +50,11 @@ namespace BoC.Tasks
                                                   basetype.IsGenericType &&
                                                   basetype.GetGenericTypeDefinition() == typeof (BaseEntity<>));
 
-            var entities = from t in assemblies
-                               .SelectMany(s => GetTypes(s))
+            var types = from t in assemblies
+                            .SelectMany(s => GetTypes(s))
+                        select t;
+
+            var entities = from t in types
                            where t.IsClass
                                  && !t.IsAbstract
                                  && typeof (IBaseEntity).IsAssignableFrom(t)
@@ -57,8 +67,31 @@ namespace BoC.Tasks
             ModuleBuilder mb = null;
             foreach (var entityType in entities)
             {
-                var interfaceToFind = baseInterface.MakeGenericType(entityType);
-                if (!IoC.IsRegistered(interfaceToFind))
+                var inferfaceType = baseInterface.MakeGenericType(entityType);
+                if (inferfaceType == null)
+                {
+                    continue;
+                }
+
+                var interfaceToFind = (from i in types
+                                       where i.IsInterface &&
+                                             inferfaceType.IsAssignableFrom(i)
+                                       select i).FirstOrDefault() ?? inferfaceType;
+
+                if (IoC.IsRegistered(interfaceToFind))
+                {
+                    //this repository is already registered, if you have multiple repositories implementing the same interface, 
+                    //you'll have to register the correct one 'by hand'
+                    continue;
+                }
+
+                var serviceType = (from r in types
+                            where !r.IsInterface &&
+                                  interfaceToFind.IsAssignableFrom(r)
+                            select r
+                           ).FirstOrDefault();
+
+                if (serviceType == null)
                 {
                     var serviceBaseType = baseType.MakeGenericType(entityType);
                     var name = "DynamicGeneratedModelService" + typeNum++;
@@ -68,11 +101,11 @@ namespace BoC.Tasks
                     var tb = mb.DefineType(name, TypeAttributes.AutoLayout | TypeAttributes.Public,
                                            serviceBaseType);
                     var constructorParams = new[]
-                        {
-                            typeof (IModelValidator), 
-                            typeof (IEventAggregator),
-                            typeof (IRepository<>).MakeGenericType(entityType)
-                        };
+                                                {
+                                                    typeof (IModelValidator),
+                                                    typeof (IEventAggregator),
+                                                    typeof (IRepository<>).MakeGenericType(entityType)
+                                                };
 
                     var baseConstructor = serviceBaseType.GetConstructor(constructorParams);
                     var constructor = tb.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard,
@@ -91,10 +124,13 @@ namespace BoC.Tasks
                     ilGenerator.Emit(OpCodes.Call, baseConstructor); // Call the base constructor
                     ilGenerator.Emit(OpCodes.Ret);
 
-                    IoC.RegisterType(interfaceToFind, tb.CreateType());
+                    serviceType = tb.CreateType();
                 }
-
+                IoC.RegisterType(interfaceToFind, serviceType);
+                IoC.RegisterType(inferfaceType, serviceType);
             }
+
+
         }
 
         private static IEnumerable<Type> GetTypes(Assembly assembly)
@@ -111,7 +147,7 @@ namespace BoC.Tasks
 
         private static ModuleBuilder GetRepositoriesModuleBuilder()
         {
-            AssemblyName aName = new AssemblyName("DynamicDomainServicesAssembly");
+            AssemblyName aName = new AssemblyName("DynamicModelServicesAssembly");
             AssemblyBuilder ab =
                 AppDomain.CurrentDomain.DefineDynamicAssembly(
                     aName,
