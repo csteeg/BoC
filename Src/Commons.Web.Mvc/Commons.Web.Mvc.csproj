@@ -85,6 +85,7 @@
     <Compile Include="Controllers\CommonBaseController.cs" />
     <Compile Include="Controllers\DynamicScaffoldController.cs" />
     <Compile Include="AutoScaffoldControllerFactory.cs" />
+    <Compile Include="Extensions\HtmlHelperTableCell.cs" />
     <Compile Include="HttpStatusCodeResult.cs" />
     <Compile Include="Init\SetDefaults.cs" />
     <Compile Include="IoCControllerFactory.cs" />

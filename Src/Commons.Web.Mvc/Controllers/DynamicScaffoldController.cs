@@ -205,10 +205,7 @@ namespace BoC.Web.Mvc.Controllers
         protected virtual ActionResult OnList(IEnumerable<TEntity> entities, string sort)
         {
             ViewData["sort"] = sort;
-            this.ViewData.Model = entities;
-            this.ViewData.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => entities.FirstOrDefault(), typeof(TEntity));
-
-            return View("PageTemplates/List");
+            return View("PageTemplates/List", entities);
         }
 
         protected virtual ViewResult OnNew(TEntity entity)

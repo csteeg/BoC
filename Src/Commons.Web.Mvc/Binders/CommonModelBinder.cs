@@ -139,8 +139,8 @@ namespace BoC.Web.Mvc.Binders
                 var modelName = (bindingContext.ModelName == "entity") ? null : bindingContext.ModelName;
                 var valueName = CreateSubPropertyName(modelName, "Id");
 
-                ValueProviderResult value;
-                if (bindingContext.ValueProvider.TryGetValue(valueName, out value))
+                ValueProviderResult value = bindingContext.ValueProvider.GetValue(controllerContext, valueName);
+                if (value != null)
                 {
                     var toProp = modelType.GetProperty("Id");
                     object pkValue = value.ConvertTo(toProp.PropertyType);

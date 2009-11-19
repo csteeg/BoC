@@ -1,18 +1,24 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable>" %>
 <asp:Content ID="Content" ContentPlaceHolderID="MainContent" runat="server">
     <%
-        var properties =
-            ViewData.ModelMetadata.Properties.Where(pm => pm.ShowForDisplay && !ViewData.TemplateInfo.Visited(pm));
+        Type memberType = null;
+        foreach (var obj in Model)
+        {
+            memberType = obj.GetType();
+            break;
+        }
+        var memberMetaData = ModelMetadataProviders.Current.GetMetadataForType(null, memberType);
+        var properties = memberMetaData.Properties.Where(pm => pm.ShowForDisplay && !ViewData.TemplateInfo.Visited(pm));
     %>
     <div class="dyndata">
-        <h1><%= ViewData["Title"]%></h1>
+        <h1><%= memberMetaData.DataTypeName %></h1>
         <br />
         <table cellpadding="0" cellspacing="0" border="0" class="table-view list-view">
             <thead>
                 <tr>
                     <th></th>
                     <% foreach (var prop in properties) { %>
-                    <th><%= Html.Label(prop.PropertyName) %></th>
+                         <th><%= Html.Label(prop.PropertyName) %></th>
                     <% } %>
                 </tr>
             </thead>
@@ -20,6 +26,8 @@
                 <% int count = 0; %>
                 <% foreach (var row in Model) {
                        var rowId = DataBinder.GetPropertyValue(row, "Id");
+                       memberMetaData = ModelMetadataProviders.Current.GetMetadataForType(() => row, memberType);
+                       properties = memberMetaData.Properties.Where(pm => pm.ShowForDisplay && !ViewData.TemplateInfo.Visited(pm));
                        %>
                     <tr class="<%= (++count) % 2 == 0 ? "even" : "odd" %>">
                         <td class="scaffold-actions" nowrap="nowrap">
@@ -32,10 +40,8 @@
                             <% } %>
                             <%= Html.ActionLink("Details", "show", new { Id = rowId })%>
                         </td>
-                        <% foreach (var prop in properties) {
-                                ViewData.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => row, row.GetType());
-                               %>
-                        <td><%= Html.Display(prop.PropertyName, "TableCell") %></td>
+                        <% foreach (var prop in properties) { %>
+                            <td><%= Html.DisplayFor(l => prop.Model, "TableCell") %></td>
                         <% } %>
                     </tr>
                 <% } %>
