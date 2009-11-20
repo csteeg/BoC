@@ -18,7 +18,7 @@ namespace BoC.Persistence.NHibernate
         }
 
         private readonly ISessionFactory sessionFactory;
-        public ISessionFactory SessionFactory 
+        public ISessionFactory SessionFactory
         {
             get
             {
@@ -30,22 +30,22 @@ namespace BoC.Persistence.NHibernate
         {
             get
             {
-                if (!CurrentSessionContext.HasBind(SessionFactory))
+                if (!AutoContextSessionContext.HasBind(SessionFactory))
                 {
-                    CurrentSessionContext.Bind(SessionFactory.OpenSession());
-                    var sess = sessionFactory.GetCurrentSession();
-                    if (sess != null)
-                        sess.FlushMode = FlushMode.Commit;
-                    return sess;
+                    AutoContextSessionContext.Bind(SessionFactory.OpenSession());
                 }
-                
                 return sessionFactory.GetCurrentSession();
             }
         }
 
+        public void CleanUp()
+        {
+            CleanUp(this.sessionFactory);
+        }
+
         public static void CleanUp(ISessionFactory sessionFactory)
         {
-            ISession session = CurrentSessionContext.Unbind(sessionFactory);
+            ISession session = AutoContextSessionContext.Unbind(sessionFactory);
             if (session != null)
             {
                 if (session.Transaction != null &&
@@ -53,17 +53,19 @@ namespace BoC.Persistence.NHibernate
                 {
                     session.Transaction.Rollback();
                 }
-                else
+                else if (HttpContext.Current != null && HttpContext.Current.Error == null && session.IsDirty())
                 {
                     session.Flush();
                 }
                 session.Close();
             }
+
         }
 
         public void Dispose()
         {
-            CleanUp(IoC.Resolve<ISessionFactory>());
+            if (HttpContext.Current != null)
+                CleanUp(SessionFactory);
         }
 
     }

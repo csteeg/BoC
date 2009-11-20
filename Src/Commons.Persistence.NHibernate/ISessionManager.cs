@@ -6,5 +6,6 @@ namespace BoC.Persistence.NHibernate
     {
         ISessionFactory SessionFactory { get; }
         ISession Session { get; }
+        void CleanUp();
     }
 }

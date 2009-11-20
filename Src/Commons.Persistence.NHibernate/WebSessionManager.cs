@@ -61,6 +61,11 @@ namespace BoC.Persistence.NHibernate
             
         }
 
+        public void CleanUp()
+        {
+            CleanUp(HttpContext.Current);
+        }
+
         public void CleanUp(HttpContext context)
         {
             CleanUp(context, sessionFactory);
