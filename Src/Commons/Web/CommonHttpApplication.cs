@@ -29,6 +29,13 @@ namespace BoC.Web
             {
                 Application.UnLock();
             }
+
+            PublishEvent<WebApplicationStartEvent, WebApplicationEventArgs>(() => new WebApplicationEventArgs(this));
+        }
+
+        virtual protected void Application_End()
+        {
+            PublishEvent<WebApplicationEndEvent, WebApplicationEventArgs>(() => new WebApplicationEventArgs(this));
         }
 
         protected virtual void InitializeApplication()

@@ -14,6 +14,8 @@ namespace BoC.Web.Events
     public class WebRequestErrorEvent : BaseEvent<WebRequestEventArgs> { }
     public class WebRequestPreHandlerExecute : BaseEvent<WebRequestEventArgs> { }
     public class WebRequestPostHandlerExecute : BaseEvent<WebRequestEventArgs> { }
+    public class WebApplicationStartEvent : BaseEvent<WebApplicationEventArgs> { }
+    public class WebApplicationEndEvent : BaseEvent<WebApplicationEventArgs> { }
 
     public class WebRequestEventArgs
     {
@@ -33,5 +35,15 @@ namespace BoC.Web.Events
         }
         
         public HttpSessionStateWrapper SessionState { get; set; }
+    }
+
+    public class WebApplicationEventArgs
+    {
+        public CommonHttpApplication ApplicationState { get; set; }
+
+        public WebApplicationEventArgs(CommonHttpApplication applicationState)
+        {
+            ApplicationState = applicationState;
+        }
     }
 }
