@@ -7,6 +7,5 @@ namespace BoC.UnitOfWork
 {
     public interface IUnitOfWork: IDisposable
     {
-        void Complete();
     }
 }

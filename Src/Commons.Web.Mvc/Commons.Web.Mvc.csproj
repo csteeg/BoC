@@ -80,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\EventTriggerAttribute.cs" />
     <Compile Include="Attributes\ValidationExceptionAttribute.cs" />
     <Compile Include="Binders\CommonModelBinder.cs" />
     <Compile Include="CommonViewUserControl.cs">
@@ -88,6 +89,7 @@
     <Compile Include="Controllers\CommonBaseController.cs" />
     <Compile Include="Controllers\DynamicScaffoldController.cs" />
     <Compile Include="AutoScaffoldControllerFactory.cs" />
+    <Compile Include="Events\ActionEvents.cs" />
     <Compile Include="Extensions\HtmlHelperTableCell.cs" />
     <Compile Include="HttpStatusCodeResult.cs" />
     <Compile Include="Init\SetDefaults.cs" />

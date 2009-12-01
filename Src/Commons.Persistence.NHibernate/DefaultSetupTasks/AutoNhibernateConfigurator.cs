@@ -56,7 +56,8 @@ namespace BoC.Persistence.DefaultSetupTasks
 
             if (!IoC.IsRegistered<ISessionManager>())
             {
-                IoC.RegisterSingleton<ISessionManager, CurrentContextSessionManager>();
+                //IoC.RegisterSingleton<ISessionManager, CurrentContextSessionManager>();
+                IoC.RegisterSingleton<ISessionManager, UnitOfWorkSessionManager>();
             }
 
             if (!IoC.IsRegistered<IUnitOfWork>())

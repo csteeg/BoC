@@ -114,10 +114,8 @@
     <Compile Include="Persistence\IBaseEntity.cs" />
     <Compile Include="Persistence\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitOfWork\DefaultSetupTasks\RegisterDefaultUnitOfWorkFactory.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\IUnitOfWorkFactory.cs" />
-    <Compile Include="UnitOfWork\IoCUnitOfWorkFactory.cs" />
+    <Compile Include="UnitOfWork\UnitOfWork.cs" />
     <Compile Include="Validation\DataAnnotationsModelValidator.cs" />
     <Compile Include="Validation\DefaultSetupTasks\RegisterDefaultModelValidator.cs" />
     <Compile Include="Validation\ErrorInfo.cs" />

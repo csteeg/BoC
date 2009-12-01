@@ -13,6 +13,8 @@ namespace BoC.Web
 {
     public abstract class CommonHttpApplication : HttpApplication
     {
+        private static string unitofworkkey = "BoC.Web.CommonHttpApplication.OuterUnitOfWork";
+
         private static bool initialized = false;
 
         virtual protected void Application_Start()
@@ -55,7 +57,14 @@ namespace BoC.Web
 
         protected virtual void AttachEvents()
         {
-            this.BeginRequest += (sender, args) => PublishEvent<WebRequestBeginEvent>();
+            this.BeginRequest += (sender, args) =>
+                                     {
+                                        if (!initialized)
+                                            Application_Start();
+
+                                        this.Context.Items[unitofworkkey] = UnitOfWork.UnitOfWork.BeginUnitOfWork();
+                                         PublishEvent<WebRequestBeginEvent>();
+                                     };
             this.EndRequest += (sender, args) => PublishEvent<WebRequestEndEvent>();
             this.PostAuthorizeRequest += (sender,args) => PublishEvent<WebPostAuthorizeEvent>();
             this.AuthorizeRequest += (sender, args) => PublishEvent<WebPostAuthorizeEvent>();
@@ -66,10 +75,14 @@ namespace BoC.Web
             this.PostRequestHandlerExecute += (sender, args) => PublishEvent<WebRequestPostHandlerExecute>();
         }
 
-        virtual protected void Application_BeginRequest(object sender, EventArgs e)
+        virtual protected void Application_EndRequest(object sender, EventArgs e)
         {
-            if (!initialized)
-                Application_Start();
+            var unitOfWork = this.Context.Items[unitofworkkey] as IDisposable;
+            if (unitOfWork != null)
+            {
+                unitOfWork.Dispose();
+            }
+            this.Context.Items.Remove(unitofworkkey);
         }
 
         virtual protected void Session_Start()

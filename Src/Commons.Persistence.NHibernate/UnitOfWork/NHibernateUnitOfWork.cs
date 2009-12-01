@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Transactions;
+using System.Web;
 using BoC.UnitOfWork;
 using NHibernate;
 
@@ -10,37 +12,72 @@ namespace BoC.Persistence.NHibernate.UnitOfWork
 {
     public class NHibernateUnitOfWork: IUnitOfWork
     {
-        private readonly ISessionManager _sessionManager;
-        private readonly TransactionScope _transactionScope = new TransactionScope();
+        private readonly ISessionFactory sessionFactory;
+        private ISession session;
         
         [ThreadStatic]
-        private static IUnitOfWork outerUnitOfWork = null;
+        private static NHibernateUnitOfWork outerUnitOfWork = null;
+        public static NHibernateUnitOfWork OuterUnitOfWork { get { return outerUnitOfWork; } }
 
-        public NHibernateUnitOfWork(ISessionManager sessionManager)
+        public NHibernateUnitOfWork(ISessionFactory sessionFactory)
         {
-            _sessionManager = sessionManager;
+            this.sessionFactory = sessionFactory;
             if (outerUnitOfWork == null)
             {
                 outerUnitOfWork = this;
             }
         }
 
-        public void Complete()
-        {
-            _transactionScope.Complete();
-        }
-
         public void Dispose()
         {
-            if (_transactionScope != null)
-            {
-                _transactionScope.Dispose();
-            }
             if (outerUnitOfWork == this)
             {
-                _sessionManager.CleanUp();
+                CleanUp();
                 outerUnitOfWork = null;
             }
         }
+
+        public void CleanUp()
+        {
+            if (outerUnitOfWork == this && session != null)
+            {
+                if (session.Transaction != null &&
+                    session.Transaction.IsActive)
+                {
+                    session.Transaction.Rollback();
+                }
+                else if (Transaction.Current != null)
+                {
+                    Transaction.Current.Rollback();
+                }
+                else if (session.IsDirty())
+                {
+                    session.Flush();
+                }
+                session.Close();
+                session.Dispose();
+                session = null;
+            }
+        }
+
+        public ISession Session
+        {
+            get
+            {
+                if (outerUnitOfWork == this)
+                {
+                    if (this.session == null)
+                    {
+                        this.session = sessionFactory.OpenSession();
+                    }
+                    return session;
+                }
+                else
+                {
+                    return outerUnitOfWork.Session;
+                }
+            }
+        }
+
     }
 }
