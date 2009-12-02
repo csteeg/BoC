@@ -15,7 +15,7 @@ namespace BoC.UnitOfWork
         }
     }
 
-    class DummyUnitOfWork : IUnitOfWork 
+    class DummyUnitOfWork : IUnitOfWork
     {
         public void Dispose()
         {
@@ -26,5 +26,6 @@ namespace BoC.UnitOfWork
         {
             
         }
-    }
+
+   }
 }

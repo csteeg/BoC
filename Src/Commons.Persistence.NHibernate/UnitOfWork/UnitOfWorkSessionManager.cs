@@ -17,7 +17,7 @@ namespace BoC.Persistence.NHibernate.UnitOfWork
                 {
                     throw new UnitOfWorkException("You are using UnitOfWorkSessionManager but are accessing a session outside a unit of work");
                 }
-                return NHibernateUnitOfWork.OuterUnitOfWork.Session;
+                return ((NHibernateUnitOfWork)NHibernateUnitOfWork.OuterUnitOfWork).Session;
             }
         }
 

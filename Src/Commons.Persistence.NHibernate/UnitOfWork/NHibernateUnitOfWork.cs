@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.ServiceModel;
 using System.Text;
 using System.Transactions;
 using System.Web;
@@ -10,53 +12,42 @@ using NHibernate;
 
 namespace BoC.Persistence.NHibernate.UnitOfWork
 {
-    public class NHibernateUnitOfWork: IUnitOfWork
+    public class NHibernateUnitOfWork : BaseThreadSafeSingleUnitOfWork
     {
         private readonly ISessionFactory sessionFactory;
         private ISession session;
-        
-        [ThreadStatic]
-        private static NHibernateUnitOfWork outerUnitOfWork = null;
-        public static NHibernateUnitOfWork OuterUnitOfWork { get { return outerUnitOfWork; } }
 
         public NHibernateUnitOfWork(ISessionFactory sessionFactory)
         {
             this.sessionFactory = sessionFactory;
-            if (outerUnitOfWork == null)
-            {
-                outerUnitOfWork = this;
-            }
         }
 
-        public void Dispose()
+        override protected void CleanUp()
         {
-            if (outerUnitOfWork == this)
+            if (session != null)
             {
-                CleanUp();
-                outerUnitOfWork = null;
-            }
-        }
-
-        public void CleanUp()
-        {
-            if (outerUnitOfWork == this && session != null)
-            {
-                if (session.Transaction != null &&
-                    session.Transaction.IsActive)
+                try
                 {
-                    session.Transaction.Rollback();
+                    if (session.Transaction != null &&
+                        session.Transaction.IsActive)
+                    {
+                        session.Transaction.Rollback();
+                    }
+                    else if (Transaction.Current != null)
+                    {
+                        Transaction.Current.Rollback();
+                    }
+                    else if (session.IsDirty())
+                    {
+                        session.Flush();
+                    }
+                    session.Close();
+                    session.Dispose();
                 }
-                else if (Transaction.Current != null)
+                finally
                 {
-                    Transaction.Current.Rollback();
+                    session = null;
                 }
-                else if (session.IsDirty())
-                {
-                    session.Flush();
-                }
-                session.Close();
-                session.Dispose();
-                session = null;
             }
         }
 
@@ -64,7 +55,7 @@ namespace BoC.Persistence.NHibernate.UnitOfWork
         {
             get
             {
-                if (outerUnitOfWork == this)
+                if (OuterUnitOfWork == this)
                 {
                     if (this.session == null)
                     {
@@ -74,10 +65,11 @@ namespace BoC.Persistence.NHibernate.UnitOfWork
                 }
                 else
                 {
-                    return outerUnitOfWork.Session;
+                    return ((NHibernateUnitOfWork)OuterUnitOfWork).Session;
                 }
             }
         }
+
 
     }
 }

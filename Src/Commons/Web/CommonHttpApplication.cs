@@ -7,6 +7,7 @@ using System.Web.SessionState;
 using BoC.EventAggregator;
 using BoC.InversionOfControl;
 using BoC.Tasks;
+using BoC.UnitOfWork;
 using BoC.Web.Events;
 
 namespace BoC.Web
@@ -65,7 +66,17 @@ namespace BoC.Web
                                         this.Context.Items[unitofworkkey] = UnitOfWork.UnitOfWork.BeginUnitOfWork();
                                          PublishEvent<WebRequestBeginEvent>();
                                      };
-            this.EndRequest += (sender, args) => PublishEvent<WebRequestEndEvent>();
+            this.EndRequest += (sender, args) =>
+                                   {
+                                       PublishEvent<WebRequestEndEvent>();
+
+                                        var unitOfWork = this.Context.Items[unitofworkkey] as IUnitOfWork;
+                                        if (unitOfWork != null)
+                                        {
+                                            unitOfWork.Dispose();
+                                        }
+                                        this.Context.Items.Remove(unitofworkkey);
+                                   };
             this.PostAuthorizeRequest += (sender,args) => PublishEvent<WebPostAuthorizeEvent>();
             this.AuthorizeRequest += (sender, args) => PublishEvent<WebPostAuthorizeEvent>();
             this.AuthenticateRequest += (sender, args) => PublishEvent<WebAuthenticateEvent>();
@@ -73,16 +84,6 @@ namespace BoC.Web
             this.Error += (sender,args) => PublishEvent<WebRequestErrorEvent>();
             this.PreRequestHandlerExecute += (sender, args) => PublishEvent<WebRequestPreHandlerExecute>();
             this.PostRequestHandlerExecute += (sender, args) => PublishEvent<WebRequestPostHandlerExecute>();
-        }
-
-        virtual protected void Application_EndRequest(object sender, EventArgs e)
-        {
-            var unitOfWork = this.Context.Items[unitofworkkey] as IDisposable;
-            if (unitOfWork != null)
-            {
-                unitOfWork.Dispose();
-            }
-            this.Context.Items.Remove(unitofworkkey);
         }
 
         virtual protected void Session_Start()
