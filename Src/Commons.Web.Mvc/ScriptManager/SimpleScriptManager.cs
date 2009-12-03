@@ -5,20 +5,47 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace BoC.Web.Mvc.ScriptManager
 {
     public class SimpleScriptManager
     {
+        private static string scriptIncludesKey = "BoC.Web.Mvc.ScriptManager.SimpleScriptManager.Includes";
+        private static string scriptsKey = "BoC.Web.Mvc.ScriptManager.SimpleScriptManager.Scripts";
         private HtmlHelper htmlHelper;
 
-        private Dictionary<string, string> scriptIncludes = new Dictionary<string, string>();
+        private IDictionary<string, string> scriptIncludes
+        {
+            get
+            {
+                if (htmlHelper.ViewContext.HttpContext.Items[scriptIncludesKey] == null)
+                {
+                    htmlHelper.ViewContext.HttpContext.Items[scriptIncludesKey] = new Dictionary<string, string>();
+                }
+                return htmlHelper.ViewContext.HttpContext.Items[scriptIncludesKey] as IDictionary<string, string>;
+                
+            }
+        }
+        private IDictionary<string, string> scripts
+        {
+            get
+            {
+                if (htmlHelper.ViewContext.HttpContext.Items[scriptsKey] == null)
+                {
+                    htmlHelper.ViewContext.HttpContext.Items[scriptsKey] = new Dictionary<string, string>();
+                }
+                return htmlHelper.ViewContext.HttpContext.Items[scriptsKey] as IDictionary<string, string>;
 
-        private Dictionary<string, string> scripts = new Dictionary<string, string>();
-        private Dictionary<string, Action> scriptsActions = new Dictionary<string, Action>();
+            }
+            
+        }
+        //private Dictionary<string, Action> scriptsActions = new Dictionary<string, Action>();
 
         /// <summary>
         /// SimpleScriptManager Constructor
@@ -102,7 +129,7 @@ namespace BoC.Web.Mvc.ScriptManager
         /// <returns>Returns the SimpleScriptManager</returns>
         public SimpleScriptManager Script(string key, string javascript)
         {
-            if (!this.scripts.ContainsKey(key) && !this.scriptsActions.ContainsKey(key))
+            if (!this.scripts.ContainsKey(key) && !String.IsNullOrEmpty(javascript))
             {
                 this.scripts.Add(key, javascript);
             }
@@ -127,9 +154,28 @@ namespace BoC.Web.Mvc.ScriptManager
         /// <returns>Returns the SimpleScriptManager</returns>
         public SimpleScriptManager Script(string key, Action javascript)
         {
-            if (!this.scripts.ContainsKey(key) && !this.scriptsActions.ContainsKey(key))
+            if (!this.scripts.ContainsKey(key))
             {
-                this.scriptsActions.Add(key, javascript);
+                var field = javascript.Target.GetType().GetField("__w");
+                if (field == null)
+                {
+                    throw new ArgumentException("Adding script through actions, is only supported from within the ASPXViewEngine", "javascript");
+                }
+
+                var oldVal = field.GetValue(javascript.Target);
+                try
+                {
+                    var stringBuilder = new StringBuilder();
+                    var stringWriter = new StringWriter(stringBuilder);
+                    var newVal = new HtmlTextWriter(stringWriter);
+                    field.SetValue(javascript.Target, newVal);
+                    javascript();
+                    return Script(key, stringBuilder.ToString());
+                }
+                finally
+                {
+                    field.SetValue(javascript.Target, oldVal);
+                }
             }
             return this;
         }
@@ -148,7 +194,7 @@ namespace BoC.Web.Mvc.ScriptManager
             }
 
             // Render All other scripts to the Page
-            if (this.scripts.Count > 0 || this.scriptsActions.Count > 0)
+            if (this.scripts.Count > 0)
             {
                 writer.WriteLine("<script type=\"text/javascript\">");
 
@@ -157,14 +203,6 @@ namespace BoC.Web.Mvc.ScriptManager
                     foreach (var script in this.scripts)
                     {
                         writer.WriteLine(script.Value);
-                    }
-                }
-
-                if (this.scriptsActions.Count > 0)
-                {
-                    foreach (var script in this.scriptsActions)
-                    {
-                        script.Value();
                     }
                 }
 
