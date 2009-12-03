@@ -90,11 +90,12 @@
     <Compile Include="Controllers\DynamicScaffoldController.cs" />
     <Compile Include="AutoScaffoldControllerFactory.cs" />
     <Compile Include="Events\ActionEvents.cs" />
-    <Compile Include="Extensions\HtmlHelperTableCell.cs" />
+    <Compile Include="Extensions\HtmlHelperScriptManager.cs" />
     <Compile Include="HttpStatusCodeResult.cs" />
     <Compile Include="Init\SetDefaults.cs" />
     <Compile Include="IoCControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScriptManager\SimpleScriptManager.cs" />
     <Compile Include="UI\Grid\DynamicDataGridRenderer.cs" />
     <Compile Include="UI\InputBuilder\HtmlExtensions.cs" />
     <Compile Include="Validation\RulesExceptionExtensions.cs" />
