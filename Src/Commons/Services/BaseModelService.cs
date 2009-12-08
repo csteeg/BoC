@@ -45,34 +45,36 @@ namespace BoC.Services
 
         public virtual TModel Insert(TModel entity)
         {
-            OnInserting(entity);
-
             TModel retValue = default(TModel);
-            ExecuteInTransaction(() => { retValue = repository.Save(entity); });
-
-            OnInserted(retValue);
-
+            ExecuteInTransaction(() =>
+                                     {
+                                         OnInserting(entity);
+                                         retValue = repository.Save(entity);
+                                         OnInserted(retValue);
+                                     });
             return retValue;
         }
 
         public virtual void Delete(TModel entity)
         {
-            OnDeleting(entity);
+            ExecuteInTransaction(() =>
+                                     {
+                                         OnDeleting(entity);
+                                         repository.Delete(entity);
+                                         OnDeleted(entity);
 
-            ExecuteInTransaction(() => repository.Delete(entity));
-
-            OnDeleted(entity);
+                                     });
         }
 
         public virtual TModel Update(TModel entity)
         {
-            OnUpdating(entity);
-
             TModel retValue = default(TModel);
-            ExecuteInTransaction(() => { retValue = repository.SaveOrUpdate(entity); });
-
-            OnUpdated(retValue);
-
+            ExecuteInTransaction(() =>
+                                     {
+                                         OnUpdating(entity);
+                                         retValue = repository.SaveOrUpdate(entity);
+                                         OnUpdated(retValue);
+                                     });
             return retValue;
         }
 

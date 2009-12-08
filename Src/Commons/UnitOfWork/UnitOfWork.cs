@@ -11,7 +11,9 @@ namespace BoC.UnitOfWork
     {
         public static IUnitOfWork BeginUnitOfWork()
         {
-            return IoC.Resolve<IUnitOfWork>() ?? new DummyUnitOfWork();
+            if (IoC.IsInitialized())
+                return IoC.Resolve<IUnitOfWork>() ?? new DummyUnitOfWork();
+            return new DummyUnitOfWork();
         }
     }
 

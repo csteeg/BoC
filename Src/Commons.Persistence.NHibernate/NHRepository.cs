@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using NHibernate;
 using BoC.Validation;
 using NHibernate.Linq;
 
@@ -20,17 +21,26 @@ namespace BoC.Persistence.NHibernate
 
         virtual public T Get(object id)
         {
-            return sessionManager.Session.Get<T>(id);
+            return TryCatch(() => sessionManager.Session.Get<T>(id));
         }
 
         virtual public void Delete(T target)
         {
-            sessionManager.Session.Delete(target);
+            TryCatch(() =>
+                         {
+                             sessionManager.Session.Delete(target);
+                             return null;
+                         });
         }
 
         virtual public void DeleteById(object id)
         {
-            sessionManager.Session.CreateSQLQuery("delete from " + typeof(T).Name + " where id = ?").SetParameter(0, id).ExecuteUpdate();
+            TryCatch(() =>
+                         {
+                             sessionManager.Session.CreateSQLQuery("delete from " + typeof (T).Name + " where id = ?").
+                                 SetParameter(0, id).ExecuteUpdate();
+                             return null;
+                         });
         }
 
         virtual public T[] Query(Expression<System.Func<T, bool>> where)
@@ -40,21 +50,40 @@ namespace BoC.Persistence.NHibernate
 
         #endregion
 
+        private T TryCatch(Func<T> func)
+        {
+            try
+            {
+                return func();
+            }
+            catch (UnresolvableObjectException exception)
+            {
+                throw new BoC.Persistence.Exceptions.ObjectNotFoundException(exception.Message, exception);
+            }
+            catch (NonUniqueObjectException exception)
+            {
+                throw new BoC.Persistence.Exceptions.ObjectNotUniqueException(exception.Message, exception);
+            }
+            
+        }
+
         virtual public T SaveOrUpdate(T target)
         {
-            return sessionManager.Session.SaveOrUpdateCopy(target) as T;
+            return TryCatch(() => sessionManager.Session.SaveOrUpdateCopy(target) as T);
         }
 
         virtual public T Save(T target)
         {
-            sessionManager.Session.Save(target);
-            return target;
+            return TryCatch(() => sessionManager.Session.Save(target) as T);
         }
 
         virtual public T Update(T target)
         {
-            sessionManager.Session.Update(target);
-            return target;
+            return TryCatch(() =>
+                                {
+                                    sessionManager.Session.Update(target);
+                                    return target;
+                                });
         }
 
         virtual public T FindOne(Expression<System.Func<T, bool>> where)
