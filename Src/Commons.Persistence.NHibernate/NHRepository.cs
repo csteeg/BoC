@@ -74,7 +74,11 @@ namespace BoC.Persistence.NHibernate
 
         virtual public T Save(T target)
         {
-            return TryCatch(() => sessionManager.Session.Save(target) as T);
+            return TryCatch(() =>
+                                {
+                                    sessionManager.Session.Save(target);
+                                    return target;
+                                });
         }
 
         virtual public T Update(T target)
