@@ -64,7 +64,19 @@ namespace BoC.Persistence.NHibernate
             {
                 throw new BoC.Persistence.Exceptions.ObjectNotUniqueException(exception.Message, exception);
             }
-            
+            catch (Exception exception)
+            {
+                if (!String.IsNullOrEmpty(exception.Message) && exception.Message.Contains("Cannot insert duplicate key in object"))
+                {
+                    throw new BoC.Persistence.Exceptions.ObjectNotUniqueException(exception.Message, exception);
+                }
+                if (exception.InnerException != null && !String.IsNullOrEmpty(exception.InnerException.Message) 
+                    && exception.InnerException.Message.Contains("Cannot insert duplicate key in object"))
+                {
+                    throw new BoC.Persistence.Exceptions.ObjectNotUniqueException(exception.Message, exception);
+                }
+                throw;
+            }
         }
 
         virtual public T SaveOrUpdate(T target)

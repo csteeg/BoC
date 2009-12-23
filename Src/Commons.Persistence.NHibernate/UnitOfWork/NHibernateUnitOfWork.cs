@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
-using System.Transactions;
-using System.Web;
-using BoC.UnitOfWork;
+﻿using BoC.UnitOfWork;
 using NHibernate;
 
 namespace BoC.Persistence.NHibernate.UnitOfWork
@@ -22,6 +13,15 @@ namespace BoC.Persistence.NHibernate.UnitOfWork
             this.sessionFactory = sessionFactory;
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (OuterUnitOfWork != this && Session != null && Session.IsDirty())
+            {
+                Session.Flush();
+            }
+            base.Dispose(disposing);
+        }
+
         override protected void CleanUp()
         {
             if (session != null)
@@ -32,10 +32,6 @@ namespace BoC.Persistence.NHibernate.UnitOfWork
                         session.Transaction.IsActive)
                     {
                         session.Transaction.Rollback();
-                    }
-                    else if (Transaction.Current != null)
-                    {
-                        Transaction.Current.Rollback();
                     }
                     else if (session.IsDirty())
                     {
@@ -57,15 +53,19 @@ namespace BoC.Persistence.NHibernate.UnitOfWork
             {
                 if (OuterUnitOfWork == this)
                 {
-                    if (this.session == null)
+                    if (session == null)
                     {
-                        this.session = sessionFactory.OpenSession();
+                        session = sessionFactory.OpenSession();
                     }
                     return session;
                 }
-                else
+                else if (OuterUnitOfWork != null)
                 {
                     return ((NHibernateUnitOfWork)OuterUnitOfWork).Session;
+                }
+                else
+                {
+                    return null;
                 }
             }
         }

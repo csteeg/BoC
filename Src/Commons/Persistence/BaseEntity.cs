@@ -30,8 +30,8 @@ namespace BoC.Persistence
 
         public override int GetHashCode()
         {
-            return 
-                (Id != null ? Id.GetHashCode() : "".GetHashCode() * 397) ^ GetType().GetHashCode();
+            return
+                (Id == null || Id.Equals(default(Tkey)) ? base.GetHashCode() : Id.GetHashCode()) ^ GetType().GetHashCode();
         }
 
         public static bool operator ==(BaseEntity<Tkey> left, BaseEntity<Tkey> right)

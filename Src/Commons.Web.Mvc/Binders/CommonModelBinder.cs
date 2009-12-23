@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using System.Linq;
 using System.Linq.Dynamic;
+using System.Reflection;
 using System.Web.DynamicData;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using System.Xml.Serialization;
 using BoC.InversionOfControl;
 using BoC.Linq;
 using BoC.Persistence;
@@ -54,6 +60,43 @@ namespace BoC.Web.Mvc.Binders
                    );
         }
 
+        public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        {
+            BindEntityModel(controllerContext, bindingContext);
+            return base.BindModel(controllerContext, bindingContext);
+        }
+
+        private void BindEntityModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        {
+            var modelType = bindingContext.ModelType;
+            if (typeof(IBaseEntity).IsAssignableFrom(modelType))
+            {
+                var modelName = (bindingContext.ModelName == "entity") ? null : bindingContext.ModelName;
+                var valueName = CreateSubPropertyName(modelName, "Id");
+
+                ValueProviderResult value = bindingContext.ValueProvider.GetValue(controllerContext, valueName);
+                if (value != null)
+                {
+                    var toProp = modelType.GetProperty("Id");
+                    object pkValue = value.ConvertTo(toProp.PropertyType);
+                    if (pkValue != null)
+                    {
+                        //we have a primary key value, let's get the service
+                        var serviceType = typeof(IModelService<>).MakeGenericType(modelType);
+                        if (IoC.IsRegistered(serviceType))
+                        {
+                            var service = IoC.Resolve(serviceType) as IModelService;
+                            if (service != null)
+                            {
+                                bindingContext.ModelMetadata.Model = service.Get(pkValue);
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
         /// <summary>
         /// The base implementation of this uses IDataErrorInfo to check for validation errors and 
         /// adds them to the ModelState. This override prevents that from occurring by doing nothing at all.
@@ -69,29 +112,14 @@ namespace BoC.Web.Mvc.Binders
         /// will add an error with the message "A value is required." to the ModelState.  We don't want 
         /// this to occur as we want these type of validation problems to be verified by our business rules.
         /// </summary>
-        protected override bool OnPropertyValidating(ControllerContext controllerContext,
-            ModelBindingContext bindingContext, PropertyDescriptor propertyDescriptor, object value)
+        protected override bool OnPropertyValidating(ControllerContext controllerContext, ModelBindingContext bindingContext, PropertyDescriptor propertyDescriptor, object value)
         {
             return true;
         }
 
         protected override object CreateModel(ControllerContext controllerContext, ModelBindingContext bindingContext, Type modelType)
         {
-            Type type = modelType;
-            if (modelType.IsGenericType)
-            {
-                Type genericTypeDefinition = modelType.GetGenericTypeDefinition();
-                if (genericTypeDefinition == typeof(IDictionary<,>))
-                {
-                    type = typeof(Dictionary<,>).MakeGenericType(modelType.GetGenericArguments());
-                }
-                else if (((genericTypeDefinition == typeof(IEnumerable<>)) || (genericTypeDefinition == typeof(ICollection<>))) || (genericTypeDefinition == typeof(IList<>)))
-                {
-                    type = typeof(List<>).MakeGenericType(modelType.GetGenericArguments());
-                    return Activator.CreateInstance(type);
-                }
-            }
-            return Activator.CreateInstance(type);
+            return base.CreateModel(controllerContext, bindingContext, modelType);
         }
 
         protected override void SetProperty(ControllerContext controllerContext, ModelBindingContext bindingContext, PropertyDescriptor propertyDescriptor, object value)
@@ -99,74 +127,138 @@ namespace BoC.Web.Mvc.Binders
             base.SetProperty(controllerContext, bindingContext, propertyDescriptor, value);
         }
 
-        public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        /// <summary>
+        /// If the property being bound is a simple, generic collection of entiy objects, then use 
+        /// reflection to get past the protected visibility of the collection property, if necessary.
+        /// </summary>
+        private void UpdateEntityCollectionModel(ControllerContext controllerContext, ModelBindingContext bindingContext, PropertyDescriptor propertyDescriptor)
         {
-            var modelType = bindingContext.ModelType;
-            /*
-            if (modelType.IsClass && IoC.IsRegistered<MetaModel>())
+            // need to skip properties that aren't part of the request, else we might hit a StackOverflowException
+            string fullPropertyKey = CreateSubPropertyName(bindingContext.ModelName, propertyDescriptor.Name);
+            if (!bindingContext.ValueProvider.ContainsPrefix(controllerContext, fullPropertyKey))
             {
-                var model = IoC.Resolve<MetaModel>();
-                MetaTable table;
-                if (model.TryGetTable(modelType, out table))
-                {
-                    var query = table.GetQuery();
-                    var pk = table.PrimaryKeyColumns[0].Name;
-                    var modelName = (bindingContext.ModelName == "entity") ? null : bindingContext.ModelName;
-                    var valueName = CreateSubPropertyName(modelName, pk);
+                return;
+            }
 
-                    ValueProviderResult value;
-                    if (bindingContext.ValueProvider.TryGetValue(valueName, out value))
+            var collection = propertyDescriptor.GetValue(bindingContext.Model) as ICollection;
+            if (collection != null)
+            {
+                var entityType = propertyDescriptor.PropertyType.GetGenericArguments().First();
+                var serviceType = typeof(IModelService<>).MakeGenericType(entityType);
+                var idProp = entityType.GetProperty("Id");
+                var service = IoC.Resolve(serviceType) as IModelService;
+
+                var valueName = CreateSubPropertyName(fullPropertyKey, "Id");
+                var incoming_raw = bindingContext.ValueProvider.GetValue(controllerContext, valueName) ?? bindingContext.ValueProvider.GetValue(controllerContext, fullPropertyKey);
+                
+                var incoming = incoming_raw.RawValue as IEnumerable;
+                if (incoming == null && incoming_raw.RawValue != null)
+                {
+                    incoming = new[] {incoming_raw.RawValue};
+                }
+
+                var query = incoming.AsQueryable().Cast<string>();
+                var collectionArray = new IBaseEntity[collection.Count];
+                collection.CopyTo(collectionArray, 0);
+                //first see if the current objects are posted again.
+                foreach (var entity in collectionArray)
+                {
+                    if (!query.Any(s => s == entity.Id + ""))
                     {
-                        object pkValue = value.AttemptedValue;
-                        if (pkValue != null)
+                        propertyDescriptor.PropertyType.InvokeMember("Remove", BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod, null, collection, new object[] { entity });
+                    }
+                }
+
+                query = query.Except(collectionArray.Select(e => e.Id + ""));
+                //now see if there are new object-id's to add
+                foreach (var id in query)
+                {
+                    object idValue = null;
+                    if (idProp.PropertyType != typeof(string) && (id.Contains("{") || id.Contains("<")))
+                    {
+                        continue; //skip stuff that's problem 
+                    }
+
+                    try { idValue = Convert.ChangeType(id, idProp.PropertyType); }
+                    catch {}
+                    if (idValue != null)
+                    {
+                        var obj = service.Get(idValue);
+                        if (obj != null)
                         {
-                            //bindingContext.ValueProvider.Remove(valueName);
-                            try
-                            {
-                                bindingContext.Model = query.Where(table.PrimaryKeyColumns[0] + " == @0", pkValue)
-                                        .FirstOrDefault();
-                            }
-                            catch (FormatException)
-                            {
-                                //could have an invalid keyvalue submitted
-                            }
+                            propertyDescriptor.PropertyType.InvokeMember("Add",
+                                                                         BindingFlags.Public | BindingFlags.Instance |
+                                                                         BindingFlags.InvokeMethod,
+                                                                         null,
+                                                                         collection,
+                                                                         new[] {obj});
+                            
+                            query = query.Where(s => s != idValue);
+                        }
+                    }
+                }
+
+                //we have some new objects to be created
+                if (query.Any())
+                {
+                    var jsonSerializer = new JavaScriptSerializer();
+                    var xmlSerializer = new XmlSerializer(entityType);
+                    var deserialize = typeof (JavaScriptSerializer).GetMethod("Deserialize").MakeGenericMethod(entityType);
+                    foreach (var value in query)
+                    {
+                        object obj = null;
+                        if (value.StartsWith("<"))
+                        {
+                            try{obj = xmlSerializer.Deserialize(new StringReader(value));}
+                            catch {}
+                        }
+                        if (obj == null)
+                        {
+                            try{obj = deserialize.Invoke(jsonSerializer, new [] {value});}
+                            catch {}
+                        }
+                        if (obj != null)
+                        {
+                            propertyDescriptor.PropertyType.InvokeMember("Add",
+                                                                         BindingFlags.Public | BindingFlags.Instance |
+                                                                         BindingFlags.InvokeMethod,
+                                                                         null,
+                                                                         collection,
+                                                                         new[] {obj});
                         }
                     }
                 }
             }
-            else*/ if (typeof(IBaseEntity).IsAssignableFrom(modelType))
-            {
-                var modelName = (bindingContext.ModelName == "entity") ? null : bindingContext.ModelName;
-                var valueName = CreateSubPropertyName(modelName, "Id");
+        }
 
-                ValueProviderResult value = bindingContext.ValueProvider.GetValue(controllerContext, valueName);
-                if (value != null)
-                {
-                    var toProp = modelType.GetProperty("Id");
-                    object pkValue = value.ConvertTo(toProp.PropertyType);
-                    if (pkValue != null)
-                    {
-                        //we have a primary key value, let's get the service
-                        var serviceType = typeof (IModelService<>).MakeGenericType(modelType);
-                        if (IoC.IsRegistered(serviceType))
-                        {
-                            var service = IoC.Resolve(serviceType) as IModelService;
-                            if (service != null)
-                            {
-                                bindingContext.ModelMetadata.Model = service.Get(pkValue);
-                            }
-                        }
-                    }
-                }
-
-            }
-
-            return base.BindModel(controllerContext, bindingContext);
+        protected override object GetPropertyValue(ControllerContext controllerContext, ModelBindingContext bindingContext, PropertyDescriptor propertyDescriptor, IModelBinder propertyBinder)
+        {
+            return base.GetPropertyValue(controllerContext, bindingContext, propertyDescriptor, propertyBinder);
         }
 
         protected override void BindProperty(ControllerContext controllerContext, ModelBindingContext bindingContext, PropertyDescriptor propertyDescriptor)
         {
-            base.BindProperty(controllerContext, bindingContext, propertyDescriptor);
+            if (IsBindableEntityCollection(propertyDescriptor.PropertyType))
+            {
+                UpdateEntityCollectionModel(controllerContext, bindingContext, propertyDescriptor);
+            }
+            else
+            {
+                base.BindProperty(controllerContext, bindingContext, propertyDescriptor);
+            }
+            
+        }
+
+        private static bool IsBindableEntityCollection(Type propertyType)
+        {
+            return propertyType.IsGenericType 
+                    && typeof(ICollection<>).IsAssignableFrom(propertyType.GetGenericTypeDefinition())
+                    && IsEntityType(propertyType.GetGenericArguments().First());
+        }
+
+        private static bool IsEntityType(Type propertyType)
+        {
+            return typeof(IBaseEntity).IsAssignableFrom(propertyType);
         }
     }
 }

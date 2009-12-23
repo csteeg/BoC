@@ -131,7 +131,7 @@ namespace BoC.Web.Mvc.ScriptManager
         {
             if (!this.scripts.ContainsKey(key) && !String.IsNullOrEmpty(javascript))
             {
-                this.scripts.Add(key, javascript);
+                this.scripts.Add(key, javascript.Trim());
             }
             return this;
         }
@@ -170,7 +170,7 @@ namespace BoC.Web.Mvc.ScriptManager
                     var newVal = new HtmlTextWriter(stringWriter);
                     field.SetValue(javascript.Target, newVal);
                     javascript();
-                    return Script(key, stringBuilder.ToString());
+                    return Script(key, stringBuilder.ToString().Trim());
                 }
                 finally
                 {
@@ -202,7 +202,12 @@ namespace BoC.Web.Mvc.ScriptManager
                 {
                     foreach (var script in this.scripts)
                     {
-                        writer.WriteLine(script.Value);
+                        writer.Write(script.Value);
+                        if (!script.Value.EndsWith(";"))
+                        {
+                            writer.Write(';');
+                        }
+                        writer.WriteLine();
                     }
                 }
 
