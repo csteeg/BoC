@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Linq.Dynamic;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Web.DynamicData;
 using System.Web.Mvc;
@@ -140,8 +140,9 @@ namespace BoC.Web.Mvc.Binders
                 return;
             }
 
-            var collection = propertyDescriptor.GetValue(bindingContext.Model) as ICollection;
+            var collection = propertyDescriptor.GetValue(bindingContext.Model) as IEnumerable;
             if (collection != null)
+                //STUPID HashSet is not inheriting from ICollection :(( warning, reflection ahead and ASSUMING add & remove methods are available on the collection :(
             {
                 var entityType = propertyDescriptor.PropertyType.GetGenericArguments().First();
                 var serviceType = typeof(IModelService<>).MakeGenericType(entityType);
@@ -158,8 +159,7 @@ namespace BoC.Web.Mvc.Binders
                 }
 
                 var query = incoming.AsQueryable().Cast<string>();
-                var collectionArray = new IBaseEntity[collection.Count];
-                collection.CopyTo(collectionArray, 0);
+                var collectionArray = collection.Cast<IBaseEntity>().ToList();
                 //first see if the current objects are posted again.
                 foreach (var entity in collectionArray)
                 {
@@ -201,20 +201,26 @@ namespace BoC.Web.Mvc.Binders
                 //we have some new objects to be created
                 if (query.Any())
                 {
-                    var jsonSerializer = new JavaScriptSerializer();
-                    var xmlSerializer = new XmlSerializer(entityType);
-                    var deserialize = typeof (JavaScriptSerializer).GetMethod("Deserialize").MakeGenericMethod(entityType);
                     foreach (var value in query)
                     {
                         object obj = null;
                         if (value.StartsWith("<"))
                         {
-                            try{obj = xmlSerializer.Deserialize(new StringReader(value));}
+                            try
+                            {
+                                var xmlSerializer = new XmlSerializer(entityType);
+                                obj = xmlSerializer.Deserialize(new StringReader(value));
+                            }
                             catch {}
                         }
                         if (obj == null)
                         {
-                            try{obj = deserialize.Invoke(jsonSerializer, new [] {value});}
+                            try
+                            {
+                                var jsonSerializer = new JavaScriptSerializer();
+                                var deserialize = typeof(JavaScriptSerializer).GetMethod("Deserialize").MakeGenericMethod(entityType);
+                                obj = deserialize.Invoke(jsonSerializer, new[] { value });
+                            }
                             catch {}
                         }
                         if (obj != null)

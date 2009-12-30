@@ -15,11 +15,25 @@ namespace BoC.Persistence.NHibernate.UnitOfWork
 
         protected override void Dispose(bool disposing)
         {
-            if (OuterUnitOfWork != this && Session != null && Session.IsDirty())
+            if (OuterUnitOfWork != this && Session != null && SafeIsDirty(Session))
             {
                 Session.Flush();
             }
             base.Dispose(disposing);
+        }
+
+        private bool SafeIsDirty(ISession session1)
+        {
+            var isDirty = false;
+            try
+            {
+                isDirty = Session.IsDirty();
+            }
+            catch (AssertionFailure)
+            {
+                isDirty = false; //cannot flush, since something is wrong with the objects (an exception occured already during this unitofwork)
+            }
+            return isDirty;
         }
 
         override protected void CleanUp()
@@ -33,7 +47,7 @@ namespace BoC.Persistence.NHibernate.UnitOfWork
                     {
                         session.Transaction.Rollback();
                     }
-                    else if (session.IsDirty())
+                    else if (SafeIsDirty(session))
                     {
                         session.Flush();
                     }
