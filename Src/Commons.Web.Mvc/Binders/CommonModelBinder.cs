@@ -74,7 +74,7 @@ namespace BoC.Web.Mvc.Binders
                 var modelName = (bindingContext.ModelName == "entity") ? null : bindingContext.ModelName;
                 var valueName = CreateSubPropertyName(modelName, "Id");
 
-                ValueProviderResult value = bindingContext.ValueProvider.GetValue(controllerContext, valueName);
+                ValueProviderResult value = bindingContext.ValueProvider.GetValue(valueName);
                 if (value != null)
                 {
                     var toProp = modelType.GetProperty("Id");
@@ -135,7 +135,7 @@ namespace BoC.Web.Mvc.Binders
         {
             // need to skip properties that aren't part of the request, else we might hit a StackOverflowException
             string fullPropertyKey = CreateSubPropertyName(bindingContext.ModelName, propertyDescriptor.Name);
-            if (!bindingContext.ValueProvider.ContainsPrefix(controllerContext, fullPropertyKey))
+            if (!bindingContext.ValueProvider.ContainsPrefix(fullPropertyKey))
             {
                 return;
             }
@@ -150,7 +150,7 @@ namespace BoC.Web.Mvc.Binders
                 var service = IoC.Resolve(serviceType) as IModelService;
 
                 var valueName = CreateSubPropertyName(fullPropertyKey, "Id");
-                var incoming_raw = bindingContext.ValueProvider.GetValue(controllerContext, valueName) ?? bindingContext.ValueProvider.GetValue(controllerContext, fullPropertyKey);
+                var incoming_raw = bindingContext.ValueProvider.GetValue(valueName) ?? bindingContext.ValueProvider.GetValue(fullPropertyKey);
                 
                 var incoming = incoming_raw.RawValue as IEnumerable;
                 if (incoming == null && incoming_raw.RawValue != null)

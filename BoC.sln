@@ -19,8 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.Web.Mvc", "Src\Comm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.Security", "Src\Commons.Security\Commons.Security.csproj", "{387BC181-5A33-4657-9C19-07A8FA48A916}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindMvc2Scaffold", "Samples\NorthwindMvc2Scaffold\NorthwindMvc2Scaffold.csproj", "{6D672CDA-7D73-45AE-8249-1B15E4734D77}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jQueryMvc", "lib\jquerymvc\jQueryMvc\jQueryMvc.csproj", "{45520F58-53A0-4565-85B7-AE95D316E822}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.Security.Mvc", "Src\Commons.Security.Mvc\Commons.Security.Mvc.csproj", "{C08BC0AA-DBB0-4FF3-8DB3-4A5CB72CEA8C}"
@@ -63,10 +61,6 @@ Global
 		{387BC181-5A33-4657-9C19-07A8FA48A916}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{387BC181-5A33-4657-9C19-07A8FA48A916}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{387BC181-5A33-4657-9C19-07A8FA48A916}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6D672CDA-7D73-45AE-8249-1B15E4734D77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D672CDA-7D73-45AE-8249-1B15E4734D77}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6D672CDA-7D73-45AE-8249-1B15E4734D77}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D672CDA-7D73-45AE-8249-1B15E4734D77}.Release|Any CPU.Build.0 = Release|Any CPU
 		{45520F58-53A0-4565-85B7-AE95D316E822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{45520F58-53A0-4565-85B7-AE95D316E822}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45520F58-53A0-4565-85B7-AE95D316E822}.Release|Any CPU.ActiveCfg = Release|Any CPU

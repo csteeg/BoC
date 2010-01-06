@@ -43,27 +43,6 @@ namespace MvcContrib.UI.Grid
             base.RenderCellValue(column, rowData);
         }*/
 
-        private bool TryRenderPartial(ViewContext viewContext, string partial, object model, string master)
-        {
-            var viewEngineCollection = ViewEngines.Engines;
-            var newViewData = new ViewDataDictionary(viewContext.ViewData) { Model = model };
-            var newViewContext = new ViewContext(viewContext, viewContext.View, newViewData, viewContext.TempData);
-            var view = FindPartialView(newViewContext, partial, viewEngineCollection, master);
-            if (view != null)
-            {
-                var wf = view as WebFormView;
-                if (wf != null)
-                {
-                    if (wf.ViewPath.EndsWith(".ascx", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        view = new WebFormView(wf.ViewPath);
-                    }
-                }
-                view.Render(newViewContext, Writer);
-                return true;
-            }
-            return false;
-        }
         private static IView FindPartialView(ViewContext viewContext, string partialViewName, ViewEngineCollection viewEngineCollection, string masterName)
         {
             ViewEngineResult result = viewEngineCollection.FindView(viewContext, partialViewName, masterName);
