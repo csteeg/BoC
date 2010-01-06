@@ -64,7 +64,7 @@ namespace BoC.Web.Mvc.ScriptManager
         /// <returns>Returns the SimpleScriptManager</returns>
         public SimpleScriptManager ScriptInclude(string scriptPath)
         {
-            return this.ScriptInclude(Guid.NewGuid().ToString(), scriptPath);
+            return this.ScriptInclude(scriptPath.ToLower(), scriptPath);
         }
 
         /// <summary>

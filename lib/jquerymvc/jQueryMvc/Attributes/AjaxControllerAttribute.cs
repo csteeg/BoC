@@ -40,8 +40,7 @@ namespace JqueryMvc.Attributes
                         ((ViewResult)filterContext.Result).ViewName = "_" + viewName;
                     }
 				}
-				else if (responseType == ResponseType.Json ||
-                    responseType == ResponseType.Xml)
+				else if (responseType == ResponseType.Json || responseType == ResponseType.Xml)
 				{
 					ViewDataDictionary data = result != null ? result.ViewData : null;
 					object model = data;
