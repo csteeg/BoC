@@ -29,15 +29,16 @@ namespace JqueryMvc.Attributes
                 var responseType = filterContext.HttpContext.Request.GetPreferedResponseType();
                 if (result != null && responseType == ResponseType.Html)
 				{
-					//load partial, only webformviewengine is supported now
-					//if (result.ViewEngine is WebFormViewEngine)
-					//	((WebFormViewEngine)result.ViewEngine).ViewLocator = DependencyResolver.GetImplementationOf<ComponentViewLocator>();
-                    if (filterContext.Result is ViewResult)
+				    var viewResult = filterContext.Result as ViewResult;
+					//prefer partial
+                    if (viewResult != null)
                     {
-                        string viewName = ((ViewResult)filterContext.Result).ViewName;
-                        if (String.IsNullOrEmpty(viewName))
-                            viewName = filterContext.RouteData.GetRequiredString("action");
-                        ((ViewResult)filterContext.Result).ViewName = "_" + viewName;
+                        filterContext.Result = new PartialViewResult()
+                                                   {
+                                                       TempData = viewResult.TempData,
+                                                       ViewData = viewResult.ViewData,
+                                                       ViewName = viewResult.ViewName
+                                                   };
                     }
 				}
 				else if (responseType == ResponseType.Json || responseType == ResponseType.Xml)

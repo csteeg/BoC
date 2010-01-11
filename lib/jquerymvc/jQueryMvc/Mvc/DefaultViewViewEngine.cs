@@ -4,47 +4,29 @@ using JqueryMvc.Attributes;
 
 namespace JqueryMvc.Mvc
 {
-    public class DefaultViewViewEngine : WebFormViewEngine //if we create an independent viewengine, caching is disabled :(, just override the default then
+    public class DefaultViewViewEngine : WebFormViewEngine
     {
-        override public ViewEngineResult FindView(ControllerContext controllerContext, string viewName, string masterName, bool useCache)
+        public DefaultViewViewEngine(): base()
         {
-            //TODO: Use caching when asp.net mvc 2's cache is fixed
-            var result = base.FindView(controllerContext, viewName, masterName, false);
+            ViewLocationFormats = new[] {
+                "~/Views/{1}/{0}.aspx",
+                "~/Views/Shared/{0}.aspx"
+            };
 
-            if (controllerContext == null || controllerContext.Controller == null)
-                return result;
+            PartialViewLocationFormats = new[] {
+                "~/Views/{1}/{0}.ascx",
+                "~/Views/Shared/{0}.ascx"
+            };
 
-            if (result == null || result.View == null)
-			{
-                if (controllerContext.HttpContext.Items["_ORIGINGAL_VIEWNAME"] == null)
-                {
-                    controllerContext.HttpContext.Items["_ORIGINGAL_VIEWNAME"] = viewName;
-                }
-			    if (!viewName.StartsWith("_"))
-                {
-                    object[] attribs = controllerContext.Controller.GetType().GetCustomAttributes(typeof(DefaultViewAttribute), true);
-                    if (attribs != null && attribs.Length > 0)
-                    {
-                        foreach (DefaultViewAttribute attrib in attribs)
-                        {
-                            if (attrib.ViewName != viewName)
-                            {
-                                result = ViewEngines.Engines.FindView(controllerContext, attrib.ViewName, masterName);
-                            }
-                        }
-                    }
-                }
-                else if (controllerContext.HttpContext.Request.IsJqAjaxRequest())
-                {
-                    result = ViewEngines.Engines.FindView(controllerContext, viewName.Substring(1), masterName);
-                }
-			}
-            else if (controllerContext.HttpContext.Items["_ORIGINGAL_VIEWNAME"] == null && result != null && result.View!=null)
-            {
-                controllerContext.HttpContext.Items["_ORIGINGAL_VIEWNAME"] = viewName;
-            }
+            AreaViewLocationFormats = new[] {
+                "~/Areas/{2}/Views/{1}/{0}.aspx",
+                "~/Areas/{2}/Views/Shared/{0}.aspx"
+            };
 
-			return result;
-		}
+            AreaPartialViewLocationFormats = new[] {
+                "~/Areas/{2}/Views/{1}/{0}.ascx",
+                "~/Areas/{2}/Views/Shared/{0}.ascx"
+            };
+        }
     }
 }

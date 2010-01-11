@@ -16,8 +16,15 @@ namespace JqueryMvc
 
         static public void SetDefaultViewEngine()
         {
-            ViewEngines.Engines.Clear();
-            ViewEngines.Engines.Add(new DefaultViewViewEngine());
+            //replace webformviewengine with our version (that searches only .ascx for partials and only .aspx for fullviews)
+            for (var i = ViewEngines.Engines.Count - 1; i >= 0; i--)
+            {
+                if (ViewEngines.Engines[i] is WebFormViewEngine)
+                {
+                    ViewEngines.Engines[i] = new DefaultViewViewEngine();
+                    break; //only do the first one
+                }
+            }
         }
 
         public static void RegisterDefaultRoutes(RouteCollection routes)
