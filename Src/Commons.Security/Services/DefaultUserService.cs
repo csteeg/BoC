@@ -561,7 +561,7 @@ namespace BoC.Security.Services
         // EncodePassword
         //   Encrypts, Hashes, or leaves the password clear based on the PasswordFormat.
         //
-        private String EncodePassword(String password)
+        public virtual String EncodePassword(String password)
         {
             if (password == null)
             {

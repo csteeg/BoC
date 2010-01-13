@@ -23,6 +23,7 @@ namespace BoC.Security.Services
         Boolean ChangePassword(User user, String oldPassword, String newPassword);
         void SetPassword(String login, String password);
         void SetPassword(User user, String password);
+        String EncodePassword(String password);
 
         IQueryable<User> FindUsersByPartialLogin(String login);
         Int32 CountUsersByPartialLogin(String login);
