@@ -76,6 +76,7 @@
     <Compile Include="CurrentContextSessionManager.cs" />
     <Compile Include="DefaultSetupTasks\AutoNhibernateRepositoryGenerator.cs" />
     <Compile Include="DefaultSetupTasks\AutoNhibernateConfigurator.cs" />
+    <Compile Include="FluentExtensions\AutoMappingExtensions.cs" />
     <Compile Include="ISessionManager.cs" />
     <Compile Include="NHibernateConfigHelper.cs" />
     <Compile Include="NHRepository.cs" />
