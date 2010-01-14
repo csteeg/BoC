@@ -86,7 +86,6 @@
     <Compile Include="Attributes\EventTriggerAttribute.cs" />
     <Compile Include="Attributes\ValidationExceptionAttribute.cs" />
     <Compile Include="Binders\CommonModelBinder.cs" />
-    <Compile Include="Binders\EntityCollectionValueProviderResult.cs" />
     <Compile Include="CommonViewUserControl.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
