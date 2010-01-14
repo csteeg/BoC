@@ -748,7 +748,7 @@ namespace BoC.Security.Services
         // CheckPassword
         //   Compares password values based on the MembershipPasswordFormat.
         //
-        private Boolean CheckPassword(String password, String dbpassword)
+        public Boolean CheckPassword(String password, String dbpassword)
         {
             switch (PasswordFormat)
             {

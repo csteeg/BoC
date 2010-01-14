@@ -24,6 +24,7 @@ namespace BoC.Security.Services
         void SetPassword(String login, String password);
         void SetPassword(User user, String password);
         String EncodePassword(String password);
+        Boolean CheckPassword(String password, String dbpassword);
 
         IQueryable<User> FindUsersByPartialLogin(String login);
         Int32 CountUsersByPartialLogin(String login);

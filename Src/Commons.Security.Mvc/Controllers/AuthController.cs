@@ -31,7 +31,7 @@ namespace BoC.Web.Mvc.Controllers
             this.service = service;
         }
 
-        public ActionResult OpenId(string openid_identifier, string returnUrl) {
+        public virtual ActionResult OpenId(string openid_identifier, string returnUrl) {
             var openid = new OpenIdRelyingParty();
             var response = openid.GetResponse();
             if (response == null) {
@@ -126,7 +126,7 @@ namespace BoC.Web.Mvc.Controllers
 
         }
 
-        public ActionResult LogOn() {
+        public virtual ActionResult LogOn() {
 
             return View();
         }
@@ -134,7 +134,7 @@ namespace BoC.Web.Mvc.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings",
             Justification = "Needs to take same parameter type as Controller.Redirect()")]
-        public ActionResult LogOn(string userName, string password, bool rememberMe, string returnUrl) {
+        public virtual ActionResult LogOn(string userName, string password, bool rememberMe, string returnUrl) {
 
             if (!ValidateLogOn(userName, password)) {
                 return View();
@@ -170,7 +170,7 @@ namespace BoC.Web.Mvc.Controllers
             }
         }
 
-        public ActionResult LogOff() {
+        public virtual ActionResult LogOff() {
 
             FormsAuthentication.SignOut();
 
@@ -185,7 +185,7 @@ namespace BoC.Web.Mvc.Controllers
 
         #region Validation Methods
 
-        private bool ValidateChangePassword(string currentPassword, string newPassword, string confirmPassword) {
+        public virtual bool ValidateChangePassword(string currentPassword, string newPassword, string confirmPassword) {
             if (String.IsNullOrEmpty(currentPassword)) {
                 ModelState.AddModelError("currentPassword", "You must specify a current password.");
             }
@@ -203,7 +203,7 @@ namespace BoC.Web.Mvc.Controllers
             return ModelState.IsValid;
         }
 
-        private bool ValidateLogOn(string userName, string password) {
+        public virtual bool ValidateLogOn(string userName, string password) {
             if (String.IsNullOrEmpty(userName)) {
                 ModelState.AddModelError("username", "You must specify a username.");
             }
