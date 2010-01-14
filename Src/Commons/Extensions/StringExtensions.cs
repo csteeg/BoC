@@ -96,14 +96,14 @@ namespace BoC.Extensions
 
             // Step 1
 
-            if (RowLen == 0)
+            if (RowLen == 0 && ColLen == 0)
             {
-                return ColLen;
+                return 0;
             }
 
-            if (ColLen == 0)
+            if (ColLen == 0 || RowLen == 0)
             {
-                return RowLen;
+                return 100;
             }
 
             /// Create the two vectors
