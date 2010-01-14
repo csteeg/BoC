@@ -71,6 +71,13 @@ namespace BoC.Web.Mvc.Binders
             var modelType = bindingContext.ModelType;
             if (typeof(IBaseEntity).IsAssignableFrom(modelType))
             {
+                //if we somehow already have the entity in the routedata (eg. Html.Action)
+                var rawValue = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+                if (rawValue != null && rawValue is IBaseEntity)
+                {
+                    return;
+                }
+
                 var modelName = (bindingContext.ModelName == "entity") ? null : bindingContext.ModelName;
                 var valueName = CreateSubPropertyName(modelName, "Id");
 
