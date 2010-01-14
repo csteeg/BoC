@@ -148,6 +148,7 @@ namespace BoC.Web.Mvc.Binders
             }
 
             var collection = propertyDescriptor.GetValue(bindingContext.Model) as IEnumerable;
+
             if (collection != null)
                 //STUPID HashSet is not inheriting from ICollection :(( warning, reflection ahead and ASSUMING add & remove methods are available on the collection :(
             {
