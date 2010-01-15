@@ -29,7 +29,7 @@ namespace BoC.Web.Mvc.ScriptManager
                     htmlHelper.ViewContext.HttpContext.Items[scriptIncludesKey] = new Dictionary<string, string>();
                 }
                 return htmlHelper.ViewContext.HttpContext.Items[scriptIncludesKey] as IDictionary<string, string>;
-                
+
             }
         }
         private IDictionary<string, string> scripts
@@ -43,7 +43,7 @@ namespace BoC.Web.Mvc.ScriptManager
                 return htmlHelper.ViewContext.HttpContext.Items[scriptsKey] as IDictionary<string, string>;
 
             }
-            
+
         }
         //private Dictionary<string, Action> scriptsActions = new Dictionary<string, Action>();
 
@@ -123,8 +123,10 @@ namespace BoC.Web.Mvc.ScriptManager
         /// </summary>
         /// <param name="javascript">The JavaScript code to include in the Page.</param>
         /// <returns>Returns the SimpleScriptManager</returns>
-        public SimpleScriptManager Script(string javascript)
+        public SimpleScriptManager Script(string javascript, params object[] args)
         {
+            if (args.Length > 0)
+                return this.Script(Guid.NewGuid().ToString(), string.Format(javascript, args));
             return this.Script(Guid.NewGuid().ToString(), javascript);
         }
 
