@@ -64,6 +64,13 @@ namespace BoC.Web.Mvc.ScriptManager
         /// <returns>Returns the SimpleScriptManager</returns>
         public SimpleScriptManager ScriptInclude(string scriptPath)
         {
+            // Check if the scriptPath is a Virtual Path
+            if (scriptPath.StartsWith("~/"))
+            {
+                // Convert the Virtual Path to an Application Absolute Path
+                scriptPath = VirtualPathUtility.ToAbsolute(scriptPath);
+            }
+
             return this.ScriptInclude(scriptPath.ToLower(), scriptPath);
         }
 

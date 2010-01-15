@@ -21,7 +21,7 @@ namespace BoC.Web.Mvc.Init
             JqueryMvc.BootStrapper.Run();
             ControllerBuilder.Current.SetControllerFactory(typeof(AutoScaffoldControllerFactory));
             ModelBinders.Binders.DefaultBinder = new CommonModelBinder();
-
+            ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder());
             MvcContrib.UI.InputBuilder.InputBuilder.Conventions.Add(new ForeignKeyPropertyConvention());
         }
     }
