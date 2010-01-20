@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -211,12 +212,11 @@ namespace BoC.Web.Mvc.ScriptManager
                 {
                     foreach (var script in this.scripts)
                     {
-                        writer.Write(script.Value);
-                        if (!script.Value.EndsWith(";"))
+                        if (script.Value != null)
                         {
-                            writer.Write(';');
+                            writer.WriteLine(Regex.Replace(script.Value, "<(/)?script[^>]*>", "",
+                                                           RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.Compiled));
                         }
-                        writer.WriteLine();
                     }
                 }
 

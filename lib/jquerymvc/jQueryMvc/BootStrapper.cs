@@ -62,7 +62,6 @@ namespace JqueryMvc
             }
             else
             {
-
                 routes.MapRoute("JsonActionId", "{controller}/{action}/{id}.{resultformat}", new {}, new { controller = @"[^\.]*", action = @"[^\.]*" }, new { __mvcajax = "true" });
                 routes.MapRoute("JsonAction", "{controller}/{action}.{resultformat}", new { id = "" }, new { controller = @"[^\.]*", action = @"[^\.]*" }, new { __mvcajax = "true" });
                 routes.MapRoute("Json", "{controller}.{resultformat}", new { action = "Index", id = "" }, new { controller = @"[^\.]*", action = @"[^\.]*" }, new { __mvcajax = "true" });

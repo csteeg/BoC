@@ -78,6 +78,7 @@
     <Compile Include="Attributes\AjaxControllerAttribute.cs" />
     <Compile Include="Attributes\ComponentViewsAttribute.cs" />
     <Compile Include="Attributes\DefaultViewAttribute.cs" />
+    <Compile Include="Attributes\JsonRequestBehaviorAttribute.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\RouteCollectionExtensions.cs" />
     <Compile Include="Mvc\DefaultViewViewEngine.cs" />

@@ -32,6 +32,17 @@ namespace BoC.Web.Mvc.Binders
                 return null;
             }
 
+            //see if we received a number and assume it's a UNIX timestamp.... or should we parse tick-based also?
+            string raw = GetRawString(bindingContext, this.Date) ?? GetRawString(bindingContext, "");
+            if (raw != null)
+            {
+                long num;
+                if (long.TryParse(raw, out num))
+                {
+                    return new System.DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(num);
+                }
+            }
+
             //try some dates
             DateTime? dateAttempt = 
                 GetA<DateTime>(bindingContext, this.Date) ?? 
@@ -74,6 +85,26 @@ namespace BoC.Web.Mvc.Binders
                                     timeAttempt.Value.Second);
             }
             return dateAttempt ?? timeAttempt;
+        }
+
+        private static string GetRawString(ModelBindingContext bindingContext, string key)
+        {
+            var modelName = (bindingContext.ModelName == "entity") ? null : bindingContext.ModelName;
+            var valueName = CreateSubPropertyName(modelName, key);
+
+            //Try it with the prefix...
+            var valueResult = bindingContext.ValueProvider.GetValue(valueName);
+            //Didn't work? Try without the prefix if needed...
+            if (valueResult == null && bindingContext.FallbackToEmptyPrefix == true)
+            {
+                valueResult = bindingContext.ValueProvider.GetValue(key);
+            }
+            if (valueResult == null)
+            {
+                return null;
+            }
+            return valueResult.AttemptedValue;
+            
         }
 
         private static T? GetA<T>(ModelBindingContext bindingContext, string key) where T : struct

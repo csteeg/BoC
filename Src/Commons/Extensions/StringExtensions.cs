@@ -12,7 +12,7 @@ namespace BoC.Extensions
 {
     public static class StringExtensions
     {
-        public static string JsEscape(this string value)
+        public static string JsSerialize(this string value)
         {
             if (String.IsNullOrEmpty(value))
                 return value;
