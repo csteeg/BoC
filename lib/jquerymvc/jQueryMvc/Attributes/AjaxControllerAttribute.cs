@@ -24,7 +24,7 @@ namespace JqueryMvc.Attributes
                 return;
             }
 
-            if (filterContext.HttpContext.Request.IsJqAjaxRequest())
+            if (filterContext.IsChildAction || filterContext.HttpContext.Request.IsJqAjaxRequest())
             {
                 var responseType = filterContext.HttpContext.Request.GetPreferedResponseType();
                 if (result != null && responseType == ResponseType.Html)
