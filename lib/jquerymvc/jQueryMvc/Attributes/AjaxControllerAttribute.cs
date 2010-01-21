@@ -20,6 +20,8 @@ namespace JqueryMvc.Attributes
                     //without this we can't detect an ajax request in FireFox :(
                 {
                     redir.RouteValues["__mvcajax"] = "true";
+                    redir.RouteValues["resultformat"] = filterContext.RouteData.Values["resultformat"] ?? filterContext.RouteData.DataTokens["resultformat"];
+                    redir.RouteValues["format"] = filterContext.RouteData.Values["format"];
                 }
                 return;
             }
