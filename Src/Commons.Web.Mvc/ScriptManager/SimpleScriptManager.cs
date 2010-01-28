@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using System.Diagnostics;
 
 namespace BoC.Web.Mvc.ScriptManager
 {
@@ -180,7 +181,10 @@ namespace BoC.Web.Mvc.ScriptManager
                     var newVal = new HtmlTextWriter(stringWriter);
                     field.SetValue(javascript.Target, newVal);
                     javascript();
-                    return Script(key, stringBuilder.ToString().Trim());
+                    return Script(key,
+                        Regex.Replace(stringBuilder.ToString().Trim(), "^\\s*<(/)?script[^>]*>", "",
+                                                           RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.Compiled)
+                        );
                 }
                 finally
                 {
@@ -200,7 +204,7 @@ namespace BoC.Web.Mvc.ScriptManager
             // Render All Script Includes to the Page
             foreach (var scriptInclude in this.scriptIncludes)
             {
-                writer.WriteLine(String.Format("<script type=\"text/javascript\" src=\"{0}\"></script>", scriptInclude.Value));
+                writer.WriteLine(String.Format("<script language=\"javascript\" type=\"text/javascript\" src=\"{0}\"></script>", scriptInclude.Value));
             }
 
             // Render All other scripts to the Page
@@ -214,8 +218,7 @@ namespace BoC.Web.Mvc.ScriptManager
                     {
                         if (script.Value != null)
                         {
-                            writer.WriteLine(Regex.Replace(script.Value, "<(/)?script[^>]*>", "",
-                                                           RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.Compiled));
+                            writer.WriteLine(script.Value);
                         }
                     }
                 }

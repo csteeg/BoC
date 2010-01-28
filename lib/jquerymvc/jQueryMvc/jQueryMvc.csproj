@@ -103,9 +103,6 @@
     <EmbeddedResource Include="ClientScripts\mvc.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ClientScripts\jquery-1.2.6.min.js" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="ClientScripts\history.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,7 +2,9 @@
 using System.Linq;
 using System.Web.Mvc;
 using System.Web;
+using System.Web.Routing;
 using JqueryMvc.Mvc;
+using Microsoft.Web.Mvc.Controls;
 
 namespace JqueryMvc.Attributes
 {
@@ -11,24 +13,53 @@ namespace JqueryMvc.Attributes
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             base.OnActionExecuted(filterContext);
-            ViewResult result = filterContext.Result as ViewResult;
+            
+            var responseType = filterContext.HttpContext.Request.GetPreferedResponseType();
 
-            if (result == null && filterContext.HttpContext.Request.IsJqAjaxRequest() && filterContext.Exception == null && filterContext.Result is RedirectToRouteResult)
+            if (filterContext.HttpContext.Request.IsJqAjaxRequest() 
+                && filterContext.Exception == null
+                && ((filterContext.Result is RedirectToRouteResult) || filterContext.Result is RedirectResult))
             {
+                //If we have redirect result, and it is an ajax request:
+                // - IF it is json or xml:
+                    // we'll return 200 OK with the URL in the header, the user can decide if he wants to redirect
+                // - if it is an html request, we'll redirect to the new action but send info about the ajax-request with it
+                
                 var redir = filterContext.Result as RedirectToRouteResult;
-                if (!redir.RouteValues.ContainsKey("__mvcajax"))
-                    //without this we can't detect an ajax request in FireFox :(
+                if (responseType == ResponseType.Json || responseType == ResponseType.Xml) //we'll return a redirect object
+                {
+                    string url;
+                    if (redir != null)
+                    {
+                        url = UrlHelper.GenerateUrl(
+                            redir.RouteName,
+                            null /* actionName */,
+                            null /* controllerName */,
+                            redir.RouteValues, 
+                            RouteTable.Routes, 
+                            filterContext.RequestContext,
+                            false /* includeImplicitMvcValues */);
+                    }
+                    else
+                    {
+                        url = ((RedirectResult) filterContext.Result).Url;
+                    }
+                    filterContext.RequestContext.HttpContext.Response.AddHeader("Location", url);
+                }
+                else if (redir != null && !redir.RouteValues.ContainsKey("__mvcajax")) //without these extra params we can't detect an ajax request in FireFox :(
                 {
                     redir.RouteValues["__mvcajax"] = "true";
-                    redir.RouteValues["resultformat"] = filterContext.RouteData.Values["resultformat"] ?? filterContext.RouteData.DataTokens["resultformat"];
+                    redir.RouteValues["resultformat"] = filterContext.RouteData.Values["resultformat"] ??
+                                                        filterContext.RouteData.DataTokens["resultformat"];
                     redir.RouteValues["format"] = filterContext.RouteData.Values["format"];
+                    return;
                 }
-                return;
-            }
 
+            }
+            
             if (filterContext.IsChildAction || filterContext.HttpContext.Request.IsJqAjaxRequest())
             {
-                var responseType = filterContext.HttpContext.Request.GetPreferedResponseType();
+                var result = filterContext.Result as ViewResult;
                 if (result != null && responseType == ResponseType.Html)
 				{
 				    var viewResult = filterContext.Result as ViewResult;
@@ -45,8 +76,9 @@ namespace JqueryMvc.Attributes
 				}
 				else if (responseType == ResponseType.Json || responseType == ResponseType.Xml)
 				{
-					ViewDataDictionary data = result != null ? result.ViewData : null;
-					object model = data;
+					ViewDataDictionary data = filterContext.Result is ViewResultBase ? ((ViewResultBase)filterContext.Result).ViewData : filterContext.Controller.ViewData;
+					
+                    object model = data;
 					if (filterContext.Exception != null)
 						model = filterContext.Exception;
                     else if (data != null && data.Model != null)
@@ -76,14 +108,14 @@ namespace JqueryMvc.Attributes
                         var attrib = filterContext.ActionDescriptor.GetCustomAttributes(typeof (JsonRequestBehaviorAttribute), true).OfType<JsonRequestBehaviorAttribute>().FirstOrDefault();
                         if (attrib == null)
                         {
-                            filterContext.ActionDescriptor.ControllerDescriptor.GetCustomAttributes(typeof (JsonRequestBehaviorAttribute), true).OfType<JsonRequestBehaviorAttribute>().FirstOrDefault();
+                            attrib = filterContext.ActionDescriptor.ControllerDescriptor.GetCustomAttributes(typeof (JsonRequestBehaviorAttribute), true).OfType<JsonRequestBehaviorAttribute>().FirstOrDefault();
                         }
 
                         if (!(filterContext.Result is JsonResult))
                         {
                             filterContext.Result = new JsonResult()
                                                        {
-                                                           Data = model,
+                                                           Data = model ?? new object(),
                                                            JsonRequestBehavior = (attrib == null) ? JsonRequestBehavior.DenyGet : attrib.JsonRequestBehavior
                                                        };
                         } 
