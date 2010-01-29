@@ -7,11 +7,13 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Script.Serialization;
 using BoC.Helpers;
+using BoC.Validation;
 
 namespace BoC.Extensions
 {
     public static class StringExtensions
     {
+
         public static string JsSerialize(this string value)
         {
             if (String.IsNullOrEmpty(value))
@@ -20,7 +22,7 @@ namespace BoC.Extensions
             return new JavaScriptSerializer().Serialize(value);
         }
 
-        static readonly Regex guidRegEx = new Regex(@"^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$", RegexOptions.Compiled);
+        static readonly Regex guidRegEx = new Regex(Expressions.Guid, RegexOptions.Compiled);
         public static bool IsGuid(this string expression)
         {
             return !String.IsNullOrEmpty(expression) 
@@ -28,13 +30,13 @@ namespace BoC.Extensions
                     && guidRegEx.IsMatch(expression);
         }
 
-        private static readonly Regex emailExpression = new Regex(@"^([0-9a-zA-Z]+[-._+&])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$", RegexOptions.Singleline | RegexOptions.Compiled);
+        private static readonly Regex emailExpression = new Regex(Expressions.Email, RegexOptions.Singleline | RegexOptions.Compiled);
         public static bool IsEmail(this string target)
         {
             return !string.IsNullOrEmpty(target) && emailExpression.IsMatch(target);
         }
 
-        private static readonly Regex webUrlExpression = new Regex(@"(http|https)://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?", RegexOptions.Singleline | RegexOptions.Compiled);
+        private static readonly Regex webUrlExpression = new Regex(Expressions.WebUrl, RegexOptions.Singleline | RegexOptions.Compiled);
         public static bool IsWebUrl(this string target)
         {
             return !string.IsNullOrEmpty(target) && webUrlExpression.IsMatch(target);

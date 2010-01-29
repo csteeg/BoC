@@ -123,6 +123,7 @@
     <Compile Include="Validation\ErrorInfo.cs" />
     <Compile Include="Validation\IModelValidator.cs" />
     <Compile Include="Validation\RulesException.cs" />
+    <Compile Include="Validation\Expressions.cs" />
     <Compile Include="Web\CommonHttpApplication.cs" />
     <Compile Include="Web\Events.cs" />
   </ItemGroup>
