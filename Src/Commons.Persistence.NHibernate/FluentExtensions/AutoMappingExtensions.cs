@@ -14,7 +14,7 @@ namespace BoC.Persistence.NHibernate.FluentExtensions
 {
     public static class AutoMappingExtensions
     {
-        private static FieldInfo fi = typeof(ComponentPartBase<IDictionary>).GetField("propertyName",
+        private static readonly FieldInfo fi = typeof(ComponentPartBase<IDictionary>).GetField("propertyName",
                                                                                           BindingFlags.GetField |
                                                                                           BindingFlags.Instance |
                                                                                           BindingFlags.NonPublic);

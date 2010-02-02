@@ -62,14 +62,14 @@ namespace BoC.Web.Mvc.Binders
 
         public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
-            BindEntityModel(controllerContext, bindingContext);
+            SetEntityModel(controllerContext, bindingContext);
             return base.BindModel(controllerContext, bindingContext);
         }
 
-        private void BindEntityModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        protected virtual void SetEntityModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
             var modelType = bindingContext.ModelType;
-            if (typeof(IBaseEntity).IsAssignableFrom(modelType))
+            if (typeof(IBaseEntity).IsAssignableFrom(modelType) && !(bindingContext.Model is IBaseEntity)) //already set?
             {
                 //if we somehow already have the entity in the routedata (eg. Html.Action)
                 var rawValue = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
@@ -200,10 +200,9 @@ namespace BoC.Web.Mvc.Binders
                                                                          null,
                                                                          collection,
                                                                          new[] {obj});
-                            
-                            query = query.Where(s => s != idValue);
                         }
                     }
+                    query = query.Where(s => s != idValue);
                 }
 
                 //we have some new objects to be created
