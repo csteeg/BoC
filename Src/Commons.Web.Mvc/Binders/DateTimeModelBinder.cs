@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using System.Threading;
 
 namespace BoC.Web.Mvc.Binders
 {
@@ -123,7 +124,7 @@ namespace BoC.Web.Mvc.Binders
             {
                 return null;
             }
-            return (T?)valueResult.ConvertTo(typeof(T));
+            return (T?)valueResult.ConvertTo(typeof(T), Thread.CurrentThread.CurrentCulture);
         }
 
         protected static string CreateSubPropertyName(string prefix, string propertyName)

@@ -50,6 +50,7 @@ namespace BoC.Persistence.NHibernate
             var config = Fluently.Configure().Database(database);
             var stringPropertyconvention = ConventionBuilder.Property.When(x => x.Expect(p => p.Property.PropertyType == typeof (string)),
                                                                            a => a.Length(255));
+            var cacheConvention = ConventionBuilder.Class.Always(c => c.Cache.ReadWrite());
             var isbasetype = new Func<Type, bool>(basetype =>
                                                   basetype.IsGenericType &&
                                                   basetype.GetGenericTypeDefinition() == typeof (BaseEntity<>));
@@ -83,8 +84,9 @@ namespace BoC.Persistence.NHibernate
                     Assembly automapper = assembly;
 
                     autoPersistenceModel.AddEntityAssembly(automapper)
-                        .Conventions.AddAssembly(automapper)
+                        .Conventions.Add(cacheConvention)
                         .Conventions.Add(stringPropertyconvention)
+                        .Conventions.AddAssembly(automapper)
                         .Alterations(alterations => alterations.AddFromAssembly(automapper))
                         //.Alterations(collection => collection.Add(new AutoMappingOverrideAlteration(automapper)))
                         //same as: UseOverridesFromAssemblyOf<Tentity>()

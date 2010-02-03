@@ -22,6 +22,7 @@ namespace BoC.Web.Mvc.Init
             ControllerBuilder.Current.SetControllerFactory(typeof(AutoScaffoldControllerFactory));
             ModelBinders.Binders.DefaultBinder = new CommonModelBinder();
             ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder());
+            ModelBinders.Binders.Add(typeof(DateTime?), new DateTimeModelBinder());
             MvcContrib.UI.InputBuilder.InputBuilder.Conventions.Add(new ForeignKeyPropertyConvention());
         }
     }
