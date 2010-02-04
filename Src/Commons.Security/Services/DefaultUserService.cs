@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Security.Principal;
 using System.Text;
 using System.Transactions;
+using System.Web;
 using System.Web.Configuration;
 using System.Web.Security;
 using BoC.EventAggregator;
@@ -391,6 +393,26 @@ namespace BoC.Security.Services
             }
         }
 
+        public User GetContextUser(HttpContextBase contextBase, bool setToContext)
+        {
+            if (contextBase == null || contextBase.User == null)
+            {
+                return null;
+            }
+
+            if (contextBase.User is User)
+            {
+                return contextBase.User as User;
+            }
+
+            var user = GetByPrincipal(contextBase.User);
+            if (user != null && setToContext)
+            {
+                contextBase.User = user;
+            }
+            return user;
+        }
+
         #region roles
 
         public virtual void CreateRole(String roleName)
@@ -473,6 +495,21 @@ namespace BoC.Security.Services
             roleRepository.Delete(role);
         }
 
+
+        public User GetByPrincipal(IPrincipal principal)
+        {
+            if (principal == null || !principal.Identity.IsAuthenticated || String.IsNullOrEmpty(principal.Identity.Name))
+            {
+                return null;
+            }
+
+            long userid;
+            if (long.TryParse(principal.Identity.Name, out userid))
+            {
+                return Get(userid);
+            }
+            return null;
+        }
 
         public virtual void AddUsersToRoles(ICollection<User> users, ICollection<Role> roles)
         {

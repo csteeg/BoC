@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using BoC.EventAggregator;
 using BoC.InversionOfControl;
+using BoC.InversionOfControl.Configuration;
 using BoC.Persistence;
 using BoC.Services;
 using BoC.Validation;
@@ -12,7 +13,7 @@ using BoC.Validation;
 
 namespace BoC.Tasks
 {
-    public class AutoRegisterModelServices : IBootstrapperTask
+    public class AutoRegisterModelServices : IContainerInitializer
     {
         public static bool CreateMissingModelServices = true;
 

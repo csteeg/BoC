@@ -37,11 +37,16 @@ namespace BoC.InversionOfControl.Configuration
                 var initTasks =
                     AppDomain.CurrentDomain.GetAssemblies().ToList()
                         .SelectMany(s => s.GetTypes())
-                        .Where(t => t.IsClass && !t.IsAbstract && typeof (IContainerInitializer).IsAssignableFrom(t));
+                        .Where(t => t.IsClass && !t.IsAbstract && typeof (IContainerInitializer).IsAssignableFrom(t))
+                        .ToList();
 
-                foreach (var t in initTasks)
+                foreach (var t in initTasks.Where(t => !t.Namespace.StartsWith("BoC."))) //first user's tasks
                 {
                     ((IContainerInitializer) Activator.CreateInstance(t)).Execute();
+                }
+                foreach (var t in initTasks.Where(t => t.Namespace.StartsWith("BoC."))) //now ours
+                {
+                    ((IContainerInitializer)Activator.CreateInstance(t)).Execute();
                 }
             }
             catch (ReflectionTypeLoadException e)

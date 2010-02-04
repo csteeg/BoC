@@ -11,7 +11,12 @@ namespace BoC.Security.Repositories.NHibernate
 {
     public class UserRepository: NHRepository<User>, IUserRepository
     {
-        public UserRepository(ISessionManager sessionManager) : base(sessionManager) { }
+        private readonly ISessionManager sessionManager;
+
+        public UserRepository(ISessionManager sessionManager) : base(sessionManager)
+        {
+            this.sessionManager = sessionManager;
+        }
 
         #region IUserDao Members
 

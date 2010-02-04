@@ -50,7 +50,7 @@ namespace BoC.Persistence.NHibernate
 
         #endregion
 
-        private T TryCatch(Func<T> func)
+        protected virtual T TryCatch(Func<T> func)
         {
             try
             {

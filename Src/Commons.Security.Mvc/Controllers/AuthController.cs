@@ -111,7 +111,7 @@ namespace BoC.Web.Mvc.Controllers
                                        };
                             service.Insert(user);
                         }
-                        FormsAuthentication.SignIn(response.ClaimedIdentifier, false);
+                        FormsAuthentication.SignIn(user.Id.ToString(), false);
 
                         return Redirect(returnUrl ?? VirtualPathUtility.ToAbsolute("~/"));
                     case AuthenticationStatus.Canceled:
@@ -161,7 +161,7 @@ namespace BoC.Web.Mvc.Controllers
                 return View();
             }
 
-            FormsAuthentication.SignIn(userName, rememberMe);
+            FormsAuthentication.SignIn(user.Id.ToString(), rememberMe);
 
             if (!String.IsNullOrEmpty(returnUrl)) {
                 return Redirect(returnUrl);

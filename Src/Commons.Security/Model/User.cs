@@ -91,7 +91,7 @@ namespace BoC.Security.Model
         [ScaffoldColumn(false)]
         virtual public IIdentity Identity
         {
-            get { return new GenericIdentity(Login, "steeg.framework.authentication"); }
+            get { return new GenericIdentity(Login, "boc.authentication"); }
         }
 
         private ICollection<Role> roles = new HashSet<Role>();

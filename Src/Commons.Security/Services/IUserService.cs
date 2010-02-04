@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
+using System.Web;
 using BoC.Security.Model;
 using BoC.Services;
 
@@ -43,6 +45,9 @@ namespace BoC.Security.Services
         String FindLoginByEmail(String email);
 
         User Authenticate(String login, String password);
+        
+        User GetContextUser(HttpContextBase contextBase, bool setToContext);
+        User GetByPrincipal(IPrincipal principal);
 
         #region Roles
         void AddUsersToRoles(ICollection<User> users, ICollection<Role> roles);
