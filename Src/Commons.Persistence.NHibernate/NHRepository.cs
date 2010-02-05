@@ -107,9 +107,16 @@ namespace BoC.Persistence.NHibernate
             return sessionManager.Session.Linq<T>().FirstOrDefault(where);
         }
 
+        private IQueryable<T> all;
         virtual public IQueryable<T> All()
         {
-            return sessionManager.Session.Linq<T>();
+            if (all == null)
+            {
+                var query = sessionManager.Session.Linq<T>();
+                query.QueryOptions.SetCachable(true);
+                all = query;
+            }
+            return all;
         }
 
         virtual public void Evict(T target)
