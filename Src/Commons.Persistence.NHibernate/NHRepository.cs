@@ -8,7 +8,7 @@ using NHibernate.Linq;
 
 namespace BoC.Persistence.NHibernate
 {
-    public class NHRepository<T> : IQueryable<T>, IRepository<T> where T : class, IBaseEntity
+    public class NHRepository<T> : IRepository<T> where T : class, IBaseEntity
     {
         private readonly ISessionManager sessionManager;
 
@@ -104,62 +104,20 @@ namespace BoC.Persistence.NHibernate
 
         virtual public T FindOne(Expression<System.Func<T, bool>> where)
         {
-            return sessionManager.Session.Linq<T>().FirstOrDefault(where);
+            return sessionManager.Session.Linq<T>().Where(where).FirstOrDefault();
         }
 
-        private IQueryable<T> all;
-        virtual public IQueryable<T> All()
+        virtual public IQueryable<T> Query()
         {
-            if (all == null)
-            {
-                var query = sessionManager.Session.Linq<T>();
-                query.QueryOptions.SetCachable(true);
-                all = query;
-            }
-            return all;
+            var query = sessionManager.Session.Linq<T>();
+            query.QueryOptions.SetCachable(true);
+            return query;
         }
 
         virtual public void Evict(T target)
         {
             sessionManager.Session.Evict(target);
         }
-
-         #region IEnumerable<T> Members
-
-         IEnumerator<T> IEnumerable<T>.GetEnumerator()
-         {
-             return All().GetEnumerator();
-         }
-
-         #endregion
-
-         #region IEnumerable Members
-
-         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-         {
-             return All().GetEnumerator();
-         }
-
-         #endregion
-
-         #region IQueryable Members
-
-         Type IQueryable.ElementType
-         {
-             get { return All().ElementType; }
-         }
-
-         System.Linq.Expressions.Expression IQueryable.Expression
-         {
-             get { return All().Expression; }
-         }
-
-         IQueryProvider IQueryable.Provider
-         {
-             get { return All().Provider; }
-         }
-
-         #endregion
 
          #region IRepository Members
 

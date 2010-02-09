@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Transactions;
 using BoC.EventAggregator;
 using BoC.Events;
 using BoC.Persistence;
 using BoC.Validation;
+using System.Linq.Dynamic;
 
 namespace BoC.Services
 {
@@ -32,15 +34,34 @@ namespace BoC.Services
 
         public virtual IEnumerable<TModel> ListAll()
         {
-            foreach (var entity in repository)
-            {
-                yield return entity;
-            }
+            return repository.Query().ToList();
         }
 
-        public virtual IQueryable<TModel> Query()
+        public IEnumerable<TModel> Find(Expression<Func<TModel, bool>> where)
         {
-            return repository;
+            return repository.Query().Where(where).ToList();
+        }
+
+        public int Count(Expression<Func<TModel, bool>> where)
+        {
+            return repository.Query().Where(where).Count();
+        }
+
+        public IEnumerable<TModel> Find(ModelQuery<TModel> query)
+        {
+            var q = repository.Query();
+            if (query != null)
+            {
+                if (query.Expression != null)
+                    q = q.Where(query.Expression);
+                if (query.ItemsToSkip > 0 || query.ItemsToTake > 0)
+                    q = q.Skip(query.ItemsToSkip).Take(query.ItemsToTake);
+                if (!String.IsNullOrEmpty(query.OrderByExpression))
+                {
+                    q = q.OrderBy(query.OrderByExpression);
+                }
+            }
+            return q.ToList();
         }
 
         public virtual TModel Insert(TModel entity)

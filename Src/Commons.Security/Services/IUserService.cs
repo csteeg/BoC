@@ -28,9 +28,9 @@ namespace BoC.Security.Services
         String EncodePassword(String password);
         Boolean CheckPassword(String password, String dbpassword);
 
-        IQueryable<User> FindUsersByPartialLogin(String login);
+        IEnumerable<User> FindUsersByPartialLogin(String login);
         Int32 CountUsersByPartialLogin(String login);
-        IQueryable<User> FindUsersByPartialEmail(String email);
+        IEnumerable<User> FindUsersByPartialEmail(String email);
         Int32 CountUsersByPartialEmail(String email);
 
         Int32 CountOnlineUsers(TimeSpan activitySpan);

@@ -72,6 +72,7 @@
     <Compile Include="Events\InsertingEvent.cs" />
     <Compile Include="Events\UpdatedEvent.cs" />
     <Compile Include="Events\UpdatingEvent.cs" />
+    <Compile Include="Extensions\ExpressionExtensions.cs" />
     <Compile Include="Inflector.cs" />
     <Compile Include="InversionOfControl\Configuration\ContainerInitializer.cs" />
     <Compile Include="InversionOfControl\Configuration\IContainerInitializer.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="ServiceModel\ServiceErrorLogger.cs" />
     <Compile Include="Services\BaseModelService.cs" />
     <Compile Include="Services\IModelService.cs" />
+    <Compile Include="Services\ModelQuery.cs" />
     <Compile Include="Tasks\AutoRegisterModelServices.cs" />
     <Compile Include="Tasks\BaseBackgroundTask.cs" />
     <Compile Include="Tasks\Bootstrapper.cs" />

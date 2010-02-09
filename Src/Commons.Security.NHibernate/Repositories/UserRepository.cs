@@ -36,7 +36,7 @@ namespace BoC.Security.Repositories.NHibernate
         {
             DateTime compareTime = DateTime.Now.Subtract(activitySpan);
             return
-                (from u in this
+                (from u in this.Query()
                  where u.LastActivity > compareTime
                  select u).Count();
         }

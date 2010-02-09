@@ -13,13 +13,13 @@ namespace BoC.Persistence
         object SaveOrUpdate(object target);
         void Evict(object target);
     }
-    public interface IRepository<T>: IRepository, IQueryable<T> where T : IBaseEntity
+
+    public interface IRepository<T>: IRepository where T : IBaseEntity
     {
         T Get(object id);
         void Delete(T target);
         void DeleteById(object id);
-        T[] Query(Expression<Func<T, bool>> where);
-        T FindOne(Expression<Func<T, bool>> where);
+        IQueryable<T> Query();
         T Save(T target);
         T Update(T target);
         T SaveOrUpdate(T target);

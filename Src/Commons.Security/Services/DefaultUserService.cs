@@ -62,7 +62,7 @@ namespace BoC.Security.Services
         public virtual Boolean UserExists(String login)
         {
             return (
-                       from u in userRepository
+                       from u in userRepository.Query()
                        where u.Login == login
                        select u
                    ).Count() > 0;
@@ -190,7 +190,7 @@ namespace BoC.Security.Services
             {
                 if (RequiresUniqueEmail)
                 {
-                    User otheruser = userRepository.FindOne(u => u.Email == user.Email);
+                    User otheruser = userRepository.Query().Where(u => u.Email == user.Email).FirstOrDefault();
                     if (otheruser != null && otheruser.Id != user.Id)
                     {
                         throw new EmailInUseException(user.Email);
@@ -325,34 +325,34 @@ namespace BoC.Security.Services
 
         public virtual String FindLoginByEmail(String email)
         {
-            User user = userRepository.FindOne(u => u.Email == email);
+            User user = userRepository.Query().Where(u => u.Email == email).FirstOrDefault();
             return user != null ? user.Login : null;
         }
 
-        public virtual IQueryable<User> FindUsersByPartialLogin(String login)
+        public virtual IEnumerable<User> FindUsersByPartialLogin(String login)
         {
-            return from u in userRepository
+            return from u in userRepository.Query()
                     where u.Login.Contains(login)
                     select u;
         }
 
         public virtual Int32 CountUsersByPartialLogin(String login)
         {
-            return (from u in userRepository
+            return (from u in userRepository.Query()
                     where u.Login.Contains(login)
                     select u).Count();
         }
 
-        public virtual IQueryable<User> FindUsersByPartialEmail(String email)
+        public virtual IEnumerable<User> FindUsersByPartialEmail(String email)
         {
-            return from u in userRepository
+            return from u in userRepository.Query()
                     where u.Email.Contains(email)
                     select u;
         }
 
         public virtual Int32 CountUsersByPartialEmail(String email)
         {
-            return (from u in userRepository
+            return (from u in userRepository.Query()
                     where u.Email.Contains(email)
                     select u).Count();
         }
@@ -363,10 +363,10 @@ namespace BoC.Security.Services
             using (var scope = new TransactionScope())
             {
                 //password = EncodePassword(password);
-                user = userRepository.FindOne(u =>
+                user = userRepository.Query().Where(u =>
                                     u.Login == login &&
                                     u.IsApproved && !u.IsLockedOut
-                    );
+                    ).FirstOrDefault();
 
                 if (user != null)
                 {
@@ -589,7 +589,7 @@ namespace BoC.Security.Services
 
         public virtual Role[] GetAllRoles()
         {
-            return roleRepository.ToArray();
+            return roleRepository.Query().ToArray();
         }
 
         #endregion

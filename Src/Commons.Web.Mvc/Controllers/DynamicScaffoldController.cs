@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Dynamic;
+using System.Linq.Expressions;
 using System.Net;
 using System.Web.Mvc;
 using BoC.Persistence;
@@ -22,10 +23,10 @@ namespace BoC.Web.Mvc.Controllers
         }
 
         static Dictionary<String, bool> propCache = new Dictionary<string, bool>();
-        private IQueryable<TEntity> addToQuery(IQueryable<TEntity> query, string propName, object value)
+        private string getQuery(string propName, int propNum)
         {
-            if (value == null || value == "")
-                return query;
+            if (string.IsNullOrEmpty(propName))
+                return null;
 
             string prop = propName;
             if (prop.Contains("."))
@@ -54,28 +55,51 @@ namespace BoC.Web.Mvc.Controllers
 
             if (propCache[prop.ToLower()])
             {
-                query = query.Where(propName + " == @0", value);
+                return propName + " == @" + propNum;
             }
-
-            return query;
+            
+            return null;
         }
-        protected virtual IQueryable<TEntity> EntitiesQuery
+        protected virtual ModelQuery<TEntity> EntitiesQuery
         {
             get
             {
-                IQueryable<TEntity> query = service.Query();
-
+                string query = null;
+                List<object> values = new List<object>();
+                int propNum = 0;
                 foreach (string name in Request.QueryString)
                 {
-                    addToQuery(query, name, Request.QueryString[name]);
+                    if (!String.IsNullOrEmpty(Request.QueryString[name]))
+                    {
+                        string newQuery = getQuery(name, propNum);
+                        if (!String.IsNullOrEmpty(newQuery))
+                        {
+                            query = " && " + newQuery;
+                            values.Add(RouteData.Values[name]);
+                            propNum++;
+                        }
+                    }
                 }
 
                 foreach (string name in RouteData.Values.Keys)
                 {
-                    addToQuery(query, name, RouteData.Values[name]);
+                    if (RouteData.Values[name] != null && RouteData.Values[name] != "")
+                    {
+                        string newQuery = getQuery(name, propNum);
+                        if (!String.IsNullOrEmpty(newQuery))
+                        {
+                            query = " && " + newQuery;
+                            values.Add(RouteData.Values[name]);
+                            propNum++;
+                        }
+                    }
                 }
-
-                return query;
+                if (!String.IsNullOrEmpty(query))
+                {
+                    query = query.Substring(4);
+                    return new ModelQuery<TEntity>() { Expression = DynamicExpression.ParseLambda<TEntity, bool>(query, values.ToArray()) };
+                }
+                return null;
             }
         }
 
@@ -118,21 +142,29 @@ namespace BoC.Web.Mvc.Controllers
 
         public virtual ActionResult List(string sort, int? show, int? page)
         {
-            IQueryable<TEntity> query = EntitiesQuery;
+            var query = EntitiesQuery;
 
             if (sort != null)
             {
                 if (sort.StartsWith("-"))
                 {
-                    query = query.OrderBy(sort.Substring(1) + " desc");
+                    query.OrderBy(sort.Substring(1) + " desc");
                 }
                 else
                 {
-                    query = query.OrderBy(sort);
+                    query.OrderBy(sort);
                 }
             }
+            if (show != null)
+            {
+                query.Take(show.Value);
+            }
+            if (page != null)
+            {
+                query.Skip(page.Value*query.ItemsToTake);
+            }
 
-            return OnList(query, sort);
+            return OnList(service.Find(query), sort);
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
