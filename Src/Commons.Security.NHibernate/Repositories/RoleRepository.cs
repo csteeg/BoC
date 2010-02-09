@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using BoC.Persistence.NHibernate;
 using BoC.Security.Model;
@@ -16,12 +17,16 @@ namespace BoC.Security.Repositories.NHibernate
 
         virtual public Role FindByName(String name)
         {
-            return this.FindOne(role => role.RoleName == name);
+            return (from role in this.Query()
+                    where role.RoleName == name
+                    select role).FirstOrDefault();
         }
 
         virtual public Role[] FindByName(ICollection<String> names)
         {
-            return this.Query(role => names.Contains(role.RoleName));
+            return (from role in this.Query()
+                    where names.Contains(role.RoleName)
+                    select role).ToArray();
         }
 
         #endregion

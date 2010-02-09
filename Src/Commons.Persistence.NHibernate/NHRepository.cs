@@ -42,12 +42,7 @@ namespace BoC.Persistence.NHibernate
                              return null;
                          });
         }
-
-        virtual public T[] Query(Expression<System.Func<T, bool>> where)
-        {
-            return sessionManager.Session.Linq<T>().Where(where).ToArray();
-        }
-
+        
         #endregion
 
         protected virtual T TryCatch(Func<T> func)
@@ -100,11 +95,6 @@ namespace BoC.Persistence.NHibernate
                                     sessionManager.Session.Update(target);
                                     return target;
                                 });
-        }
-
-        virtual public T FindOne(Expression<System.Func<T, bool>> where)
-        {
-            return sessionManager.Session.Linq<T>().Where(where).FirstOrDefault();
         }
 
         virtual public IQueryable<T> Query()

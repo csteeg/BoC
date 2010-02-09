@@ -22,14 +22,20 @@ namespace BoC.Security.Repositories.NHibernate
 
         virtual public User FindByLogin(String login)
         {
-            return this.FindOne(user => user.Login == login);
+            return
+                (from user in this.Query()
+                 where user.Login == login
+                 select user).FirstOrDefault();
         }
 
         virtual public User[] FindByLogin(ICollection<String> logins)
         {
             if (logins == null || logins.Count == 0)
                 return new User[0];
-            return this.Query(user => logins.Contains(user.Login));
+            return
+                (from user in this.Query()
+                where logins.Contains(user.Login)
+                select user).ToArray();
         }
 
         virtual public int CountOnlineUsers(TimeSpan activitySpan)
