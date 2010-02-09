@@ -1,0 +1,100 @@
+e7f8ba5b997c32e7375360aa95cd38f7038cdba8
+ .../BiDirectionalManyToManyPairingVisitor.cs       |   89 ++++++++++----------
+ 1 files changed, 46 insertions(+), 43 deletions(-)
+
+diff --git a/src/FluentNHibernate/Visitors/BiDirectionalManyToManyPairingVisitor.cs b/src/FluentNHibernate/Visitors/BiDirectionalManyToManyPairingVisitor.cs
+index 97a6600..486199c 100644
+--- a/src/FluentNHibernate/Visitors/BiDirectionalManyToManyPairingVisitor.cs
++++ b/src/FluentNHibernate/Visitors/BiDirectionalManyToManyPairingVisitor.cs
+@@ -1,44 +1,47 @@
+-using System;
+-using System.Collections.Generic;
+-using System.Linq;
+-using FluentNHibernate.MappingModel.Collections;
+-
+-namespace FluentNHibernate.Visitors
+-{
+-    public class BiDirectionalManyToManyPairingVisitor : DefaultMappingModelVisitor
+-    {
+-        private readonly List<ICollectionMapping> relationships = new List<ICollectionMapping>();
+-
+-        protected override void ProcessCollection(ICollectionMapping mapping)
+-        {
+-            if (!(mapping.Relationship is ManyToManyMapping))
+-                return;
+-
+-            var potentialOtherSides = relationships
+-                .Where(x => x.ContainingEntityType == mapping.ChildType && x.ChildType == mapping.ContainingEntityType);
+-
+-            if (potentialOtherSides.Count() == 1)
+-            {
+-                var otherSide = potentialOtherSides.First();
+-
+-                mapping.OtherSide = otherSide;
+-                otherSide.OtherSide = mapping;
+-            }
+-            else if (potentialOtherSides.Count() > 1)
+-            {
+-                var reducedOtherSides = potentialOtherSides
+-                    .Where(x => x.Member.Name == mapping.Member.Name.Replace(mapping.ChildType.Name, x.ChildType.Name));
+-
+-                if (reducedOtherSides.Count() != 1)
+-                    throw new NotSupportedException(string.Format("Can't figure out what the other side of the many-to-many property '{0}' should be. ", mapping.Member.Name));
+-
+-                var otherSide = reducedOtherSides.First();
+-
+-                mapping.OtherSide = otherSide;
+-                otherSide.OtherSide = mapping;
+-            }
+-
+-            relationships.Add(mapping);
+-        }
+-    }
++using System;
++using System.Collections.Generic;
++using System.Linq;
++using FluentNHibernate.MappingModel.Collections;
++
++namespace FluentNHibernate.Visitors
++{
++    public class BiDirectionalManyToManyPairingVisitor : DefaultMappingModelVisitor
++    {
++        private readonly List<ICollectionMapping> relationships = new List<ICollectionMapping>();
++
++        protected override void ProcessCollection(ICollectionMapping mapping)
++        {
++            if (!(mapping.Relationship is ManyToManyMapping))
++                return;
++
++            var potentialOtherSides = relationships
++                .Where(x => x.ContainingEntityType == mapping.ChildType && x.ChildType == mapping.ContainingEntityType)
++                .GroupBy(x => x.Member) //distinct creates some infinite loop by getting the hashcode (wich gets the ohterside's hashcode, etc)
++                .Select(x => x.First());
++
++            if (potentialOtherSides.Count() == 1)
++            {
++                var otherSide = potentialOtherSides.First();
++
++                mapping.OtherSide = otherSide;
++                otherSide.OtherSide = mapping;
++            }
++            else if (potentialOtherSides.Count() > 1)
++            {
++                var reducedOtherSides = potentialOtherSides
++                    .Where(x => x.Member.Name == mapping.Member.Name.Replace(mapping.ChildType.Name, x.ChildType.Name));
++
++                if (reducedOtherSides.Count() != 1)
++                    throw new NotSupportedException(string.Format("Can't figure out what the other side of the many-to-many property '{0}' should be. ", mapping.Member.Name));
++
++                var otherSide = reducedOtherSides.First();
++
++                mapping.OtherSide = otherSide;
++                otherSide.OtherSide = mapping;
++            }
++
++            relationships.Add(mapping);
++        }
++    }
++
+ }
+\ No newline at end of file

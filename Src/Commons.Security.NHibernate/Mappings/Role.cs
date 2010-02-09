@@ -7,7 +7,7 @@ namespace BoC.Security.Model.Mappings
     {
         public void Override(AutoMapping<Role> m)
         {
-            m.HasManyToMany<User>(r => r.Users).AsSet();
+            m.HasManyToMany<User>(r => r.Users).AsSet().Cascade.SaveUpdate();
         }
     }
 }

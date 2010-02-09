@@ -48,26 +48,30 @@ namespace BoC.Persistence.NHibernate
         public static void SetupAutoMapperForEntities(IPersistenceConfigurer database, params Assembly[] assemblies)
         {
             var config = Fluently.Configure().Database(database);
-            var stringPropertyconvention = ConventionBuilder.Property.When(x => x.Expect(p => p.Property.PropertyType == typeof (string)),
+            var stringPropertyconvention = 
+                ConventionBuilder.Property.When(x => x.Expect(p => p.Property.PropertyType == typeof (string)),
                                                                            a => a.Length(255));
             var cacheConvention = ConventionBuilder.Class.Always(c => c.Cache.ReadWrite());
-            var isbasetype = new Func<Type, bool>(basetype =>
-                                                  basetype.IsGenericType &&
-                                                  basetype.GetGenericTypeDefinition() == typeof (BaseEntity<>));
-
+            
             IEnumerable<Assembly> ass;
             if (assemblies == null || assemblies.Length == 0)
             {
                 ass = AppDomain.CurrentDomain.GetAssemblies().Where(
                     a => !a.FullName.StartsWith("System.") &&
-                            !a.FullName.StartsWith("Microsoft."));
+                         !a.FullName.StartsWith("Microsoft.") &&
+                         a != typeof(AutoMap).Assembly
+               );
             }
             else
             {
                 ass = assemblies;
             }
 
-            var autoPersistenceModel = new AutoPersistenceModel();
+            var autoPersistenceModel = new AutoPersistenceModel()
+                .Conventions.Add(cacheConvention)
+                .Conventions.Add(stringPropertyconvention)
+                .IgnoreBase(typeof (BaseEntity<>))
+                .IgnoreBase(typeof (IBaseEntity));
 
             foreach (var assembly in ass)
             {
@@ -79,18 +83,15 @@ namespace BoC.Persistence.NHibernate
                 {
                     continue;//cannot do dynamic assemblies
                 }
-                if (assembly != null && assembly != typeof(AutoMap).Assembly)
+                if (assembly != null)
                 {
                     Assembly automapper = assembly;
 
                     autoPersistenceModel.AddEntityAssembly(automapper)
-                        .Conventions.Add(cacheConvention)
-                        .Conventions.Add(stringPropertyconvention)
                         .Conventions.AddAssembly(automapper)
                         .Alterations(alterations => alterations.AddFromAssembly(automapper))
                         //.Alterations(collection => collection.Add(new AutoMappingOverrideAlteration(automapper)))
                         //same as: UseOverridesFromAssemblyOf<Tentity>()
-                        .Setup(c => c.IsBaseType = isbasetype)
                         .Where(t => typeof (IBaseEntity).IsAssignableFrom(t));
 
                     // MORE Evil hack, since adding to the Alterations does NOT work.

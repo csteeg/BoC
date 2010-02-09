@@ -8,8 +8,8 @@ namespace BoC.Security.Model.Mappings
     {
         public void Override(AutoMapping<User> m)
         {
-            m.HasManyToMany<Role>(u => u.Roles).AsSet();
-            m.Not.Map(u => u.IsOnLine);
+            m.HasManyToMany<Role>(u => u.Roles).Cascade.SaveUpdate().AsSet();
+            m.IgnoreProperty(u => u.IsOnLine);
         }
     }
 }
