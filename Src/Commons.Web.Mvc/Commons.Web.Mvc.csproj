@@ -94,6 +94,7 @@
     <Compile Include="Controllers\DynamicScaffoldController.cs" />
     <Compile Include="AutoScaffoldControllerFactory.cs" />
     <Compile Include="Events\ActionEvents.cs" />
+    <Compile Include="Extensions\ActionDescriptorExtensions.cs" />
     <Compile Include="Extensions\HtmlHelperScriptManager.cs" />
     <Compile Include="HttpStatusCodeResult.cs" />
     <Compile Include="Init\SetDefaults.cs" />

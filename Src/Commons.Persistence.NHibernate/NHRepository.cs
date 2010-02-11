@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using NHibernate;
 using BoC.Validation;
 using NHibernate.Linq;
+using NHibernate.Transform;
 
 namespace BoC.Persistence.NHibernate
 {

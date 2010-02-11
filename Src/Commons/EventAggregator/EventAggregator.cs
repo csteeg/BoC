@@ -12,11 +12,16 @@ namespace BoC.EventAggregator
 
         public TEventType GetEvent<TEventType>() where TEventType : BaseEvent, new()
         {
+            return GetEvent(typeof (TEventType)) as TEventType;
+        }
+
+        public BaseEvent GetEvent(Type eventType)
+        {
             _rwl.EnterUpgradeableReadLock();
 
             try
             {
-                var eventInstance = _events.SingleOrDefault(evt => evt.GetType() == typeof(TEventType)) as TEventType;
+                var eventInstance = _events.SingleOrDefault(evt => evt.GetType() == eventType);
 
                 if (eventInstance == null)
                 {
@@ -24,11 +29,11 @@ namespace BoC.EventAggregator
 
                     try
                     {
-                        eventInstance = _events.SingleOrDefault(evt => evt.GetType() == typeof(TEventType)) as TEventType;
+                        eventInstance = _events.SingleOrDefault(evt => evt.GetType() == eventType);
 
                         if (eventInstance == null)
                         {
-                            eventInstance = new TEventType();
+                            eventInstance = Activator.CreateInstance(eventType) as BaseEvent;
                             _events.Add(eventInstance);
                         }
                     }

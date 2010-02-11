@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoContextSessionContext.cs" />
+    <Compile Include="Cache\ProjectionEnabledQueryCache.cs" />
     <Compile Include="CurrentContextSessionManager.cs" />
     <Compile Include="DefaultSetupTasks\AutoNhibernateRepositoryGenerator.cs" />
     <Compile Include="DefaultSetupTasks\AutoNhibernateConfigurator.cs" />

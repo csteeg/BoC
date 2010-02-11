@@ -4,10 +4,14 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using BoC.InversionOfControl;
+using BoC.Persistence.NHibernate.Cache;
+using FluentNHibernate;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Alterations;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Conventions.Helpers;
+using FluentNHibernate.Conventions.Inspections;
+using FluentNHibernate.Conventions.Instances;
 using NHibernate;
 using FluentNHibernate.Cfg;
 using NHibernate.Caches.SysCache;
@@ -25,7 +29,7 @@ namespace BoC.Persistence.NHibernate
         {
             return MsSqlConfiguration.MsSql2005.ConnectionString(c => c.FromConnectionStringWithKey(connectionStringKey))
                 .UseReflectionOptimizer()
-                .Cache(cache => cache.UseQueryCache().ProviderClass<SysCacheProvider>())
+                .Cache(cache => cache.UseQueryCache().ProviderClass<SysCacheProvider>().QueryCacheFactory<ProjectionEnabledQueryCacheFactory>())
             #if DEBUG
                 .ShowSql()
             #endif
@@ -37,7 +41,7 @@ namespace BoC.Persistence.NHibernate
         {
             return SQLiteConfiguration.Standard.ConnectionString(c => c.FromConnectionStringWithKey(connectionStringKey))
                 .UseReflectionOptimizer()
-                .Cache(cache => cache.UseQueryCache().ProviderClass<SysCacheProvider>())
+                .Cache(cache => cache.UseQueryCache().ProviderClass<SysCacheProvider>().QueryCacheFactory<ProjectionEnabledQueryCacheFactory>())
 #if DEBUG
                 .ShowSql()
 #endif
@@ -48,17 +52,26 @@ namespace BoC.Persistence.NHibernate
         public static void SetupAutoMapperForEntities(IPersistenceConfigurer database, params Assembly[] assemblies)
         {
             var config = Fluently.Configure().Database(database);
-            var stringPropertyconvention = 
-                ConventionBuilder.Property.When(x => x.Expect(p => p.Property.PropertyType == typeof (string)),
-                                                                           a => a.Length(255));
+            var stringPropertyconvention = ConventionBuilder.Property.When(x => x.Expect(p => p.Property.PropertyType == typeof (string)), a => a.Length(255));
+            
             var cacheConvention = ConventionBuilder.Class.Always(c => c.Cache.ReadWrite());
             
+            var collectionsConventionMany = ConventionBuilder.HasMany.When(
+                x => x.Expect(p => !(p.Member is DummyPropertyInfo)),
+                instance => { instance.Cascade.SaveUpdate(); instance.Cache.ReadWrite(); });
+            var collectionsConventionManyToMany = ConventionBuilder.HasManyToMany.When(
+                x => x.Expect(p => !(p.Member is DummyPropertyInfo)),
+                instance => { instance.Cascade.SaveUpdate(); instance.Cache.ReadWrite(); });
+            var lazyConvention = ConventionBuilder.Reference.Always(c => c.LazyLoad());
+
             IEnumerable<Assembly> ass;
             if (assemblies == null || assemblies.Length == 0)
             {
                 ass = AppDomain.CurrentDomain.GetAssemblies().Where(
                     a => !a.FullName.StartsWith("System.") &&
                          !a.FullName.StartsWith("Microsoft.") &&
+                         !a.FullName.Contains("mscorlib") &&
+                         a != typeof(ISession).Assembly &&
                          a != typeof(AutoMap).Assembly
                );
             }
@@ -68,8 +81,7 @@ namespace BoC.Persistence.NHibernate
             }
 
             var autoPersistenceModel = new AutoPersistenceModel()
-                .Conventions.Add(cacheConvention)
-                .Conventions.Add(stringPropertyconvention)
+                //.Conventions.Add(cacheConvention, collectionsConventionMany, collectionsConventionManyToMany, stringPropertyconvention, lazyConvention)
                 .IgnoreBase(typeof (BaseEntity<>))
                 .IgnoreBase(typeof (IBaseEntity));
 
@@ -90,12 +102,11 @@ namespace BoC.Persistence.NHibernate
                     autoPersistenceModel.AddEntityAssembly(automapper)
                         .Conventions.AddAssembly(automapper)
                         .Alterations(alterations => alterations.AddFromAssembly(automapper))
-                        //.Alterations(collection => collection.Add(new AutoMappingOverrideAlteration(automapper)))
-                        //same as: UseOverridesFromAssemblyOf<Tentity>()
+                        .Alterations(collection => collection.Add(new AutoMappingOverrideAlteration(automapper))) //same as: UseOverridesFromAssemblyOf<Tentity>()
                         .Where(t => typeof (IBaseEntity).IsAssignableFrom(t));
 
                     // MORE Evil hack, since adding to the Alterations does NOT work.
-                    new AutoMappingOverrideAlteration(automapper).Alter(autoPersistenceModel);
+                    //new AutoMappingOverrideAlteration(automapper).Alter(autoPersistenceModel);
                 }
             }
 

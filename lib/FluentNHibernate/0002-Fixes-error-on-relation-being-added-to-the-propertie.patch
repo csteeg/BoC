@@ -1,4 +1,9 @@
-e7f8ba5b997c32e7375360aa95cd38f7038cdba8
+From e7f8ba5b997c32e7375360aa95cd38f7038cdba8 Mon Sep 17 00:00:00 2001
+From: unknown <CSteeg@.modernmedia.local>
+Date: Tue, 9 Feb 2010 15:08:29 +0100
+Subject: [PATCH 2/4] Fixes error on relation being added to the properties collection twice
+
+---
  .../BiDirectionalManyToManyPairingVisitor.cs       |   89 ++++++++++----------
  1 files changed, 46 insertions(+), 43 deletions(-)
 
@@ -98,3 +103,6 @@ index 97a6600..486199c 100644
 +
  }
 \ No newline at end of file
+-- 
+1.6.4.msysgit.0
+

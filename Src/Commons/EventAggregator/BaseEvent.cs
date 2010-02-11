@@ -30,7 +30,7 @@ namespace BoC.EventAggregator
             return eventSubscription.SubscriptionToken;
         }
 
-        protected virtual void Publish(params object[] arguments)
+        public virtual void Publish(params object[] arguments)
         {
             List<Action<object[]>> executionStrategies = PruneAndReturnStrategies();
 
