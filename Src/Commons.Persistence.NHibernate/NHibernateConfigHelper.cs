@@ -59,6 +59,7 @@ namespace BoC.Persistence.NHibernate
             var collectionsConventionMany = ConventionBuilder.HasMany.When(
                 x => x.Expect(p => !(p.Member is DummyPropertyInfo)),
                 instance => { instance.Cascade.SaveUpdate(); instance.Cache.ReadWrite(); });
+
             var collectionsConventionManyToMany = ConventionBuilder.HasManyToMany.When(
                 x => x.Expect(p => !(p.Member is DummyPropertyInfo)),
                 instance => { instance.Cascade.SaveUpdate(); instance.Cache.ReadWrite(); });
@@ -81,7 +82,7 @@ namespace BoC.Persistence.NHibernate
             }
 
             var autoPersistenceModel = new AutoPersistenceModel()
-                //.Conventions.Add(cacheConvention, collectionsConventionMany, collectionsConventionManyToMany, stringPropertyconvention, lazyConvention)
+                .Conventions.Add(cacheConvention, collectionsConventionMany, collectionsConventionManyToMany, stringPropertyconvention, lazyConvention)
                 .IgnoreBase(typeof (BaseEntity<>))
                 .IgnoreBase(typeof (IBaseEntity));
 

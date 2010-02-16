@@ -91,6 +91,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controllers\CommonBaseController.cs" />
+    <Compile Include="Controllers\CommonBaseAsyncController.cs" />
     <Compile Include="Controllers\DynamicScaffoldController.cs" />
     <Compile Include="AutoScaffoldControllerFactory.cs" />
     <Compile Include="Events\ActionEvents.cs" />

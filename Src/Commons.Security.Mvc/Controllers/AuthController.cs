@@ -162,6 +162,7 @@ namespace BoC.Web.Mvc.Controllers
             }
 
             FormsAuthentication.SignIn(user.Id.ToString(), rememberMe);
+            HttpContext.User = user;
 
             if (!String.IsNullOrEmpty(returnUrl)) {
                 return Redirect(returnUrl);

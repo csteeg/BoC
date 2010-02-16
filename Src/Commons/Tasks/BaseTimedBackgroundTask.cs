@@ -7,6 +7,8 @@ namespace BoC.Tasks
 {
     public abstract class BaseTimedBackgroundTask : BaseBackgroundTask
     {
+        private readonly Timer timer = new Timer();
+
         protected BaseTimedBackgroundTask(IEventAggregator eventAggregator)
             : base(eventAggregator)
         {
@@ -36,6 +38,11 @@ namespace BoC.Tasks
             }
         }
 
+        /// <summary>
+        /// Set this to false (default is false), to complete DoWork() before starting the timer again
+        /// (prevents running the task again before it has even finished)
+        /// If set to true, the task is run every [Interval] milliseconds
+        /// </summary>
         public bool AutoReset
         {
             get
@@ -47,8 +54,6 @@ namespace BoC.Tasks
                 timer.AutoReset = value;
             }
         }
-
-        private System.Timers.Timer timer = new Timer();
 
         /// <summary>
         /// This method is started in a background thread
