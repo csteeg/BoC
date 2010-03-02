@@ -15,6 +15,10 @@ namespace BoC.Security.Mvc.Controllers
     {
         private readonly IUserService service;
 
+        public AccountController()
+        {
+        }
+
         // This constructor is not used by the MVC framework but is instead provided for ease
         // of unit testing this type. See the comments at the end of this file for more
         // information.
