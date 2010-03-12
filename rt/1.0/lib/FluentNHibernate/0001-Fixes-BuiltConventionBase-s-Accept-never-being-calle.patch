@@ -1,0 +1,77 @@
+From 812160adc9010a5890d81849e9e4c47396815e43 Mon Sep 17 00:00:00 2001
+From: unknown <CSteeg@.modernmedia.local>
+Date: Tue, 9 Feb 2010 15:07:59 +0100
+Subject: [PATCH 1/4] Fixes BuiltConventionBase's Accept() never being called
+
+---
+ .../Helpers/Prebuilt/BuiltConventionBase.cs        |   58 ++++++++++----------
+ 1 files changed, 29 insertions(+), 29 deletions(-)
+
+diff --git a/src/FluentNHibernate/Conventions/Helpers/Prebuilt/BuiltConventionBase.cs b/src/FluentNHibernate/Conventions/Helpers/Prebuilt/BuiltConventionBase.cs
+index 0c26d22..2fe1d83 100644
+--- a/src/FluentNHibernate/Conventions/Helpers/Prebuilt/BuiltConventionBase.cs
++++ b/src/FluentNHibernate/Conventions/Helpers/Prebuilt/BuiltConventionBase.cs
+@@ -1,30 +1,30 @@
+-using System;
+-using FluentNHibernate.Conventions.AcceptanceCriteria;
+-using FluentNHibernate.Conventions.Inspections;
+-
+-namespace FluentNHibernate.Conventions.Helpers.Prebuilt
+-{
+-    [Multiple]
+-    public abstract class BuiltConventionBase<TInspector, TInstance>
+-        where TInspector : IInspector
+-    {
+-        private readonly Action<IAcceptanceCriteria<TInspector>> accept;
+-        private readonly Action<TInstance> convention;
+-
+-        public BuiltConventionBase(Action<IAcceptanceCriteria<TInspector>> accept, Action<TInstance> convention)
+-        {
+-            this.accept = accept;
+-            this.convention = convention;
+-        }
+-
+-        public void Accept(IAcceptanceCriteria<TInspector> acceptance)
+-        {
+-            accept(acceptance);
+-        }
+-
+-        public void Apply(TInstance instance)
+-        {
+-            convention(instance);
+-        }
+-    }
++using System;
++using FluentNHibernate.Conventions.AcceptanceCriteria;
++using FluentNHibernate.Conventions.Inspections;
++
++namespace FluentNHibernate.Conventions.Helpers.Prebuilt
++{
++    [Multiple]
++    public abstract class BuiltConventionBase<TInspector, TInstance> : IConventionAcceptance<TInspector>
++        where TInspector : IInspector
++    {
++        private readonly Action<IAcceptanceCriteria<TInspector>> accept;
++        private readonly Action<TInstance> convention;
++
++        public BuiltConventionBase(Action<IAcceptanceCriteria<TInspector>> accept, Action<TInstance> convention)
++        {
++            this.accept = accept;
++            this.convention = convention;
++        }
++
++        public void Accept(IAcceptanceCriteria<TInspector> acceptance)
++        {
++            accept(acceptance);
++        }
++
++        public void Apply(TInstance instance)
++        {
++            convention(instance);
++        }
++    }
+ }
+\ No newline at end of file
+-- 
+1.6.4.msysgit.0
+

@@ -1,0 +1,316 @@
+;###################################
+;Danish Translation by Morten Skytte
+;###################################
+
+[frmMain]
+tsSQL=SQL Query
+tsResult=Resultat
+tsEdit=Rediger Data
+pEditTop=
+lblTable=Tabel:
+lblFilterField=Filterfelt:
+lblFilter=Filter:
+miDatabase=Database
+miNew=Ny
+miOpen=Åbn
+miCleanUp=Rens
+miClose=Luk
+miCreationSQL=Database SQL
+miMigrate=Migrer til SQLite3
+miRecentList=Sidste
+miExit=Afslut
+miTable=Tabel
+miNewTable=Opret Tabel
+miEditTable=Rediger Tabel
+miDeleteTable=Slet Tabel
+miIndex=Index
+miNewIndex=Opret Index
+miEditIndex=Rediger Index
+miDeleteIndex=Slet Index
+miView=View
+miNewView=Opret View
+miEditView=Rediger View
+miDeleteView=Slet View
+miTrigger=Trigger
+miNewTrigger=Opret Trigger
+miEditTrigger=Rediger Trigger
+miDeleteTrigger=Slet Trigger
+Abfrage1=Query
+miAddQuery=Opret Query
+miShowQuery=Åbn Query
+miSaveQueryMain=Gem Query
+miDelQuery=Slet Query
+miOpenSQL=Eksekver med Resultat
+miExecSQL=Eksekver uden Resultat
+miInsertInNewViewMain=Benyt i nyt View
+miInsertInNewTriggerMain=Benyt i ny Trigger
+Daten1=Data
+miExport=Exporter
+miSendToExcel=Overfør til Excel
+miImport=Importer Data
+miHelp=Hjælp
+miInfo=Info
+Fehlerbericht1=Log
+pmiRefresh=Opdater
+pmiShowSQL=Vis SQL
+pmiNewTable=Opret Tabel
+pmiEditTable=Rediger Tabel
+pmiDelTable=Slet Tabel
+pmiNewIndex=Opret Index
+pmiEditIndex=Rediger Index
+pmiDelIndex=Slet Index
+pmiNewView=Opret View
+pmiEditView=Rediger View
+pmiDelView=Slet View
+pmiNewTrigger=Opret Trigger
+pmiEditTrigger=Rediger Trigger
+pmiDelTrigger=Slet Trigger
+pmiFindQuery=Find Query
+pmiAddQuery=Opret Query
+pmiShowQuery=Åbn Query
+pmiDelQuery=Slet Query
+miAddTab=Opret ny Query
+miSaveQuery=Gem til database
+miSaveToFile=Gem til fil
+miUndo=Fortryd
+miRedo=Gentag
+miCut=Klip
+miCopy=Kopier
+miPaste=Indsæt
+miSelAll=Marker Alle
+miCopyToDelphi=Kopier som Delphi Kilde
+miComment=Skift kommentar
+miInsertInNewView=Anvend i nyt View
+miInsertInNewTrigger=Avend i ny Trigger
+miDeleteTab=Luk Query
+miMemo=Vis Memo
+miPicture=Vis Billede
+tbbNewDatabase=Opret Database
+tbbOpenDatabase=Åbn ( Sidste ) Database
+tbbCleanUp=Rens Database
+tbbCloseDatabase=Luk Database
+tbbNewTable=Opret Tabel
+tbbEditTable=Rediger Tabel
+tbbDeleteTable=Slet Tabel
+tbbNewIndex=Opret Index
+tbbEditIndex=Rediger Index
+tbbDeleteIndex=Slet Index
+tbbNewView=Opret View
+tbbEditView=Rediger View
+tbbDeleteView=Slet View
+tbbNewTrigger=Opret Trigger
+tbbEditTrigger=Rediger Trigger
+tbbDeleteTrigger=Slet Trigger
+tbbAddSQL=Opret ny Query
+tbbSaveSQL=Gem query til database
+tbbOpenSQL=Eksekver Query med resultat (select) F9
+tbbExecSQL=Eksekver Query uden resultat (insert,update,delete) F8 
+
+tbbViewHierarchy=hierarki visning
+tbbShowTables=Vis Tabeller
+tbbShowFields=Vis Felter
+tbbShowTriggers=Vis Triggers
+tbbShowIndexes=Vis Indexes
+tbbShowViews=Vis Views
+tbbShowSysEntrys=Vis System Entries
+tbbShowQueries=Vis Queries
+
+[frmTable]
+lblTablename=Tabelnavn:
+gbFields="     Tabelfelter"
+btnAdd=Opret felt
+btnDel=Slet felt
+btnChange=Rediger felt
+btnOK=Opret
+btnCancel=Fortryd
+btnPrimaryKey=Primary Key
+
+[frmField]
+lblFieldName=Feltnavn:
+lblFieldType=Felttype:
+lblDefaultValue=Standard værdi:
+cbUnique=Unik
+cbNotNull=Not NULL
+cbPrimaryKey=Primary Key
+cbAutoInc=Auto Increment
+btnAdd=Opret
+btnCancel=Fortryd
+
+[frmIndex]
+lblIndexName=Indexnavn:
+lblTable=Tabel:
+cbUnique=Unik
+gbFields="     Felter"
+lblSrcFields=Ledige felter:
+lblDestFields=Indekseret felter:
+btnCreate=Opret
+btnCancel=Fortryd
+
+[frmView]
+lblViewName=Viewnavn:
+gbSQL="     SQL Select"
+btnCreate=Opret
+btnCancel=Fortryd
+[frmPicture]
+btnPic=Skift billede
+btnDel=Slet billede
+btnSave=Gem billede som
+
+[frmTrigger]
+lblTriggername=Triggernavn:
+tsEvent=Trigger Event
+lblTable=Tabel:
+lblView=View:
+gbFields="     Flet"
+lblSrcFields=Ledige felter:
+lblDestFields=Event Felter:
+gbTriggerEvent=Udløs Event
+rbBefore=Før
+rbAfter=Efter
+rbInsteadOf=I stedet for
+gbEvents=Event
+gbFOR=Aktion
+rbEachRow=Each Row
+rbEachStatement=Each Statement
+tsSQL=Udløs SQL
+gbTriggerSQL="     SQL kilde med eksekvering af Trigger Event (OLD. / NEW. = Ref)"
+lblCondition=Betingelse:
+btnCreate=Opret
+btnCancel=Fortryd
+
+[frmImport]
+Caption=Importer data
+gbMapping=Feltmapning
+lblSourceFields=Kildefelter:
+lblTargetFields=Målfelter:
+lblDestTable=Måltabel:
+cbClearTable=Rens tabel inden importering
+btnLoadFile=Åbn fil
+btnImport=Importer data
+btnClose=Luk
+
+[frmLog]
+Caption=Fejllog
+
+[frmMemoEdit]
+Caption=Rdiger Memo 
+
+[MessageStrings]
+lngInfo=Info
+lngWarning=Advarsel:
+lngCreate=Opret
+lngEdit=Rediger
+lngAdd=Tilføj
+
+lngNameAlreadyExists=Navnet er allerede allokeret!
+lngInvalidChars=Navnet må ikke indeholde 'sqlite_', speciel karaktere eller mellemrum!
+lngEnterSQLSource=Indtast SQL udtrykket
+
+lngCreateView=Opret View
+lngEditView=Rediger View
+lngEnterViewName=Indtast navnet på Viewet!
+lngEnterTriggerName=Indtast navnet på Triggeren!
+lngSelectTable=Vælg tabel!
+lngSelectView=Vælg View!
+lngSelectEvent=Vælg Event!
+lngSelectFields=Vælg felt!
+lngSemiNotFound=Kunne ikke finde semikolon efter SQL udtrykket! 
+lngCreateTrigger=Opret Trigger
+lngEditTrigger=Rediger Trigger
+lngBlobFileSize=Af sikkerhed mæssige årsager er maksimum FilStørrelse begrænset til 500kb. SQLite 2.8 x supporter max. 1 MB pr data række
+lngSeperator=Separator
+lngEnterSeperatorChar=Indtast separator karakter!
+lngContainsHeaderFieldNames=Indeholder første række feltnavne?
+lngFieldAlreadyChoosen=Feltet er allerede valgt!
+lngSeperatedValues=Separatorværdier
+lngEnterFieldName=Indtast feltnavn!
+lngEnterFieldType=Indtast eller vælg felttype!
+lngPKAlreadyExist=Primary Key er allerede allokeret!
+lngFieldSize=Feltstørrelse:
+lngEnterFieldSize=Indtast feltstørrelse:
+lngEditField=Rediger felt
+lngAddField=Tilføj felt
+lngEnterIndexName=Indtast indeksnavn!
+lngEditIndex=Rediger Index
+lngCreateIndex=Opret Index
+lngEnterTableName=Indtast tabelnavn!
+lngAddTableFields=Tilføj tabel felter!
+lngEditTable=Rediger tabel
+lngCreateTable=Opret tabel
+lngTableFieldName=Feltnavn
+lngTableFieldType=Felttype
+lngTableFieldConstraint=Feltbegrænsning
+lngSendToExcelSuccess=Data overføt til Excel.
+lngSendToExcelWait=Overføre data til Excel, vent vendligst...
+lngNoDataToSend=Der blev ikke fundet data til at sende!
+lngFailToSave=Filen kunne ikke gemmes!
+lngError=Fejl:
+lngNoDataToExport=Ingen data at eksporter!
+lngExcelFormat=Excel Kompatibelt Format
+lngCSVFormat=Værdi separeret Format
+lngXMLFormat=XML Format
+lngHTMLFormat=HTML Format
+lngCCFunction="Funktion"
+lngCCField=   "Felt    "
+lngCCTable=   "Tabel   "
+lngCCView=    "View    "
+lngCCIndex=   "Index   "
+lngCCTrigger= "Trigger "
+lngReservedWordQuery=%s er et reserveret ord
+lngQueryIdent=Query
+lngEnterName=Indtast navn!
+lngSaveQuery=Gem Query:
+lngEnterQueryNamePrompt=Indtast navnet for Query'en:
+lngCleanUpMessage=Databasen blev renset for %s unødvendig data. 
+lngDeleteConfirmation=Vil du slette?
+lngConfirmation=Bekræftigelse:
+lngDBDisconnected=Afbryd databaseforbindelse
+lngDBConnected=Forbind database
+lngDisconnected=Ikke forbundet
+lngOpenDatabase=Åben Database:
+lngTVQueries=Queries
+lngTVTriggers=Triggers
+lngTVViews=Views
+lngTVIndexes=Indexes
+lngTVTables=Tabeller
+lngTVFields=Felter
+lngQueryExecTime=Query eksekveret i %dms
+lngQueryExecuted=Query eksekveret
+lngDBCreated=Database oprettet
+lngSelectDBSaveTarget=Vælg mål for ny database:
+lngTableFieldDefault=Standard værdi
+lngMultiPrimaryKey=Multi Field Primary Key only can be used if no Single Field Primary Key was selected! 
+lngMigrationSuccess=Database migrering fulført vellykket!
+lngMigrationInProgress=Tabel "%s" migreres, vent venligst...
+lngSQLiteDB=SQLite Database
+lngAnyFile=Any File
+lngImportDone=Importering færdig!
+lngBtnFirst=Første
+lngBtnPrev=Foregående
+lngBtnLast=Sidste
+lngBtnNext=Næste
+lngBtnAdd=Indsæt
+lngBtnRemove=Slet
+lngBtnEdit=Rediger
+lngBtnApply=Anvend
+lngBtnCancel=Fortryd
+lngBtnRefresh=Opdater
+
+
+[StrfTimeHint]
+Line0=
+Line1=Formatkonstanter:
+Line2=
+Line3=%d   dag i måneden
+Line4=%f   ** brøkdel af sekund  SS.SSS
+Line5=%H   time 00-24
+Line6=%j   dag på året 001-366
+Line7=%J   ** Julian dags værdi
+Line8=%m   måned 01-12
+Line9=%M   minut 00-59
+Line10=%s   sekund siden 1970-01-01
+Line11=%S   sekund 00-59
+Line12=%w   dag på ugen 0-6  søndag==0
+Line13=%W   uge på året 00-53
+Line14=%Y   år 0000-9999
+Line15=%%   %

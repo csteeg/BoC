@@ -1,0 +1,136 @@
+Version 0.8.3.2 Public Beta
+===========================
+
+# Bugfix: FieldDialog - "Unique" checkbox will not disabled if Fieldtype is empty while clicking "AutoInc" (thx Papadoulas Konstantinos)
+
++ Added "having" keyword to the highlighter (thx Rémi)
+
+# ship SQLite DLL version 3.5.1 (for Papadoulas Konstantinos)
+
++ ship greek language file (thx Papadoulas Konstantinos)
+
+# updated dutch language file (thx Johan Samyn)
+
+# updated spanish language file (thx Blas López)
+
++ ship catalan language file (thx Blas López)
+
+
+
+Version 0.8.3.1 Public Beta
+===========================
+
++ ESC Shortcut for canceling/closing dialogs (thx deerchao)
+
++ INI Option [Main] Splash=0 deactivates splashscreen (for secret sqirrel)
+
+# Bugfix: CSV Export: Date / DateTime Fields will now exported sqlite valid (thx bseller)
+
++ Added "Auto Assign" feature button for fieldmapping at import dialog (for bseller, igitur)
+
++ INI Option [Main] CodeEditorFontName="Tahoma" (for Takefumi-o)
+
+# Bugfix: Default Values will not longer stored UpperCase (thx Piotr Drozdowski)
+
++ Sqlite3 is now default for new database creation (for igitur)
+
+# ship SQLite DLL version 3.4.2 
+
++ ship danish language file (thx Morten Skytte)
+
+Version 0.8.3.0 Public Beta
+===========================
+
+# Bugfix: Removed Splashscreen Border at Vista
+
+# Bugfix: fixed Access Violation after excuting non-select statement with result and switch to result tab
+
++ Added: showing content of selected table/view if result tab is active
+
+# ship SQLite DLL version 3.3.13
+
++ ship traditional chinese language file
+
+Version 0.8.2.9 Public Beta
+===========================
+
+# Bugfix: Fixed anchors of apply/cancel Button at Edit-Memo form
+
+# Changed Application Icon
+
+# Changed About Box
+
+# Bugfix: Autodetect IgnoreInvalidToken Mode
+
++ ship czech language file
+
+Version 0.8.2.8 Public Beta
+===========================
+
++ Added "rowid" to code completion on each table
+
++ Added Tooltips on DB Navigator Buttons ("Edit Data" Tab)
+
++ Added: Autodetect IgnoreInvalidToken Mode
+
+# Bugfix: gui do not offers to edit/delete system tables/indexes anymore
+
+# Bugfix: disabled filter combos are reenabled when closes the database
+
+# Bugfix: Fixed croping Trigger SQL statement
+
+# Bugfix: Fixed Sqlite3 Migration Feature -> "Can not update this Query type" 
+(Feature now disabled while IgnoreInvalidToken Mode)
+
+# Added some Shortcuts
+  - CTRL+O      : Open File
+  - CTRL+W      : Close File
+  - CTRL+PG_UP  : Prev SQL Tab
+  - CTRL+PG_DOWN: Next SQL Tab 
+
+# ship SQLite DLL version 3.3.8
+
++ ship turkish language file
+
+
+Version 0.8.2.7 Non Public Beta
+===============================
+
+# Bugfix: Fixed parsing trigger events
+
+# Bugfix: Fixed anchors for Add/Edit/Delete field Buttons at the Table-Edit form  
+
++ If ini file is detected at application folder now it is used for primary to load/save settings
+
+
+Version 0.8.2.6 Public Beta
+===========================
+
++ English Changelog started :)
+
+# Fixes Buttons and UAP Support for Windows Vista
+
+# SQL Code Generator -> Ident Quotes '"' replaced by SQLite Ident Brackets '[' , ']'
+
++ CodeCompletion works now also with Ident Brackets
+
++ Hidden ini Flag [Main] IgnoreInvalidToken=1 
+  Hint:
+    - This disables Editing on all Grids! Because Zeos Database Objects does not support Ident Brackets and Invalid Chars
+    - Now you can design Tables/Fields/Indizes... with Invalid Chars
+    - CodeCompletion inserts always with IdentBrackets
+
+
+# All Controls are set to DEFAULT_CHARSET  (some was set to ANSI_CHARSET before) 
+
++ Added "Help - Change Languguage" Menu Item
+
+# Filter does not appear anymore at "OnChange" Event, you have to press Enter or the Button to apply the Filter
+
++ Added "Import Done!" Messagebox
+
++ Added Hungarian Language File
+
++ Added Norwegian Language File
+
++ Ship sqlite3.dll Version 3.3.6

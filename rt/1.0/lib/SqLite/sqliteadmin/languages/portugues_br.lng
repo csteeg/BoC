@@ -1,0 +1,325 @@
+;#########################################
+;Portugues(BR) Translation by mamede
+;#########################################
+
+[frmMain]
+tsSQL=Constulta SQL
+tsResult=Resultado
+tsEdit=Edita Dados
+pEditTop=
+lblTable=Tabela:
+lblFilterField=CampoFiltro:
+lblFilter=Filtro:
+miDatabase=Database
+miNew=Novo
+miOpen=Abrir
+miCleanUp=Limpa
+miClose=Fecha
+miCreationSQL=Database SQL
+miMigrate=Migrar para SQLite3
+miRecentList=Recente
+miExit=Sair
+miTable=Tabela
+miNewTable=Novo
+miEditTable=Editar
+miDeleteTable=Apagar
+miIndex=Índice
+miNewIndex=Novo
+miEditIndex=Editar
+miDeleteIndex=Apagar
+miView=View
+miNewView=Novo
+miEditView=Editar
+miDeleteView=Apagar
+miTrigger=Trigger
+miNewTrigger=Novo
+miEditTrigger=Editar
+miDeleteTrigger=Apagar
+Abfrage1=Consulta
+miAddQuery=Adicionar
+miShowQuery=Abrir
+miSaveQueryMain=Salvar
+miDelQuery=Apagar
+miOpenSQL=Executar com Resultado
+miExecSQL=Executar sem Resultado
+miInsertInNewViewMain=Usar em um novo View
+miInsertInNewTriggerMain=Usar em um novo Trigger
+Daten1=Dados
+miExport=Exportar
+miSendToExcel=Enviar para Excel
+miImport=Importar Dados
+miHelp=Ajuda
+miInfo=Infomações
+Fehlerbericht1=Log
+pmiRefresh=Recalcular
+pmiShowSQL=Mostrar SQL
+pmiNewTable=Criar Tabela
+pmiEditTable=Alterar Tabela
+pmiDelTable=Apagar Tabela
+pmiNewIndex=Criar Índice
+pmiEditIndex=Alterar Índice
+pmiDelIndex=Apagar Índice
+pmiNewView=Criar View
+pmiEditView=Alterar View
+pmiDelView=Apagar View
+pmiNewTrigger=Criar Trigger
+pmiEditTrigger=Alterar Trigger
+pmiDelTrigger=Apagar Trigger
+pmiFindQuery=Procurar Consulta
+pmiAddQuery=Adicionar Consulta
+pmiShowQuery=Abrir Consulta
+pmiDelQuery=Apagar Consulta
+miAddTab=Criar Nova Consulta
+miSaveQuery=Salvar no Banco de Dados
+miSaveToFile=Salvar em Arquivo
+miUndo=Desfazer
+miRedo=Refazer
+miCut=Recortar
+miCopy=Copiar
+miPaste=Colar
+miSelAll=Selelciona Tudo
+miCopyToDelphi=Copiar com fonte Delphi
+miComment=Trocar Comentário
+miInsertInNewView=Usar em uma nova View
+miInsertInNewTrigger=Usar em um novo Trigger
+miDeleteTab=Fechar Consulta
+miMemo=Mostar Memo
+miPicture=Mostrar Imagem
+tbbNewDatabase=Criar Banco de Dados
+tbbOpenDatabase=Abrir ( Recente ) Banco de Dados
+tbbCleanUp=Limpar Banco de Dados
+tbbCloseDatabase=Fechar Banco de Dados
+tbbNewTable=Criar Tabela
+tbbEditTable=Alterar Tabela
+tbbDeleteTable=Apagar Tabela
+tbbNewIndex=Criar Índice
+tbbEditIndex=Alterar Índice
+tbbDeleteIndex=Apagar Índice
+tbbNewView=Criar View
+tbbEditView=Alterar View
+tbbDeleteView=Apagar View
+tbbNewTrigger=Crriar Trigger
+tbbEditTrigger=Alterar Trigger
+tbbDeleteTrigger=Apagar Trigger
+tbbAddSQL=Adicionar Nova Consulta
+tbbSaveSQL=Salvar Consulta no Banco de Dados
+tbbOpenSQL=Executar Consulta SQL com Resultado (select) F9
+tbbExecSQL=Executar Consulta SQL sem Resultado (insert,update,delete) F8 
+
+tbbViewHierarchy=View Hierárquico
+tbbShowTables=Mostra Tabelas
+tbbShowFields=Mostra Campos
+tbbShowTriggers=Mostra Triggers
+tbbShowIndexes=Mostra Índices
+tbbShowViews=Mostra Views
+tbbShowSysEntrys=Mostra o Sistema Inteiro
+tbbShowQueries=Mostra Consultas
+
+[frmTable]
+lblTablename=Nome da Tabela:
+gbFields="     Campos da Tabela"
+btnAdd=Adiciomnar Campo
+btnDel=Apagar Campos
+btnChange=Alterar Campos
+btnOK=Criar
+btnCancel=Cancelar
+btnPrimaryKey=Chave Primária
+
+[frmField]
+lblFieldName=Nome do Campo:
+lblFieldType=Tipo do Campo:
+lblDefaultValue=Valor Padrão:
+cbUnique=Único
+cbNotNull=Obrigatório
+cbPrimaryKey=Chave Primária
+cbAutoInc=AutoIncremento
+btnAdd=Adicionar
+btnCancel=Cancelar
+
+[frmIndex]
+lblIndexName=Nome do Índice:
+lblTable=Tabela:
+cbUnique=Único
+gbFields="     Campos"
+lblSrcFields=Campos Disponíveis:
+lblDestFields=Campos Indexados:
+btnCreate=Criar
+btnCancel=Cancelar
+
+[frmView]
+lblViewName=Nome do View:
+gbSQL="     SQL Select"
+btnCreate=Criar
+btnCancel=Cancelar
+[frmPicture]
+btnPic=Alterar Imagem
+btnDel=Apagar Imagem
+btnSave=Salvar Imagem como
+
+[frmTrigger]
+lblTriggername=Nome do Trigger:
+tsEvent=Evento Trigger
+lblTable=Tabela:
+lblView=View:
+gbFields="     Campos"
+lblSrcFields=Campos Disponíveis:
+lblDestFields=Campos do Evento:
+gbTriggerEvent=Evento Trigger
+rbBefore=Before
+rbAfter=After
+rbInsteadOf=Instead Of
+gbEvents=Evento
+gbFOR=Ação
+rbEachRow=Cada Registro
+rbEachStatement=Cada Comando
+tsSQL=Trigger SQL
+gbTriggerSQL="      Arquivo SQL a ser executano no evento Trigger (OLD. / NEW. = Ref)"
+lblCondition=Condição:
+btnCreate=Criar
+btnCancel=Cancelar
+
+[frmImport]
+Caption=Importar Dados
+gbMapping=Mapear Campo
+lblSourceFields=Campos de Origem:
+lblTargetFields=Campos de Destino:
+lblDestTable=Tabela Trigger:
+cbClearTable=Limpar Tabela Antes de Importar
+btnLoadFile=Abir Arquivo
+btnImport=Importar Dados
+btnClose=Fechar
+
+[frmLog]
+Caption=Log de Erro
+
+[frmMemoEdit]
+Caption=Alterar Memo 
+
+[MessageStrings]
+lngInfo=Infomação
+lngWarning=Aviso:
+lngCreate=Criar
+lngEdit=Alterar
+lngAdd=Adicionar
+
+lngNameAlreadyExists=Nome já utilizado!
+lngInvalidChars=O Nome náo pode conter o prefixo 'sqlite_', carecteres especiais o espaços! 
+lngEnterSQLSource=Por favor, entre com o comando SQL
+
+lngCreateView=Criar View
+lngEditView=Alterar View
+lngEnterViewName=Por favor, entre o nome do View!
+lngEnterTriggerName=Por favor, entre o nome do Trigger!
+lngSelectTable=Por favor, selecione a Tabela
+lngSelectView=Por favor, selecione a View!
+lngSelectEvent=Por favor, selecione o Evento!
+lngSelectFields=Por favor, selecione os Campos!
+lngSemiNotFound= Não foi encontrado o ponto e vírgula após o comando SQL! 
+lngCreateTrigger=Criar Trigger
+lngEditTrigger=Alterar Trigger
+lngBlobFileSize=Por razões de segurança. o tamanho máximo do campo é limitado a 500kb. O SQLite 2.8 x supprta o max. 1 MB por registro
+lngSeperator=Separador
+lngEnterSeperatorChar=Por favor, entro co caractere separador!
+lngContainsHeaderFieldNames=O primeiro registro contem os nome dos campos?
+lngFieldAlreadyChoosen=Campo já selecionado!
+lngSeperatedValues=Valores separados
+lngEnterFieldName=Por favor, informe o nome do campo!
+lngEnterFieldType=Por favor, informe ou selecione o tipo do campo!
+lngPKAlreadyExist=Chave primária já alocada!
+lngFieldSize=Tam. do Campo:
+lngEnterFieldSize=Por favor, entre o tamanho do campo:
+lngEditField=Alterar Campo
+lngAddField=Novo Campo
+lngEnterIndexName=Por favor, informe o nome do índice!
+lngEditIndex=Alterar Índice
+lngCreateIndex=Criar Índice
+lngEnterTableName=Por favor, entre o nome da tabela!
+lngAddTableFields=Por favor, adicione os campos da tabela!
+lngEditTable=Alterar Tabela
+lngCreateTable=Criar Tabela
+lngTableFieldName=Nome do Campo
+lngTableFieldType=Tipo do Campo
+lngTableFieldConstraint=Restrições do Campo
+lngSendToExcelSuccess=O envio dos dapos para o Excel foram bem sucedidos.
+lngSendToExcelWait=Enviando dados para o Excel, por favor aguarde...
+lngNoDataToSend=Não foram encontrados dados para envio!
+lngFailToSave=Arquivo não pode ser salvo!
+lngError=Erro:
+lngNoDataToExport=Não foram encontrados dados para exportar!
+lngExcelFormat=Formato compatível com o Excel
+lngCSVFormat=Formato de separador de Valor
+lngXMLFormat=Formato XML
+lngHTMLFormat=Formato HTML
+lngCCFunction="Função "
+lngCCField=   "Campo  "
+lngCCTable=   "Tabela "
+lngCCView=    "View   "
+lngCCIndex=   "Índice "
+lngCCTrigger= "Trigger"
+lngReservedWordQuery=%s é uma palavra reservada
+lngQueryIdent=Consulta
+lngEnterName=Digite o Nome!
+lngSaveQuery=Salva Consulta:
+lngEnterQueryNamePrompt=Por favor, entre o nome da consulta:
+lngCleanUpMessage=O banco de dados foi limpo em %s de dados não necessários. 
+lngDeleteConfirmation=Confirma a exclusão?
+lngConfirmation=Confirmação:
+lngDBDisconnected=Banco de dados desconectado
+lngDBConnected=Banco de dados conectado
+lngDisconnected=Não conectado
+lngOpenDatabase=Abir banco de dados:
+lngTVQueries=Consultas
+lngTVTriggers=Triggers
+lngTVViews=Views
+lngTVIndexes=Índices
+lngTVTables=Tabelas
+lngTVFields=Campos
+lngQueryExecTime=Consulta executada em %dms
+lngQueryExecuted=Consulta executada
+lngDBCreated=Banco de dados criado
+lngSelectDBSaveTarget=Selecione o destino do novo banco de dados:
+lngTableFieldDefault=Valor Padrão
+lngMultiPrimaryKey=Chave primária de múltiplos campos somente podem ser usada se ma chave primária de único campo não for selecionada
+lngMigrationSuccess=A migração do banco de dados foi completada com sucesso!
+lngMigrationInProgress=A tabela "%s" está sendo migrada, por favor espere...
+
+;##############################################
+;########## Begin Language Updates ############
+;## Send updates to "sqliteadmin@orbmu2k.de" ##
+;##############################################
+
+lngSQLiteDB=SQLite Database
+lngAnyFile=Any File
+lngImportDone=Import done!
+lngBtnFirst=First
+lngBtnPrev=Previos
+lngBtnLast=Last
+lngBtnNext=Next
+lngBtnAdd=Insert
+lngBtnRemove=Delete
+lngBtnEdit=Edit
+lngBtnApply=Post
+lngBtnCancel=Cancel
+lngBtnRefresh=Refresh
+
+;##############################################
+;########### End Language Updates #############
+;##############################################
+
+[StrfTimeHint]
+Line0=
+Line1=Restrições de Formato:
+Line2=
+Line3=%d   dia do mês
+Line4=%f   ** segundos fracionados  SS.SSS
+Line5=%H   hora 00-24
+Line6=%j   dia do ano 001-366
+Line7=%J   ** número do dia juliano
+Line8=%m   mês 01-12
+Line9=%M   minuto 00-59
+Line10=%s   segundos desde 1970-01-01
+Line11=%S   segundos 00-59
+Line12=%w   dia da semana 0-6  domingo==0
+Line13=%W   semana do ano 00-53
+Line14=%Y   ano  0000-9999
+Line15=%%   %

@@ -1,0 +1,316 @@
+;############################################
+;Greek Translation by Papadoulas Konstantinos
+;############################################
+
+[frmMain]
+tsSQL=Ερώτημα SQL
+tsResult=Αποτέλεσμα
+tsEdit=Επεξεργασία δεδομένων
+pEditTop=
+lblTable=Πίνακας:
+lblFilterField=Πεδίο φίλτρου
+lblFilter=Συνθήκη:
+miDatabase=Βάση Δεδομένων
+miNew=Νέα
+miOpen=’νοιγμα
+miCleanUp=Εκκένωση Βάσης
+miClose=Κλείσιμο
+miCreationSQL=Εντολή SQL της Βάσης
+miMigrate=Μετατροπή σε Sqlite3
+miRecentList=Πρόσφατα ανοιγμένες
+miExit=Έξοδος
+miTable=Πίνακας
+miNewTable=Νέος
+miEditTable=Επεξεργασία
+miDeleteTable=Διαγραφή
+miIndex=Δείκτης
+miNewIndex=Νέος
+miEditIndex=Επεξεργασία
+miDeleteIndex=Διαγραφή
+miView=Προβολή
+miNewView=Νέα
+miEditView=Επεξεργασία
+miDeleteView=Διαγραφή
+miTrigger=Διέγερση
+miNewTrigger=Νέα
+miEditTrigger=Επεξεργασία
+miDeleteTrigger=Διαγραφή
+Abfrage1=Ερώτημα
+miAddQuery=Προσθήκη
+miShowQuery=’νοιγμα
+miSaveQueryMain=Αποθήκευση
+miDelQuery=Διαγραφή
+miOpenSQL=Εκτέλεση με αποτέλεσμα
+miExecSQL=Εκτέλεση χωρίς αποτέλεσμα
+miInsertInNewViewMain=Εισαγωγή σε νέα Προβολή
+miInsertInNewTriggerMain=Εισαγωγή σε νέα Διέγερση
+Daten1=Δεδομένα
+miExport=Εξαγωγή
+miSendToExcel=Αποστολή στο Excel
+miImport=Εισαγωγή Δεδομένων
+miHelp=Βοήθεια
+miInfo=Πληροφορίες
+Fehlerbericht1=Καταγραφή
+pmiRefresh=Ανανέωση
+pmiShowSQL=Εμφάνιση SQL
+pmiNewTable=Δημιουργία Πίνακα
+pmiEditTable=Επεξεργασία Πίνακα
+pmiDelTable=Διαγραφή Πίνακα
+pmiNewIndex=Δημιουργία Δείκτη
+pmiEditIndex=Επεξεργασία Δείκτη
+pmiDelIndex=Διαγραφή Δείκτη
+pmiNewView=Δημιουργία Προβολής
+pmiEditView=Επεξεργασία Προβολής
+pmiDelView=Διαγραφή Προβολής
+pmiNewTrigger=Δημιουργία Διέγερσης
+pmiEditTrigger=Επεξεργασία Διέγερσης
+pmiDelTrigger=Διαγραφή Διέγερσης
+pmiFindQuery=Εύρεση Ερωτήματος
+pmiAddQuery=Προσθήκη Ερωτήματος
+pmiShowQuery=’νοιγμα Ερωτήματος
+pmiDelQuery=Διαγραφή Ερωτήματος
+miAddTab=Δημιουργία νέου Ερωτήματος
+miSaveQuery=Αποθήκευση στη Βάση Δεδομένων
+miSaveToFile=Αποθήκευση σε Αρχείο
+miUndo=Αναίρεση
+miRedo=Επανάληψη
+miCut=Αποκοπή
+miCopy=Αντιγραφή
+miPaste=Επικόλληση
+miSelAll=Επιλογή όλων
+miCopyToDelphi=Αντιγραφή σε κώδικα Delphi
+miComment=Ενναλαγή Σχολίου
+miInsertInNewView=Εισαγωγή σε νέα Προβολή
+miInsertInNewTrigger=Εισαγωγή σε νέα Διέγερση
+miDeleteTab=Κλείσιμο Ερωτήματος
+miMemo=Εμφάνιση Κειμένου
+miPicture=Εμφάνιση Εικόνας
+tbbNewDatabase=Δημιουργία Βάσης Δεδομένων
+tbbOpenDatabase=’νοιγμα ( πρόσφατης ) Βάσης
+tbbCleanUp=Καθαρισμός Βάσης
+tbbCloseDatabase=Κλείσιμο Βάσης
+tbbNewTable=Δημιουργία Πίνακα
+tbbEditTable=Επεξεργασία Πίνακα
+tbbDeleteTable=Διαγραφή Πίνακα
+tbbNewIndex=Δημιουργία Δείκτη
+tbbEditIndex=Επεξεργασία Δείκτη
+tbbDeleteIndex=Διαγραφή Δείκτη
+tbbNewView=Δημιουργία Προβολής
+tbbEditView=Επεξεργασία Προβολής
+tbbDeleteView=Διαγραφή Προβολής
+tbbNewTrigger=Δημιουργία Διέγερσης
+tbbEditTrigger=Επεξεργασία Διέγερσης
+tbbDeleteTrigger=Διαγραφή Διέγερσης
+tbbAddSQL=Προσθήκη νέου Ερωτήματος
+tbbSaveSQL=Αποθήκευση Ερωτήματος στη Βάση Δεδομένων
+tbbOpenSQL=Εκτέλεση του Ερωτήματος SQL με Αποτέλεσμα (select) F9
+tbbExecSQL=Εκτέλεση του Ερωτήματος SQL χωρίς Αποτέλεσμα (insert,update,delete) F8 
+
+tbbViewHierarchy=Προβολή Ιεραρχίας
+tbbShowTables=Εμφάνιση Πινάκων
+tbbShowFields=Εμφάνιση Πεδίων
+tbbShowTriggers=Εμφάνιση Διεγέρσεων
+tbbShowIndexes=Εμφάνιση Δεικτών
+tbbShowViews=Εμφάνιση Προβολών
+tbbShowSysEntrys=Εμφάνιση στοιχείων Συστήματος
+tbbShowQueries=Εμφάνιση Ερωτημάτων
+
+[frmTable]
+lblTablename=Όνομα:
+gbFields="     Πεδία του Πίνακα"
+btnAdd=Δημιουργία Πεδίου
+btnDel=Διαγραφή Πεδίου
+btnChange=Αλλαγή Πεδίου
+btnOK=Δημιουργία
+btnCancel=’κυρο
+btnPrimaryKey=Πρωτεύον Κλειδί
+
+[frmField]
+lblFieldName=Όνομα:
+lblFieldType=Τύπος:
+lblDefaultValue=Αυτόματη τιμή:
+cbUnique=Μοναδικό
+cbNotNull=Όχι ΚΕΝΟ
+cbPrimaryKey=Πρωτεύον Κλειδί
+cbAutoInc=Αυτόματη Μέτρηση
+btnAdd=Προσθήκη
+btnCancel=’κυρο
+
+[frmIndex]
+lblIndexName=Όνομα:
+lblTable=Πίνακας:
+cbUnique=Μοναδικός
+gbFields="     Πεδία"
+lblSrcFields=Διαθέσιμα Πεδία:
+lblDestFields=Επιλεγμένα Πεδία:
+btnCreate=Δημιουργία
+btnCancel=’κυρο
+
+[frmView]
+lblViewName=Όνομα:
+gbSQL="     Εντολή SQL"
+btnCreate=Δημιουργία
+btnCancel=’κυρο
+
+[frmPicture]
+btnPic=Αλλαγή Εικόνας
+btnDel=Διαγραφή Εικόνας
+btnSave=Αποθήκευση εικόνας...
+
+[frmTrigger]
+lblTriggername=Όνομα:
+tsEvent=Γεγονός
+lblTable=Πίνακας:
+lblView=Προβολή:
+gbFields="     Πεδία"
+lblSrcFields=Διαθέσιμα Πεδία:
+lblDestFields=Επιλεγμένα Πεδία:
+gbTriggerEvent=Διέγερση...
+rbBefore=Πρίν
+rbAfter=Μετά
+rbInsteadOf=Αντί για
+gbEvents=Γεγονότα
+gbFOR=Εκτέλεση σε...
+rbEachRow=Κάθε γραμμή
+rbEachStatement=Κάθε εντολή
+tsSQL=Εντολή SQL της Διέγερσης
+gbTriggerSQL="     Εντολή SQL που θα εκτελεστεί στο Γεγονός Διέγερσης:"
+lblCondition=Προϋπόθεση:
+btnCreate=Δημιουργία
+btnCancel=’κυρο
+
+[frmImport]
+Caption=Εισαγωγή Δεδομένων
+gbMapping=Αντιστοιχία Πεδίων για εισαγωγή:
+lblSourceFields=Πεδία πηγής:
+lblTargetFields=Πεδία προορισμού:
+lblDestTable=Πίνακας:
+cbClearTable=Καθαρισμός του Πίνακα πριν την Εισαγωγή
+btnLoadFile=’νοιγμα Αρχείου
+btnImport=Εισαγωγή Δεδομένων
+btnClose=Κλείσιμο
+
+[frmLog]
+Caption=Καταγραφή Σφαλμάτων
+
+[frmMemoEdit]
+Caption=Επεξεργασία Κειμένου 
+
+[MessageStrings]
+lngInfo=Πληροφορίες
+lngWarning=Προσοχή:
+lngCreate=Δημιουργία
+lngEdit=Επεξεργασία
+lngAdd=Προσθήκη
+
+lngNameAlreadyExists=Το όνομα αυτό χρησιμοποιείται ήδη!
+lngInvalidChars=Το όνομα δεν πρέπει να ξεκινάει με τη λέξη 'sqlite_' ή να περιέχει ΚΕΝΑ και ΕΙΔΙΚΟΥΣ χαρακτήρες!
+lngEnterSQLSource=Παρακαλώ εισάγετε την Εντολή SQL
+
+lngCreateView=Δημιουργία Προβολής
+lngEditView=Επεξεργασία Προβολής
+lngEnterViewName=Παρακαλώ εισάγετε το όνομα της Προβολής!
+lngEnterTriggerName=Παρακαλώ εισάγετε το όνομα της Διέγερσης!
+lngSelectTable=Παρακαλώ επιλέξτε Πίνακα!
+lngSelectView=Παρακαλώ επιλέξτε Προβολή!
+lngSelectEvent=Παρακαλώ επιλέξτε Γεγονός!
+lngSelectFields=Παρακαλώ επιλέξτε Πεδία!
+lngSemiNotFound=Δεν βρέθηκε ερωτηματικό μετά απο την εντολή SQL !
+lngCreateTrigger=Δημιουργία Διέγερσης
+lngEditTrigger=Επεξεργασία Διέγερσης
+lngBlobFileSize=Για λόγους ασφαλείας το μέγιστο Μέγεθος Αρχείου έχει περιοριστεί στα 500kb. Η SQLite 2.8 x υποστηρίζει μέχρι 1 MB ανα γραμμή δεδομένων
+lngSeperator=Διαχωριστής
+lngEnterSeperatorChar=Παρακαλώ εισάγετε το Χαρακτήρα Διαχωρισμού!
+lngContainsHeaderFieldNames=Η πρώτη γραμμή περιέχει ονόματα Πεδίων;
+lngFieldAlreadyChoosen=Αυτό το Πεδίο έχει ήδη επιλεχθεί!
+lngSeperatedValues=Διαχωρισμού Τιμών (CSV)
+lngEnterFieldName=Παρακαλώ εισάγετε το όνομα του Πεδίου!
+lngEnterFieldType=Παρακαλώ εισάγετε ή επιλέξτε τον Τύπο του Πεδίου!
+lngPKAlreadyExist=Το Πρωτεύον Κλειδί έχει ήδη τοποθετηθεί!
+lngFieldSize=Μέγεθος πεδίου:
+lngEnterFieldSize=Παρακαλώ εισάγετε μέγεθος Πεδίου:
+lngEditField=Επεξεργασία Πεδίου
+lngAddField=Προσθήκη Πεδίου
+lngEnterIndexName=Παρακαλώ εισάγετε το όνομα του Δείκτη!
+lngEditIndex=Επεξεργασία Δείκτη
+lngCreateIndex=Δημιουργία Δείκτη
+lngEnterTableName=Παρακαλώ εισάγετε το όνομα του Πίνακα!
+lngAddTableFields=Παρακαλώ προσθέστε Πεδία στον Πίνακα!
+lngEditTable=Επεξεργασία Πίνακα
+lngCreateTable=Δημιουργία Πίνακα
+lngTableFieldName=Όνομα Πεδίου
+lngTableFieldType=Τύπος Πεδίου
+lngTableFieldConstraint=Προϋποθέσεις Πεδίου
+lngSendToExcelSuccess=Η αποστολή δεδομένων στο Excel ήταν επιτυχής.
+lngSendToExcelWait=Αποστολή δεδομένων στο Excel, παρακαλώ περιμένετε ...
+lngNoDataToSend=Δεν βρέθηκαν δεδομένα για αποστολή!
+lngFailToSave=Η αποθήκευση του αρχείου δεν είναι δυνατή!
+lngError=Σφάλμα:
+lngNoDataToExport=Δεν βρέθηκαν δεδομένα για εξαγωγή!
+lngExcelFormat=Αρχείο τύπου Microsoft Excel
+lngCSVFormat=Αρχείο τύπου Διαχωρισμένων Τιμών
+lngXMLFormat=Αρχείο τύπου XML
+lngHTMLFormat=Αρχείο τύπου HTML
+lngCCFunction="Συνάρτηση"
+lngCCField=   "Πεδίο    "
+lngCCTable=   "Πίνακας  "
+lngCCView=    "Προβολή  "
+lngCCIndex=   "Δείκτης  "
+lngCCTrigger= "Διέγερση "
+lngReservedWordQuery=Η λέξη %s χσρησιμοποιείται απο το σύστημα
+lngQueryIdent=Ερώτημα
+lngEnterName=Εισάγετε όνομα!
+lngSaveQuery=Αποθήκευση Ερωτήματος:
+lngEnterQueryNamePrompt=Παρακαλώ εισάγετε το όνομα του Ερωτήματος:
+lngCleanUpMessage=Η Βάση ελευθερώθηκε απο %s άδειου χώρου.
+lngDeleteConfirmation=Θέλετε να γίνει η διαγραφή;
+lngConfirmation=Επιβεβαίωση:
+lngDBDisconnected=Η Βάση είναι αποσυνδεδεμένη
+lngDBConnected=Η Βάση είναι συνδεδεμένη
+lngDisconnected=Χωρίς σύνδεση
+lngOpenDatabase=’νοιγμα Βάσης:
+lngTVQueries=Ερωτήματα
+lngTVTriggers=Διεγέρσεις
+lngTVViews=Προβολές
+lngTVIndexes=Δείκτες
+lngTVTables=Πίνακες
+lngTVFields=Πεδία
+lngQueryExecTime=Το Ερώτημα εκτελέστηκε σε %dms
+lngQueryExecuted=Το Ερώτημα εκτελέστηκε
+lngDBCreated=Η Βάση δημιουργήθηκε
+lngSelectDBSaveTarget=Επιλέξτε προορισμό για τη Νέα Βάση:
+lngTableFieldDefault=Προκαθορισμένη τιμή
+lngMultiPrimaryKey=Το Πρωτεύον Κλειδι μπορεί να χρησιμοποιηθεί σε Πολλαπλά Πεδία μόνο εάν δεν έχει ορισθεί Πρωτεύον Κλειδί σε κάποιο Πεδίο!
+lngMigrationSuccess=Η μετατροπή της Βάσης ολοκληρώθηκε επιτυχώς!
+lngMigrationInProgress=Ο Πίνακας "%s" μετατρέπεται, παρακαλώ περιμένετε ...
+lngSQLiteDB=Βαση δεδομένων
+lngAnyFile=Όλα τα αρχεία
+lngImportDone=Η εισαγωγή ολοκληρώθηκε!
+lngBtnFirst=Πρώτο
+lngBtnPrev=Προηγούμενο
+lngBtnLast=Τελευταίο
+lngBtnNext=Επόμενο
+lngBtnAdd=Εισαγωγή
+lngBtnRemove=Διαγραφή
+lngBtnEdit=Επεξεργασία
+lngBtnApply=Αποστολή
+lngBtnCancel=’κυρο
+lngBtnRefresh=Ανανέωση
+
+[StrfTimeHint]
+Line0=
+Line1=Σταθερές Μορφής:
+Line2=
+Line3=%d   ημέρα του μήνα
+Line4=%f   ** κλασματικά δευτερόλεπτα  SS.SSS
+Line5=%H   ώρα 00-24
+Line6=%j   ημέρα του χρόνου 001-366
+Line7=%J   ** αριθμός ημέρας Ιουλιανού
+Line8=%m   μήνας 01-12
+Line9=%M   λεπτά 00-59
+Line10=%s   δευτερόλεπτα απο το 1970-01-01
+Line11=%S   δευτερόλεπτα 00-59
+Line12=%w   ημέρα της εβδομάδος 0-6  κυριακή==0
+Line13=%W   εβδομάδα του χρόνου 00-53
+Line14=%Y   έτος 0000-9999
+Line15=%%   %

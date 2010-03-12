@@ -1,0 +1,326 @@
+;######################################
+;Turkish Translation by Ismail Ata KURT
+;######################################
+
+[frmMain]
+tsSQL=SQL Sorgusu
+tsResult=Sonuç
+tsEdit=Veriyi Düzenle
+pEditTop=
+lblTable=Tablo:
+lblFilterField=Filtrelenmiþtablo:
+lblFilter=Filtre:
+miDatabase=Veri Tabaný
+miNew=Yeni
+miOpen=Aç
+miCleanUp=Temizle
+miClose=Kapat
+miCreationSQL=SQL Veritabaný
+miMigrate=SQLite3'e dönüþtür
+miRecentList=En son
+miExit=Çýkýþ
+miTable=Tablo
+miNewTable=Yeni
+miEditTable=Düzenle
+miDeleteTable=Sil
+miIndex=Ýndeks
+miNewIndex=Yeni
+miEditIndex=Düzenle
+miDeleteIndex=Sil
+miView=Göster
+miNewView=Yeni
+miEditView=Düzenle
+miDeleteView=Sil
+miTrigger=Tetik (Trigger)
+miNewTrigger=Yeni
+miEditTrigger=Düzenle
+miDeleteTrigger=Sil
+Abfrage1=Sorgu
+miAddQuery=Ekle
+miShowQuery=Aç
+miSaveQueryMain=Sakla
+miDelQuery=Sil
+miOpenSQL=Sonuçla çalýþtýr
+miExecSQL=Sonuçsuz çalýþtýr
+miInsertInNewViewMain=Yeni görünümde kullan
+miInsertInNewTriggerMain=Yeni tetikte kullan
+Daten1=Veri
+miExport=Dönüþtür
+miSendToExcel=Excel'e yolla
+miImport=Veri al
+miHelp=Yardým
+miInfo=Bilgi
+Fehlerbericht1=Rapor
+pmiRefresh=Tazele
+pmiShowSQL=SQL'i göster
+pmiNewTable=Tablo Oluþtur
+pmiEditTable=Tablo Düzenle
+pmiDelTable=Tablo Sil
+pmiNewIndex=Ýndex Oluþtur
+pmiEditIndex=Ýndex Düzenle
+pmiDelIndex=Ýndex Sil
+pmiNewView=Görünüm Oluþtur
+pmiEditView=Görünüm Düzenle
+pmiDelView=Görünüm Sil
+pmiNewTrigger=Tetik Oluþtur
+pmiEditTrigger=Tetik Düzenle
+pmiDelTrigger=Tetik Sil
+pmiFindQuery=Sorgu Bul
+pmiAddQuery=Sorgu Ekle
+pmiShowQuery=Sorgu Aç
+pmiDelQuery=Sorgu Sil
+miAddTab=Yeni Sorgu Oluþtur
+miSaveQuery=Veritabanýna sakla
+miSaveToFile=Dosyaya Sakla
+miUndo=Geri Al
+miRedo=Tekrarla
+miCut=Kes
+miCopy=Kopyala
+miPaste=Yapýþtýr
+miSelAll=Hepsini Seç
+miCopyToDelphi=Delphi kaynaðý olarak kopyala
+miComment=Yorumu göster/gizle
+miInsertInNewView=Yeni Görünümde Kullan
+miInsertInNewTrigger=Yeni Tetikde Kullan
+miDeleteTab=Sorguyu Kapat
+miMemo=Memo'yu Göster
+miPicture=Resmi Göster
+tbbNewDatabase=Veritabaný Oluþtur
+tbbOpenDatabase=Veritabanýný(en son)  Aç
+tbbCleanUp=Veritabanýný Temizle
+tbbCloseDatabase=Veritabanýný Kapat
+tbbNewTable=Tablo Oluþtur
+tbbEditTable=Tablo Düzenle
+tbbDeleteTable=Tablo Sil
+tbbNewIndex=Ýndeks oluþtur
+tbbEditIndex=Ýndeks düzenle
+tbbDeleteIndex=Ýndeks Sil
+tbbNewView=Görünüm Oluþtur
+tbbEditView=Görünüm Düzenle
+tbbDeleteView=Görünüm Sil
+tbbNewTrigger=Tetik Oluþtur
+tbbEditTrigger=Tetik Düzenle
+tbbDeleteTrigger=Tetik Sil
+tbbAddSQL=Yeni Sorgu Ekle
+tbbSaveSQL=Sorguyu Veritabanýna Sakla
+tbbOpenSQL=SQL Sorgusunu Sonuçla Çalýþtýr (select) F9
+tbbExecSQL=SQL Sorgusunu Sonuçsuz Çalýþtýr (insert,update,delete) F8 
+
+tbbViewHierarchy=Hiyerarþik Görünüm
+tbbShowTables=Tablolarý Göster
+tbbShowFields=Alanlarý Göster
+tbbShowTriggers=Tetikleri Göster
+tbbShowIndexes=Ýndeksleri Göster
+tbbShowViews=Görünümleri Göster
+tbbShowSysEntrys=Sistem Girdilerini Göster
+tbbShowQueries=Sorgularý Göster
+
+[frmTable]
+lblTablename=Tabloadý:
+gbFields="     Tabloalanlarý"
+btnAdd=Alan Ekle
+btnDel=Alan Sil
+btnChange=Alaný Düzenle
+btnOK=Oluþtur
+btnCancel=Ýptal
+btnPrimaryKey=Ana Anahtar
+
+[frmField]
+lblFieldName=Alanadý:
+lblFieldType=Alantipi:
+lblDefaultValue=Varsayýlan Deðer:
+cbUnique=Eþsiz
+cbNotNull=Boþ deðil
+cbPrimaryKey=Ana Anahtar
+cbAutoInc=Otomatik Artýþ
+btnAdd=Ekle
+btnCancel=Ýptal
+
+[frmIndex]
+lblIndexName=Ýdeksadý:
+lblTable=Tablo:
+cbUnique=Eþsiz
+gbFields="     Alanlar"
+lblSrcFields=Uygun Alanlar:
+lblDestFields=Ýndekslenmiþ Alanlar:
+btnCreate=Oluþtur
+btnCancel=Ýptal
+
+[frmView]
+lblViewName=Görünümadý:
+gbSQL="     SQL Select"
+btnCreate=Oluþtur
+btnCancel=Ýptal
+[frmPicture]
+btnPic=Resmi Deðiþtir
+btnDel=Resmi Sil
+btnSave=Resmi Farklý Kaydet
+
+[frmTrigger]
+lblTriggername=Tetikadý:
+tsEvent=Tetik Olayý
+lblTable=Tablo:
+lblView=Görünüm:
+gbFields="     Alanlar"
+lblSrcFields=Uygun Alanlar:
+lblDestFields=Olay Alanlarý:
+gbTriggerEvent=Tetik Olayý
+rbBefore=Önce
+rbAfter=Sonra
+rbInsteadOf=Yerine
+gbEvents=Olay
+gbFOR=Ýþlem
+rbEachRow=Her Satýr
+rbEachStatement=Her Ýfade
+tsSQL=Tetik SQL
+gbTriggerSQL="     Tetik Olayýnda çalýþacak SQL Kaynaðý (OLD. / NEW. = Ref)"
+lblCondition=Koþul:
+btnCreate=Oluþtur
+btnCancel=Ýptal
+
+[frmImport]
+Caption=Veri Al
+gbMapping=Alan Tasarýmý
+lblSourceFields=Kaynak Alanlar:
+lblTargetFields=Hedef Alanlar:
+lblDestTable=Hedef Tablo:
+cbClearTable=Veri almadan önce Tabloyu Temizle
+btnLoadFile=Dosya Aç
+btnImport=Veri Al
+btnClose=Kapat
+
+[frmLog]
+Caption=Hata Raporu
+
+[frmMemoEdit]
+Caption=Memo'yu Düzenle 
+
+[MessageStrings]
+lngInfo=Bilgi
+lngWarning=Uyarý:
+lngCreate=Oluþtur
+lngEdit=Düzenle
+lngAdd=Ekle
+
+lngNameAlreadyExists=Ýsim zaten yerleþtirilmiþ!
+lngInvalidChars=Ýsim 'sqlite_' öneki , özel karakter , boþluk içeremez!
+lngEnterSQLSource=Lütfen SQL ifadesini girin
+
+lngCreateView=Görünüm Oluþtur
+lngEditView=Görünüm Düzenle
+lngEnterViewName=Lütfen Görünüm Adýný Girin!
+lngEnterTriggerName=Lütfen Tetik Adý Girin!
+lngSelectTable=Lütfen Tablo Seçin!
+lngSelectView=Lütfen Görünüm Seçin!
+lngSelectEvent=Lütfen Olay Seçin!
+lngSelectFields=Lütfen Alanlarý Seçin!
+lngSemiNotFound=SQL ifadesinden sonra noktalý virgül bulunamadý! 
+lngCreateTrigger=Tetik Oluþtur
+lngEditTrigger=Tetik Düzenle
+lngBlobFileSize=Gücenlik nedenlerinden dolayý maksimum Dosya Boyutu 500 kb ile limitlidir. SQLite 2.8 x  her veri satýrý baþýna mak. 1 MB desteklemektedir.
+lngSeperator=Ayýraç
+lngEnterSeperatorChar=Ayýraç Karakterini Girin Lütfen!
+lngContainsHeaderFieldNames=Ýlk Satýr Alan adlarý içeriyormu?
+lngFieldAlreadyChoosen=Alan Zaten Seçil,!
+lngSeperatedValues=Deðerleri Ayýr
+lngEnterFieldName=Lütfen Alan Adý girim!
+lngEnterFieldType=Lütfen Alan adý girin veya Alan Tipi seçin!
+lngPKAlreadyExist=Ana Anahtar zaten yerleþtirilmiþ!
+lngFieldSize=Alanboyutu:
+lngEnterFieldSize=Lütfen Alan Boyutu girin:
+lngEditField=Alaný Düzenle
+lngAddField=Alan Ekle
+lngEnterIndexName=Lütfen Ýndeks Adý Girin!
+lngEditIndex=Ýndeks'i Düzenle
+lngCreateIndex=Ýndeks Oluþtur
+lngEnterTableName=Lütfen Tablo Adý girin!
+lngAddTableFields=Lütfen Tablo Alanlarý Ekleyin!
+lngEditTable=Tablo Düzenle
+lngCreateTable=Tablo Düzenle
+lngTableFieldName=Alanadý
+lngTableFieldType=Alantipi
+lngTableFieldConstraint=Alankýsýtý
+lngSendToExcelSuccess=Excel'e veri gönderimi baþarýlý.
+lngSendToExcelWait=Excel'e veri yolla, lütfen bekleyin ...
+lngNoDataToSend=Yollanacak Veri Bulunamadý!
+lngFailToSave=Dosya Saklanamadý!
+lngError=Hata:
+lngNoDataToExport=Dönüþtürülecek Veri Bulunamadý!
+lngExcelFormat=Excel Uyumlu Biçim
+lngCSVFormat=Ayrýlmýþ Deðer Formatý
+lngXMLFormat=XML Formatý
+lngHTMLFormat=HTML Formatý
+lngCCFunction="Fonksiyon"
+lngCCField=   "Alan     "
+lngCCTable=   "Tablo    "
+lngCCView=    "Görünüm  "
+lngCCIndex=   "Ýdeks    "
+lngCCTrigger= "Tetik    "
+lngReservedWordQuery=%s ayrýlmýþ kelime
+lngQueryIdent=Sorgu
+lngEnterName=Ýsim Girin!
+lngSaveQuery=Sorguyu Sakla:
+lngEnterQueryNamePrompt=Bu Sorgu için Bir Ýsim Girin Lütfen:
+lngCleanUpMessage=Veritabaný %s 'i kadar gereksiz veriden temizlendi. 
+lngDeleteConfirmation=Gerçekten Silmek Ýstiyormusunuz?
+lngConfirmation=Onaylama:
+lngDBDisconnected=Veritabaný baðlantýsý kesildi
+lngDBConnected=Veritabanýna baðlanýldý
+lngDisconnected=Baðlý deðil
+lngOpenDatabase=Veritabaný Aç:
+lngTVQueries=Sorgular
+lngTVTriggers=Tetikler
+lngTVViews=Görünümler
+lngTVIndexes=Ýndeksler
+lngTVTables=Tablolar
+lngTVFields=Alanlar
+lngQueryExecTime=Sorgu %dms 'de  çalýþtýrýldý
+lngQueryExecuted=Sorgu Çalýþtýrýldý
+lngDBCreated=Veritabaný oluþturuldu
+lngSelectDBSaveTarget=Yeni Veritabaný için Hedef Seçin:
+lngTableFieldDefault=Varsayýlan Deðer
+lngMultiPrimaryKey=Çoklu Alan Ana Anahtarý tek Alan Ana Anahtarý seçili deðilken kullanýlabilir! 
+lngMigrationSuccess=Veritabaný Dönüþümü baþarýyla tamamlandý!
+lngMigrationInProgress="%s" Tablosu dönüþtürülüyor , Lütfen bekleyin...
+lngSQLiteDB=SQLite Veritabaný
+lngAnyFile=Herhangi Bir Dosya
+lngImportDone=Alma Baþarýlý!
+
+;##############################################
+;########## Begin Language Updates ############
+;## Send updates to "sqliteadmin@orbmu2k.de" ##
+;##############################################
+
+lngBtnFirst=First
+lngBtnPrev=Previos
+lngBtnLast=Last
+lngBtnNext=Next
+lngBtnAdd=Insert
+lngBtnRemove=Delete
+lngBtnEdit=Edit
+lngBtnApply=Post
+lngBtnCancel=Cancel
+lngBtnRefresh=Refresh
+
+;##############################################
+;########### End Language Updates #############
+;##############################################
+
+
+[StrfTimeHint]
+Line0=
+Line1=Formatsabitleri:
+Line2=
+Line3=%d   Ayýn günü
+Line4=%f   ** Kesirli Saniyeler SS.SSS
+Line5=%H   Saat 00-24
+Line6=%j   Yýl Günü 001-366
+Line7=%J   ** Julian Gün Numarasý
+Line8=%m   Ay 01-12
+Line9=%M   Dakika 00-59
+Line10=%s  1970-01-01 itibaren saniyeler
+Line11=%S   Saniyeler 00-59
+Line12=%w   Haftanýn Günü 0-6  pazar==0
+Line13=%W   Yýlýn Hatasý 00-53
+Line14=%Y   Yýl 0000-9999
+Line15=%%   %

@@ -1,0 +1,325 @@
+;##############################
+;Hungarian Translation by Zsolt 
+;##############################
+
+[frmMain]
+tsSQL=SQL Lekérdezés
+tsResult=Eredmény
+tsEdit=Adat szerkesztése
+pEditTop=
+lblTable=Tábla:
+lblFilterField=Szürõmezõ:
+lblFilter=Szürõ:
+miDatabase=Adatbázis
+miNew=Új
+miOpen=Megnyit
+miCleanUp=Takarítás
+miClose=Bezár
+miCreationSQL=SQL Adatbázis
+miMigrate=SQLite3 migrálás
+miRecentList=Elõzmény
+miExit=Kilépés
+miTable=Tábla
+miNewTable=Új
+miEditTable=Szerkeszt
+miDeleteTable=Töröl
+miIndex=Index
+miNewIndex=Új
+miEditIndex=Szerkeszt
+miDeleteIndex=Töröl
+miView=Nézet
+miNewView=Új
+miEditView=Szerkeszt
+miDeleteView=Töröl
+miTrigger=Trigger
+miNewTrigger=Új
+miEditTrigger=Szerkeszt
+miDeleteTrigger=Töröl
+Abfrage1=Lekérdezés
+miAddQuery=Hozzáad
+miShowQuery=Megnyit
+miSaveQueryMain=Ment
+miDelQuery=Töröl
+miOpenSQL=Végrehajtás eredménnyel
+miExecSQL=Végrehajtás eredmény nélkül
+miInsertInNewViewMain=Használd új nézetben
+miInsertInNewTriggerMain=Haszáld új triggerben
+Daten1=Adat
+miExport=Exportál
+miSendToExcel=Excelbe áthelyez
+miImport=Importál
+miHelp=Segítség
+miInfo=Információ
+Fehlerbericht1=Log
+pmiRefresh=Frissít
+pmiShowSQL=SQL bemutatása
+pmiNewTable=Tábla létrehozás
+pmiEditTable=Tábla szerkesztés
+pmiDelTable=Tábla törlése
+pmiNewIndex=Index létrehozás
+pmiEditIndex=Index létrehozás
+pmiDelIndex=Index törlése
+pmiNewView=Nézet létrehozás
+pmiEditView=Nézet szerkesztés
+pmiDelView=Nézet törlése
+pmiNewTrigger=Trigger létrehozás
+pmiEditTrigger=Trigger szerkesztés
+pmiDelTrigger=Trigger törése
+pmiFindQuery=Lekérdezés keresés
+pmiAddQuery=Lekérdezés hozzáadása
+pmiShowQuery=Lekérdezés megnyitása
+pmiDelQuery=Lekérdezés törélse
+miAddTab=Új lekérdezés létrehozása
+miSaveQuery=Mentés az adatbázisba
+miSaveToFile=Mentés állományba
+miUndo=Visszavon
+miRedo=Helyreállít
+miCut=Kivág
+miCopy=Másol
+miPaste=Beilleszt
+miSelAll=Mindent kijelöl
+miCopyToDelphi=Delphi forrásba másolás
+miComment=Kommentek bekapcsolása
+miInsertInNewView=Használd új nézetben
+miInsertInNewTrigger=Használd új triggerben
+miDeleteTab=Lekérdezés bezárása
+miMemo=Memo megjelentítése
+miPicture=Kép megjelenítése
+tbbNewDatabase=Adatbázis létrehozás
+tbbOpenDatabase=Adatbázis megnyitása
+tbbCleanUp=Adatbázis takarítása
+tbbCloseDatabase=Adatbázis bezárása
+tbbNewTable=Tábla létrehozás
+tbbEditTable=Tábla szerkesztés
+tbbDeleteTable=Tábla törlése
+tbbNewIndex=Index létrehozás
+tbbEditIndex=Index szerkesztés
+tbbDeleteIndex=Index törlés
+tbbNewView=Nézet létrehozás
+tbbEditView=Nézet szerkesztés
+tbbDeleteView=Nézet törlés
+tbbNewTrigger=Trigger létrehozás
+tbbEditTrigger=Trigger szerkesztés
+tbbDeleteTrigger=Trigger törlése
+tbbAddSQL=Új lekérdezés hozzáadása
+tbbSaveSQL=Lekérdezés mentése az adatbázisba
+tbbOpenSQL=SQL lekérdezés végrehajtása eredménnyel (select) F9
+tbbExecSQL=SQL lekérdezés végrehajtása eredmén nélkül (insert,update,delete) F8
+
+tbbViewHierarchy=Hierarchia nézet
+tbbShowTables=Táblák megmutatása
+tbbShowFields=Mezõk megmutatása
+tbbShowTriggers=Triggerek megmutatása
+tbbShowIndexes=Indexek megmutatása
+tbbShowViews=Nézetek megmutatása
+tbbShowSysEntrys=Rendszer bejegyzések megmutatása
+tbbShowQueries=Lekérdezések megmutatása
+
+[frmTable]
+lblTablename=Táblanév:
+gbFields="     Táblamezõk"
+btnAdd=Mezõ hozzáadása
+btnDel=Mezõ törlése
+btnChange=Mezõ szerkesztése
+btnOK=Létrehoz
+btnCancel=Visszavon
+btnPrimaryKey=Elsõdleges kulcs
+
+[frmField]
+lblFieldName=Mezõnév:
+lblFieldType=Mezõtipus:
+lblDefaultValue=Alap érték:
+cbUnique=Egyedi
+cbNotNull=Nem NULL
+cbPrimaryKey=Elsõdleges kulcs
+cbAutoInc=Automatikus növelés
+btnAdd=Hozzáad
+btnCancel=Visszavon
+
+[frmIndex]
+lblIndexName=Indexnév:
+lblTable=Tábla:
+cbUnique=Egyedi
+gbFields="     Mezõk"
+lblSrcFields=Elérhetõ mezõk:
+lblDestFields=Indexelt mezõk:
+btnCreate=Létrehoz
+btnCancel=Visszavon
+
+[frmView]
+lblViewName=Nézetnév:
+gbSQL="     SQL Select"
+btnCreate=Létrehoz
+btnCancel=Visszavon
+[frmPicture]
+btnPic=Kép cseréje
+btnDel=Kép törlése
+btnSave=Kép mentése máskénts
+
+[frmTrigger]
+lblTriggername=Triggernév:
+tsEvent=Trigger esemény
+lblTable=Tábla:
+lblView=Nézet:
+gbFields="     Mezõk"
+lblSrcFields=Elérhetõ mezõk:
+lblDestFields=Esemény mezõ:
+gbTriggerEvent=Trigger esemény
+rbBefore=Elötte
+rbAfter=Utánna
+rbInsteadOf=Helyette
+gbEvents=Esemény
+gbFOR=Akció
+rbEachRow=Minden sorra
+rbEachStatement=Minden kifejezésre
+tsSQL=Trigger SQL
+gbTriggerSQL="     SQL forrás amely a Trigger eseményt végrehajtja (OLD. / NEW. = Ref)"
+lblCondition=Állapot:
+btnCreate=Létrehoz
+btnCancel=Visszavon
+
+[frmImport]
+Caption=Adatok importálása
+gbMapping=Mezõ térkép
+lblSourceFields=Forrás mezõk:
+lblTargetFields=Cél mezõk:
+lblDestTable=Cél tábla:
+cbClearTable=Tábla törlése importálás elött
+btnLoadFile=Állomány megnyitása
+btnImport=Adat importálása
+btnClose=Bezár
+
+[frmLog]
+Caption=Hiba Log
+
+[frmMemoEdit]
+Caption=Memo szerkestése
+
+[MessageStrings]
+lngInfo=Információ
+lngWarning=Figyelmeztetés:
+lngCreate=Létrehoz
+lngEdit=Szerkeszt
+lngAdd=Hozzáadás
+
+lngNameAlreadyExists=Ez a név már foglalt!
+lngInvalidChars=A név nem tartalmazza az 'sqlite_' elõtagot!
+lngEnterSQLSource=Kérem irja be az SQL kifejezést
+
+lngCreateView=Nézet létrehozása
+lngEditView=Nézet szerkesztése
+lngEnterViewName=Kérem irja be a nézet nevét!
+lngEnterTriggerName=Kérem irja be a trigger nevét!
+lngSelectTable=Kérem jelölje ki a táblát!
+lngSelectView=Kérem jelölje ki a nézetet!
+lngSelectEvent=Kérem jelölje ki az eseményt!
+lngSelectFields=Kérem jelölje ki a mezõt!
+lngSemiNotFound=Nincs pontosvesszõ az SQL kifejezés után!
+lngCreateTrigger=Trigger létrehozás
+lngEditTrigger=Trigger szerkesztés
+lngBlobFileSize=Biztonsági okokból a maximális file méret limitálva van 500Kb-ra. Az SQLite 2.8 x az max. 1 MB/adatsort támogatja.
+lngSeperator=Elválasztó
+lngEnterSeperatorChar=Kérem adja meg az elválasztó karaktert!
+lngContainsHeaderFieldNames=Az elsõ sor tartalmazza a mezõ neveit?
+lngFieldAlreadyChoosen=A mezõ már ki volt választva!
+lngSeperatedValues=Elválasztó értékek
+lngEnterFieldName=Kérem irja be a mezõ nevét!
+lngEnterFieldType=Kérem irja be vagy válassza ki a mezõ tipusát!
+lngPKAlreadyExist=Az elsõdleges kulcs már le van foglalva!
+lngFieldSize=Mezõméret:
+lngEnterFieldSize=Kérem adja meg a mezõ méretét:
+lngEditField=Mezõ szerkesztés
+lngAddField=Mezõ hozzáadás
+lngEnterIndexName=Kérem adja meg az index nevég!
+lngEditIndex=Index szerkesztése
+lngCreateIndex=Index létrehozása
+lngEnterTableName=Kérem adja meg a tábla nevét!
+lngAddTableFields=Kérem adjon a táblához mezõket!
+lngEditTable=Tábla szerkesztés
+lngCreateTable=Tábla létrehozás
+lngTableFieldName=Mezõnév
+lngTableFieldType=Mezõtipus
+lngTableFieldConstraint=Mezõkikötés
+lngSendToExcelSuccess=Adatküldés az Excelnek sikeres volt.
+lngSendToExcelWait=Adat küldése az Excelnek, kérem várjon...
+lngNoDataToSend=Nincs küldendõ adat!
+lngFailToSave=Az file nem lett elmentve!
+lngError=Hiba:
+lngNoDataToExport=Nincs adat az exportáláshoz!
+lngExcelFormat=Excel kompatibilis formátum
+lngCSVFormat=Értékek elválaszva formátum
+lngXMLFormat=XML formátum
+lngHTMLFormat=HTML formátum
+lngCCFunction="Funkció"
+lngCCField=   "Mezõ   "
+lngCCTable=   "Tábla  "
+lngCCView=    "Nézet  "
+lngCCIndex=   "Index  "
+lngCCTrigger= "Trigger"
+lngReservedWordQuery=%s , ez egy fentartott szó
+lngQueryIdent=Leklérdezés
+lngEnterName=Név megadása!
+lngSaveQuery=Lekérdezés mentése:
+lngEnterQueryNamePrompt=Kérem adja meg a nevét a lekérdezésnek:
+lngCleanUpMessage=Az adatbázis ki lett tiszitva a(z)  %s nemkivánt adatoktól.
+lngDeleteConfirmation=Valóban törli?
+lngConfirmation=Megerõsítés:
+lngDBDisconnected=Adatbáziskapcsolat megszakítva
+lngDBConnected=Adatbázis csatlakozva
+lngDisconnected=Nem csatlakozott
+lngOpenDatabase=Nyitott adatbázis:
+lngTVQueries=Lekérdezések
+lngTVTriggers=Triggerek
+lngTVViews=Nézetek
+lngTVIndexes=Indexek
+lngTVTables=Táblák
+lngTVFields=Mezõk
+lngQueryExecTime=A lekrédezés végrehajtási ideje %dms
+lngQueryExecuted=Lekérdezés végrehajtva
+lngDBCreated=Adatbázis létrejött
+lngSelectDBSaveTarget=Jelölje ki az új adatbázis célját:
+lngTableFieldDefault=Alapérték
+lngMultiPrimaryKey=Több mezõs elsõdleges kulcs akkor hozható létreh ha nincs egy mezõs elsõdleges kulcs kijelölve!
+lngMigrationSuccess=Adatbázis migráció sikeresen befejezõdött!
+lngMigrationInProgress="%s" tábla migrálása folyamatban, kérem várjon...
+lngSQLiteDB=SQLite Adatbázis
+lngAnyFile=Akármilyen állomány
+lngImportDone=Import done!
+
+;##############################################
+;########## Begin Language Updates ############
+;## Send updates to "sqliteadmin@orbmu2k.de" ##
+;##############################################
+
+lngBtnFirst=First
+lngBtnPrev=Previos
+lngBtnLast=Last
+lngBtnNext=Next
+lngBtnAdd=Insert
+lngBtnRemove=Delete
+lngBtnEdit=Edit
+lngBtnApply=Post
+lngBtnCancel=Cancel
+lngBtnRefresh=Refresh
+
+;##############################################
+;########### End Language Updates #############
+;##############################################
+
+[StrfTimeHint]
+Line0=
+Line1=Formátum konstansok:
+Line2=
+Line3=%d   a honap napja
+Line4=%f   ** részletes másodperc  SS.SSS
+Line5=%H   óra 00-24
+Line6=%j   az év napja 001-366
+Line7=%J   ** Julian nap száma
+Line8=%m   hónap 01-12
+Line9=%M   perc 00-59
+Line10=%s   másodperc 1970-01-01-töl
+Line11=%S   másodperc 00-59
+Line12=%w   a hét napja 0-6  vasárnap==0
+Line13=%W   az év hete 00-53
+Line14=%Y   év 0000-9999
+Line15=%%   %

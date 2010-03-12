@@ -1,0 +1,190 @@
+From d2b6abd3125815d06868049fee7668156fde0e9b Mon Sep 17 00:00:00 2001
+From: unknown <CSteeg@.modernmedia.local>
+Date: Thu, 11 Feb 2010 10:35:04 +0100
+Subject: [PATCH 3/4] Allow to reset cache
+
+---
+ src/FluentNHibernate/Mapping/CachePart.cs |  171 +++++++++++++++--------------
+ 1 files changed, 88 insertions(+), 83 deletions(-)
+
+diff --git a/src/FluentNHibernate/Mapping/CachePart.cs b/src/FluentNHibernate/Mapping/CachePart.cs
+index d484462..4f06d35 100644
+--- a/src/FluentNHibernate/Mapping/CachePart.cs
++++ b/src/FluentNHibernate/Mapping/CachePart.cs
+@@ -1,84 +1,89 @@
+-using System;
+-using FluentNHibernate.Mapping.Providers;
+-using FluentNHibernate.MappingModel;
+-
+-namespace FluentNHibernate.Mapping
+-{
+-    public class CachePart : ICacheMappingProvider
+-    {
+-        private readonly Type entityType;
+-        private readonly AttributeStore<CacheMapping> attributes = new AttributeStore<CacheMapping>();
+-
+-        public CachePart(Type entityType)
+-        {
+-            this.entityType = entityType;
+-        }
+-
+-        CacheMapping ICacheMappingProvider.GetCacheMapping()
+-        {
+-            var mapping = new CacheMapping(attributes.CloneInner());
+-            mapping.ContainedEntityType = entityType;
+-
+-            return mapping;
+-        }
+-
+-        public CachePart ReadWrite()
+-        {
+-            attributes.Set(x => x.Usage, "read-write");
+-            return this;
+-        }
+-
+-        public CachePart NonStrictReadWrite()
+-        {
+-            attributes.Set(x => x.Usage, "nonstrict-read-write");
+-            return this;
+-        }
+-
+-        public CachePart ReadOnly()
+-        {
+-            attributes.Set(x => x.Usage, "read-only");
+-            return this;
+-        }
+-
+-        public CachePart Transactional()
+-        {
+-            attributes.Set(x => x.Usage, "transactional");
+-            return this;
+-        }
+-
+-        public CachePart CustomUsage(string custom)
+-        {
+-            attributes.Set(x => x.Usage, custom);
+-            return this;
+-        }
+-
+-        public CachePart Region(string name)
+-        {
+-            attributes.Set(x => x.Region, name);
+-            return this;
+-        }
+-
+-        public CachePart IncludeAll()
+-        {
+-            attributes.Set(x => x.Include, "all");
+-            return this;
+-        }
+-
+-        public CachePart IncludeNonLazy()
+-        {
+-            attributes.Set(x => x.Include, "non-lazy");
+-            return this;
+-        }
+-
+-        public CachePart CustomInclude(string custom)
+-        {
+-            attributes.Set(x => x.Include, custom);
+-            return this;
+-        }
+-
+-        public bool IsDirty
+-        {
+-            get { return attributes.IsSpecified(x => x.Region) || attributes.IsSpecified(x => x.Usage) || attributes.IsSpecified(x => x.Include); }
+-        }
+-    }
++using System;
++using FluentNHibernate.Mapping.Providers;
++using FluentNHibernate.MappingModel;
++
++namespace FluentNHibernate.Mapping
++{
++    public class CachePart : ICacheMappingProvider
++    {
++        private readonly Type entityType;
++        private AttributeStore<CacheMapping> attributes = new AttributeStore<CacheMapping>();
++
++        public CachePart(Type entityType)
++        {
++            this.entityType = entityType;
++        }
++
++        CacheMapping ICacheMappingProvider.GetCacheMapping()
++        {
++            var mapping = new CacheMapping(attributes.CloneInner());
++            mapping.ContainedEntityType = entityType;
++            return mapping;
++        }
++
++        public CachePart ReadWrite()
++        {
++            attributes.Set(x => x.Usage, "read-write");
++            return this;
++        }
++
++        public CachePart NonStrictReadWrite()
++        {
++            attributes.Set(x => x.Usage, "nonstrict-read-write");
++            return this;
++        }
++
++        public CachePart ReadOnly()
++        {
++            attributes.Set(x => x.Usage, "read-only");
++            return this;
++        }
++
++        public CachePart Transactional()
++        {
++            attributes.Set(x => x.Usage, "transactional");
++            return this;
++        }
++
++        public CachePart CustomUsage(string custom)
++        {
++            attributes.Set(x => x.Usage, custom);
++            return this;
++        }
++
++        public CachePart Region(string name)
++        {
++            attributes.Set(x => x.Region, name);
++            return this;
++        }
++
++        public CachePart IncludeAll()
++        {
++            attributes.Set(x => x.Include, "all");
++            return this;
++        }
++
++        public CachePart IncludeNonLazy()
++        {
++            attributes.Set(x => x.Include, "non-lazy");
++            return this;
++        }
++
++        public CachePart CustomInclude(string custom)
++        {
++            attributes.Set(x => x.Include, custom);
++            return this;
++        }
++
++        public CachePart NoCache()
++        {
++            attributes = new AttributeStore<CacheMapping>();
++            return this;
++        }
++
++        public bool IsDirty
++        {
++            get { return attributes.IsSpecified(x => x.Region) || attributes.IsSpecified(x => x.Usage) || attributes.IsSpecified(x => x.Include); }
++        }
++    }
+ }
+\ No newline at end of file
+-- 
+1.6.4.msysgit.0
+

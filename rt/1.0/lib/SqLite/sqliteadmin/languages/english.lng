@@ -1,0 +1,316 @@
+;##################################
+;English Translation by Orbmu2k ;-)
+;##################################
+
+[frmMain]
+tsSQL=SQL Query
+tsResult=Result
+tsEdit=Edit Data
+pEditTop=
+lblTable=Table:
+lblFilterField=Filterfield:
+lblFilter=Filter:
+miDatabase=Database
+miNew=New
+miOpen=Open
+miCleanUp=CleanUp
+miClose=Close
+miCreationSQL=Database SQL
+miMigrate=Migrate to SQLite3
+miRecentList=Recent
+miExit=Exit
+miTable=Table
+miNewTable=New
+miEditTable=Edit
+miDeleteTable=Delete
+miIndex=Index
+miNewIndex=New
+miEditIndex=Edit
+miDeleteIndex=Delete
+miView=View
+miNewView=New
+miEditView=Edit
+miDeleteView=Delete
+miTrigger=Trigger
+miNewTrigger=New
+miEditTrigger=Edit
+miDeleteTrigger=Delete
+Abfrage1=Query
+miAddQuery=Add
+miShowQuery=Open
+miSaveQueryMain=Save
+miDelQuery=Delete
+miOpenSQL=Execute with Result
+miExecSQL=Execute without Result
+miInsertInNewViewMain=Use in new View
+miInsertInNewTriggerMain=Use in new Trigger
+Daten1=Data
+miExport=Export
+miSendToExcel=Send to Excel
+miImport=Import Data
+miHelp=Help
+miInfo=Info
+Fehlerbericht1=Log
+pmiRefresh=Refresh
+pmiShowSQL=Show SQL
+pmiNewTable=Create Table
+pmiEditTable=Edit Table
+pmiDelTable=Delete Table
+pmiNewIndex=Create Index
+pmiEditIndex=Edit Index
+pmiDelIndex=Delete Index
+pmiNewView=Create View
+pmiEditView=Edit View
+pmiDelView=Delete View
+pmiNewTrigger=Create Trigger
+pmiEditTrigger=Edit Trigger
+pmiDelTrigger=Delete Trigger
+pmiFindQuery=Find Query
+pmiAddQuery=Add Query
+pmiShowQuery=Open Query
+pmiDelQuery=Delete Query
+miAddTab=Create new Query
+miSaveQuery=Save to Database
+miSaveToFile=Save To File
+miUndo=Undo
+miRedo=Redo
+miCut=Cut
+miCopy=Copy
+miPaste=Paste
+miSelAll=Select All
+miCopyToDelphi=Copy as Delphi Source
+miComment=Toggle Comment
+miInsertInNewView=Use in new View
+miInsertInNewTrigger=Use in new Trigger
+miDeleteTab=Close Query
+miMemo=Show Memo
+miPicture=Show Picture
+tbbNewDatabase=Create Database
+tbbOpenDatabase=Open ( Recent ) Database
+tbbCleanUp=Database CleanUp
+tbbCloseDatabase=Close Database
+tbbNewTable=Create Table
+tbbEditTable=Edit Table
+tbbDeleteTable=Delete Table
+tbbNewIndex=Create Index
+tbbEditIndex=Edit Index
+tbbDeleteIndex=Delete Index
+tbbNewView=Create View
+tbbEditView=Edit View
+tbbDeleteView=Delete View
+tbbNewTrigger=Create Trigger
+tbbEditTrigger=Edit Trigger
+tbbDeleteTrigger=Delete Trigger
+tbbAddSQL=Add new Query
+tbbSaveSQL=Save Query to Database
+tbbOpenSQL=Execute SQL Query with Result (select) F9
+tbbExecSQL=Execute SQL Query without Result (insert,update,delete) F8 
+
+tbbViewHierarchy=Hierarchy View
+tbbShowTables=Show Tables
+tbbShowFields=Show Fields
+tbbShowTriggers=Show Triggers
+tbbShowIndexes=Show Indexes
+tbbShowViews=Show Views
+tbbShowSysEntrys=Show System Entries
+tbbShowQueries=Show Queries
+
+[frmTable]
+lblTablename=Tablename:
+gbFields="     Tablefields"
+btnAdd=&Add Field
+btnDel=&Delete Field
+btnChange=&Edit Field
+btnOK=C&reate
+btnCancel=Cance&l
+btnPrimaryKey=Primary Key
+
+[frmField]
+lblFieldName=Fieldname:
+lblFieldType=FieldType:
+lblDefaultValue=Default Value:
+cbUnique=Unique
+cbNotNull=Not NULL
+cbPrimaryKey=Primary Key
+cbAutoInc=Auto Increment
+btnAdd=Add
+btnCancel=Cancel
+
+[frmIndex]
+lblIndexName=Indexname:
+lblTable=Table:
+cbUnique=Unique
+gbFields="     Fields"
+lblSrcFields=Available Fields:
+lblDestFields=Indexed Fields:
+btnCreate=Create
+btnCancel=Cancel
+
+[frmView]
+lblViewName=Viewname:
+gbSQL="     SQL Select"
+btnCreate=Create
+btnCancel=Cancel
+[frmPicture]
+btnPic=Change Picture
+btnDel=Delete Picture
+btnSave=Save Picture as
+
+[frmTrigger]
+lblTriggername=Triggername:
+tsEvent=Trigger Event
+lblTable=Table:
+lblView=View:
+gbFields="     Fields"
+lblSrcFields=Available Fields:
+lblDestFields=Event Fields:
+gbTriggerEvent=Trigger Event
+rbBefore=Before
+rbAfter=After
+rbInsteadOf=Instead Of
+gbEvents=Event
+gbFOR=Action
+rbEachRow=Each Row
+rbEachStatement=Each Statement
+tsSQL=Trigger SQL
+gbTriggerSQL="     SQL Source wich execute at Trigger Event (OLD. / NEW. = Ref)"
+lblCondition=Condition:
+btnCreate=Create
+btnCancel=Cancel
+
+[frmImport]
+Caption=Import Data
+gbMapping=Field Mapping
+lblSourceFields=Source Fields:
+lblTargetFields=Target Fields:
+lblDestTable=Target Table:
+cbClearTable=Clear Table before Import
+btnLoadFile=Open File
+btnImport=Import Data
+btnClose=Close
+
+[frmLog]
+Caption=Error Log
+
+[frmMemoEdit]
+Caption=Edit Memo 
+
+[MessageStrings]
+lngInfo=Info
+lngWarning=Warning:
+lngCreate=Create
+lngEdit=Edit
+lngAdd=Add
+
+lngNameAlreadyExists=Name is already allocated!
+lngInvalidChars=Name may not contain 'sqlite_' prefix, any special or blanks! 
+lngEnterSQLSource=Please enter SQL statement
+
+lngCreateView=Create View
+lngEditView=Edit View
+lngEnterViewName=Please enter View Name!
+lngEnterTriggerName=Please enter Trigger Name!
+lngSelectTable=Please select Table!
+lngSelectView=Please select View!
+lngSelectEvent=Please select Event!
+lngSelectFields=Please select Fields!
+lngSemiNotFound=No semicolon after the SQL statement found! 
+lngCreateTrigger=Create Trigger
+lngEditTrigger=Edit Trigger
+lngBlobFileSize=For safety reasons the maximum FileSize is limited on 500kb. SQLite 2.8 x supports max. 1 MB per data row
+lngSeperator=Seperator
+lngEnterSeperatorChar=Please enter Seperator Char!
+lngContainsHeaderFieldNames=Does first row contains Field names?
+lngFieldAlreadyChoosen=Field was already chosen!
+lngSeperatedValues=Seperate Values
+lngEnterFieldName=Please enter Field Name!
+lngEnterFieldType=Please enter or select Field Type!
+lngPKAlreadyExist=Primary Key is already allocated!
+lngFieldSize=Fieldsize:
+lngEnterFieldSize=Please enter Field Size:
+lngEditField=Edit Field
+lngAddField=Add Field
+lngEnterIndexName=Please enter Index Name!
+lngEditIndex=Edit Index
+lngCreateIndex=Create Index
+lngEnterTableName=Please enter Tablename!
+lngAddTableFields=Please add Table Fields!
+lngEditTable=Edit Table
+lngCreateTable=Create Table
+lngTableFieldName=Fieldname
+lngTableFieldType=Fieldtype
+lngTableFieldConstraint=Fieldconstraint
+lngSendToExcelSuccess=Send Data to Excel was successful.
+lngSendToExcelWait=Send Data to Excel, please wait ...
+lngNoDataToSend=No Data for Send found!
+lngFailToSave=File could not be saved!
+lngError=Error:
+lngNoDataToExport=No Data for Export found!
+lngExcelFormat=Excel Compatible Format
+lngCSVFormat=Value seprerated Format
+lngXMLFormat=XML Format
+lngHTMLFormat=HTML Format
+lngCCFunction="Function"
+lngCCField=   "Field   "
+lngCCTable=   "Table   "
+lngCCView=    "View    "
+lngCCIndex=   "Index   "
+lngCCTrigger= "Trigger "
+lngReservedWordQuery=%s is a reserved Word
+lngQueryIdent=Query
+lngEnterName=Enter Name!
+lngSaveQuery=Save Query:
+lngEnterQueryNamePrompt=Please enter a Name for this Query:
+lngCleanUpMessage=The database was cleared up of %s of unnecessary data. 
+lngDeleteConfirmation=Really deleting?
+lngConfirmation=Confirmation:
+lngDBDisconnected=Database disconnected
+lngDBConnected=Database connected
+lngDisconnected=Not connected
+lngOpenDatabase=Open Database:
+lngTVQueries=Queries
+lngTVTriggers=Triggers
+lngTVViews=Views
+lngTVIndexes=Indexes
+lngTVTables=Tables
+lngTVFields=Fields
+lngQueryExecTime=Query executed within %dms
+lngQueryExecuted=Query executed
+lngDBCreated=Database created
+lngSelectDBSaveTarget=Select Taget for new Database:
+lngTableFieldDefault=Default Value
+lngMultiPrimaryKey=Multi Field Primary Key only can be used if no Single Field Primary Key was selected! 
+lngMigrationSuccess=Database Migration completed successful!
+lngMigrationInProgress=Table "%s" is migrating, please wait...
+lngSQLiteDB=SQLite Database
+lngAnyFile=Any File
+lngImportDone=Import done!
+lngBtnFirst=First
+lngBtnPrev=Previos
+lngBtnLast=Last
+lngBtnNext=Next
+lngBtnAdd=Insert
+lngBtnRemove=Delete
+lngBtnEdit=Edit
+lngBtnApply=Post
+lngBtnCancel=Cancel
+lngBtnRefresh=Refresh
+
+
+[StrfTimeHint]
+Line0=
+Line1=Formatconstants:
+Line2=
+Line3=%d   day of month
+Line4=%f   ** fractional seconds  SS.SSS
+Line5=%H   hour 00-24
+Line6=%j   day of year 001-366
+Line7=%J   ** Julian day number
+Line8=%m   month 01-12
+Line9=%M   minute 00-59
+Line10=%s   seconds since 1970-01-01
+Line11=%S   seconds 00-59
+Line12=%w   day of week 0-6  sunday==0
+Line13=%W   week of year 00-53
+Line14=%Y   year 0000-9999
+Line15=%%   %

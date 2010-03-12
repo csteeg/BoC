@@ -1,0 +1,44 @@
+﻿<#@ template language="C#v3.5" debug="True" hostspecific="True" #>
+<#@ include file="../../CodeGeneration/_utils.tt" #>
+<#
+	//SETTINGS:
+	string entityFolder = "Entities";
+	/////////
+
+	EnvDTE.Project project = GetCurrentProject();
+	System.IO.FileInfo info = new System.IO.FileInfo(project.FullName); 
+	var dir = new System.IO.DirectoryInfo(System.IO.Path.Combine(info.Directory.FullName, "Entities"));
+	
+	if (dir.Exists)
+    { #>
+using System;
+using BoC.Persistence;
+using BoC.Persistence.NHibernate;
+using <#= project.Name #>.<#= entityFolder #>;
+namespace <#= project.Name #>.Repositories
+{
+<#		foreach (var file in dir.GetFiles("*.cs"))
+		{ 
+			var name = System.IO.Path.GetFileNameWithoutExtension(file.Name);
+#>
+	public partial interface I<#= name #>Repository: IRepository<<#= name #>> {}
+<#
+		}
+#>
+}
+namespace <#= project.Name #>.Repositories.NHibernate
+{
+<#		foreach (var file in dir.GetFiles("*.cs"))
+		{ 
+			var name = System.IO.Path.GetFileNameWithoutExtension(file.Name);
+#>
+	public partial class <#= name #>Repository: NHRepository<<#= name #>>, I<#= name #>Repository 
+	{
+		public <#= name #>Repository(SessionManager sessionManager):base(sessionManager){}
+	}
+<#
+		}
+#>
+}
+<# 
+} #>

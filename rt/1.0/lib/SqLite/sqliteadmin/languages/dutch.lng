@@ -1,0 +1,327 @@
+;################################
+;Dutch Translation by Johan Samyn
+;################################
+
+[frmMain]
+tsSQL=SQL Query
+tsResult=Resultaat
+tsEdit=Editeer Gegevens
+pEditTop=
+lblTable=Tabel:
+lblFilterField=Filterveld:
+lblFilter=Filter:
+miDatabase=Database
+miNew=Nieuw
+miOpen=Open
+miCleanUp=Opruimen
+miClose=Sluiten
+miCreationSQL=Database SQL
+miMigrate=Migratie naar SQLite3
+miRecentList=Recent
+miExit=Afsluiten
+miTable=Tabel
+miNewTable=Nieuw
+miEditTable=Wijzig
+miDeleteTable=Verwijder
+miIndex=Index
+miNewIndex=Nieuw
+miEditIndex=Wijzig
+miDeleteIndex=Verwijder
+miView=View
+miNewView=Nieuw
+miEditView=Wijzig
+miDeleteView=Verwijder
+miTrigger=Trigger
+miNewTrigger=Nieuw
+miEditTrigger=Wijzig
+miDeleteTrigger=Verwijder
+Abfrage1=Query
+miAddQuery=Nieuw
+miShowQuery=Open
+miSaveQueryMain=Bewaar
+miDelQuery=Verwijder
+miOpenSQL=Voer uit met resultaat
+miExecSQL=Voer uit zonder resultaat
+miInsertInNewViewMain=Gebruik in nieuwe View
+miInsertInNewTriggerMain=Gebruik in nieuwe Trigger
+Daten1=Gegevens
+miExport=Exporteer
+miSendToExcel=Stuur naar Excel
+miImport=Importeer Gegevens
+miHelp=Help
+miInfo=Info
+Fehlerbericht1=Log
+pmiRefresh=Hernieuw
+pmiShowSQL=Toon SQL
+pmiNewTable=Nieuwe Tabel
+pmiEditTable=Wijzig Tabel
+pmiDelTable=Verwijder Tabel
+pmiNewIndex=Nieuwe Index
+pmiEditIndex=Wijzig Index
+pmiDelIndex=Verwijder Index
+pmiNewView=Nieuwe View
+pmiEditView=Wijzig View
+pmiDelView=Verwijder View
+pmiNewTrigger=Nieuwe Trigger
+pmiEditTrigger=Wijzig Trigger
+pmiDelTrigger=Verwijder Trigger
+pmiFindQuery=Zoek Query
+pmiAddQuery=Query toevoegen
+pmiShowQuery=Open Query
+pmiDelQuery=Verwijder Query
+miAddTab=Nieuwe Query
+miSaveQuery=Bewaar in Database
+miSaveToFile=Bewaar in Bestand
+miUndo=Ongedaan maken
+miRedo=Opnieuw doen
+miCut=Knip
+miCopy=Kopiëer
+miPaste=Plak
+miSelAll=Selecteer Alles
+miCopyToDelphi=Kopiëer naar Delphi Source
+miComment=Commentaar aan/uit
+miInsertInNewView=Gebruik in nieuwe View
+miInsertInNewTrigger=Gebruik in nieuwe Trigger
+miDeleteTab=Sluit Query
+miMemo=Toon Memo
+miPicture=Toon Afbeelding
+tbbNewDatabase=Nieuwe Database
+tbbOpenDatabase=Open (recente) Database
+tbbCleanUp=Database Opruimen
+tbbCloseDatabase=Sluit Database
+tbbNewTable=Nieuwe Tabel
+tbbEditTable=Wijzig Tabel
+tbbDeleteTable=Verwijder Tabel
+tbbNewIndex=Nieuwe Index
+tbbEditIndex=Wijzig Index
+tbbDeleteIndex=Verwijder Index
+tbbNewView=Nieuwe View
+tbbEditView=Wijzig View
+tbbDeleteView=Verwijder View
+tbbNewTrigger=Nieuwe Trigger
+tbbEditTrigger=Wijzig Trigger
+tbbDeleteTrigger=Verwijder Trigger
+tbbAddSQL=Nieuwe Query
+tbbSaveSQL=Bewaar Query
+tbbOpenSQL=SQL Query uitvoeren met resultaat (select) F9
+tbbExecSQL=SQL Query uitvoeren zonder resultaat (insert,update,delete) F8 
+
+tbbViewHierarchy=Hiërarchisch overzicht
+tbbShowTables=Toon Tabellen
+tbbShowFields=Toon Velden
+tbbShowTriggers=Toon Triggers
+tbbShowIndexes=Toon Indexen
+tbbShowViews=Toon Views
+tbbShowSysEntrys=Toon systeem gegevens
+tbbShowQueries=Toon Queries
+
+[frmTable]
+lblTablename=Tabelnaam:
+gbFields="     Tabelvelden"
+btnAdd=Nieuw Veld
+btnDel=Verwijder Veld
+btnChange=Wijzig Veld
+btnOK=Aanmaken
+btnCancel=Annuleren
+btnPrimaryKey=Primaire Sleutel
+
+[frmField]
+lblFieldName=Veldnaam:
+lblFieldType=VeldType:
+lblDefaultValue=Default Waarde:
+cbUnique=Uniek
+cbNotNull=Niet NULL
+cbPrimaryKey=Primaire Sleutel
+cbAutoInc=Auto-Increment
+btnAdd=Aanmaken
+btnCancel=Annuleren
+
+[frmIndex]
+lblIndexName=Indexnaam:
+lblTable=Tabel:
+cbUnique=Uniek
+gbFields="     Velden"
+lblSrcFields=Beschikbare Velden:
+lblDestFields=Geïndexeerde Velden:
+btnCreate=Aanmaken
+btnCancel=Annuleren
+
+[frmView]
+lblViewName=Viewnaam:
+gbSQL="     SQL Select"
+btnCreate=Aanmaken
+btnCancel=Annuleren
+
+[frmPicture]
+btnPic=Afbeelding wijzigen
+btnDel=Afbeelding verwijderen
+btnSave=Afbeelding opslaan als
+
+[frmTrigger]
+lblTriggername=Triggernaam:
+tsEvent=Trigger Event
+lblTable=Tabel:
+lblView=View:
+gbFields="     Velden"
+lblSrcFields=Beschikbare Velden:
+lblDestFields=Event Velden:
+gbTriggerEvent=Trigger Event
+rbBefore=Vooraf
+rbAfter=Achteraf
+rbInsteadOf=In plaats van
+gbEvents=Event
+gbFOR=Actie
+rbEachRow=Elke rij
+rbEachStatement=Elke opdracht
+tsSQL=Trigger SQL
+gbTriggerSQL="     SQL Source uitgevoerd door Trigger Event (OLD. / NEW. = Ref)"
+lblCondition=Voorwaarde:
+btnCreate=Aanmaken
+btnCancel=Annuleren
+
+[frmImport]
+Caption=Gegevens inlezen
+gbMapping=Veld Mapping
+lblSourceFields=Bronvelden:
+lblTargetFields=Doelvelden:
+lblDestTable=Doeltabel:
+cbClearTable=Tabel leegmaken voor inlezen
+btnLoadFile=Bestand openen
+btnImport=Inlezen
+btnClose=Sluiten
+
+[frmLog]
+Caption=Overzicht fouten
+
+[frmMemoEdit]
+Caption=Wijzig Memo 
+
+[MessageStrings]
+lngInfo=Informatie
+lngWarning=Waarschuwing:
+lngCreate=Aanmaken
+lngEdit=Wijzigen
+lngAdd=Toevoegen
+
+lngNameAlreadyExists=Deze naam werd al toegekend !
+lngInvalidChars=De naam mag geen prefix 'sqlite_', speciale tekens, of blanko's bevatten !
+lngEnterSQLSource=Tik een SQL opdracht in
+
+lngCreateView=Nieuwe View
+lngEditView=Wijzig View
+lngEnterViewName=Geef een View naam op aub !
+lngEnterTriggerName=Geef een naam voor de Trigger aub !
+lngSelectTable=Selecteer een Tabel aub !
+lngSelectView=Selecteer een View aub !
+lngSelectEvent=Selecteer een Event aub !
+lngSelectFields=Selecteer een Veld aub !
+lngSemiNotFound=Geen puntkomma gevonden op einde van SQL opdracht ! 
+lngCreateTrigger=Nieuwe Trigger
+lngEditTrigger=Wijzig Trigger
+lngBlobFileSize=Om veiligheidsredenen is de maximum grootte van een bestand beperkt tot 500kb. SQLite 2.8 x ondersteunt max. 1 MB per gegevensrij
+lngSeperator=Scheidingsteken
+lngEnterSeperatorChar=Geef een scheidingsteken in aub !
+lngContainsHeaderFieldNames=Bevat de eerste rij veldnamen ?
+lngFieldAlreadyChoosen=Dit veld is al geselecteerd !
+lngSeperatedValues=Waarden scheiden
+lngEnterFieldName=Geef een veldnaam in aub !
+lngEnterFieldType=Geef of selecteer een Veldtype aub !
+lngPKAlreadyExist=Primaire Sleutel is al toegekend !
+lngFieldSize=Veldgrootte:
+lngEnterFieldSize=Geef de veldgrootte in aub :
+lngEditField=Wijzig Veld
+lngAddField=Nieuw Veld
+lngEnterIndexName=Geef de Index naam in aub !
+lngEditIndex=Wijzig Index
+lngCreateIndex=Nieuwe Index
+lngEnterTableName=Geen een Tabelnaam aub !
+lngAddTableFields=Voeg velden toe aub !
+lngEditTable=Wijzig Tabel
+lngCreateTable=Nieuwe Tabel
+lngTableFieldName=Veldnaam
+lngTableFieldType=Veldtype
+lngTableFieldConstraint=Veldconstraint
+lngSendToExcelSuccess=Gegevens naar Excel sturen was succesvol.
+lngSendToExcelWait=Versturen gegevens naar Excel, even geduld aub ...
+lngNoDataToSend=Geen gegevens gevonden om te versturen !
+lngFailToSave=Bestand kon niet bewaard worden !
+lngError=Fout:
+lngNoDataToExport=Geen gegevens gevonden voor Export !
+lngExcelFormat=Excel compatibel formaat
+lngCSVFormat=Komma-gescheiden formaat
+lngXMLFormat=XML Formaat
+lngHTMLFormat=HTML Formaat
+lngCCFunction="Functie"
+lngCCField=   "Veld   "
+lngCCTable=   "Tabel  "
+lngCCView=    "View   "
+lngCCIndex=   "Index  "
+lngCCTrigger= "Trigger"
+lngReservedWordQuery=%s is een gereserveerd woord
+lngQueryIdent=Query
+lngEnterName=Geef Naam in !
+lngSaveQuery=Bewaar Query:
+lngEnterQueryNamePrompt=Geef aub een naam voor deze Query:
+lngCleanUpMessage=Er is voor %s aan onnodige gegevens opgeruimd uit de database.
+lngDeleteConfirmation=Weet u zeker dat u wilt verwijderen ?
+lngConfirmation=Bevestiging:
+lngDBDisconnected=Database gedisconnecteerd
+lngDBConnected=Database geconnecteerd
+lngDisconnected=Niet geconnecteerd
+lngOpenDatabase=Open Database:
+lngTVQueries=Queries
+lngTVTriggers=Triggers
+lngTVViews=Views
+lngTVIndexes=Indexen
+lngTVTables=Tabellen
+lngTVFields=Velden
+lngQueryExecTime=Query uitgevoerd in %dms
+lngQueryExecuted=Query uitgevoerd
+lngDBCreated=Database aangemaakt
+lngSelectDBSaveTarget=Selecteer doel voor nieuwe Database:
+lngTableFieldDefault=Default Waarde
+lngMultiPrimaryKey=Meer-velden Primaire sleutel enkel te gebruiken als geen één-veld Primaire Sleutel geselecteerd was !
+lngMigrationSuccess=Database migratie succesvol afgerond !
+lngMigrationInProgress=Bezig met Tabel "%s" te migreren, even geduld aub ...
+
+;##############################################
+;########## Begin Language Updates ############
+;## Send updates to "sqliteadmin@orbmu2k.de" ##
+;##############################################
+
+lngSQLiteDB=SQLite Database
+lngAnyFile=Alle bestanden
+lngImportDone=Inlezen klaar !
+lngBtnFirst=Eerste
+lngBtnPrev=Vorige
+lngBtnLast=Laatste
+lngBtnNext=Volgende
+lngBtnAdd=Toevoegen
+lngBtnRemove=Schrappen
+lngBtnEdit=Wijzigen
+lngBtnApply=Toepassen
+lngBtnCancel=Annuleren
+lngBtnRefresh=Verversen
+
+;##############################################
+;########### End Language Updates #############
+;##############################################
+
+[StrfTimeHint]
+Line0=
+Line1=Formaat constanten:
+Line2=
+Line3=%d   dag van de maand
+Line4=%f   ** duizendsten van seconden  SS.SSS
+Line5=%H   uur 00-24
+Line6=%j   dag van het jaar 001-366
+Line7=%J   ** 'Julian day' nummer
+Line8=%m   maand 01-12
+Line9=%M   minuut 00-59
+Line10=%s   seconden sedert 1970-01-01
+Line11=%S   seconden 00-59
+Line12=%w   dag van de week 0-6 (zondag==0)
+Line13=%W   week van het jaar 00-53
+Line14=%Y   jaar 0000-9999
+Line15=%%   %
+
