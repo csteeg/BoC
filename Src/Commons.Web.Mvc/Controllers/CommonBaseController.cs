@@ -1,10 +1,13 @@
-﻿using BoC.Web.Mvc.Attributes;
-using JqueryMvc.Mvc;
+﻿using System.Web.Mvc;
+using BoC.Web.Mvc.Attributes;
 
 namespace BoC.Web.Mvc.Controllers
 {
     [EventTrigger]
-    public class CommonBaseController: ExtController
+    [AjaxController]
+    [HandleError]
+    [DefaultView("default")]
+    public class CommonBaseController : Controller
     {
         public CommonBaseController() {}
     }

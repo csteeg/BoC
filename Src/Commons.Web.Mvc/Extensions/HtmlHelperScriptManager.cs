@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections;
+using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using BoC.Web.Mvc.ScriptManager;
 
@@ -15,5 +16,16 @@ namespace System.Web.Mvc
         {
             helper.RenderPartial(helper.ViewData["OriginalViewName"] as string);
         }
+
+        public static string UnsortedList(this HtmlHelper helper, object data)
+        {
+            if (data != null && (data is IEnumerable))
+            {
+                return data.ToUnsortedList();
+
+            }
+            return String.Empty;
+        }
+
     }
 }

@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Web.Mvc;
 
-namespace JqueryMvc.ActionResults
+namespace BoC.Web.Mvc.ActionResults
 {
     public class DataContractXmlResult : ActionResult
     {

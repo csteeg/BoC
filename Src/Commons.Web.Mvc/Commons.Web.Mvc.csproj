@@ -31,14 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="jQueryMvc, Version=0.3.3414.37851, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\jQueryMvc.dll</HintPath>
-    </Reference>
-    <Reference Include="MvcContrib, Version=1.0.0.99, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\MvcContrib.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations, Version=99.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -47,6 +39,9 @@
     </Reference>
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -83,7 +78,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionResults\DataContractXmlResult.cs" />
+    <Compile Include="ActionResults\XmlResult.cs" />
+    <Compile Include="Attributes\AjaxControllerAttribute.cs" />
+    <Compile Include="Attributes\DefaultViewAttribute.cs" />
     <Compile Include="Attributes\EventTriggerAttribute.cs" />
+    <Compile Include="Attributes\JsonRequestBehaviorAttribute.cs" />
     <Compile Include="Attributes\ValidationExceptionAttribute.cs" />
     <Compile Include="Binders\CommonModelBinder.cs" />
     <Compile Include="Binders\DateTimeModelBinder.cs" />
@@ -94,16 +94,21 @@
     <Compile Include="Controllers\CommonBaseAsyncController.cs" />
     <Compile Include="Controllers\DynamicScaffoldController.cs" />
     <Compile Include="AutoScaffoldControllerFactory.cs" />
+    <Compile Include="DefaultViewViewEngine.cs" />
     <Compile Include="Events\ActionEvents.cs" />
     <Compile Include="Extensions\ActionDescriptorExtensions.cs" />
     <Compile Include="Extensions\HtmlHelperScriptManager.cs" />
+    <Compile Include="Extensions\HttpRequestBaseExtensions.cs" />
+    <Compile Include="Extensions\HttpSessionStateBaseExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\RouteCollectionExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="HttpStatusCodeResult.cs" />
     <Compile Include="Init\SetDefaults.cs" />
     <Compile Include="IoCControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptManager\SimpleScriptManager.cs" />
-    <Compile Include="UI\Grid\DynamicDataGridRenderer.cs" />
-    <Compile Include="UI\InputBuilder\HtmlExtensions.cs" />
+    <Compile Include="SimleException.cs" />
     <Compile Include="Validation\RulesExceptionExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +116,12 @@
       <Project>{25C350AF-4957-47E8-960A-6C59794C5DEF}</Project>
       <Name>Commons</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClientScripts\history.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClientScripts\mvc.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

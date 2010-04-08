@@ -3,7 +3,6 @@ using System.Web.Mvc;
 using System.Web;
 using BoC.Validation;
 using BoC.Web.Mvc.Validation;
-using JqueryMvc.Mvc;
 
 namespace BoC.Web.Mvc.Attributes
 {

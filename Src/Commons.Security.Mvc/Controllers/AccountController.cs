@@ -6,7 +6,6 @@ using System.Web.Security;
 using BoC.Security.Model;
 using BoC.Security.Services;
 using BoC.Web.Mvc.Controllers;
-using JqueryMvc.Mvc;
 
 namespace BoC.Security.Mvc.Controllers
 {

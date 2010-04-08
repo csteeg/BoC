@@ -3,12 +3,18 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web;
 using System.Web.Routing;
-using JqueryMvc.Mvc;
-using Microsoft.Web.Mvc.Controls;
+using BoC.Web.Mvc.ActionResults;
 
-namespace JqueryMvc.Attributes
+namespace BoC.Web.Mvc.Attributes
 {
-    public class AjaxControllerAttribute: System.Web.Mvc.ActionFilterAttribute
+    /// <summary>
+    /// The AjaxControllerAttribute does a few things
+    ///     - if the current request is a json-request, it returns the model as a json result
+    ///     - if the current request is an xml-request, it returns the model as an xml result
+    ///     - if the current request is an ajax-request, it returns a partialviewresult
+    /// If your controller uses this attribute, you can always return a normal ViewResult, it will be transformed by this actionfilter
+    /// </summary>
+    public class AjaxControllerAttribute: ActionFilterAttribute
     {
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
@@ -22,7 +28,7 @@ namespace JqueryMvc.Attributes
             {
                 //If we have redirect result, and it is an ajax request:
                 // - IF it is json or xml:
-                    // we'll return 200 OK with the URL in the header, the user can decide if he wants to redirect
+                // we'll return 200 OK with the URL in the header, the user can decide if he wants to redirect
                 // - if it is an html request, we'll redirect to the new action but send info about the ajax-request with it
                 
                 var redir = filterContext.Result as RedirectToRouteResult;
@@ -61,46 +67,46 @@ namespace JqueryMvc.Attributes
             {
                 var result = filterContext.Result as ViewResult;
                 if (result != null && responseType == ResponseType.Html)
-				{
-				    var viewResult = filterContext.Result as ViewResult;
-					//prefer partial
+                {
+                    var viewResult = filterContext.Result as ViewResult;
+                    //prefer partial
                     if (viewResult != null)
                     {
                         filterContext.Result = new PartialViewResult()
                                                    {
                                                        TempData = viewResult.TempData,
                                                        ViewData = viewResult.ViewData,
-                                                       ViewName = viewResult.ViewName
+                                                       ViewName = viewResult.ViewName,
                                                    };
                     }
-				}
-				else if (responseType == ResponseType.Json || responseType == ResponseType.Xml)
-				{
-					ViewDataDictionary data = filterContext.Result is ViewResultBase ? ((ViewResultBase)filterContext.Result).ViewData : filterContext.Controller.ViewData;
+                }
+                else if (responseType == ResponseType.Json || responseType == ResponseType.Xml)
+                {
+                    ViewDataDictionary data = filterContext.Result is ViewResultBase ? ((ViewResultBase)filterContext.Result).ViewData : filterContext.Controller.ViewData;
 					
                     object model = data;
-					if (filterContext.Exception != null)
-						model = filterContext.Exception;
+                    if (filterContext.Exception != null)
+                        model = filterContext.Exception;
                     else if (data != null && data.Model != null)
                         model = data.Model;
 
-					if (model is Exception)
-					{
-					    filterContext.Result = null;
+                    if (model is Exception)
+                    {
+                        filterContext.Result = null;
 
-						Exception exc = ((Exception)model).InnerException ?? ((Exception)model);
-						if (exc is HttpException)
-						{
-							filterContext.HttpContext.Response.StatusCode = ((HttpException)exc).GetHttpCode();
-						}
-						else
-						{
-							filterContext.HttpContext.Response.StatusCode = 500;
-						}
-						filterContext.HttpContext.Response.StatusDescription = exc.Message;
-					    filterContext.ExceptionHandled = true;
-						model = new SimpleException(exc);
-					}
+                        Exception exc = ((Exception)model).InnerException ?? ((Exception)model);
+                        if (exc is HttpException)
+                        {
+                            filterContext.HttpContext.Response.StatusCode = ((HttpException)exc).GetHttpCode();
+                        }
+                        else
+                        {
+                            filterContext.HttpContext.Response.StatusCode = 500;
+                        }
+                        filterContext.HttpContext.Response.StatusDescription = exc.Message;
+                        filterContext.ExceptionHandled = true;
+                        model = new SimpleException(exc);
+                    }
 
                     if (responseType == ResponseType.Json)
                     {
@@ -128,11 +134,11 @@ namespace JqueryMvc.Attributes
                     {
                         filterContext.Result = new XmlResult(model);
                     }
-				}
+                }
             }
         }
 
-        /* In asp.net mvc 2, we OnActionExecuted seems to be triggered always, so we don't need this seperate function anymore 
+        /* In asp.net mvc 2, the OnActionExecuted seems to be triggered always, so we don't need this seperate function anymore 
         void IExceptionFilter.OnException(ExceptionContext filterContext)
         {
             if (filterContext.Result == null && filterContext.HttpContext.Request.GetPreferedResponseType() == ResponseType.Json)

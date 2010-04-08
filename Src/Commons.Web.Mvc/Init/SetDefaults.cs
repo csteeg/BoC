@@ -1,15 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+using System.Web;
 using System.Web.Mvc;
-using BoC.InversionOfControl;
-using BoC.Persistence;
+using System.Web.Routing;
 using BoC.Tasks;
 using BoC.Web.Mvc.Binders;
-using MvcContrib.UI.InputBuilder;
-using MvcContrib.UI.InputBuilder.Conventions;
 
 namespace BoC.Web.Mvc.Init
 {
@@ -17,70 +11,70 @@ namespace BoC.Web.Mvc.Init
     {
         public void Execute()
         {
-            //MvcContrib.UI.InputBuilder.InputBuilder.BootStrap();
-            JqueryMvc.BootStrapper.Run();
+            SetDefaultViewEngine();
+            RegisterDefaultRoutes(RouteTable.Routes);
             ControllerBuilder.Current.SetControllerFactory(typeof(AutoScaffoldControllerFactory));
             ModelBinders.Binders.DefaultBinder = new CommonModelBinder();
             ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder());
             ModelBinders.Binders.Add(typeof(DateTime?), new DateTimeModelBinder());
-            MvcContrib.UI.InputBuilder.InputBuilder.Conventions.Add(new ForeignKeyPropertyConvention());
         }
-    }
 
-    internal class ForeignKeyPropertyConvention : DefaultProperyConvention
-    {
-        /*
-        private static readonly Type baseRepository = typeof(IRepository<>);
-
-        public override bool CanHandle(PropertyInfo propertyInfo)
+        static public void SetDefaultViewEngine()
         {
-            return (typeof(IBaseEntity).IsAssignableFrom(propertyInfo.PropertyType));
-        }
-        public override InputModelProperty ModelPropertyBuilder(PropertyInfo propertyInfo, object value)
-        {
-            if 
+            //replace webformviewengine with our version (that searches only .ascx for partials and only .aspx for fullviews)
+            for (var i = ViewEngines.Engines.Count - 1; i >= 0; i--)
             {
-                var repository = IoC.Resolve(baseRepository.MakeGenericType(propertyInfo.PropertyType)) as IQueryable;
-
-                var selectList =
-                    from entity in repository.OfType<IBaseEntity>()
-                    select
-                        new SelectListItem() { Text = entity.ToString(), Value = entity.Id + "", Selected = entity == value };
-
-                return new ModelProperty<IEnumerable<SelectListItem>> { Value = selectList };
-
-            }
-
-            return base.ModelPropertyBuilder(propertyInfo, value);
-        }
-        
-        public override string PartialNameConvention(PropertyInfo propertyInfo)
-        {
-            if (typeof(IBaseEntity).IsAssignableFrom(propertyInfo.PropertyType))
-            {
-                return "ForeignKey";
-            }
-            if (propertyInfo.PropertyType.IsGenericType && typeof(IEnumerable).IsAssignableFrom(propertyInfo.PropertyType))
-            {
-                var type = propertyInfo.PropertyType.GetGenericArguments()[0];
-                if (typeof(IBaseEntity).IsAssignableFrom(type))
+                if (ViewEngines.Engines[i] is WebFormViewEngine)
                 {
-                    return "Children";
+                    ViewEngines.Engines[i] = new DefaultViewViewEngine();
+                    break; //only do the first one
                 }
             }
-
-            if (propertyInfo.PropertyType.IsGenericType && propertyInfo.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
-            {
-                return PartialNameConvention(propertyInfo.PropertyType.GetProperty("Value"));
-            }
-            if (propertyInfo.PropertyType.IsPrimitive && propertyInfo.PropertyType != typeof(Byte) && propertyInfo.PropertyType != typeof(sbyte)
-                && propertyInfo.PropertyType != typeof(Boolean) && propertyInfo.PropertyType != typeof(char))
-            {
-                return "Int32";
-            }
-
-            return base.PartialNameConvention(propertyInfo);
         }
-        */
+
+        public static void RegisterDefaultRoutes(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            //if you live on a server that doesn't need the 
+            //default.aspx... you can delete the default.aspx,
+            //and routing will be skipped for existing files...
+            if (HttpContext.Current != null && System.IO.File.Exists(HttpContext.Current.Server.MapPath("~/default.aspx")))
+            {
+                routes.IgnoreRoute("{*rest}", new { rest = "^Content\\/.*" });
+                routes.RouteExistingFiles = true;
+                routes.MapRoute("Default.aspx", "default.aspx",
+                    new
+                    {
+                        controller = "Home",
+                        action = "Index",
+                        id = ""
+                    }
+                );
+                routes.MapRoute("Json", "{controller}.{resultformat}.aspx", new { action = "Index", id = "" }, new { controller = @"[^\.]*", action = @"[^\.]*" }, new { __mvcajax = "true" });
+                routes.MapRoute("JsonAction", "{controller}/{action}.{resultformat}.aspx", new { id = "" }, new { controller = @"[^\.]*", action = @"[^\.]*" }, new { __mvcajax = "true" });
+                routes.MapRoute("JsonActionId", "{controller}/{action}/{id}.{resultformat}.aspx", new { }, new { controller = @"[^\.]*", action = @"[^\.]*" }, new { __mvcajax = "true" });
+
+                routes.MapRoute(
+                    "Default",
+                    "{controller}.aspx/{action}/{id}",
+                    new { controller = "Home", action = "Index", id = ""},
+                    new { controller = "[^\\.]*", action = "[^\\.]*" }
+                );
+            }
+            else
+            {
+                routes.MapRoute("JsonActionId", "{controller}/{action}/{id}.{resultformat}", new { }, new { controller = @"[^\.]*", action = @"[^\.]*" }, new { __mvcajax = "true" });
+                routes.MapRoute("JsonAction", "{controller}/{action}.{resultformat}", new { id = "" }, new { controller = @"[^\.]*", action = @"[^\.]*" }, new { __mvcajax = "true" });
+                routes.MapRoute("Json", "{controller}.{resultformat}", new { action = "Index", id = "" }, new { controller = @"[^\.]*", action = @"[^\.]*" }, new { __mvcajax = "true" });
+                routes.MapRoute(
+                    "Default",
+                    "{controller}/{action}/{id}",
+                    new { controller = "Home", action = "Index", id = "" },
+                    new { controller = "[^\\.]*", action = "[^\\.]*" }
+                );
+            }
+        }
+
     }
 }

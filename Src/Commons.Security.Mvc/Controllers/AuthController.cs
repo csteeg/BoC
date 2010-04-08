@@ -12,7 +12,6 @@ using DotNetOpenAuth.Messaging;
 using DotNetOpenAuth.OpenId;
 using DotNetOpenAuth.OpenId.RelyingParty;
 using DotNetOpenAuth.OpenId.Extensions.AttributeExchange;
-using JqueryMvc.Mvc;
 
 namespace BoC.Web.Mvc.Controllers
 {
