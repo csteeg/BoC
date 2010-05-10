@@ -62,40 +62,25 @@ namespace BoC.Tasks
 
         protected override void OnStart()
         {
-            //allows initialization stuff
+            timer.Elapsed += (sender, args) =>
+            {
+                try
+                {
+                    DoWork();
+                }
+                finally
+                {
+                    if (!AutoReset)
+                        timer.Start();
+                }
+            };
+            timer.Start();
         }
 
         protected override void OnStop()
         {
-            //allows cleanup stuff
-        }
-
-        override public void Start()
-        {
-            OnStart();
-            timer.Elapsed += (sender, args) =>
-                                 {
-                                     try
-                                     {
-                                         DoWork();
-                                     }
-                                     finally 
-                                     {
-                                         if (!AutoReset)
-                                            timer.Start();
-                                     }
-                                 };
-            timer.Start();
-
-            IsRunning = true;
-        }
-
-        override public void Stop()
-        {
             IsStopping = true;
             timer.Stop();
-            OnStop();
-            IsRunning = false;
         }
 
     }

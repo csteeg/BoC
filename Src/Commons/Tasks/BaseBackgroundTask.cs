@@ -19,7 +19,7 @@ namespace BoC.Tasks
             _eventAggregator = eventAggregator;
         }
 
-        virtual public bool IsRunning
+        public bool IsRunning
         {
             get { return running; }
             protected set { running = value; }
@@ -34,13 +34,13 @@ namespace BoC.Tasks
             }
         }
 
-        virtual public void Start()
+        public void Start()
         {
-            OnStart();
             IsRunning = true;
+            OnStart();
         }
 
-        virtual public void Stop()
+        public void Stop()
         {
             OnStop();
             IsRunning = false;

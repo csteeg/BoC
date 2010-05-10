@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons", "Src\Commons\Commons.csproj", "{25C350AF-4957-47E8-960A-6C59794C5DEF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.Logging.Log4Net", "Src\Commons.Logging.Log4Net\Commons.Logging.Log4Net.csproj", "{77EAE608-5CFF-4EF4-A647-49C9757CB829}"
@@ -19,6 +19,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.Security", "Src\Commons.Security\Commons.Security.csproj", "{387BC181-5A33-4657-9C19-07A8FA48A916}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.Security.Mvc", "Src\Commons.Security.Mvc\Commons.Security.Mvc.csproj", "{C08BC0AA-DBB0-4FF3-8DB3-4A5CB72CEA8C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D75EF326-E1BC-4DFB-ABA8-5BE622875649}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.Tests", "Tests\Commons.Tests\Commons.Tests.csproj", "{A0D3CBAC-14B4-4805-8B2F-227957986CB4}"
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
@@ -62,8 +66,15 @@ Global
 		{C08BC0AA-DBB0-4FF3-8DB3-4A5CB72CEA8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C08BC0AA-DBB0-4FF3-8DB3-4A5CB72CEA8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C08BC0AA-DBB0-4FF3-8DB3-4A5CB72CEA8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0D3CBAC-14B4-4805-8B2F-227957986CB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0D3CBAC-14B4-4805-8B2F-227957986CB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0D3CBAC-14B4-4805-8B2F-227957986CB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0D3CBAC-14B4-4805-8B2F-227957986CB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A0D3CBAC-14B4-4805-8B2F-227957986CB4} = {D75EF326-E1BC-4DFB-ABA8-5BE622875649}
 	EndGlobalSection
 EndGlobal

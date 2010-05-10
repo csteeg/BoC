@@ -17,7 +17,7 @@ namespace BoC.InversionOfControl.Unity
         {
             var configuration = (UnityConfigurationSection) ConfigurationManager.GetSection("unity");
             if (configuration != null)
-                configuration.Containers.Default.Configure(container);
+                configuration.Configure(container);
         }
         
         public UnityDependencyResolver(IUnityContainer container)
@@ -26,8 +26,6 @@ namespace BoC.InversionOfControl.Unity
 
             this.container = container;
             this.container.AddExtension(new TypeTrackingExtension());
-            this.container.RegisterInstance<IUnityContainer>(container);
-            this.container.RegisterInstance<IDependencyResolver>(this);
         }
 
         public IUnityContainer Container { get { return container; } }
@@ -111,30 +109,54 @@ namespace BoC.InversionOfControl.Unity
         
         public IEnumerable<T> ResolveAll<T>()
         {
-            var namedInstances = container.ResolveAll<T>();
-            var unnamedInstance = default(T);
+            if (!CanResolve(typeof(T)))
+                yield break;
 
-            try
-            {
-                unnamedInstance = container.Resolve<T>();
-            }
-            catch (ResolutionFailedException)
-            {
-                //When default instance is missing
-            }
+            var unnamedInstance = Resolve<T>();
+            if (unnamedInstance != null)
+                yield return unnamedInstance;
 
-            if (Equals(unnamedInstance, default(T)))
+            foreach (var o in container.ResolveAll<T>())
             {
-                return namedInstances;
+                yield return o;
             }
-
-            return new ReadOnlyCollection<T>(new List<T>(namedInstances) { unnamedInstance });
         }
 
         public bool IsRegistered(Type type)
         {
             return container.Configure<TypeTrackingExtension>().IsRegistered(type);
         }
+
+        /// <summary>
+        /// Determines whether this type can be resolved as the default.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns>
+        /// 	<c>true</c> if this instance can resolve; otherwise, <c>false</c>.
+        /// </returns>
+        public bool CanResolve<T>()
+        {
+            return CanResolve(typeof(T));
+        }
+        /// <summary>
+        /// Determines whether this type can be resolved as the default.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>
+        /// 	<c>true</c> if this instance can resolve; otherwise, <c>false</c>.
+        /// </returns>
+        public bool CanResolve(Type type)
+        {
+            if (isResolvableClass(type))
+                return true;
+            return IsRegistered(type);
+        }
+
+        private bool isResolvableClass(Type type)
+        {
+            return type.IsClass && !type.IsAbstract;
+        }
+
 
         ~UnityDependencyResolver()
         {

@@ -97,7 +97,7 @@ namespace BoC.Web.Mvc.Controllers
                 if (!String.IsNullOrEmpty(query))
                 {
                     query = query.Substring(4);
-                    return new ModelQuery<TEntity>() { Expression = DynamicExpression.ParseLambda<TEntity, bool>(query, values.ToArray()) };
+                    return new ModelQuery<TEntity>() { Expression = DynamicExpressionParser.ParseLambda<TEntity, bool>(query, values.ToArray()) };
                 }
                 return null;
             }

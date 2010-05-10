@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Principal;
+using System.Web.Security;
 using BoC.Persistence;
 
 namespace BoC.Security.Model
@@ -143,7 +144,7 @@ namespace BoC.Security.Model
                 return this.Login.ToLower().GetHashCode();
         }
 
-        virtual public System.Web.Security.MembershipUser ToMembershipUser()
+        virtual public MembershipUser ToMembershipUser()
         {
             string provName = "BoC.usermembership";
             if (System.Web.Security.Membership.Provider != null)

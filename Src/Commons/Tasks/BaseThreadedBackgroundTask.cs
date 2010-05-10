@@ -33,32 +33,17 @@ namespace BoC.Tasks
 
         protected override void OnStart()
         {
-            //allows initialization stuff
+            workThread = new Thread(DoWork);
+            workThread.Start();
+            if (stopping) //if we have to stop immediately...
+                Stop();
         }
 
         protected override void OnStop()
         {
-            //allows cleanup stuff
-        }
-
-        override public void Start()
-        {
-            OnStart();
-            workThread = new Thread(DoWork);
-            workThread.Start();
-            if (stopping) //if we have to stop immediately...
-                workThread.Join();
-            IsRunning = true;
-        }
-
-        override public void Stop()
-        {
             IsStopping = true;
-            OnStop();
             if (workThread != null)
                 workThread.Join();
-            IsRunning = false;
         }
-
     }
 }
