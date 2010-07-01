@@ -1,4 +1,4 @@
-namespace BoC.InversionOfControl.Configuration
+namespace BoC.InversionOfControl
 {
     public interface IContainerInitializer
     {

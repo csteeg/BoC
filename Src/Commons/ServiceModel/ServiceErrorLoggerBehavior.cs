@@ -21,7 +21,7 @@ namespace BoC.ServiceModel
 
         public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
         {
-            var errorHandler = IoC.Resolve<ServiceErrorLogger>();
+            var errorHandler = IoC.Resolver.Resolve<ServiceErrorLogger>();
             foreach (ChannelDispatcherBase channelDispatcherBase in serviceHostBase.ChannelDispatchers)
             {
                 var channelDispatcher = channelDispatcherBase as ChannelDispatcher;

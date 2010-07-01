@@ -11,20 +11,26 @@ namespace BoC.ServiceModel
 {
     public class IoCInstanceProvider: IInstanceProvider
     {
+        private readonly IDependencyResolver dependencyResolver;
         private readonly Type type;
+
+        public IoCInstanceProvider(IDependencyResolver dependencyResolver)
+        {
+            this.dependencyResolver = dependencyResolver;
+        }
 
         public IoCInstanceProvider(Type type)
         {
             this.type = type;
             //test if we can create instances for this type
-            IoC.Resolve(type);
+            dependencyResolver.Resolve(type);
         }
 
         #region IInstanceProvider Members
 
         public object GetInstance(InstanceContext instanceContext, Message message)
         {
-            return IoC.Resolve(type);
+            return dependencyResolver.Resolve(type);
         }
 
         public object GetInstance(InstanceContext instanceContext)

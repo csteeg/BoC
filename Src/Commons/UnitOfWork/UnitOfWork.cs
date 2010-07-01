@@ -12,7 +12,7 @@ namespace BoC.UnitOfWork
         public static IUnitOfWork BeginUnitOfWork()
         {
             if (IoC.IsInitialized())
-                return IoC.Resolve<IUnitOfWork>() ?? new DummyUnitOfWork();
+                return IoC.Resolver.Resolve<IUnitOfWork>() ?? new DummyUnitOfWork();
             return new DummyUnitOfWork();
         }
     }

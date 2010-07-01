@@ -1,16 +1,21 @@
 using System;
 using BoC.InversionOfControl;
-using BoC.InversionOfControl.Configuration;
 
 namespace BoC.Validation.DefaultSetupTasks
 {
     public class RegisterDefaultModelValidator : IContainerInitializer
     {
+        private readonly IDependencyResolver dependencyResolver;
+        public RegisterDefaultModelValidator(IDependencyResolver dependencyResolver)
+        {
+            this.dependencyResolver = dependencyResolver;
+        }
+
         public void Execute()
         {
-            if (!IoC.IsRegistered<IModelValidator>())
+            if (!dependencyResolver.IsRegistered<IModelValidator>())
             {
-                IoC.RegisterType<IModelValidator, DataAnnotationsModelValidator>();
+                dependencyResolver.RegisterType<IModelValidator, DataAnnotationsModelValidator>();
             }
         }
     }

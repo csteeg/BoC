@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Reflection.Emit;
 using BoC.EventAggregator;
 using BoC.InversionOfControl;
-using BoC.InversionOfControl.Configuration;
 using BoC.Persistence;
 using BoC.Services;
 using BoC.Validation;
@@ -15,6 +14,13 @@ namespace BoC.Tasks
 {
     public class AutoRegisterModelServices : IContainerInitializer
     {
+        private readonly IDependencyResolver dependencyResolver;
+
+        public AutoRegisterModelServices(IDependencyResolver dependencyResolver)
+        {
+            this.dependencyResolver = dependencyResolver;
+        }
+
         public static bool CreateMissingModelServices = true;
 
         public void Execute()
@@ -33,9 +39,9 @@ namespace BoC.Tasks
                 foreach (var @interface in interfaces)
                 {
                     if (typeof(IModelService<>).IsAssignableFrom(@interface)
-                        && !IoC.IsRegistered(@interface))
+                        && !dependencyResolver.IsRegistered(@interface))
                     {
-                        IoC.RegisterType(@interface, service);
+                        dependencyResolver.RegisterType(@interface, service);
                     }
                 }
             }
@@ -45,7 +51,7 @@ namespace BoC.Tasks
             
         }
 
-        static void CreateModelServices(IEnumerable<Assembly> assemblies)
+        void CreateModelServices(IEnumerable<Assembly> assemblies)
         {
             var isbasetype = new Func<Type, bool>(basetype =>
                                                   basetype.IsGenericType &&
@@ -79,7 +85,7 @@ namespace BoC.Tasks
                                              inferfaceType.IsAssignableFrom(i)
                                        select i).FirstOrDefault() ?? inferfaceType;
 
-                if (IoC.IsRegistered(interfaceToFind))
+                if (dependencyResolver.IsRegistered(interfaceToFind))
                 {
                     //this repository is already registered, if you have multiple repositories implementing the same interface, 
                     //you'll have to register the correct one 'by hand'
@@ -127,8 +133,8 @@ namespace BoC.Tasks
 
                     serviceType = tb.CreateType();
                 }
-                IoC.RegisterType(interfaceToFind, serviceType);
-                IoC.RegisterType(inferfaceType, serviceType);
+                dependencyResolver.RegisterType(interfaceToFind, serviceType);
+                dependencyResolver.RegisterType(inferfaceType, serviceType);
             }
 
 

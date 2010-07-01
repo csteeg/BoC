@@ -46,8 +46,14 @@ namespace BoC.Web
             if (!initialized)
             {
                 initialized = true;
-                Bootstrapper.RegisterAllTasksAndRunThem(type => true);
+                InitializeIoC();
             }
+        }
+
+        protected virtual void InitializeIoC()
+        {
+            if (!IoC.IsInitialized())
+                IoC.InitializeWith(new DependencyResolverFactory().CreateInstance());
         }
 
         public override void Init()
@@ -103,7 +109,7 @@ namespace BoC.Web
 
         private void PublishEvent<T, TEventArgs>(Func<TEventArgs> args) where T: BaseEvent<TEventArgs>, new()
         {
-            var eventAggregator = IoC.Resolve<IEventAggregator>();
+            var eventAggregator = IoC.Resolver.Resolve<IEventAggregator>();
             if (eventAggregator != null)
             {
                 eventAggregator.GetEvent<T>().Publish(args());
@@ -113,7 +119,7 @@ namespace BoC.Web
 
         private void PublishEvent<T>() where T : BaseEvent<WebRequestEventArgs>, new()
         {
-            var eventAggregator = IoC.Resolve<IEventAggregator>();
+            var eventAggregator = IoC.Resolver.Resolve<IEventAggregator>();
             if (eventAggregator != null)
             {
                 eventAggregator.GetEvent<T>().Publish(new WebRequestEventArgs(new HttpContextWrapper(HttpContext.Current)));

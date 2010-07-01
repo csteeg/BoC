@@ -2,6 +2,7 @@ using System;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using BoC.InversionOfControl;
 using BoC.Tasks;
 using BoC.Web.Mvc.Binders;
 
@@ -9,12 +10,19 @@ namespace BoC.Web.Mvc.Init
 {
     public class SetDefaults : IBootstrapperTask
     {
+        private readonly IDependencyResolver dependencyResolver;
+
+        public SetDefaults(IDependencyResolver dependencyResolver)
+        {
+            this.dependencyResolver = dependencyResolver;
+        }
+
         public void Execute()
         {
             SetDefaultViewEngine();
             RegisterDefaultRoutes(RouteTable.Routes);
-            ControllerBuilder.Current.SetControllerFactory(typeof(AutoScaffoldControllerFactory));
-            ModelBinders.Binders.DefaultBinder = new CommonModelBinder();
+            ControllerBuilder.Current.SetControllerFactory(new AutoScaffoldControllerFactory(dependencyResolver));
+            ModelBinders.Binders.DefaultBinder = new CommonModelBinder(dependencyResolver);
             ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder());
             ModelBinders.Binders.Add(typeof(DateTime?), new DateTimeModelBinder());
         }

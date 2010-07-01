@@ -26,6 +26,8 @@ namespace BoC.InversionOfControl.Unity
 
             this.container = container;
             this.container.AddExtension(new TypeTrackingExtension());
+
+            this.RegisterInstance<IDependencyResolver>(this);
         }
 
         public IUnityContainer Container { get { return container; } }
@@ -120,6 +122,11 @@ namespace BoC.InversionOfControl.Unity
             {
                 yield return o;
             }
+        }
+
+        public bool IsRegistered<T>()
+        {
+            return IsRegistered(typeof (T));
         }
 
         public bool IsRegistered(Type type)

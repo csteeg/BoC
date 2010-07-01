@@ -49,8 +49,9 @@ namespace BoC.Persistence.NHibernate
                 .CurrentSessionContext(CurrentSessionContextClass);
         }
 
-        public static void SetupAutoMapperForEntities(IPersistenceConfigurer database, params Assembly[] assemblies)
+        public static void SetupAutoMapperForEntities(IDependencyResolver dependencyResolver, params Assembly[] assemblies)
         {
+            var database = dependencyResolver.Resolve<IPersistenceConfigurer>();
             var config = Fluently.Configure().Database(database);
             var stringPropertyconvention = ConventionBuilder.Property.When(x => x.Expect(p => p.Property.PropertyType == typeof (string)), a => a.Length(255));
             
@@ -125,15 +126,15 @@ namespace BoC.Persistence.NHibernate
 
             var nhconfig = config.BuildConfiguration();
             var sessionFactory = config.BuildSessionFactory();
-            
-            IoC.RegisterInstance<Configuration>(nhconfig);
-            IoC.RegisterInstance<ISessionFactory>(sessionFactory);
+
+            dependencyResolver.RegisterInstance<Configuration>(nhconfig);
+            dependencyResolver.RegisterInstance<ISessionFactory>(sessionFactory);
 
             new SchemaUpdate(nhconfig).Execute(true, true);
         }
 
         public static bool CreateNonExistingRepositories = true;
-        public static void AutoRegisterRepositories()
+        public static void AutoRegisterRepositories(IDependencyResolver dependencyResolver)
         {
             //these 3 could vary per project:
             const string idPropertyName = "Id";
@@ -183,7 +184,7 @@ namespace BoC.Persistence.NHibernate
                                 interfaceType.IsAssignableFrom(i)
                           select i).FirstOrDefault() ?? interfaceType;
 
-                if (IoC.IsRegistered(toFind))
+                if (dependencyResolver.IsRegistered(toFind))
                 {
                     //this repository is already registered, if you have multiple repositories implementing the same interface, 
                     //you'll have to register the correct one 'by hand'
@@ -225,8 +226,8 @@ namespace BoC.Persistence.NHibernate
                     
                     repo = tb.CreateType();
                 }
-                IoC.RegisterType(interfaceType, repo);
-                IoC.RegisterType(toFind, repo);
+                dependencyResolver.RegisterType(interfaceType, repo);
+                dependencyResolver.RegisterType(toFind, repo);
             }
         }
 

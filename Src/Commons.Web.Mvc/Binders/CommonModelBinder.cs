@@ -19,6 +19,13 @@ namespace BoC.Web.Mvc.Binders
 {
     public class CommonModelBinder : DefaultModelBinder
     {
+        private readonly IDependencyResolver dependencyResolver;
+
+        public CommonModelBinder(IDependencyResolver dependencyResolver)
+        {
+            this.dependencyResolver = dependencyResolver;
+        }
+
         /// <summary>
         /// After the model is updated, there may be a number of ModelState errors added by ASP.NET MVC for 
         /// and data casting problems that it runs into while binding the object.  This gets rid of those
@@ -90,9 +97,9 @@ namespace BoC.Web.Mvc.Binders
                     {
                         //we have a primary key value, let's get the service
                         var serviceType = typeof(IModelService<>).MakeGenericType(modelType);
-                        if (IoC.IsRegistered(serviceType))
+                        if (dependencyResolver.IsRegistered(serviceType))
                         {
-                            var service = IoC.Resolve(serviceType) as IModelService;
+                            var service = dependencyResolver.Resolve(serviceType) as IModelService;
                             if (service != null)
                             {
                                 bindingContext.ModelMetadata.Model = service.Get(pkValue);
@@ -155,7 +162,7 @@ namespace BoC.Web.Mvc.Binders
                 var entityType = propertyDescriptor.PropertyType.GetGenericArguments().First();
                 var serviceType = typeof(IModelService<>).MakeGenericType(entityType);
                 var idProp = entityType.GetProperty("Id");
-                var service = IoC.Resolve(serviceType) as IModelService;
+                var service = dependencyResolver.Resolve(serviceType) as IModelService;
 
                 var valueName = CreateSubPropertyName(fullPropertyKey, "Id");
                 var incoming_raw = bindingContext.ValueProvider.GetValue(valueName) ?? bindingContext.ValueProvider.GetValue(fullPropertyKey);

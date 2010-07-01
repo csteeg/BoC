@@ -96,8 +96,7 @@
     <Compile Include="Events\UpdatingEvent.cs" />
     <Compile Include="Extensions\ExpressionExtensions.cs" />
     <Compile Include="Inflector.cs" />
-    <Compile Include="InversionOfControl\Configuration\ContainerInitializer.cs" />
-    <Compile Include="InversionOfControl\Configuration\IContainerInitializer.cs" />
+    <Compile Include="InversionOfControl\IContainerInitializer.cs" />
     <Compile Include="Linq\Dynamic.cs" />
     <Compile Include="Linq\ExpressionUtility.cs" />
     <Compile Include="Linq\IQueryableExtensions.cs" />
@@ -113,10 +112,10 @@
     <Compile Include="Services\ModelQuery.cs" />
     <Compile Include="Tasks\AutoRegisterModelServices.cs" />
     <Compile Include="Tasks\BaseBackgroundTask.cs" />
-    <Compile Include="Tasks\Bootstrapper.cs" />
+    <Compile Include="Tasks\RegisterBackgroundTasks.cs" />
+    <Compile Include="Tasks\BootstrapperTasksInitializer.cs" />
     <Compile Include="Tasks\BaseThreadedBackgroundTask.cs" />
     <Compile Include="Tasks\BaseTimedBackgroundTask.cs" />
-    <Compile Include="Tasks\IPostBootstrapperTask.cs" />
     <Compile Include="Tasks\IBackgroundTask.cs" />
     <Compile Include="Tasks\IBootstrapperTask.cs" />
     <Compile Include="Tasks\StartBackgroundTasks.cs" />

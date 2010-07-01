@@ -1,16 +1,21 @@
 using System;
 using BoC.InversionOfControl;
-using BoC.InversionOfControl.Configuration;
 
 namespace BoC.EventAggregator.DefaultSetupTasks
 {
     public class InitEventAggregatorTask : IContainerInitializer
     {
+        private readonly IDependencyResolver dependencyResolver;
+        public InitEventAggregatorTask(IDependencyResolver dependencyResolver)
+        {
+            this.dependencyResolver = dependencyResolver;
+        }
+
         public void Execute()
         {
-            if (!IoC.IsRegistered<IEventAggregator>())
+            if (!dependencyResolver.IsRegistered<IEventAggregator>())
             {
-                IoC.RegisterSingleton<IEventAggregator, EventAggregator>();
+                dependencyResolver.RegisterSingleton<IEventAggregator, EventAggregator>();
             }
         }
     }

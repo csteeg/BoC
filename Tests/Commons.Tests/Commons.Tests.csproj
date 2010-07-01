@@ -49,8 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseFixture.cs" />
-    <Compile Include="Tasks\BootstrapperFixture.cs" />
+    <Compile Include="EventAggregator\DefaultSetupTasks\InitEventAggregatorTaskFixture.cs" />
+    <Compile Include="Tasks\BootstrapperTasksInitializerFixture.cs" />
     <Compile Include="Tasks\BaseTimedBackgroundTaskFixture.cs" />
+    <Compile Include="Tasks\RegisterBackgroundTasksFixture.cs" />
     <Compile Include="Tasks\StartBackgroundTasksFixture.cs" />
     <Compile Include="EventAggregator\BaseEventFixture.cs" />
     <Compile Include="EventAggregator\BaseEvent`1Fixture.cs" />

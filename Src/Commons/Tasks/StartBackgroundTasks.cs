@@ -2,7 +2,7 @@ using BoC.Helpers;
 
 namespace BoC.Tasks
 {
-    public class StartBackgroundTasks : IPostBootstrapperTask
+    public class StartBackgroundTasks : IBootstrapperTask
     {
         private readonly IBackgroundTask[] _tasks;
 

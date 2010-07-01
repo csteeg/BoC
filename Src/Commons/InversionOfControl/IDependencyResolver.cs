@@ -19,5 +19,6 @@ namespace BoC.InversionOfControl
 
         IEnumerable<T> ResolveAll<T>();
         bool IsRegistered(Type type);
+        bool IsRegistered<T>();
     }
 }

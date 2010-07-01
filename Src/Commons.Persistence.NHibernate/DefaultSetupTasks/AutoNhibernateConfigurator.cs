@@ -2,7 +2,6 @@ using System;
 using System.Configuration;
 using System.Web;
 using BoC.InversionOfControl;
-using BoC.InversionOfControl.Configuration;
 using BoC.Persistence.NHibernate;
 using BoC.Persistence.NHibernate.UnitOfWork;
 using BoC.UnitOfWork;
@@ -15,10 +14,17 @@ namespace BoC.Persistence.DefaultSetupTasks
 {
     public class AutoNhibernateConfigurator : IContainerInitializer
     {
+        private readonly IDependencyResolver dependencyResolver;
+
+        public AutoNhibernateConfigurator(IDependencyResolver dependencyResolver)
+        {
+            this.dependencyResolver = dependencyResolver;
+        }
+
         public void Execute()
         {
             IPersistenceConfigurer db = null;
-            if (!IoC.IsRegistered<IPersistenceConfigurer>())
+            if (!dependencyResolver.IsRegistered<IPersistenceConfigurer>())
             {
                 foreach (ConnectionStringSettings connectionString in ConfigurationManager.ConnectionStrings)
                 {
@@ -40,7 +46,7 @@ namespace BoC.Persistence.DefaultSetupTasks
             }
             else
             {
-                db = IoC.Resolve<IPersistenceConfigurer>();
+                db = dependencyResolver.Resolve<IPersistenceConfigurer>();
             }
 
             if (db == null)
@@ -49,20 +55,20 @@ namespace BoC.Persistence.DefaultSetupTasks
             }
 
 
-            if (!IoC.IsRegistered<ISessionFactory>())
+            if (!dependencyResolver.IsRegistered<ISessionFactory>())
             {
-                NHibernateConfigHelper.SetupAutoMapperForEntities(db);
+                NHibernateConfigHelper.SetupAutoMapperForEntities(dependencyResolver);
             }
 
-            if (!IoC.IsRegistered<ISessionManager>())
+            if (!dependencyResolver.IsRegistered<ISessionManager>())
             {
                 //IoC.RegisterSingleton<ISessionManager, CurrentContextSessionManager>();
-                IoC.RegisterSingleton<ISessionManager, UnitOfWorkSessionManager>();
+                dependencyResolver.RegisterSingleton<ISessionManager, UnitOfWorkSessionManager>();
             }
 
-            if (!IoC.IsRegistered<IUnitOfWork>())
+            if (!dependencyResolver.IsRegistered<IUnitOfWork>())
             {
-                IoC.RegisterType<IUnitOfWork, NHibernateUnitOfWork>();
+                dependencyResolver.RegisterType<IUnitOfWork, NHibernateUnitOfWork>();
             }
         }
     }

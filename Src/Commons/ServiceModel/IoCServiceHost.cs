@@ -13,13 +13,12 @@ namespace BoC.ServiceModel
         protected IoCServiceHost() {}
 
         public IoCServiceHost(Type serviceType, params Uri[] baseAddresses) : base(serviceType, baseAddresses) {}
-
         public IoCServiceHost(object singletonInstance, params Uri[] baseAddresses) : base(singletonInstance, baseAddresses) {}
 
         protected override void OnOpening()
         {
-            IoC.Resolve<IoCServiceBehavior>().AddToHost(this);
-            IoC.Resolve<ServiceErrorLoggerBehavior>().AddToHost(this);
+            IoC.Resolver.Resolve<IoCServiceBehavior>().AddToHost(this);
+            IoC.Resolver.Resolve<ServiceErrorLoggerBehavior>().AddToHost(this);
             base.OnOpening();
         }
     }

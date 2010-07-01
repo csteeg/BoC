@@ -14,6 +14,11 @@ namespace BoC.Web.Mvc
     public class AutoScaffoldControllerFactory : IoCControllerFactory
     {
         private static Hashtable controllerTypeCache = new Hashtable();
+
+        public AutoScaffoldControllerFactory(IDependencyResolver dependencyResolver): base(dependencyResolver)
+        {
+        }
+
         protected override Type GetControllerType(RequestContext requestContext, string controllerName)
         {
             var result = base.GetControllerType(requestContext, controllerName);
@@ -42,7 +47,7 @@ namespace BoC.Web.Mvc
                 return null;
             }
 
-            return typeof(DynamicScaffoldController<>).MakeGenericType(entityType);
+            return (Type)(controllerTypeCache[controllerName.ToLower()] = typeof(DynamicScaffoldController<>).MakeGenericType(entityType));
 
         }
     }
