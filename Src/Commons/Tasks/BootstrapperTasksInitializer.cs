@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using BoC.Helpers;
 using BoC.InversionOfControl;
 
 namespace BoC.Tasks
@@ -7,9 +8,12 @@ namespace BoC.Tasks
     public class BootstrapperTasksInitializer: IContainerInitializer
     {
         private readonly IDependencyResolver dependencyResolver;
-        public BootstrapperTasksInitializer(IDependencyResolver dependencyResolver)
+        private readonly IAppDomainHelper[] appDomainHelpers;
+
+        public BootstrapperTasksInitializer(IDependencyResolver dependencyResolver, IAppDomainHelper[] appDomainHelpers)
         {
             this.dependencyResolver = dependencyResolver;
+            this.appDomainHelpers = appDomainHelpers;
         }
 
         volatile private static Func<Type, bool> taskFilter = t => true;
@@ -21,9 +25,9 @@ namespace BoC.Tasks
 
         public void RegisterAllTasks()
         {
-            var tasks = AppDomain.CurrentDomain.GetAssemblies().ToList()
-                    .SelectMany(s => s.GetTypes())
-                    .Where(t => t.IsClass && !t.IsAbstract && typeof(IBootstrapperTask).IsAssignableFrom(t) && TaskFilter(t));
+            var tasks = appDomainHelpers
+                        .SelectMany(helper => helper
+                            .GetTypes(t => t.IsClass && !t.IsAbstract && typeof(IBootstrapperTask).IsAssignableFrom(t) && TaskFilter(t)));
             foreach (var t in tasks)
             {
                 dependencyResolver.RegisterType(typeof(IBootstrapperTask), t);

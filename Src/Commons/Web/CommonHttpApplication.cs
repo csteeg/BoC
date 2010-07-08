@@ -46,14 +46,13 @@ namespace BoC.Web
             if (!initialized)
             {
                 initialized = true;
-                InitializeIoC();
+                InitializeBoC();
             }
         }
 
-        protected virtual void InitializeIoC()
+        protected virtual void InitializeBoC()
         {
-            if (!IoC.IsInitialized())
-                IoC.InitializeWith(new DependencyResolverFactory().CreateInstance());
+            Initializer.Execute();
         }
 
         public override void Init()

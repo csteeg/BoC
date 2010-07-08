@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using BoC.EventAggregator;
+using BoC.Helpers;
 using BoC.InversionOfControl;
 using BoC.Persistence;
 using BoC.Services;
@@ -15,23 +16,24 @@ namespace BoC.Tasks
     public class AutoRegisterModelServices : IContainerInitializer
     {
         private readonly IDependencyResolver dependencyResolver;
+        private readonly IAppDomainHelper[] appDomainHelpers;
 
-        public AutoRegisterModelServices(IDependencyResolver dependencyResolver)
+        public AutoRegisterModelServices(IDependencyResolver dependencyResolver, IAppDomainHelper[] appDomainHelpers)
         {
             this.dependencyResolver = dependencyResolver;
+            this.appDomainHelpers = appDomainHelpers;
         }
 
         public static bool CreateMissingModelServices = true;
 
         public void Execute()
         {
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
-            var modelservices = assemblies
-                .SelectMany(s => s.GetTypes())
-                .Where(t => t.IsClass && !t.IsAbstract &&
+            var modelservices = appDomainHelpers
+                .SelectMany(helpers => helpers
+                    .GetTypes(t => t.IsClass && !t.IsAbstract &&
                             !t.Assembly.GetName().Name.StartsWith("Microsoft") && 
                             !t.Assembly.GetName().Name.StartsWith("System") 
-                            && typeof(IModelService<>).IsAssignableFrom(t));
+                            && typeof(IModelService<>).IsAssignableFrom(t)));
 
             foreach (var service in modelservices)
             {
@@ -47,19 +49,19 @@ namespace BoC.Tasks
             }
 
             if (CreateMissingModelServices)
-                CreateModelServices(assemblies);
+                CreateModelServices();
             
         }
 
-        void CreateModelServices(IEnumerable<Assembly> assemblies)
+        void CreateModelServices()
         {
             var isbasetype = new Func<Type, bool>(basetype =>
                                                   basetype.IsGenericType &&
                                                   basetype.GetGenericTypeDefinition() == typeof (BaseEntity<>));
 
-            var types = from t in assemblies
-                            .SelectMany(s => GetTypes(s))
-                        select t;
+            var types = (from t in appDomainHelpers
+                            .SelectMany(s => s.GetTypes(type => true))
+                        select t).ToList();
 
             var entities = from t in types
                            where t.IsClass

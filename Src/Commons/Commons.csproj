@@ -95,7 +95,10 @@
     <Compile Include="Events\UpdatedEvent.cs" />
     <Compile Include="Events\UpdatingEvent.cs" />
     <Compile Include="Extensions\ExpressionExtensions.cs" />
-    <Compile Include="Inflector.cs" />
+    <Compile Include="Helpers\AppDomainHelper.cs" />
+    <Compile Include="Helpers\IAppDomainHelper.cs" />
+    <Compile Include="Helpers\Inflector.cs" />
+    <Compile Include="Initializer.cs" />
     <Compile Include="InversionOfControl\IContainerInitializer.cs" />
     <Compile Include="Linq\Dynamic.cs" />
     <Compile Include="Linq\ExpressionUtility.cs" />
@@ -130,7 +133,6 @@
     <Compile Include="EventAggregator\SubscriptionToken.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\CheckArgument.cs" />
-    <Compile Include="InversionOfControl\DependencyResolverFactory.cs" />
     <Compile Include="InversionOfControl\IDependencyResolver.cs" />
     <Compile Include="InversionOfControl\IDependencyResolverFactory.cs" />
     <Compile Include="InversionOfControl\IoC.cs" />

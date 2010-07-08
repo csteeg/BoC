@@ -15,7 +15,7 @@
 using System.Collections;
 using System.Text.RegularExpressions;
 
-namespace BoC
+namespace BoC.Helpers
 {
     /// <summary>
     /// The Inflector class transforms words from one 

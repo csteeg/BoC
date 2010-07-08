@@ -47,58 +47,23 @@ namespace BoC.InversionOfControl
 
         private static void RunContainerInitailizers(IDependencyResolver dependencyResolver)
         {
-            string binPath = AppDomain.CurrentDomain.SetupInformation.PrivateBinPath;
-
-            // In the context of a unit test the privatebinpath is an empty string.
-            if (String.IsNullOrEmpty(binPath))
+            var appdomainHelpers = dependencyResolver.ResolveAll<IAppDomainHelper>();
+            if (appdomainHelpers == null || appdomainHelpers.Count() == 0)
             {
-                binPath = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+                appdomainHelpers = new[] {AppDomainHelper.CreateDefault()};
             }
 
-            foreach (var dir in binPath.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
-            {
-                foreach (var file in Directory.GetFiles(dir, "*.dll"))
-                {
-                    try
-                    {
-                        Assembly.LoadFrom(file);
-                    }
-                    catch { }
-                }
-            }
-            try
-            {
-                var initTasks =
-                    AppDomain.CurrentDomain.GetAssemblies().ToList()
-                        .SelectMany(s => s.GetTypes())
-                        .Where(t => t.IsClass && !t.IsAbstract && typeof(IContainerInitializer).IsAssignableFrom(t))
-                        .ToList();
+            var initTasks =
+                appdomainHelpers.SelectMany(helper => helper.GetTypes(
+                    t => t.IsClass && !t.IsAbstract && typeof (IContainerInitializer).IsAssignableFrom(t)));
 
-                foreach (var t in initTasks.Where(t => !t.Namespace.StartsWith("BoC."))) //first user's tasks
-                {
-                    RunContainerInitailizer(t, dependencyResolver);
-                }
-                foreach (var t in initTasks.Where(t => t.Namespace.StartsWith("BoC."))) //now ours
-                {
-                    RunContainerInitailizer(t, dependencyResolver);
-                }
-            }
-            catch (ReflectionTypeLoadException e)
+            foreach (var t in initTasks.Where(t => !t.Namespace.StartsWith("BoC."))) //first user's tasks
             {
-                StringBuilder message = new StringBuilder("Failed to load assembly.\nFailed types:\n");
-                message.AppendLine("---------------------------");
-                foreach (var type in e.Types)
-                {
-                    message.AppendLine(type + "");
-                }
-                message.AppendLine("---------------------------");
-                message.AppendLine("LoaderExceptions:");
-                message.AppendLine("---------------------------");
-                foreach (var exception in e.LoaderExceptions)
-                {
-                    message.AppendLine(exception.Message);
-                }
-                throw new Exception(message.ToString(), e);
+                RunContainerInitailizer(t, dependencyResolver);
+            }
+            foreach (var t in initTasks.Where(t => t.Namespace.StartsWith("BoC."))) //now ours
+            {
+                RunContainerInitailizer(t, dependencyResolver);
             }
         }
 

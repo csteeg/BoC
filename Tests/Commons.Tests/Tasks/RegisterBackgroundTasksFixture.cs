@@ -1,4 +1,5 @@
 using System;
+using BoC.Helpers;
 using BoC.Tasks;
 using Moq;
 using Xunit;
@@ -11,24 +12,29 @@ namespace BoC.Tests.Tasks
         public void Execute_Should_Register_Tasks()
         {
             var task2 = new Mock<IBackgroundTask>();
+            var appdomainHelper = new Mock<IAppDomainHelper>();
+            appdomainHelper.Setup(h => h.GetTypes(It.IsAny<Func<Type, bool>>())).Returns(new Type[]{ typeof(FindableBackgroundTask), typeof(object)});
 
-            resolver.Setup(r => r.RegisterType(typeof(IBackgroundTask), typeof(FindableBackgroundTask))).Verifiable();
+            new RegisterBackgroundTasks(resolver.Object, new[] { appdomainHelper.Object }).Execute();
 
-            new RegisterBackgroundTasks(resolver.Object).Execute();
-            
-            task2.Verify();
-            resolver.Verify();
+            resolver.Verify(r => r.RegisterType(typeof(IBackgroundTask), typeof(FindableBackgroundTask)), Times.Once());
         }
 
         [Fact]
-        public void Register_Should_Not_Find_And_Register_Anything_When_Filtered()
+        public void Register_Should_Use_StaticFilter()
         {
-            resolver.Setup(r => r.RegisterType(typeof(IBackgroundTask), typeof(FindableBackgroundTask))).Verifiable();
+            var filtered = false;
+            var appdomainHelper = new Mock<IAppDomainHelper>();
 
-            RegisterBackgroundTasks.TaskFilter = type => false;
-            new RegisterBackgroundTasks(resolver.Object).Execute();
+            appdomainHelper
+                .Setup(h => h.GetTypes(It.IsAny<Func<Type, bool>>()))
+                .Callback<Func<Type, bool>>(func => func(typeof (FindableBackgroundTask)))
+                .Returns(new Type[0]);
 
-            resolver.Verify(r => r.RegisterType(typeof(IBackgroundTask), typeof(FindableBackgroundTask)), Times.Never());
+            RegisterBackgroundTasks.TaskFilter = type => filtered = true;
+            new RegisterBackgroundTasks(resolver.Object, new[] {appdomainHelper.Object}).Execute();
+
+            Assert.True(filtered);
         }
 
     }

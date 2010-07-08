@@ -1,4 +1,5 @@
 using System;
+using BoC.Helpers;
 using BoC.Tasks;
 using Moq;
 using Xunit;
@@ -11,39 +12,61 @@ namespace BoC.Tests.Tasks
         public void Run_Should_Execute_Tasks()
         {
             var task1 = new Mock<IBootstrapperTask>();
-
             task1.Setup(t => t.Execute()).Verifiable();
-
             resolver.Setup(r => r.ResolveAll<IBootstrapperTask>()).Returns(new[] { task1.Object });
+            var appdomainHelper = new Mock<IAppDomainHelper>();
 
-            new BootstrapperTasksInitializer(resolver.Object).Run();
+            new BootstrapperTasksInitializer(resolver.Object, new[] {appdomainHelper.Object}).Run();
 
             task1.Verify();
         }
 
         [Fact]
-        public void Execute_Should_Register_Tasks()
+        public void RegisterAllTasks_Should_Register_Tasks()
         {
             var task1 = new Mock<IBootstrapperTask>();
-
+            
             resolver.Setup(r => r.ResolveAll<IBootstrapperTask>()).Returns(new[] { task1.Object });
-            resolver.Setup(r => r.RegisterType(typeof(IBootstrapperTask), typeof(FindableBootstrapperTask))).Verifiable();
+            
+            var appdomainHelper = new Mock<IAppDomainHelper>();
+            appdomainHelper.Setup(h => h.GetTypes(It.IsAny<Func<Type, bool>>())).Returns(new Type[] { typeof(FindableBootstrapperTask), typeof(object) });
 
-            new BootstrapperTasksInitializer(resolver.Object).Execute();
+            new BootstrapperTasksInitializer(resolver.Object, new[] {appdomainHelper.Object}).RegisterAllTasks();
 
             resolver.Verify(r => r.RegisterType(typeof(IBootstrapperTask), typeof(FindableBootstrapperTask)), Times.Once());
         }
 
+        [Fact]
+        public void Execute_Should_Register_And_Run_Tasks()
+        {
+            var task1 = new Mock<IBootstrapperTask>();
+
+            resolver.Setup(r => r.ResolveAll<IBootstrapperTask>()).Returns(new[] { task1.Object });
+
+            var appdomainHelper = new Mock<IAppDomainHelper>();
+            appdomainHelper.Setup(h => h.GetTypes(It.IsAny<Func<Type, bool>>())).Returns(new Type[] { typeof(FindableBootstrapperTask), typeof(object) });
+
+            new BootstrapperTasksInitializer(resolver.Object, new[] { appdomainHelper.Object }).Execute();
+
+            resolver.Verify(r => r.RegisterType(typeof(IBootstrapperTask), typeof(FindableBootstrapperTask)), Times.Once());
+            task1.Verify(t => t.Execute(), Times.Once());
+        }
+
 
         [Fact]
-        public void Register_Should_Not_Find_And_Register_Anything_When_Filtered()
+        public void Register_Should_Use_Static_Filter()
         {
-            resolver.Setup(r => r.RegisterType(typeof(IBootstrapperTask), typeof(FindableBootstrapperTask))).Verifiable();
+            var filtered = false;
+            var appdomainHelper = new Mock<IAppDomainHelper>();
+            appdomainHelper
+                .Setup(h => h.GetTypes(It.IsAny<Func<Type, bool>>()))
+                .Callback<Func<Type, bool>>(func => func(typeof(FindableBootstrapperTask)))
+                .Returns(new Type[0]);
+            BootstrapperTasksInitializer.TaskFilter = type => filtered = true;
 
-            BootstrapperTasksInitializer.TaskFilter = type => false;
-            new BootstrapperTasksInitializer(resolver.Object).RegisterAllTasks();
+            new BootstrapperTasksInitializer(resolver.Object, new[] { appdomainHelper.Object }).RegisterAllTasks();
 
-            resolver.Verify(r => r.RegisterType(typeof(IBootstrapperTask), typeof(FindableBootstrapperTask)), Times.Never());
+            Assert.True(filtered);
         }
 
     }

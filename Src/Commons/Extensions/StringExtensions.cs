@@ -42,6 +42,11 @@ namespace BoC.Extensions
             return !string.IsNullOrEmpty(target) && webUrlExpression.IsMatch(target);
         }
 
+        public static string NullSafe(this string target)
+        {
+            return (target ?? string.Empty).Trim();
+        }
+
         public static string MD5(this string s)
         {
             var provider = new MD5CryptoServiceProvider();
@@ -63,20 +68,55 @@ namespace BoC.Extensions
             return string.Format(CultureInfo.CurrentCulture, target, args);
         }
 
+        public static T ToEnum<T>(this string target, T defaultValue) where T : struct, IComparable, IFormattable
+        {
+            var convertedValue = defaultValue;
+
+            if (!string.IsNullOrEmpty(target))
+            {
+                Enum.TryParse(target.Trim(), true, out convertedValue);
+            }
+
+            return convertedValue;
+        }
+
         public static int LevenshteinDistance(this String value, String compareString)
         {
             return LevenshteinDistance(value, compareString, false);
         }
+
+        public static int LevenshteinDistance(this String value, String compareString, bool removeSpecialChars)
+        {
+            return value.LevenshteinDistance(compareString, removeSpecialChars, false);
+        }
+
+        public static int LevenshteinDistancePercentage(this String value, String compareString, bool removeSpecialChars)
+        {
+            return value.LevenshteinDistance(compareString, removeSpecialChars, true);
+        }
+
+        public static int LevenshteinDistancePercentage(this String value, String compareString)
+        {
+            return value.LevenshteinDistance(compareString, false, true);
+        }
+
         ///*****************************
         /// Compute Levenshtein distance 
         /// Memory efficient version
         ///*****************************
-        public static int LevenshteinDistance(this String value, String compareString, bool removeSpecialChars)
+        static int LevenshteinDistance(this String value, String compareString, bool removeSpecialChars, bool returnPercentage)
         {
             if (value == null)
                 throw new ArgumentNullException("value");
             if (compareString == null)
                 throw new ArgumentNullException("compareString");
+
+            /// Test string length
+            var maxlen = Math.Pow(2, 31);
+            if (value.Length > maxlen)
+                throw new ArgumentException("\nMaximum string length in Levenshtein.iLD is " +maxlen + ".\nYours is " + value.Length + ".", "value");
+            if (compareString.Length > maxlen)
+                throw new ArgumentException("\nMaximum string length in Levenshtein.iLD is " + maxlen + ".\nYours is " + compareString.Length + ".", "compareString");
 
             if (removeSpecialChars)
             {
@@ -92,10 +132,6 @@ namespace BoC.Extensions
             char Col_j;                // jth character of sCol
             int cost;                   // cost
 
-            /// Test string length
-            if (Math.Max(value.Length, compareString.Length) > Math.Pow(2, 31))
-                throw (new Exception("\nMaximum string length in Levenshtein.iLD is " + Math.Pow(2, 31) + ".\nYours is " + Math.Max(value.Length, compareString.Length) + "."));
-
             // Step 1
 
             if (RowLen == 0 && ColLen == 0)
@@ -105,7 +141,7 @@ namespace BoC.Extensions
 
             if (ColLen == 0 || RowLen == 0)
             {
-                return 100;
+                return returnPercentage ? 100 : Math.Max(ColLen, RowLen);
             }
 
             /// Create the two vectors
@@ -187,8 +223,12 @@ namespace BoC.Extensions
             /// The vectors where swaped one last time at the end of the last loop,
             /// that is why the result is now in v0 rather than in v1
             System.Console.WriteLine("iDist=" + v0[RowLen]);
-            int max = System.Math.Max(RowLen, ColLen);
-            return ((100 * v0[RowLen]) / max);
+            if (returnPercentage)
+            {
+                int max = System.Math.Max(RowLen, ColLen);
+                return ((100*v0[RowLen])/max);
+            }
+            return v0[RowLen];
         }
 
     }
