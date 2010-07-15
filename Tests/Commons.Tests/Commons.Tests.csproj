@@ -37,6 +37,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,12 +52,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseFixture.cs" />
+    <Compile Include="BaseIoCFixture.cs" />
     <Compile Include="EventAggregator\DefaultSetupTasks\InitEventAggregatorTaskFixture.cs" />
+    <Compile Include="Extensions\ExpressionExtensionFixture.cs" />
     <Compile Include="Extensions\StringExtensionFixture.cs" />
     <Compile Include="Helpers\CheckArgumentFixture.cs" />
     <Compile Include="InversionOfControl\IoCFixture.cs" />
-    <Compile Include="PersistenceLayer\BaseEntityFixture.cs" />
+    <Compile Include="Persistence\BaseEntityFixture.cs" />
+    <Compile Include="Services\AutoRegisterModelServicesFixture.cs" />
+    <Compile Include="Services\BaseModelServiceFixtures\BasicQueryFixture.cs" />
+    <Compile Include="Services\BaseModelServiceFixtures\BaseModelServiceBaseFixture.cs" />
+    <Compile Include="Services\BaseModelServiceFixtures\ValidateEntityFixture.cs" />
+    <Compile Include="Services\BaseModelServiceFixtures\UpdateFixture.cs" />
+    <Compile Include="Services\BaseModelServiceFixtures\DeleteFixture.cs" />
+    <Compile Include="Services\BaseModelServiceFixtures\DummyModel.cs" />
+    <Compile Include="Services\BaseModelServiceFixtures\FindByModelFixture.cs" />
+    <Compile Include="Services\BaseModelServiceFixtures\InsertFixture.cs" />
+    <Compile Include="Services\BaseModelServiceFixtures\FindFixture.cs" />
+    <Compile Include="Services\DummyModel.cs" />
     <Compile Include="Tasks\BootstrapperTasksInitializerFixture.cs" />
     <Compile Include="Tasks\BaseTimedBackgroundTaskFixture.cs" />
     <Compile Include="Tasks\RegisterBackgroundTasksFixture.cs" />

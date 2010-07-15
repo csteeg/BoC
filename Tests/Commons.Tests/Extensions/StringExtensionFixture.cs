@@ -173,5 +173,21 @@ namespace BoC.Tests.Extensions
             Assert.Equal(expect, input.LevenshteinDistancePercentage(compare));
         }
 
+        [Theory]
+        [InlineData("asdfnadfsf*(*FD DFK FD (DFDFKJ", "asdfnadfsfFDDFKFDDFDFKJ")]
+        [InlineData("878&(*&abc .asdf", "878abcasdf")]
+        public void LevenshteinDistancePercentage_Should_Say_Zero_When_Removing_Special_Chars(string input, string compare)
+        {
+            Assert.Equal(0, input.LevenshteinDistancePercentage(compare, true));
+        }
+
+        [Theory]
+        [InlineData("6B015431-94A2-4FA5-8AD5-3E9D16110F87", true)]
+        [InlineData("aa7b78f6-78FD-4208-B7BD-60A8F1DC0FD8", true)]
+        [InlineData("aa7b78f678FD4208B7BD60A8F1DC0FD8", false)]
+        public void IsGuid_Should_Return_If_Input_Is_A_Valid_Guid(string input, bool expect)
+        {
+            Assert.Equal(input.IsGuid(), expect);
+        }
     }
 }

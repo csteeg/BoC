@@ -31,14 +31,16 @@ namespace BoC.Tests
 
     public class TestableDependencyResolver: IDependencyResolver
     {
-        public virtual void Dispose()
+        readonly List<Type> registered = new List<Type>();
+        
+        virtual public void Dispose()
         {
-            
+            registered.Clear();
         }
 
         public virtual void RegisterInstance<T>(T instance)
         {
-            
+            registered.Add(typeof(T));
         }
 
         public void RegisterSingleton<TFrom, TTo>() where TTo : TFrom
@@ -48,6 +50,7 @@ namespace BoC.Tests
 
         public virtual void RegisterSingleton(Type from, Type to)
         {
+            registered.Add(from);
         }
 
         public void RegisterType<TFrom, TTo>() where TTo : TFrom
@@ -57,6 +60,7 @@ namespace BoC.Tests
 
         public virtual void RegisterType(Type from, Type to)
         {
+            registered.Add(from);
         }
 
         public virtual void Inject<T>(T existing)
@@ -73,7 +77,7 @@ namespace BoC.Tests
             return null;
         }
 
-        public T Resolve<T>()
+        virtual public T Resolve<T>()
         {
             var result = Resolve(typeof (T));
             if (result != null)
@@ -96,7 +100,7 @@ namespace BoC.Tests
 
         public virtual bool IsRegistered(Type type)
         {
-            return false;
+            return registered.Contains(type);
         }
 
         public bool IsRegistered<T>()

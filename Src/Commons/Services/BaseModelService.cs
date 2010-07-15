@@ -17,7 +17,7 @@ namespace BoC.Services
         private readonly IEventAggregator eventAggregator;
         protected readonly IRepository<TModel> repository;
         // Methods
-        public BaseModelService(
+        protected BaseModelService(
             IModelValidator validator, 
             IEventAggregator eventAggregator, 
             IRepository<TModel> repository)
@@ -54,8 +54,10 @@ namespace BoC.Services
             {
                 if (query.Expression != null)
                     q = q.Where(query.Expression);
-                if (query.ItemsToSkip > 0 || query.ItemsToTake > 0)
-                    q = q.Skip(query.ItemsToSkip).Take(query.ItemsToTake);
+                if (query.ItemsToSkip > 0)
+                    q = q.Skip(query.ItemsToSkip);
+                if (query.ItemsToTake > 0)
+                    q = q.Take(query.ItemsToTake);
                 if (!String.IsNullOrEmpty(query.OrderByExpression))
                 {
                     q = q.OrderBy(query.OrderByExpression);

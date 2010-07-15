@@ -13,6 +13,15 @@ namespace BoC.Tests.EventAggregator
         }
 
         [Fact]
+        public void Get_Should_Return_Instance_Of_Event_Type()
+        {
+            var instance1 = _eventAggregator.GetEvent<SomeEvent>();
+
+            Assert.NotNull(instance1);
+            Assert.IsAssignableFrom<SomeEvent>(instance1);
+        }
+
+        [Fact]
         public void Get_Should_Return_Same_Instance_Of_Same_Event_Type()
         {
             var instance1 = _eventAggregator.GetEvent<SomeEvent>();

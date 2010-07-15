@@ -13,15 +13,6 @@ namespace BoC.Extensions
 {
     public static class StringExtensions
     {
-
-        public static string JsSerialize(this string value)
-        {
-            if (String.IsNullOrEmpty(value))
-                return value;
-            
-            return new JavaScriptSerializer().Serialize(value);
-        }
-
         static readonly Regex guidRegEx = new Regex(Expressions.Guid, RegexOptions.Compiled);
         public static bool IsGuid(this string expression)
         {

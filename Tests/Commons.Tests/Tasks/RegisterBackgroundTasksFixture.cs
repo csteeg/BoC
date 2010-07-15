@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using BoC.Helpers;
 using BoC.Tasks;
 using Moq;
@@ -13,7 +14,8 @@ namespace BoC.Tests.Tasks
         {
             var task2 = new Mock<IBackgroundTask>();
             var appdomainHelper = new Mock<IAppDomainHelper>();
-            appdomainHelper.Setup(h => h.GetTypes(It.IsAny<Func<Type, bool>>())).Returns(new Type[]{ typeof(FindableBackgroundTask), typeof(object)});
+            appdomainHelper.Setup(h => h.GetTypes(It.IsAny<Func<Type, bool>>()))
+                .Returns<Func<Type, bool>>(f => new Type[] { typeof(FindableBackgroundTask), typeof(object) }.Where(f));
 
             new RegisterBackgroundTasks(resolver.Object, new[] { appdomainHelper.Object }).Execute();
 

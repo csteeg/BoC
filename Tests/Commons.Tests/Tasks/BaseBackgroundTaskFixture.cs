@@ -26,6 +26,17 @@ namespace BoC.Tests.Tasks
         }
 
         [Fact]
+        public void Dispose_Should_Call_Stop()
+        {
+            using (_task.Object)
+            {
+                _task.Object.Start();
+            }
+
+            Assert.False(_task.Object.IsRunning);
+        }
+
+        [Fact]
         public void Start_Should_Change_Is_Running_Status()
         {
             _task.Object.Stop();

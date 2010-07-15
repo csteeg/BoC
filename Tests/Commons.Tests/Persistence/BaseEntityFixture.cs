@@ -1,7 +1,7 @@
 ﻿using BoC.Persistence;
 using Xunit;
 
-namespace BoC.Tests.PersistenceLayer
+namespace BoC.Tests.Persistence
 {
     public class TestableEntity1: BaseEntity<int> {}
     public class TestableEntity2: BaseEntity<int> { }

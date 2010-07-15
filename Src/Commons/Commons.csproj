@@ -94,6 +94,7 @@
     <Compile Include="Events\InsertingEvent.cs" />
     <Compile Include="Events\UpdatedEvent.cs" />
     <Compile Include="Events\UpdatingEvent.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Extensions\ExpressionExtensions.cs" />
     <Compile Include="Helpers\AppDomainHelper.cs" />
     <Compile Include="Helpers\IAppDomainHelper.cs" />
@@ -113,7 +114,7 @@
     <Compile Include="Services\BaseModelService.cs" />
     <Compile Include="Services\IModelService.cs" />
     <Compile Include="Services\ModelQuery.cs" />
-    <Compile Include="Tasks\AutoRegisterModelServices.cs" />
+    <Compile Include="Services\DefaultSetupTasks\AutoRegisterModelServices.cs" />
     <Compile Include="Tasks\BaseBackgroundTask.cs" />
     <Compile Include="Tasks\RegisterBackgroundTasks.cs" />
     <Compile Include="Tasks\BootstrapperTasksInitializer.cs" />

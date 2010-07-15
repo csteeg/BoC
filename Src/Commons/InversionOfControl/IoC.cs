@@ -19,11 +19,11 @@ namespace BoC.InversionOfControl
             lock (resolverLock)
             {
                 if (IoC.Resolver != null)
-                    throw new ArgumentException("IoC already initialized");
+                    throw new ApplicationException("IoC already initialized");
                 
                 IoC.Resolver = resolver;
 
-                RunContainerInitailizers(resolver);
+                RunContainerInitializers(resolver);
             }
         }
 
@@ -36,7 +36,7 @@ namespace BoC.InversionOfControl
         public static IDependencyResolver Resolver
         {
             get { return resolver; }
-            set
+            private set
             {
                 lock (resolverLock)
                 {
@@ -45,7 +45,15 @@ namespace BoC.InversionOfControl
             }
         }
 
-        private static void RunContainerInitailizers(IDependencyResolver dependencyResolver)
+        public static void Reset()
+        {
+            lock (resolverLock)
+            {
+                Resolver = null;
+            }
+        }
+
+        private static void RunContainerInitializers(IDependencyResolver dependencyResolver)
         {
             var appdomainHelpers = dependencyResolver.ResolveAll<IAppDomainHelper>();
             if (appdomainHelpers == null || appdomainHelpers.Count() == 0)
@@ -56,35 +64,26 @@ namespace BoC.InversionOfControl
             var initTasks =
                 appdomainHelpers.SelectMany(helper => helper.GetTypes(
                     t => t.IsClass && !t.IsAbstract && typeof (IContainerInitializer).IsAssignableFrom(t)));
-
-            foreach (var t in initTasks.Where(t => !t.Namespace.StartsWith("BoC."))) //first user's tasks
+            //register them:
+            foreach (var taskType in initTasks)
             {
-                RunContainerInitailizer(t, dependencyResolver);
+                dependencyResolver.RegisterType(typeof(IContainerInitializer), taskType);
             }
-            foreach (var t in initTasks.Where(t => t.Namespace.StartsWith("BoC."))) //now ours
+            //run them:
+            var allTasks = dependencyResolver.ResolveAll<IContainerInitializer>();
+            if (allTasks != null)
             {
-                RunContainerInitailizer(t, dependencyResolver);
-            }
-        }
-
-        private static void RunContainerInitailizer(Type type, IDependencyResolver dependencyResolver)
-        {
-            IContainerInitializer initializer = null;
-            try
-            {
-                var constructor = type.GetConstructor(new[] {typeof (IDependencyResolver)});
-                if (constructor != null)
+                //first user's tasks:
+                foreach (var task in allTasks.Where(t => !t.GetType().Namespace.StartsWith("BoC.")))
                 {
-                    initializer = Activator.CreateInstance(type,new object[]{ dependencyResolver}) as IContainerInitializer;
+                    task.Execute();
+                }
+                //now ours:
+                foreach (var task in allTasks.Where(t => t.GetType().Namespace.StartsWith("BoC.")))
+                {
+                    task.Execute();
                 }
             }
-            catch {}
-
-            if (initializer == null)
-                initializer = Activator.CreateInstance(type) as IContainerInitializer;
-            
-            if (initializer != null)
-                initializer.Execute();
         }
     }
 }

@@ -1,17 +1,15 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using BoC.EventAggregator;
+using BoC.Extensions;
 using BoC.Helpers;
 using BoC.InversionOfControl;
 using BoC.Persistence;
-using BoC.Services;
 using BoC.Validation;
 
-
-namespace BoC.Tasks
+namespace BoC.Services.DefaultSetupTasks
 {
     public class AutoRegisterModelServices : IContainerInitializer
     {
@@ -33,14 +31,14 @@ namespace BoC.Tasks
                     .GetTypes(t => t.IsClass && !t.IsAbstract &&
                             !t.Assembly.GetName().Name.StartsWith("Microsoft") && 
                             !t.Assembly.GetName().Name.StartsWith("System") 
-                            && typeof(IModelService<>).IsAssignableFrom(t)));
+                            && typeof(IModelService).IsAssignableFrom(t)));
 
             foreach (var service in modelservices)
             {
                 var interfaces = service.GetInterfaces();
                 foreach (var @interface in interfaces)
                 {
-                    if (typeof(IModelService<>).IsAssignableFrom(@interface)
+                    if (typeof (IModelService<>).IsGenericAssignableFrom(@interface)
                         && !dependencyResolver.IsRegistered(@interface))
                     {
                         dependencyResolver.RegisterType(@interface, service);
@@ -76,16 +74,12 @@ namespace BoC.Tasks
             ModuleBuilder mb = null;
             foreach (var entityType in entities)
             {
-                var inferfaceType = baseInterface.MakeGenericType(entityType);
-                if (inferfaceType == null)
-                {
-                    continue;
-                }
+                var interfaceType = baseInterface.MakeGenericType(entityType);
 
                 var interfaceToFind = (from i in types
                                        where i.IsInterface &&
-                                             inferfaceType.IsAssignableFrom(i)
-                                       select i).FirstOrDefault() ?? inferfaceType;
+                                             interfaceType.IsAssignableFrom(i)
+                                       select i).FirstOrDefault() ?? interfaceType;
 
                 if (dependencyResolver.IsRegistered(interfaceToFind))
                 {
@@ -109,55 +103,43 @@ namespace BoC.Tasks
                         mb = GetRepositoriesModuleBuilder();
                     var tb = mb.DefineType(name, TypeAttributes.AutoLayout | TypeAttributes.Public,
                                            serviceBaseType);
-                    var constructorParams = new[]
-                                                {
-                                                    typeof (IModelValidator),
-                                                    typeof (IEventAggregator),
-                                                    typeof (IRepository<>).MakeGenericType(entityType)
-                                                };
-
-                    var baseConstructor = serviceBaseType.GetConstructor(constructorParams);
-                    var constructor = tb.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard,
-                                                           constructorParams);
-                    for (int i = 1; i <= constructorParams.Length; i++)
+                    //add same constructors as basetype:
+                    var baseConstructors = serviceBaseType.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                    foreach (var baseConstructor in baseConstructors)
                     {
-                        constructor.DefineParameter(i, ParameterAttributes.None, "param" + i);
-                    }
+                        var constructorParams = baseConstructor.GetParameters();
+                        var constructor = tb.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard,
+                                                               constructorParams.Select(pi => pi.ParameterType).ToArray());
+                        for (int i = 1; i <= constructorParams.Length; i++)
+                        {
+                            constructor.DefineParameter(i, ParameterAttributes.None, "param" + i);
+                        }
 
-                    ILGenerator ilGenerator = constructor.GetILGenerator();
-                    ilGenerator.Emit(OpCodes.Ldarg_0); // Load "this"
-                    for (int i = 1; i <= constructorParams.Length; i++)
-                    {
-                        ilGenerator.Emit(OpCodes.Ldarg, i);
+                        ILGenerator ilGenerator = constructor.GetILGenerator();
+                        ilGenerator.Emit(OpCodes.Ldarg_0); // Load "this"
+                        for (int i = 1; i <= constructorParams.Length; i++)
+                        {
+                            ilGenerator.Emit(OpCodes.Ldarg, i);
+                        }
+                        ilGenerator.Emit(OpCodes.Call, baseConstructor); // Call the base constructor
+                        ilGenerator.Emit(OpCodes.Ret);
                     }
-                    ilGenerator.Emit(OpCodes.Call, baseConstructor); // Call the base constructor
-                    ilGenerator.Emit(OpCodes.Ret);
-
                     serviceType = tb.CreateType();
                 }
                 dependencyResolver.RegisterType(interfaceToFind, serviceType);
-                dependencyResolver.RegisterType(inferfaceType, serviceType);
+                if (interfaceToFind != interfaceType)
+                {
+                    dependencyResolver.RegisterType(interfaceType, serviceType);
+                }
             }
 
 
-        }
-
-        private static IEnumerable<Type> GetTypes(Assembly assembly)
-        {
-            try
-            {
-                return assembly.GetExportedTypes();
-            }
-            catch (NotSupportedException)
-            {
-                return new List<Type>(0);
-            }
         }
 
         private static ModuleBuilder GetRepositoriesModuleBuilder()
         {
-            AssemblyName aName = new AssemblyName("DynamicModelServicesAssembly");
-            AssemblyBuilder ab =
+            var aName = new AssemblyName("DynamicModelServicesAssembly");
+            var ab =
                 AppDomain.CurrentDomain.DefineDynamicAssembly(
                     aName,
                     AssemblyBuilderAccess.RunAndSave);

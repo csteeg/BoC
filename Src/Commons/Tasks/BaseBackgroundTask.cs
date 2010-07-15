@@ -27,7 +27,6 @@ namespace BoC.Tasks
 
         protected IEventAggregator EventAggregator
         {
-            [DebuggerStepThrough]
             get
             {
                 return _eventAggregator;
@@ -52,12 +51,12 @@ namespace BoC.Tasks
 
         protected SubscriptionToken Subscribe<TEvent,TEventArgs>(Action<TEventArgs> action) where TEvent : BaseEvent<TEventArgs>, new() where TEventArgs : class
         {
-            return _eventAggregator.GetEvent<TEvent>().Subscribe(action, true);
+            return EventAggregator.GetEvent<TEvent>().Subscribe(action, true);
         }
 
         protected void Unsubscribe<TEvent>(SubscriptionToken token) where TEvent : BaseEvent, new()
         {
-            _eventAggregator.GetEvent<TEvent>().Unsubscribe(token);
+            EventAggregator.GetEvent<TEvent>().Unsubscribe(token);
         }
 
         public void Dispose()

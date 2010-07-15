@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using BoC.Helpers;
 using BoC.Tasks;
 using Moq;
@@ -29,7 +30,8 @@ namespace BoC.Tests.Tasks
             resolver.Setup(r => r.ResolveAll<IBootstrapperTask>()).Returns(new[] { task1.Object });
             
             var appdomainHelper = new Mock<IAppDomainHelper>();
-            appdomainHelper.Setup(h => h.GetTypes(It.IsAny<Func<Type, bool>>())).Returns(new Type[] { typeof(FindableBootstrapperTask), typeof(object) });
+            appdomainHelper.Setup(h => h.GetTypes(It.IsAny<Func<Type, bool>>()))
+                .Returns<Func<Type, bool>>(f => new Type[] { typeof(FindableBootstrapperTask), typeof(object) }.Where(f));
 
             new BootstrapperTasksInitializer(resolver.Object, new[] {appdomainHelper.Object}).RegisterAllTasks();
 
@@ -44,7 +46,8 @@ namespace BoC.Tests.Tasks
             resolver.Setup(r => r.ResolveAll<IBootstrapperTask>()).Returns(new[] { task1.Object });
 
             var appdomainHelper = new Mock<IAppDomainHelper>();
-            appdomainHelper.Setup(h => h.GetTypes(It.IsAny<Func<Type, bool>>())).Returns(new Type[] { typeof(FindableBootstrapperTask), typeof(object) });
+            appdomainHelper.Setup(h => h.GetTypes(It.IsAny<Func<Type, bool>>()))
+                .Returns<Func<Type, bool>>(f => new Type[] { typeof(FindableBootstrapperTask), typeof(object) }.Where(f));
 
             new BootstrapperTasksInitializer(resolver.Object, new[] { appdomainHelper.Object }).Execute();
 
