@@ -189,5 +189,30 @@ namespace BoC.Tests.Extensions
         {
             Assert.Equal(input.IsGuid(), expect);
         }
+
+        [Fact]
+        public void LevenshteinDistancePercentage_Should_Throw_When_Input_Is_Null()
+        {
+            Assert.Throws<ArgumentNullException>(() => StringExtensions.LevenshteinDistancePercentage(null, ""));
+        }
+
+        [Fact]
+        public void LevenshteinDistancePercentage_Should_Throw_When_Compare_Is_Null()
+        {
+            Assert.Throws<ArgumentNullException>(() => "".LevenshteinDistancePercentage(null));
+        }
+
+        [Fact]
+        public void LevenshteinDistance_Should_Throw_When_Input_Is_Null()
+        {
+            Assert.Throws<ArgumentNullException>(() => StringExtensions.LevenshteinDistance(null, ""));
+        }
+
+        [Fact]
+        public void LevenshteinDistance_Should_Throw_When_Compare_Is_Null()
+        {
+            Assert.Throws<ArgumentNullException>(() => "".LevenshteinDistance(null));
+        }
     }
+
 }

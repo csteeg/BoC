@@ -12,14 +12,25 @@ namespace BoC.Helpers
         private readonly string domainPath;
         private readonly string fileFilter;
         private List<Assembly> loadedAssemblies = new List<Assembly>();
-        private bool loaded = false;
         static private readonly object loadlock = new object();
 
         public AppDomainHelper(string domainPath, string fileFilter)
         {
+            Loaded = false;
             this.domainPath = domainPath;
             this.fileFilter = fileFilter;
         }
+
+        public string DomainPath
+        {
+            get { return domainPath; }
+        }
+
+        public string FileFilter
+        {
+            get { return fileFilter; }
+        }
+        public bool Loaded { get; private set; }
 
         public IEnumerable<Assembly> GetAssemblies()
         {
@@ -36,40 +47,33 @@ namespace BoC.Helpers
         {
             lock (loadlock)
             {
-                loaded = false;
+                Loaded = false;
                 loadedAssemblies.Clear();
             }
         }
 
         private void EnsureLoaded()
         {
-            if (loaded) return;
+            if (Loaded) return;
 
             lock (loadlock)
             {
-                if (!loaded)
+                if (!Loaded)
                 {
                     loadedAssemblies.Clear();
                     try
                     {
-                        loadedAssemblies.AddRange(Directory.EnumerateFiles(domainPath, fileFilter).Select(Assembly.LoadFrom));
+                        loadedAssemblies.AddRange(Directory.EnumerateFiles(DomainPath, FileFilter).Select(Assembly.LoadFrom));
+                        Loaded = true;
                     }
-                    catch (FileNotFoundException)
-                    {
-                        // Files should always exists but don't blow up here if they don't
-                    }
-                    catch (FileLoadException)
-                    {
-                        // File was found but could not be loaded
-                    }
-                    catch (BadImageFormatException)
-                    {
-                        // Dlls that contain native code are not loaded, but do not invalidate the Directory
-                    }
-                    catch (ReflectionTypeLoadException)
-                    {
-                        // Dlls that have missing Managed dependencies are not loaded, but do not invalidate the Directory 
-                    }
+                    // Files should always exists but don't blow up here if they don't
+                    catch (FileNotFoundException){}
+                    // File was found but could not be loaded
+                    catch (FileLoadException){}
+                    // Dlls that contain native code are not loaded, but do not invalidate the Directory
+                    catch (BadImageFormatException){}
+                    // Dlls that have missing Managed dependencies are not loaded, but do not invalidate the Directory 
+                    catch (ReflectionTypeLoadException){}
 
                 }
             }

@@ -5,18 +5,10 @@ using BoC.Extensions;
 
 namespace BoC.Helpers
 {
-    public class Check
+    public static class Check
     {
-        internal Check()
+        public static class Argument
         {
-        }
-
-        public class Argument
-        {
-            internal Argument()
-            {
-            }
-
             [DebuggerStepThrough]
             public static void IsNotEmpty(Guid argument, string argumentName)
             {

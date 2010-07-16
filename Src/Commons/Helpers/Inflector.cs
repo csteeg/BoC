@@ -21,16 +21,11 @@ namespace BoC.Helpers
     /// The Inflector class transforms words from one 
     /// form to another. For example, from singular to plural.
     /// </summary>
-    public class Inflector
+    public static class Inflector
     {
         private static readonly ArrayList plurals = new ArrayList();
         private static readonly ArrayList singulars = new ArrayList();
         private static readonly ArrayList uncountables = new ArrayList();
-
-        private Inflector()
-        {
-        }
-
         #region Default Rules
 
         static Inflector()

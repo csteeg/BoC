@@ -56,7 +56,10 @@
     <Compile Include="EventAggregator\DefaultSetupTasks\InitEventAggregatorTaskFixture.cs" />
     <Compile Include="Extensions\ExpressionExtensionFixture.cs" />
     <Compile Include="Extensions\StringExtensionFixture.cs" />
+    <Compile Include="Extensions\TypeExtensionsFixture.cs" />
     <Compile Include="Helpers\CheckArgumentFixture.cs" />
+    <Compile Include="Helpers\AppDomainHelperFixture.cs" />
+    <Compile Include="Helpers\InflectorFixture.cs" />
     <Compile Include="InversionOfControl\IoCFixture.cs" />
     <Compile Include="Persistence\BaseEntityFixture.cs" />
     <Compile Include="Services\AutoRegisterModelServicesFixture.cs" />
@@ -83,6 +86,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tasks\BaseBackgroundTaskFixture.cs" />
     <Compile Include="Tasks\BaseThreadedBackgroundTaskFixture.cs" />
+    <Compile Include="Validation\RulesExceptionFixture.cs" />
+    <Compile Include="Validation\ErrorInfoFixture.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
