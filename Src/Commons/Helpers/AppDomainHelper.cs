@@ -61,20 +61,36 @@ namespace BoC.Helpers
                 if (!Loaded)
                 {
                     loadedAssemblies.Clear();
-                    try
+                    if (!String.IsNullOrEmpty(DomainPath))
                     {
-                        loadedAssemblies.AddRange(Directory.EnumerateFiles(DomainPath, FileFilter).Select(Assembly.LoadFrom));
-                        Loaded = true;
-                    }
-                    // Files should always exists but don't blow up here if they don't
-                    catch (FileNotFoundException){}
-                    // File was found but could not be loaded
-                    catch (FileLoadException){}
-                    // Dlls that contain native code are not loaded, but do not invalidate the Directory
-                    catch (BadImageFormatException){}
-                    // Dlls that have missing Managed dependencies are not loaded, but do not invalidate the Directory 
-                    catch (ReflectionTypeLoadException){}
+                        var paths = DomainPath.Split(';');
+                        foreach (var path in paths)
+                        {
+                            try
+                            {
+                                loadedAssemblies.AddRange(Directory.GetFiles(path, FileFilter).Select(Assembly.LoadFrom));
+                                Loaded = true;
+                            }
+                                // Files should always exists but don't blow up here if they don't
+                            catch (FileNotFoundException)
+                            {
+                            }
+                                // File was found but could not be loaded
+                            catch (FileLoadException)
+                            {
+                            }
+                                // Dlls that contain native code are not loaded, but do not invalidate the Directory
+                            catch (BadImageFormatException)
+                            {
+                            }
+                                // Dlls that have missing Managed dependencies are not loaded, but do not invalidate the Directory 
+                            catch (ReflectionTypeLoadException)
+                            {
+                            }
 
+                        }
+
+                    }
                 }
             }
         }

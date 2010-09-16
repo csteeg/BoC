@@ -10,10 +10,10 @@ namespace BoC.Tasks
         private readonly IDependencyResolver dependencyResolver;
         private readonly IAppDomainHelper[] appDomainHelpers;
 
-        public RegisterBackgroundTasks(IDependencyResolver dependencyResolver, IAppDomainHelper[] appDomainHelpers)
+        public RegisterBackgroundTasks(IDependencyResolver dependencyResolver, IAppDomainHelper appDomainHelpers)
         {
             this.dependencyResolver = dependencyResolver;
-            this.appDomainHelpers = appDomainHelpers;
+            this.appDomainHelpers = new[] { appDomainHelpers };
         }
 
         volatile private static Func<Type, bool> taskFilter = t => true;

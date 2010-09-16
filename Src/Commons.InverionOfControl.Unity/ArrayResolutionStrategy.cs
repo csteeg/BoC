@@ -15,7 +15,7 @@ namespace BoC.InverionOfControl.Unity
     public class CustomArrayResolutionStrategy : BuilderStrategy
     {
         private delegate object ArrayResolver(IBuilderContext context);
-        private static readonly MethodInfo genericResolveArrayMethod = typeof(ArrayResolutionStrategy)
+        private static readonly MethodInfo genericResolveArrayMethod = typeof(CustomArrayResolutionStrategy)
                 .GetMethod("ResolveArray", BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly);
 
         /// <summary>

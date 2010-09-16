@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Diagnostics;
+using System.Linq;
 using BoC.Helpers;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
@@ -86,7 +88,14 @@ namespace BoC.InversionOfControl.Unity
             Check.Argument.IsNotNull(type, "type");
             if (Container.Configure<TypeTrackingExtension>().CanResolve(type, name))
             {
-                return container.Resolve(type, name);
+                var result = container.Resolve(type, name);
+                if (typeof(IEnumerable).IsAssignableFrom(type) && 
+                    ((result == null) || ((IEnumerable)result).Cast<Object>().Count() == 0))
+                {
+                    result = this.ResolveAll(type);
+                }
+
+                return result;
             }
             else
             {
@@ -107,7 +116,22 @@ namespace BoC.InversionOfControl.Unity
             return (T) Resolve(typeof(T), name);
         }
 
-        
+
+        IEnumerable ResolveAll(Type t)
+        {
+            if (!CanResolve(t))
+                yield break;
+
+            var unnamedInstance = Resolve(t);
+            if (unnamedInstance != null)
+                yield return unnamedInstance;
+
+            foreach (var o in container.ResolveAll(t))
+            {
+                yield return o;
+            }
+        }
+
         public IEnumerable<T> ResolveAll<T>()
         {
             if (!CanResolve(typeof(T)))

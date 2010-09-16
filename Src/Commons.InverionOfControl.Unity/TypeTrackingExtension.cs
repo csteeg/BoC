@@ -20,13 +20,11 @@ namespace BoC.InversionOfControl.Unity
             Context.RegisteringInstance += OnNewInstance;
             Context.Registering += OnNewType;
 
-            //our own array resolver:
-            Context.Strategies.AddNew<CustomArrayResolutionStrategy>(UnityBuildStage.Creation);
-
             Context.Container.Configure<UnityDefaultBehaviorExtension>().InitializeExtension(Context);
             Context.Container.Configure<InjectedMembers>().InitializeExtension(Context);
 
-
+            //our own array resolver:
+            Context.Strategies.AddNew<CustomArrayResolutionStrategy>(UnityBuildStage.Creation);
         }
 
         public override void Remove()

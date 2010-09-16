@@ -65,7 +65,7 @@ namespace BoC.Extensions
 
             if (!string.IsNullOrEmpty(target))
             {
-                Enum.TryParse(target.Trim(), true, out convertedValue);
+                convertedValue = (T) Enum.Parse(typeof (T), target.Trim());
             }
 
             return convertedValue;
