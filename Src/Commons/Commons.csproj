@@ -102,8 +102,6 @@
     <Compile Include="Initializer.cs" />
     <Compile Include="InversionOfControl\IContainerInitializer.cs" />
     <Compile Include="Linq\Dynamic.cs" />
-    <Compile Include="Linq\ExpressionUtility.cs" />
-    <Compile Include="Linq\IQueryableExtensions.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Persistence\Exceptions.cs" />
     <Compile Include="ServiceModel\ServiceErrorLoggerBehavior.cs" />

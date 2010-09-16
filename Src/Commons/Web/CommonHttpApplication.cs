@@ -16,7 +16,7 @@ namespace BoC.Web
     {
         private static string unitofworkkey = "BoC.Web.CommonHttpApplication.OuterUnitOfWork";
 
-        private static bool initialized = false;
+        private volatile static bool initialized = false;
 
         virtual protected void Application_Start()
         {

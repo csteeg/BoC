@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using BoC.InverionOfControl.Unity;
 using Microsoft.Practices.Unity;
+using Microsoft.Practices.Unity.ObjectBuilder;
 
 namespace BoC.InversionOfControl.Unity
 {
+    
     public class TypeTrackingExtension : UnityContainerExtension
     {
         private readonly Dictionary<Type, HashSet<string>> registeredTypes = new Dictionary<Type, HashSet<string>>();
@@ -17,8 +20,12 @@ namespace BoC.InversionOfControl.Unity
             Context.RegisteringInstance += OnNewInstance;
             Context.Registering += OnNewType;
 
+            //our own array resolver:
+            Context.Strategies.AddNew<CustomArrayResolutionStrategy>(UnityBuildStage.Creation);
+
             Context.Container.Configure<UnityDefaultBehaviorExtension>().InitializeExtension(Context);
             Context.Container.Configure<InjectedMembers>().InitializeExtension(Context);
+
 
         }
 

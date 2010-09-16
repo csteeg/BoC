@@ -1,5 +1,5 @@
 ﻿//Copyright (C) Microsoft Corporation.  All rights reserved.
-
+//From : http://weblogs.asp.net/scottgu/archive/2008/01/07/dynamic-linq-part-1-using-the-linq-dynamic-query-library.aspx
 using System;
 using System.Collections.Generic;
 using System.Text;

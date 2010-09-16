@@ -104,7 +104,7 @@ namespace BoC.Services
         public virtual void ValidateEntity(TModel entity)
         {
             var errors = validator.Validate(entity);
-            if (errors != null && errors.Count > 0)
+            if (errors != null && errors.Count() > 0)
                 throw new RulesException(errors);
         }
 

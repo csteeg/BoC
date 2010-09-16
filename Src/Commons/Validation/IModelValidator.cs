@@ -7,6 +7,6 @@ namespace BoC.Validation
 {
     public interface IModelValidator
     {
-        ICollection<ErrorInfo> Validate(object model);
+        IEnumerable<ErrorInfo> Validate(object model);
     }
 }

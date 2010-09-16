@@ -23,11 +23,5 @@ namespace BoC.UnitOfWork
         {
             
         }
-
-        public void Complete()
-        {
-            
-        }
-
    }
 }

@@ -36,6 +36,7 @@
       <HintPath>..\lib\Moq\NET40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
@@ -86,10 +87,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tasks\BaseBackgroundTaskFixture.cs" />
     <Compile Include="Tasks\BaseThreadedBackgroundTaskFixture.cs" />
+    <Compile Include="UnitOfWork\UnitOfWorkFixture.cs" />
+    <Compile Include="Validation\DataAnnotationsModelValidatorFixture.cs" />
+    <Compile Include="Validation\RegisterDefaultModelValidatorFixture.cs" />
     <Compile Include="Validation\RulesExceptionFixture.cs" />
     <Compile Include="Validation\ErrorInfoFixture.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Web\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Src\Commons\Commons.csproj">
       <Project>{25C350AF-4957-47E8-960A-6C59794C5DEF}</Project>

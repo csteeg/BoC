@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D75EF326
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.Tests", "Tests\Commons.Tests\Commons.Tests.csproj", "{A0D3CBAC-14B4-4805-8B2F-227957986CB4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutputCaching", "..\..\Clixmaster\new\TRUNK\src\OutputCaching\OutputCaching.csproj", "{0BAF9D16-4B3E-482A-B280-8E56D5C4DC63}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -70,6 +72,10 @@ Global
 		{A0D3CBAC-14B4-4805-8B2F-227957986CB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0D3CBAC-14B4-4805-8B2F-227957986CB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0D3CBAC-14B4-4805-8B2F-227957986CB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BAF9D16-4B3E-482A-B280-8E56D5C4DC63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BAF9D16-4B3E-482A-B280-8E56D5C4DC63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BAF9D16-4B3E-482A-B280-8E56D5C4DC63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BAF9D16-4B3E-482A-B280-8E56D5C4DC63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
