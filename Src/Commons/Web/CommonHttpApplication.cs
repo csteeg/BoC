@@ -67,13 +67,13 @@ namespace BoC.Web
                                      {
                                         if (!initialized)
                                             Application_Start();
-
+                                        
                                         this.Context.Items[unitofworkkey] = UnitOfWork.UnitOfWork.BeginUnitOfWork();
-                                         PublishEvent<WebRequestBeginEvent>();
+                                        PublishEvent<WebRequestBeginEvent>();
                                      };
             this.EndRequest += (sender, args) =>
                                    {
-                                       PublishEvent<WebRequestEndEvent>();
+                                        PublishEvent<WebRequestEndEvent>();
 
                                         var unitOfWork = this.Context.Items[unitofworkkey] as IUnitOfWork;
                                         if (unitOfWork != null)
