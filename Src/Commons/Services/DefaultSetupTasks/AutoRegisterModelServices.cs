@@ -16,10 +16,10 @@ namespace BoC.Services.DefaultSetupTasks
         private readonly IDependencyResolver dependencyResolver;
         private readonly IAppDomainHelper[] appDomainHelpers;
 
-        public AutoRegisterModelServices(IDependencyResolver dependencyResolver, IAppDomainHelper appDomainHelpers)
+        public AutoRegisterModelServices(IDependencyResolver dependencyResolver, IAppDomainHelper[] appDomainHelpers)
         {
             this.dependencyResolver = dependencyResolver;
-            this.appDomainHelpers = new[] { appDomainHelpers };
+            this.appDomainHelpers = appDomainHelpers;
         }
 
         public static bool CreateMissingModelServices = true;

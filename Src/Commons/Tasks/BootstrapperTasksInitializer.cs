@@ -10,10 +10,10 @@ namespace BoC.Tasks
         private readonly IDependencyResolver dependencyResolver;
         private readonly IAppDomainHelper[] appDomainHelpers;
 
-        public BootstrapperTasksInitializer(IDependencyResolver dependencyResolver, IAppDomainHelper appDomainHelpers)
+        public BootstrapperTasksInitializer(IDependencyResolver dependencyResolver, IAppDomainHelper[] appDomainHelpers)
         {
             this.dependencyResolver = dependencyResolver;
-            this.appDomainHelpers = new[] { appDomainHelpers };
+            this.appDomainHelpers = appDomainHelpers;
         }
 
         volatile private static Func<Type, bool> taskFilter = t => true;

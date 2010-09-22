@@ -10,6 +10,7 @@ namespace BoC.UnitOfWork
         public void BeginUnitOfWork_Should_Ask_Resolver_For_IUnitOfWork()
         {
             var resolver = new Mock<IDependencyResolver>();
+            IoC.Reset();
             IoC.InitializeWith(resolver.Object);
 
             UnitOfWork.BeginUnitOfWork();
@@ -37,6 +38,7 @@ namespace BoC.UnitOfWork
         public void BeginUnitOfWork_Should_Return_Dummy_UnitOfWork_If_No_IUnitOfWork_Registered()
         {
             var resolver = new Mock<IDependencyResolver>();
+            IoC.Reset();
             IoC.InitializeWith(resolver.Object);
 
             using (var uow = UnitOfWork.BeginUnitOfWork())

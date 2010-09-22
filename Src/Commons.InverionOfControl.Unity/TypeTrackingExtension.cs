@@ -15,7 +15,7 @@ namespace BoC.InversionOfControl.Unity
         protected override void Initialize()
         {
             Context.Container.Configure<UnityDefaultBehaviorExtension>().Remove();
-            Context.Container.Configure<InjectedMembers>().Remove();
+
             //we have to be the first in the chain
             Context.RegisteringInstance += OnNewInstance;
             Context.Registering += OnNewType;
@@ -24,8 +24,6 @@ namespace BoC.InversionOfControl.Unity
             Context.Strategies.AddNew<CustomArrayResolutionStrategy>(UnityBuildStage.PreCreation);
 
             Context.Container.Configure<UnityDefaultBehaviorExtension>().InitializeExtension(Context);
-            Context.Container.Configure<InjectedMembers>().InitializeExtension(Context);
-
         }
 
         public override void Remove()
