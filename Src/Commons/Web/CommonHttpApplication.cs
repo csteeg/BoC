@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Web;
-using System.Web.SessionState;
 using BoC.EventAggregator;
 using BoC.InversionOfControl;
-using BoC.Tasks;
 using BoC.UnitOfWork;
 using BoC.Web.Events;
 

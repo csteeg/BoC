@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace BoC.InversionOfControl
@@ -18,6 +19,7 @@ namespace BoC.InversionOfControl
         T Resolve<T>(string name);
 
         IEnumerable<T> ResolveAll<T>();
+        IEnumerable ResolveAll(Type type);
         bool IsRegistered(Type type);
         bool IsRegistered<T>();
     }

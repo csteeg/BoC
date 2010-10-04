@@ -28,7 +28,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.Persistence.Xpo", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.InverionOfControl.Unity.Tests", "Tests\Commons.InverionOfControl.Unity.Tests\Commons.InverionOfControl.Unity.Tests.csproj", "{7C6C7E1E-8769-433B-9257-2C117DDA0DB4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.Persistence.Norm", "Src\Commons.Persistence.NoRM\Commons.Persistence.Norm.csproj", "{EC5E1C97-41C1-4624-8CEE-0D1EC842D306}"
+EndProject
 Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		.NET 3.5 DEBUG|Any CPU = .NET 3.5 DEBUG|Any CPU
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +107,12 @@ Global
 		{7C6C7E1E-8769-433B-9257-2C117DDA0DB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C6C7E1E-8769-433B-9257-2C117DDA0DB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C6C7E1E-8769-433B-9257-2C117DDA0DB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC5E1C97-41C1-4624-8CEE-0D1EC842D306}..NET 3.5 DEBUG|Any CPU.ActiveCfg = Release|Any CPU
+		{EC5E1C97-41C1-4624-8CEE-0D1EC842D306}..NET 3.5 DEBUG|Any CPU.Build.0 = Release|Any CPU
+		{EC5E1C97-41C1-4624-8CEE-0D1EC842D306}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC5E1C97-41C1-4624-8CEE-0D1EC842D306}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC5E1C97-41C1-4624-8CEE-0D1EC842D306}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC5E1C97-41C1-4624-8CEE-0D1EC842D306}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,9 +120,5 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A0D3CBAC-14B4-4805-8B2F-227957986CB4} = {D75EF326-E1BC-4DFB-ABA8-5BE622875649}
 		{7C6C7E1E-8769-433B-9257-2C117DDA0DB4} = {D75EF326-E1BC-4DFB-ABA8-5BE622875649}
-	EndGlobalSection
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal

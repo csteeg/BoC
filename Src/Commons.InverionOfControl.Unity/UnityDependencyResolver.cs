@@ -117,7 +117,7 @@ namespace BoC.InversionOfControl.Unity
         }
 
 
-        IEnumerable ResolveAll(Type t)
+        public IEnumerable ResolveAll(Type t)
         {
             if (!CanResolve(t))
                 yield break;

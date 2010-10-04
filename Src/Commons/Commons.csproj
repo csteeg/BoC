@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BoC</RootNamespace>
     <AssemblyName>Commons</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -164,6 +164,8 @@
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
     <Compile Include="Validation\DataAnnotationsModelValidator.cs" />
+    <Compile Include="Validation\DataAnnotations\PropertiesMustMatchAttribute.cs" />
+    <Compile Include="Validation\DataAnnotations\ValidatePasswordLengthAttribute.cs" />
     <Compile Include="Validation\DefaultSetupTasks\RegisterDefaultModelValidator.cs" />
     <Compile Include="Validation\ErrorInfo.cs" />
     <Compile Include="Validation\IModelValidator.cs" />

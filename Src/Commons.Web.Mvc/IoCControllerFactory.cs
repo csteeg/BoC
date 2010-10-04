@@ -8,7 +8,7 @@ namespace BoC.Web.Mvc
     {
         private readonly IDependencyResolver dependencyResolver;
 
-        protected IoCControllerFactory(IDependencyResolver dependencyResolver)
+        public IoCControllerFactory(IDependencyResolver dependencyResolver)
         {
             this.dependencyResolver = dependencyResolver;
         }

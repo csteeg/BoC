@@ -7,11 +7,10 @@ using System.Text;
 using System.Transactions;
 using System.Web;
 using System.Web.Configuration;
-using System.Web.Security;
 using BoC.EventAggregator;
 using BoC.Extensions;
+using BoC.Persistence;
 using BoC.Security.Model;
-using BoC.Security.Repositories;
 using BoC.Services;
 using BoC.Validation;
 
@@ -20,12 +19,12 @@ namespace BoC.Security.Services
     public class DefaultUserService : BaseModelService<User>, IUserService
     {
         private const Int32 SALT_BYTES = 16;
-        private readonly IRoleRepository roleRepository;
+        private readonly IRepository<Role> roleRepository;
         private readonly IModelValidator modelValidator;
-        private readonly IUserRepository userRepository;
+        private readonly IRepository<User> userRepository;
         private const Int32 newPasswordLength = 8;
 
-        public DefaultUserService(IEventAggregator eventAggregator, IUserRepository userRepository, IRoleRepository roleRepository, IModelValidator modelValidator) : 
+        public DefaultUserService(IEventAggregator eventAggregator, IRepository<User> userRepository, IRepository<Role> roleRepository, IModelValidator modelValidator) : 
             base(modelValidator, eventAggregator, userRepository)
         {
             this.userRepository = userRepository;
@@ -56,7 +55,11 @@ namespace BoC.Security.Services
         #endregion
         public virtual User FindUser(String login)
         {
-            return userRepository.FindByLogin(login);
+            return (
+                       from u in userRepository.Query()
+                       where u.Login == login
+                       select u
+                   ).FirstOrDefault();
         }
 
         public virtual Boolean UserExists(String login)
@@ -227,7 +230,11 @@ namespace BoC.Security.Services
 
         public virtual Int32 CountOnlineUsers(TimeSpan activitySpan)
         {
-            return userRepository.CountOnlineUsers(activitySpan);
+            DateTime compareTime = DateTime.Now.Subtract(activitySpan);
+            return
+                (from u in userRepository.Query()
+                 where u.LastActivity > compareTime
+                 select u).Count();
         }
 
         public virtual void UpdateActivity(String login)
@@ -440,7 +447,10 @@ namespace BoC.Security.Services
 
         public virtual Role FindRole(String roleName)
         {
-            return roleRepository.FindByName(roleName);
+            return
+                (from role in roleRepository.Query()
+                where role.RoleName == roleName
+                select role).FirstOrDefault();
         }
 
         public virtual void DeleteRole(String roleName)
@@ -511,7 +521,7 @@ namespace BoC.Security.Services
             return null;
         }
 
-        public virtual void AddUsersToRoles(ICollection<User> users, ICollection<Role> roles)
+        public virtual void AddUsersToRoles(IEnumerable<User> users, IEnumerable<Role> roles)
         {
             if ((users == null) || (roles == null))
             {
@@ -532,41 +542,29 @@ namespace BoC.Security.Services
             }
         }
 
-        public virtual void AddUsersToRoles(ICollection<String> logins, ICollection<String> roleNames)
+        public virtual void AddUsersToRoles(IEnumerable<String> logins, IEnumerable<String> roleNames)
         {
-            User[] users = userRepository.FindByLogin(logins);
-            if (users == null || users.Length != logins.Count)
-            {
-                throw new UserNotFoundException();
-            }
-
-            Role[] roles = roleRepository.FindByName(roleNames);
-            if (roles == null || roles.Length != roleNames.Count)
-            {
-                throw new RoleNotFoundException();
-            }
-
-            AddUsersToRoles(users, roles);
+            AddUsersToRoles(
+                from user in userRepository.Query()
+                where logins.Contains(user.Login)
+                select user, 
+                from role in roleRepository.Query()
+                where roleNames.Contains(role.RoleName)
+                select role);
         }
 
-        public virtual void RemoveUsersFromRoles(ICollection<String> logins, ICollection<String> roleNames)
+        public virtual void RemoveUsersFromRoles(IEnumerable<String> logins, IEnumerable<String> roleNames)
         {
-            User[] users = userRepository.FindByLogin(logins);
-            if (users == null || users.Length != logins.Count)
-            {
-                throw new UserNotFoundException();
-            }
-
-            Role[] roles = roleRepository.FindByName(roleNames);
-            if (roles == null || roles.Length != roleNames.Count)
-            {
-                throw new RoleNotFoundException();
-            }
-
-            RemoveUsersFromRoles(users, roles);
+            RemoveUsersFromRoles(
+                from user in userRepository.Query()
+                where logins.Contains(user.Login)
+                select user,
+                from role in roleRepository.Query()
+                where roleNames.Contains(role.RoleName)
+                select role);
         }
 
-        public virtual void RemoveUsersFromRoles(ICollection<User> users, ICollection<Role> roles)
+        public virtual void RemoveUsersFromRoles(IEnumerable<User> users, IEnumerable<Role> roles)
         {
             if ((users == null) || (roles == null))
             {

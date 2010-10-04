@@ -44,7 +44,15 @@ namespace BoC.InverionOfControl.Unity
         private static object ResolveArray<T>(IBuilderContext context)
         {
             var container = context.NewBuildUp<IUnityContainer>();
-            var firstItem = container.Resolve<T>();
+            T firstItem;
+            try
+            {
+                firstItem = container.Resolve<T>();
+            }
+            catch(ResolutionFailedException)
+            {
+                return null;
+            }
             var results = new List<T>(container.ResolveAll<T>());
             if (firstItem != null)
                 results.Insert(0, firstItem);

@@ -94,9 +94,15 @@ namespace BoC.Persistence
                         ilGenerator.Emit(OpCodes.Ldarg, i);
                     }
                     ilGenerator.Emit(OpCodes.Call, baseConstructor);    // Call the base constructor
-                    ilGenerator.Emit(OpCodes.Ret); 
-                    
-                    repo = tb.CreateType();
+                    ilGenerator.Emit(OpCodes.Ret);
+                    try
+                    {
+                        repo = tb.CreateType();
+                    }
+                    catch (TypeLoadException exception)
+                    {
+                        throw new TypeLoadException("Error creating an automatic generated Repository for " + toFind, exception);
+                    }
                 }
                 dependencyResolver.RegisterType(interfaceType, repo);
                 dependencyResolver.RegisterType(toFind, repo);

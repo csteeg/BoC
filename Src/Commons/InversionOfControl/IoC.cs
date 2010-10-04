@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using BoC.Helpers;
 
 namespace BoC.InversionOfControl
@@ -22,7 +17,6 @@ namespace BoC.InversionOfControl
                     throw new ApplicationException("IoC already initialized");
                 
                 IoC.Resolver = resolver;
-
                 RunContainerInitializers(resolver);
             }
         }

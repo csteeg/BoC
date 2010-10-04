@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using BoC.InversionOfControl;
 using BoC.UnitOfWork;
@@ -94,6 +95,11 @@ namespace BoC.Tests
         }
 
         public virtual IEnumerable<T> ResolveAll<T>()
+        {
+            return null;
+        }
+
+        public IEnumerable ResolveAll(Type type)
         {
             return null;
         }

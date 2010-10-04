@@ -19,12 +19,19 @@ namespace BoC.Web.Mvc.Init
 
         public void Execute()
         {
+            MvcServiceLocator.SetCurrent(new ServiceLocatorWrapper(dependencyResolver));
             SetDefaultViewEngine();
+            RegisterAllAreas();
             RegisterDefaultRoutes(RouteTable.Routes);
-            ControllerBuilder.Current.SetControllerFactory(new AutoScaffoldControllerFactory(dependencyResolver));
+            dependencyResolver.RegisterType(typeof(IControllerFactory), typeof(IoCControllerFactory));
             ModelBinders.Binders.DefaultBinder = new CommonModelBinder(dependencyResolver);
             ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder());
             ModelBinders.Binders.Add(typeof(DateTime?), new DateTimeModelBinder());
+        }
+
+        protected virtual void RegisterAllAreas()
+        {
+            AreaRegistration.RegisterAllAreas();
         }
 
         static public void SetDefaultViewEngine()

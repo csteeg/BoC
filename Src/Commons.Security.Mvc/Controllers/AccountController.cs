@@ -4,7 +4,9 @@ using System.Security.Principal;
 using System.Web.Mvc;
 using System.Web.Security;
 using BoC.Security.Model;
+using BoC.Security.Mvc.ViewModels;
 using BoC.Security.Services;
+using BoC.Validation;
 using BoC.Web.Mvc.Controllers;
 
 namespace BoC.Security.Mvc.Controllers
@@ -12,47 +14,43 @@ namespace BoC.Security.Mvc.Controllers
     [HandleError]
     public class AccountController : CommonBaseController
     {
+        private readonly IModelValidator modelValidator;
         private readonly IUserService service;
 
-        public AccountController()
+        public AccountController(IModelValidator modelValidator, IUserService service)
         {
-        }
-
-        // This constructor is not used by the MVC framework but is instead provided for ease
-        // of unit testing this type. See the comments at the end of this file for more
-        // information.
-        public AccountController(IUserService service)
-        {
+            this.modelValidator = modelValidator;
             this.service = service;
         }
 
         public ActionResult Register()
         {
-            ViewData["PasswordLength"] = service.MinRequiredPasswordLength;
-
-            return View();
+            return View(new RegisterModel());
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Register(User user, string password, string confirmPassword) 
+        public ActionResult Register(RegisterModel registration)
         {
             ViewData["PasswordLength"] = service.MinRequiredPasswordLength;
 
-            if (ValidateRegistration(user.Login, user.Email, password, confirmPassword)) {
-                // Attempt to register the user
-                try
+            // Attempt to register the user
+            try
+            {
+                var user = service.CreateUser(new User
+                                                  {
+                                                      Email = registration.Email,
+                                                      Login = registration.UserName,
+                                                  }, registration.Password);
+                if (user != null)
                 {
-                    user = service.CreateUser(user, password);
-                    if (user != null)
-                    {
-                        return View("RegisterSuccess");
-                    }
-                }
-                catch (Exception exc)
-                {
-                    this.ModelState.AddModelError("_FORM", exc.Message);
+                    return View("RegisterSuccess");
                 }
             }
+            catch (Exception exc)
+            {
+                this.ModelState.AddModelError("_FORM", exc.Message);
+            }
+
             // If we got this far, something failed, redisplay form
             return View();
         }
@@ -117,26 +115,6 @@ namespace BoC.Security.Mvc.Controllers
                 ModelState.AddModelError("_FORM", "The new password and confirmation password do not match.");
             }
 
-            return ModelState.IsValid;
-        }
-
-        protected bool ValidateRegistration(string userName, string email, string password, string confirmPassword) {
-            if (String.IsNullOrEmpty(userName)) {
-                ModelState.AddModelError("Login", "You must specify a username.");
-            }
-            if (String.IsNullOrEmpty(email)) {
-                ModelState.AddModelError("email", "You must specify an email address.");
-            }
-            if (password == null || password.Length < service.MinRequiredPasswordLength)
-            {
-                ModelState.AddModelError("password",
-                                         String.Format(CultureInfo.CurrentCulture,
-                                                       "You must specify a password of {0} or more characters.",
-                                                       service.MinRequiredPasswordLength));
-            }
-            if (!String.Equals(password, confirmPassword, StringComparison.Ordinal)) {
-                ModelState.AddModelError("_FORM", "The new password and confirmation password do not match.");
-            }
             return ModelState.IsValid;
         }
 

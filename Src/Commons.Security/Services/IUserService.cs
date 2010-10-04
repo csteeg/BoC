@@ -50,10 +50,10 @@ namespace BoC.Security.Services
         User GetByPrincipal(IPrincipal principal);
 
         #region Roles
-        void AddUsersToRoles(ICollection<User> users, ICollection<Role> roles);
-        void AddUsersToRoles(ICollection<String> logins, ICollection<String> roleNames);
-        void RemoveUsersFromRoles(ICollection<String> logins, ICollection<String> roleNames);
-        void RemoveUsersFromRoles(ICollection<User> users, ICollection<Role> roles);
+        void AddUsersToRoles(IEnumerable<User> users, IEnumerable<Role> roles);
+        void AddUsersToRoles(IEnumerable<String> logins, IEnumerable<String> roleNames);
+        void RemoveUsersFromRoles(IEnumerable<String> logins, IEnumerable<String> roleNames);
+        void RemoveUsersFromRoles(IEnumerable<User> users, IEnumerable<Role> roles);
         void CreateRole(String roleName);
         Role GetRole(Int64 id);
         Role FindRole(String roleName);
