@@ -8,12 +8,13 @@ using System.Web.Security;
 using BoC.Security.Model;
 using BoC.Security.Services;
 using BoC.Validation;
+using BoC.Web.Mvc.Controllers;
 using DotNetOpenAuth.Messaging;
 using DotNetOpenAuth.OpenId;
 using DotNetOpenAuth.OpenId.RelyingParty;
 using DotNetOpenAuth.OpenId.Extensions.AttributeExchange;
 
-namespace BoC.Web.Mvc.Controllers
+namespace BoC.Security.Mvc.Controllers
 {
     [HandleError]
     public class AuthController : CommonBaseController

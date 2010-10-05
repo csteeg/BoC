@@ -52,9 +52,4 @@ namespace BoC.Web.Mvc
 
         }
     }
-
-
-       
-    }
-
 }

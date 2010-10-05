@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Scripts\MicrosoftMvcJQueryValidation.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
