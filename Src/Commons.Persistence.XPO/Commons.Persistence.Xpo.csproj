@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BoC.Persistence.Xpo</RootNamespace>
     <AssemblyName>Commons.Persistence.Xpo</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -46,23 +46,24 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Boc.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Data.v9.3">
-      <HintPath>..\..\lib\XPO\DevExpress.Data.v9.3.dll</HintPath>
+    <Reference Include="DevExpress.Data.9.3">
+      <HintPath>..\..\lib\XPO\DevExpress.Data.9.3.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Data.v9.3.Linq">
-      <HintPath>..\..\lib\XPO\DevExpress.Data.v9.3.Linq.dll</HintPath>
+    <Reference Include="DevExpress.Data.9.3.Linq">
+      <HintPath>..\..\lib\XPO\DevExpress.Data.9.3.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Xpo.v9.3">
-      <HintPath>..\..\lib\XPO\DevExpress.Xpo.v9.3.dll</HintPath>
+    <Reference Include="DevExpress.Xpo.9.3">
+      <HintPath>..\..\lib\XPO\DevExpress.Xpo.9.3.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Xpo.v9.3.Linq">
-      <HintPath>..\..\lib\XPO\DevExpress.Xpo.v9.3.Linq.dll</HintPath>
+    <Reference Include="DevExpress.Xpo.9.3.Linq">
+      <HintPath>..\..\lib\XPO\DevExpress.Xpo.9.3.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -81,9 +82,6 @@
     <Compile Include="UnitOfWork\XpoUnitOfWorkSessionManager.cs" />
     <Compile Include="XpoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Boc.snk" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Commons\Commons.csproj">

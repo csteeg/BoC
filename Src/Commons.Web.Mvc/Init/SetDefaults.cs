@@ -23,7 +23,7 @@ namespace BoC.Web.Mvc.Init
             SetDefaultViewEngine();
             RegisterAllAreas();
             RegisterDefaultRoutes(RouteTable.Routes);
-            dependencyResolver.RegisterType(typeof(IControllerFactory), typeof(IoCControllerFactory));
+            dependencyResolver.RegisterType(typeof(IControllerFactory), typeof(AutoScaffoldControllerFactory));
             ModelBinders.Binders.DefaultBinder = new CommonModelBinder(dependencyResolver);
             ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder());
             ModelBinders.Binders.Add(typeof(DateTime?), new DateTimeModelBinder());

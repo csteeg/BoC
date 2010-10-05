@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
+using System.Web;
 using System.Web.Mvc;
 using System.Collections;
 using System.Linq;
@@ -11,13 +15,9 @@ using BoC.Web.Mvc.Controllers;
 
 namespace BoC.Web.Mvc
 {
-    public class AutoScaffoldControllerFactory : IoCControllerFactory
+    public class AutoScaffoldControllerFactory : DefaultControllerFactory
     {
         private static Hashtable controllerTypeCache = new Hashtable();
-
-        public AutoScaffoldControllerFactory(IDependencyResolver dependencyResolver): base(dependencyResolver)
-        {
-        }
 
         protected override Type GetControllerType(RequestContext requestContext, string controllerName)
         {
@@ -41,6 +41,7 @@ namespace BoC.Web.Mvc
                         typeof(IBaseEntity).IsAssignableFrom(t) &&
                         t.Name.Equals(controllerName, StringComparison.InvariantCultureIgnoreCase)
                         ).FirstOrDefault();
+
             if (entityType == null)
             {
                 controllerTypeCache[controllerName.ToLower()] = null;
@@ -50,6 +51,10 @@ namespace BoC.Web.Mvc
             return (Type)(controllerTypeCache[controllerName.ToLower()] = typeof(DynamicScaffoldController<>).MakeGenericType(entityType));
 
         }
+    }
+
+
+       
     }
 
 }
