@@ -1,0 +1,47 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="692C9DDA-88FF-4632-A7BB-E5959139B212/f:FakeClasses.cs" caret="149" fromTop="5" />
+      <File id="1D2C9A00-9C40-4419-A4F6-6F5D888E9837/f:Class1.cs" caret="0" fromTop="0" />
+      <File id="d:Miscellaneous Files/f:AssemblyAttributes.cs/l:C!?Users?csteeg?AppData?Local?Symbols?src?source?.NET?4?DEVDIV_TFS?Dev10?Releases?RTMRel?ndp?clr?src?BCL?System?Reflection?AssemblyAttributes.cs?1305376?AssemblyAttributes.cs" caret="6021" fromTop="14" />
+      <File id="B9871C7C-E444-4E69-A843-C2AA17ACB454/d:Properties/f:AssemblyInfo.cs" caret="1525" fromTop="27" />
+      <File id="BF987E4F-2160-4B5C-9ACD-1593C0C6CA3E/d:Properties/f:AssemblyInfo.cs" caret="1476" fromTop="29" />
+      <File id="692C9DDA-88FF-4632-A7BB-E5959139B212/d:Properties/f:AssemblyInfo.cs" caret="1497" fromTop="29" />
+      <File id="1D2C9A00-9C40-4419-A4F6-6F5D888E9837/d:Properties/f:AssemblyInfo.cs" caret="1533" fromTop="11" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="692C9DDA-88FF-4632-A7BB-E5959139B212/f:FakeClasses.cs" caret="2450" fromTop="29" />
+      <File id="692C9DDA-88FF-4632-A7BB-E5959139B212/f:FakeClasses.cs" caret="589" fromTop="21" />
+      <File id="692C9DDA-88FF-4632-A7BB-E5959139B212/f:FakeClasses.cs" caret="1326" fromTop="27" />
+      <File id="692C9DDA-88FF-4632-A7BB-E5959139B212/f:FakeClasses.cs" caret="149" fromTop="5" />
+      <File id="B9871C7C-E444-4E69-A843-C2AA17ACB454/d:Properties/f:AssemblyInfo.cs" caret="1522" fromTop="27" />
+      <File id="BF987E4F-2160-4B5C-9ACD-1593C0C6CA3E/d:Properties/f:AssemblyInfo.cs" caret="1476" fromTop="29" />
+      <File id="1D2C9A00-9C40-4419-A4F6-6F5D888E9837/d:Properties/f:AssemblyInfo.cs" caret="1533" fromTop="29" />
+      <File id="692C9DDA-88FF-4632-A7BB-E5959139B212/d:Properties/f:AssemblyInfo.cs" caret="1497" fromTop="29" />
+    </RecentEdits>
+  </RecentFiles>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir IsNull="False">
+    </NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Default">
+      <Item value="assembly" priority="0" />
+      <Item value="StrongNameKeyPair`0" priority="0" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+</Configuration>
