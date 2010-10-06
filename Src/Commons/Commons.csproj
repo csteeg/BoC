@@ -164,7 +164,7 @@
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
     <Compile Include="Validation\DataAnnotationsModelValidator.cs" />
-    <Compile Include="Validation\DataAnnotations\PropertiesMustMatchAttribute.cs" />
+    <Compile Include="Validation\DataAnnotations\CompareAttribute.cs" />
     <Compile Include="Validation\DataAnnotations\ValidatePasswordLengthAttribute.cs" />
     <Compile Include="Validation\DefaultSetupTasks\RegisterDefaultModelValidator.cs" />
     <Compile Include="Validation\ErrorInfo.cs" />

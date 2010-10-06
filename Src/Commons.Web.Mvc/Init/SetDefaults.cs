@@ -5,6 +5,7 @@ using System.Web.Routing;
 using BoC.InversionOfControl;
 using BoC.Tasks;
 using BoC.Web.Mvc.Binders;
+using IDependencyResolver = BoC.InversionOfControl.IDependencyResolver;
 
 namespace BoC.Web.Mvc.Init
 {
@@ -19,11 +20,13 @@ namespace BoC.Web.Mvc.Init
 
         public void Execute()
         {
-            MvcServiceLocator.SetCurrent(new ServiceLocatorWrapper(dependencyResolver));
+            System.Web.Mvc.DependencyResolver.SetResolver(new DependencyResolverWrapper(dependencyResolver));
             SetDefaultViewEngine();
             RegisterAllAreas();
             RegisterDefaultRoutes(RouteTable.Routes);
-            dependencyResolver.RegisterType(typeof(IControllerFactory), typeof(AutoScaffoldControllerFactory));
+            
+            dependencyResolver.RegisterType<IControllerFactory,AutoScaffoldControllerFactory>();
+
             ModelBinders.Binders.DefaultBinder = new CommonModelBinder(dependencyResolver);
             ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder());
             ModelBinders.Binders.Add(typeof(DateTime?), new DateTimeModelBinder());

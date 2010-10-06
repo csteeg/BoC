@@ -11,6 +11,7 @@ using System.Xml.Serialization;
 using BoC.InversionOfControl;
 using BoC.Persistence;
 using BoC.Services;
+using IDependencyResolver = BoC.InversionOfControl.IDependencyResolver;
 
 namespace BoC.Web.Mvc.Binders
 {

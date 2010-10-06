@@ -4,7 +4,6 @@ using BoC.Validation.DataAnnotations;
 
 namespace BoC.Security.Mvc.ViewModels
 {
-    [PropertiesMustMatch("Password", "ConfirmPassword", ErrorMessage = "The password and confirmation password do not match.")]
     public class RegisterModel
     {
         [Required]
@@ -25,6 +24,7 @@ namespace BoC.Security.Mvc.ViewModels
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 }
