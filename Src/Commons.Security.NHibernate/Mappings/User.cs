@@ -10,6 +10,7 @@ namespace BoC.Security.Model.Mappings
         {
             m.HasManyToMany<Role>(u => u.Roles).Cascade.SaveUpdate().AsSet();
             m.IgnoreProperty(u => u.IsOnLine);
+            m.IgnoreProperty(u => u.Identity);
         }
     }
 }

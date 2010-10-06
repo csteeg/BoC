@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using BoC.Security.Model;
 using BoC.Web;
+using Norm.Configuration;
 
 namespace ToDoList
 {
@@ -18,24 +20,15 @@ namespace ToDoList
             filters.Add(new HandleErrorAttribute());
         }
 
-        public static void RegisterRoutes(RouteCollection routes)
+        protected override void InitializeApplication()
         {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            base.InitializeApplication();
 
-            routes.MapRoute(
-                "Default", // Route name
-                "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
-            );
-
-        }
-
-        protected void Application_Start()
-        {
-            AreaRegistration.RegisterAllAreas();
-
-            RegisterGlobalFilters(GlobalFilters.Filters);
-            RegisterRoutes(RouteTable.Routes);
+            MongoConfiguration.Initialize(config =>
+                            config.For<User>(c =>
+                            {
+                                c.ForProperty(u => u.Identity).
+                            }));
         }
     }
 }

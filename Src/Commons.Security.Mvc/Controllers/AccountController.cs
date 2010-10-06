@@ -25,34 +25,39 @@ namespace BoC.Security.Mvc.Controllers
 
         public ActionResult Register()
         {
+            ViewModel.PasswordLength = service.MinRequiredPasswordLength;
+
             return View(new RegisterModel());
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Register(RegisterModel registration)
         {
-            ViewData["PasswordLength"] = service.MinRequiredPasswordLength;
-
-            // Attempt to register the user
-            try
+            if (ModelState.IsValid)
             {
-                var user = service.CreateUser(new User
-                                                  {
-                                                      Email = registration.Email,
-                                                      Login = registration.UserName,
-                                                  }, registration.Password);
-                if (user != null)
+                // Attempt to register the user
+                try
                 {
-                    return View("RegisterSuccess");
+                    var user = service.CreateUser(new User
+                                                      {
+                                                          Email = registration.Email,
+                                                          Login = registration.UserName,
+                                                      }, registration.Password);
+                    if (user != null)
+                    {
+                        return View("RegisterSuccess");
+                    }
                 }
-            }
-            catch (Exception exc)
-            {
-                this.ModelState.AddModelError("_FORM", exc.Message);
+                catch (Exception exc)
+                {
+                    this.ModelState.AddModelError("", exc.Message);
+                }
             }
 
             // If we got this far, something failed, redisplay form
-            return View();
+            ViewModel.PasswordLength = service.MinRequiredPasswordLength;
+
+            return Register(registration);
         }
 
         [Authorize]

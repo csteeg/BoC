@@ -53,17 +53,17 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Data.9.3">
-      <HintPath>..\..\lib\XPO\DevExpress.Data.9.3.dll</HintPath>
+    <Reference Include="DevExpress.Data.v9.3">
+      <HintPath>..\..\lib\XPO\DevExpress.Data.v9.3.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Data.9.3.Linq">
-      <HintPath>..\..\lib\XPO\DevExpress.Data.9.3.Linq.dll</HintPath>
+    <Reference Include="DevExpress.Data.v9.3.Linq">
+      <HintPath>..\..\lib\XPO\DevExpress.Data.v9.3.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Xpo.9.3">
-      <HintPath>..\..\lib\XPO\DevExpress.Xpo.9.3.dll</HintPath>
+    <Reference Include="DevExpress.Xpo.v9.3">
+      <HintPath>..\..\lib\XPO\DevExpress.Xpo.v9.3.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Xpo.9.3.Linq">
-      <HintPath>..\..\lib\XPO\DevExpress.Xpo.9.3.Linq.dll</HintPath>
+    <Reference Include="DevExpress.Xpo.v9.3.Linq">
+      <HintPath>..\..\lib\XPO\DevExpress.Xpo.v9.3.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
