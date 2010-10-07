@@ -148,7 +148,6 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="HttpStatusCodeResult.cs" />
     <Compile Include="Init\SetDefaults.cs" />
-    <Compile Include="InversionOfControl\DependencyResolverWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptManager\SimpleScriptManager.cs" />
     <Compile Include="SimleException.cs" />

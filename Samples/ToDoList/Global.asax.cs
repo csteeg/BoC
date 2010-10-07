@@ -24,6 +24,11 @@ namespace ToDoList
         {
             base.InitializeApplication();
 
+            MongoConfiguration.Initialize(config =>
+                            config.For<User>(c =>
+                            {
+                                c.ForProperty(u => u.Identity).
+                            }));
         }
     }
 }

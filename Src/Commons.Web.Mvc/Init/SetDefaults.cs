@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -20,7 +21,9 @@ namespace BoC.Web.Mvc.Init
 
         public void Execute()
         {
-            System.Web.Mvc.DependencyResolver.SetResolver(new DependencyResolverWrapper(dependencyResolver));
+            System.Web.Mvc.DependencyResolver.SetResolver(
+                this.dependencyResolver.Resolve,
+                (t) => this.dependencyResolver.ResolveAll(t).Cast<object>());
             SetDefaultViewEngine();
             RegisterAllAreas();
             RegisterDefaultRoutes(RouteTable.Routes);
