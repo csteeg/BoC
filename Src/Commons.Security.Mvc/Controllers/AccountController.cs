@@ -57,7 +57,7 @@ namespace BoC.Security.Mvc.Controllers
             // If we got this far, something failed, redisplay form
             ViewModel.PasswordLength = service.MinRequiredPasswordLength;
 
-            return Register(registration);
+            return View(registration);
         }
 
         [Authorize]

@@ -52,7 +52,10 @@
       <HintPath>..\..\Build\Commons.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Norm, Version=0.9.8.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Norm, Version=0.9.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\atheken-NoRM\Norm.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
