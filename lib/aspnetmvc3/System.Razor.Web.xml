@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>System.Razor.Web</name>
+  </assembly>
+  <members>
+    <member name="T:System.Razor.Web.PreApplicationStartCode"></member>
+    <member name="M:System.Razor.Web.PreApplicationStartCode.Start"></member>
+    <member name="T:System.Razor.Web.RazorBuildProvider"></member>
+    <member name="M:System.Razor.Web.RazorBuildProvider.#ctor"></member>
+    <member name="M:System.Razor.Web.RazorBuildProvider.AddVirtualPathDependency(System.String)"></member>
+    <member name="P:System.Razor.Web.RazorBuildProvider.AssemblyBuilder">
+      <returns>Returns <see cref="T:System.Web.Compilation.AssemblyBuilder" />.</returns>
+    </member>
+    <member name="P:System.Razor.Web.RazorBuildProvider.CodeCompilerType">
+      <returns>Returns <see cref="T:System.Web.Compilation.CompilerType" />.</returns>
+    </member>
+    <member name="E:System.Razor.Web.RazorBuildProvider.CodeGenerationCompleted"></member>
+    <member name="E:System.Razor.Web.RazorBuildProvider.CodeGenerationStarted"></member>
+    <member name="M:System.Razor.Web.RazorBuildProvider.CreateHost">
+      <returns>Returns <see cref="T:System.Razor.Web.WebPageRazorHost" />.</returns>
+    </member>
+    <member name="M:System.Razor.Web.RazorBuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)"></member>
+    <member name="M:System.Razor.Web.RazorBuildProvider.GetGeneratedType(System.CodeDom.Compiler.CompilerResults)">
+      <returns>Returns <see cref="T:System.Type" />.</returns>
+    </member>
+    <member name="M:System.Razor.Web.RazorBuildProvider.InternalOpenReader">
+      <returns>Returns <see cref="T:System.IO.TextReader" />.</returns>
+    </member>
+    <member name="P:System.Razor.Web.RazorBuildProvider.VirtualPath">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Web.RazorBuildProvider.VirtualPathDependencies">
+      <returns>Returns <see cref="T:System.Collections.ICollection" />.</returns>
+    </member>
+    <member name="T:System.Razor.Web.WebCodeRazorHost"></member>
+    <member name="M:System.Razor.Web.WebCodeRazorHost.#ctor(System.String)"></member>
+    <member name="M:System.Razor.Web.WebCodeRazorHost.#ctor(System.String,System.String)"></member>
+    <member name="M:System.Razor.Web.WebCodeRazorHost.GetClassName(System.String)">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Web.WebCodeRazorHost.PostProcessGeneratedCode(System.CodeDom.CodeCompileUnit,System.CodeDom.CodeNamespace,System.CodeDom.CodeTypeDeclaration,System.CodeDom.CodeMemberMethod)"></member>
+    <member name="T:System.Razor.Web.WebPageRazorHost"></member>
+    <member name="M:System.Razor.Web.WebPageRazorHost.#ctor(System.String)"></member>
+    <member name="M:System.Razor.Web.WebPageRazorHost.#ctor(System.String,System.String)"></member>
+    <member name="M:System.Razor.Web.WebPageRazorHost.AddGlobalImport(System.String)"></member>
+    <member name="P:System.Razor.Web.WebPageRazorHost.CodeLanguage">
+      <returns>Returns <see cref="T:System.Razor.RazorCodeLanguage" />.</returns>
+    </member>
+    <member name="M:System.Razor.Web.WebPageRazorHost.CreateMarkupParser">
+      <returns>Returns <see cref="T:System.Razor.Parser.MarkupParser" />.</returns>
+    </member>
+    <member name="P:System.Razor.Web.WebPageRazorHost.DefaultBaseClass">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Web.WebPageRazorHost.DefaultClassName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Web.WebPageRazorHost.DefaultDebugCompilation">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Web.WebPageRazorHost.DefaultPageBaseClass">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Web.WebPageRazorHost.GetClassName(System.String)">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Web.WebPageRazorHost.GetCodeLanguage">
+      <returns>Returns <see cref="T:System.Razor.RazorCodeLanguage" />.</returns>
+    </member>
+    <member name="M:System.Razor.Web.WebPageRazorHost.GetGlobalImports">
+      <returns>Returns <see cref="T:System.Collections.Generic.IEnumerable`1" />.</returns>
+    </member>
+    <member name="P:System.Razor.Web.WebPageRazorHost.IsInitPage">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Web.WebPageRazorHost.IsSpecialPage">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Web.WebPageRazorHost.IsStartPage">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Web.WebPageRazorHost.PhysicalPath">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Web.WebPageRazorHost.PostProcessGeneratedCode(System.CodeDom.CodeCompileUnit,System.CodeDom.CodeNamespace,System.CodeDom.CodeTypeDeclaration,System.CodeDom.CodeMemberMethod)"></member>
+    <member name="P:System.Razor.Web.WebPageRazorHost.VirtualPath">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="T:System.Razor.Web.WebRazorHostFactory"></member>
+    <member name="M:System.Razor.Web.WebRazorHostFactory.#ctor"></member>
+    <member name="M:System.Razor.Web.WebRazorHostFactory.ApplyConfigurationToHost(System.Razor.Web.Configuration.RazorPagesSection,System.Razor.Web.WebPageRazorHost)"></member>
+    <member name="M:System.Razor.Web.WebRazorHostFactory.CreateDefaultHost(System.String,System.String)">
+      <returns>Returns <see cref="T:System.Razor.Web.WebPageRazorHost" />.</returns>
+    </member>
+    <member name="M:System.Razor.Web.WebRazorHostFactory.CreateHost(System.String,System.String)">
+      <returns>Returns <see cref="T:System.Razor.Web.WebPageRazorHost" />.</returns>
+    </member>
+    <member name="M:System.Razor.Web.WebRazorHostFactory.CreateHostFromConfig(System.Razor.Web.Configuration.SystemRazorWebSectionGroup,System.String,System.String)">
+      <returns>Returns <see cref="T:System.Razor.Web.WebPageRazorHost" />.</returns>
+    </member>
+    <member name="M:System.Razor.Web.WebRazorHostFactory.CreateHostFromConfig(System.String,System.String)">
+      <returns>Returns <see cref="T:System.Razor.Web.WebPageRazorHost" />.</returns>
+    </member>
+    <member name="T:System.Razor.Web.Configuration.HostSection"></member>
+    <member name="M:System.Razor.Web.Configuration.HostSection.#ctor"></member>
+    <member name="P:System.Razor.Web.Configuration.HostSection.FactoryType">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="F:System.Razor.Web.Configuration.HostSection.SectionName"></member>
+    <member name="T:System.Razor.Web.Configuration.RazorPagesSection"></member>
+    <member name="M:System.Razor.Web.Configuration.RazorPagesSection.#ctor"></member>
+    <member name="P:System.Razor.Web.Configuration.RazorPagesSection.Namespaces">
+      <returns>Returns <see cref="T:System.Web.Configuration.NamespaceCollection" />.</returns>
+    </member>
+    <member name="P:System.Razor.Web.Configuration.RazorPagesSection.PageBaseType">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="F:System.Razor.Web.Configuration.RazorPagesSection.SectionName"></member>
+    <member name="T:System.Razor.Web.Configuration.SystemRazorWebSectionGroup"></member>
+    <member name="M:System.Razor.Web.Configuration.SystemRazorWebSectionGroup.#ctor"></member>
+    <member name="F:System.Razor.Web.Configuration.SystemRazorWebSectionGroup.GroupName"></member>
+    <member name="P:System.Razor.Web.Configuration.SystemRazorWebSectionGroup.Host">
+      <returns>Returns <see cref="T:System.Razor.Web.Configuration.HostSection" />.</returns>
+    </member>
+    <member name="P:System.Razor.Web.Configuration.SystemRazorWebSectionGroup.Pages">
+      <returns>Returns <see cref="T:System.Razor.Web.Configuration.RazorPagesSection" />.</returns>
+    </member>
+  </members>
+</doc>

@@ -1,0 +1,1430 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>System.Razor</name>
+  </assembly>
+  <members>
+    <member name="T:System.Razor.CSharpRazorCodeLanguage"></member>
+    <member name="M:System.Razor.CSharpRazorCodeLanguage.#ctor"></member>
+    <member name="P:System.Razor.CSharpRazorCodeLanguage.CodeDomProviderType">
+      <returns>Returns <see cref="T:System.Type" />.</returns>
+    </member>
+    <member name="M:System.Razor.CSharpRazorCodeLanguage.CreateCodeGenerator(System.String,System.String,System.String,System.Razor.RazorEngineHost)">
+      <returns>Returns <see cref="T:System.Razor.Generator.RazorCodeGenerator" />.</returns>
+    </member>
+    <member name="M:System.Razor.CSharpRazorCodeLanguage.CreateCodeParser">
+      <returns>Returns <see cref="T:System.Razor.Parser.ParserBase" />.</returns>
+    </member>
+    <member name="P:System.Razor.CSharpRazorCodeLanguage.LanguageName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="T:System.Razor.DocumentParseCompleteEventArgs"></member>
+    <member name="M:System.Razor.DocumentParseCompleteEventArgs.#ctor"></member>
+    <member name="P:System.Razor.DocumentParseCompleteEventArgs.GeneratorResults">
+      <returns>Returns <see cref="T:System.Razor.GeneratorResults" />.</returns>
+    </member>
+    <member name="P:System.Razor.DocumentParseCompleteEventArgs.SourceChange">
+      <returns>Returns <see cref="T:System.Razor.Text.TextChange" />.</returns>
+    </member>
+    <member name="T:System.Razor.GeneratorResults"></member>
+    <member name="M:System.Razor.GeneratorResults.#ctor(System.Boolean,System.Razor.Parser.SyntaxTree.Block,System.Collections.Generic.IList{System.Razor.Parser.SyntaxTree.RazorError},System.CodeDom.CodeCompileUnit,System.Collections.Generic.IDictionary{System.Int32,System.Razor.Generator.GeneratedCodeMapping})"></member>
+    <member name="M:System.Razor.GeneratorResults.#ctor(System.Razor.Parser.SyntaxTree.Block,System.Collections.Generic.IList{System.Razor.Parser.SyntaxTree.RazorError},System.CodeDom.CodeCompileUnit,System.Collections.Generic.IDictionary{System.Int32,System.Razor.Generator.GeneratedCodeMapping})"></member>
+    <member name="M:System.Razor.GeneratorResults.#ctor(System.Razor.ParserResults,System.CodeDom.CodeCompileUnit,System.Collections.Generic.IDictionary{System.Int32,System.Razor.Generator.GeneratedCodeMapping})"></member>
+    <member name="P:System.Razor.GeneratorResults.DesignTimeLineMappings">
+      <returns>Returns <see cref="T:System.Collections.Generic.IDictionary`2" />.</returns>
+    </member>
+    <member name="P:System.Razor.GeneratorResults.GeneratedCode">
+      <returns>Returns <see cref="T:System.CodeDom.CodeCompileUnit" />.</returns>
+    </member>
+    <member name="T:System.Razor.ParserResults"></member>
+    <member name="M:System.Razor.ParserResults.#ctor(System.Boolean,System.Razor.Parser.SyntaxTree.Block,System.Collections.Generic.IList{System.Razor.Parser.SyntaxTree.RazorError})"></member>
+    <member name="M:System.Razor.ParserResults.#ctor(System.Razor.Parser.SyntaxTree.Block,System.Collections.Generic.IList{System.Razor.Parser.SyntaxTree.RazorError})"></member>
+    <member name="P:System.Razor.ParserResults.Document">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.Block" />.</returns>
+    </member>
+    <member name="P:System.Razor.ParserResults.ParserErrors">
+      <returns>Returns <see cref="T:System.Collections.Generic.IList`1" />.</returns>
+    </member>
+    <member name="P:System.Razor.ParserResults.Success">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="T:System.Razor.PartialParseResult"></member>
+    <member name="F:System.Razor.PartialParseResult.Rejected">
+      <summary />
+    </member>
+    <member name="F:System.Razor.PartialParseResult.Accepted">
+      <summary />
+    </member>
+    <member name="F:System.Razor.PartialParseResult.Provisional">
+      <summary />
+    </member>
+    <member name="F:System.Razor.PartialParseResult.SpanContextChanged">
+      <summary />
+    </member>
+    <member name="T:System.Razor.RazorCodeLanguage"></member>
+    <member name="M:System.Razor.RazorCodeLanguage.#ctor"></member>
+    <member name="P:System.Razor.RazorCodeLanguage.CodeDomProviderType">
+      <returns>Returns <see cref="T:System.Type" />.</returns>
+    </member>
+    <member name="M:System.Razor.RazorCodeLanguage.CreateCodeGenerator(System.String,System.String,System.String,System.Razor.RazorEngineHost)">
+      <returns>Returns <see cref="T:System.Razor.Generator.RazorCodeGenerator" />.</returns>
+    </member>
+    <member name="M:System.Razor.RazorCodeLanguage.CreateCodeParser">
+      <returns>Returns <see cref="T:System.Razor.Parser.ParserBase" />.</returns>
+    </member>
+    <member name="M:System.Razor.RazorCodeLanguage.GetLanguageByExtension(System.String)">
+      <returns>Returns <see cref="T:System.Razor.RazorCodeLanguage" />.</returns>
+    </member>
+    <member name="P:System.Razor.RazorCodeLanguage.LanguageName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.RazorCodeLanguage.Languages">
+      <returns>Returns <see cref="T:System.Collections.Generic.IDictionary`2" />.</returns>
+    </member>
+    <member name="T:System.Razor.RazorEditorParser"></member>
+    <member name="M:System.Razor.RazorEditorParser.#ctor(System.Razor.RazorEngineHost,System.String)"></member>
+    <member name="M:System.Razor.RazorEditorParser.CheckForStructureChanges(System.Razor.Text.TextChange)">
+      <returns>Returns <see cref="T:System.Razor.PartialParseResult" />.</returns>
+    </member>
+    <member name="P:System.Razor.RazorEditorParser.CurrentParseTree">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.Block" />.</returns>
+    </member>
+    <member name="M:System.Razor.RazorEditorParser.Dispose"></member>
+    <member name="M:System.Razor.RazorEditorParser.Dispose(System.Boolean)"></member>
+    <member name="E:System.Razor.RazorEditorParser.DocumentParseComplete"></member>
+    <member name="M:System.Razor.RazorEditorParser.ProcessChange(System.Threading.CancellationToken,System.Razor.Text.TextChange)"></member>
+    <member name="M:System.Razor.RazorEditorParser.QueueFullReparse(System.Razor.Text.TextChange)"></member>
+    <member name="T:System.Razor.RazorEngineHost"></member>
+    <member name="M:System.Razor.RazorEngineHost.#ctor"></member>
+    <member name="M:System.Razor.RazorEngineHost.#ctor(System.Razor.RazorCodeLanguage)"></member>
+    <member name="M:System.Razor.RazorEngineHost.#ctor(System.Razor.RazorCodeLanguage,System.Func`1)"></member>
+    <member name="P:System.Razor.RazorEngineHost.CodeLanguage">
+      <returns>Returns <see cref="T:System.Razor.RazorCodeLanguage" />.</returns>
+    </member>
+    <member name="M:System.Razor.RazorEngineHost.CreateMarkupParser">
+      <returns>Returns <see cref="T:System.Razor.Parser.MarkupParser" />.</returns>
+    </member>
+    <member name="M:System.Razor.RazorEngineHost.DecorateCodeGenerator(System.Razor.Generator.RazorCodeGenerator)">
+      <returns>Returns <see cref="T:System.Razor.Generator.RazorCodeGenerator" />.</returns>
+    </member>
+    <member name="M:System.Razor.RazorEngineHost.DecorateCodeParser(System.Razor.Parser.ParserBase)">
+      <returns>Returns <see cref="T:System.Razor.Parser.ParserBase" />.</returns>
+    </member>
+    <member name="M:System.Razor.RazorEngineHost.DecorateMarkupParser(System.Razor.Parser.MarkupParser)">
+      <returns>Returns <see cref="T:System.Razor.Parser.MarkupParser" />.</returns>
+    </member>
+    <member name="P:System.Razor.RazorEngineHost.DefaultBaseClass">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.RazorEngineHost.DefaultClassName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.RazorEngineHost.DefaultNamespace">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.RazorEngineHost.DesignTimeMode">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.RazorEngineHost.GeneratedClassContext">
+      <returns>Returns <see cref="T:System.Razor.Generator.GeneratedClassContext" />.</returns>
+    </member>
+    <member name="P:System.Razor.RazorEngineHost.NamespaceImports">
+      <returns>Returns <see cref="T:System.Collections.Generic.ISet`1" />.</returns>
+    </member>
+    <member name="M:System.Razor.RazorEngineHost.PostProcessGeneratedCode(System.CodeDom.CodeCompileUnit,System.CodeDom.CodeNamespace,System.CodeDom.CodeTypeDeclaration,System.CodeDom.CodeMemberMethod)"></member>
+    <member name="T:System.Razor.RazorTemplateEngine"></member>
+    <member name="M:System.Razor.RazorTemplateEngine.#ctor(System.Razor.RazorEngineHost)"></member>
+    <member name="M:System.Razor.RazorTemplateEngine.CreateCodeGenerator(System.String,System.String,System.String)">
+      <returns>Returns <see cref="T:System.Razor.Generator.RazorCodeGenerator" />.</returns>
+    </member>
+    <member name="M:System.Razor.RazorTemplateEngine.CreateParser">
+      <returns>Returns <see cref="T:System.Razor.Parser.RazorParser" />.</returns>
+    </member>
+    <member name="M:System.Razor.RazorTemplateEngine.GenerateCode(System.IO.TextReader,System.String,System.String,System.String,System.Nullable{System.Threading.CancellationToken})">
+      <returns>Returns <see cref="T:System.Razor.GeneratorResults" />.</returns>
+    </member>
+    <member name="M:System.Razor.RazorTemplateEngine.GenerateCode(System.Razor.Text.ITextBuffer,System.String,System.String,System.String,System.Nullable{System.Threading.CancellationToken})">
+      <returns>Returns <see cref="T:System.Razor.GeneratorResults" />.</returns>
+    </member>
+    <member name="M:System.Razor.RazorTemplateEngine.GenerateCodeCore(System.Razor.Text.LookaheadTextReader,System.String,System.String,System.String,System.Nullable{System.Threading.CancellationToken})">
+      <returns>Returns <see cref="T:System.Razor.GeneratorResults" />.</returns>
+    </member>
+    <member name="P:System.Razor.RazorTemplateEngine.Host">
+      <returns>Returns <see cref="T:System.Razor.RazorEngineHost" />.</returns>
+    </member>
+    <member name="M:System.Razor.RazorTemplateEngine.ParseTemplate(System.IO.TextReader,System.Nullable{System.Threading.CancellationToken})">
+      <returns>Returns <see cref="T:System.Razor.ParserResults" />.</returns>
+    </member>
+    <member name="M:System.Razor.RazorTemplateEngine.ParseTemplate(System.Razor.Text.ITextBuffer,System.Nullable{System.Threading.CancellationToken})">
+      <returns>Returns <see cref="T:System.Razor.ParserResults" />.</returns>
+    </member>
+    <member name="M:System.Razor.RazorTemplateEngine.ParseTemplateCore(System.Razor.Text.LookaheadTextReader,System.Nullable{System.Threading.CancellationToken})">
+      <returns>Returns <see cref="T:System.Razor.ParserResults" />.</returns>
+    </member>
+    <member name="T:System.Razor.TemplateCompileResults"></member>
+    <member name="M:System.Razor.TemplateCompileResults.#ctor(System.Boolean,System.Razor.Parser.SyntaxTree.Block,System.Collections.Generic.IList{System.Razor.Parser.SyntaxTree.RazorError},System.CodeDom.CodeCompileUnit,System.Collections.Generic.IDictionary{System.Int32,System.Razor.Generator.GeneratedCodeMapping},System.Type,System.CodeDom.Compiler.CompilerErrorCollection)"></member>
+    <member name="M:System.Razor.TemplateCompileResults.#ctor(System.Razor.GeneratorResults,System.Type,System.CodeDom.Compiler.CompilerErrorCollection)"></member>
+    <member name="M:System.Razor.TemplateCompileResults.#ctor(System.Razor.Parser.SyntaxTree.Block,System.Collections.Generic.IList{System.Razor.Parser.SyntaxTree.RazorError},System.CodeDom.CodeCompileUnit,System.Collections.Generic.IDictionary{System.Int32,System.Razor.Generator.GeneratedCodeMapping},System.Type,System.CodeDom.Compiler.CompilerErrorCollection)"></member>
+    <member name="P:System.Razor.TemplateCompileResults.CompiledTemplate">
+      <returns>Returns <see cref="T:System.Type" />.</returns>
+    </member>
+    <member name="P:System.Razor.TemplateCompileResults.CompilerErrors">
+      <returns>Returns <see cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />.</returns>
+    </member>
+    <member name="T:System.Razor.VBRazorCodeLanguage"></member>
+    <member name="M:System.Razor.VBRazorCodeLanguage.#ctor"></member>
+    <member name="P:System.Razor.VBRazorCodeLanguage.CodeDomProviderType">
+      <returns>Returns <see cref="T:System.Type" />.</returns>
+    </member>
+    <member name="M:System.Razor.VBRazorCodeLanguage.CreateCodeGenerator(System.String,System.String,System.String,System.Razor.RazorEngineHost)">
+      <returns>Returns <see cref="T:System.Razor.Generator.RazorCodeGenerator" />.</returns>
+    </member>
+    <member name="M:System.Razor.VBRazorCodeLanguage.CreateCodeParser">
+      <returns>Returns <see cref="T:System.Razor.Parser.ParserBase" />.</returns>
+    </member>
+    <member name="P:System.Razor.VBRazorCodeLanguage.LanguageName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="T:System.Razor.Generator.BaseCodeWriter"></member>
+    <member name="M:System.Razor.Generator.BaseCodeWriter.#ctor"></member>
+    <member name="M:System.Razor.Generator.BaseCodeWriter.EmitEndConstructor"></member>
+    <member name="M:System.Razor.Generator.BaseCodeWriter.EmitEndLambdaExpression"></member>
+    <member name="M:System.Razor.Generator.BaseCodeWriter.EmitEndMethodInvoke"></member>
+    <member name="M:System.Razor.Generator.BaseCodeWriter.EmitStartMethodInvoke(System.String)"></member>
+    <member name="M:System.Razor.Generator.BaseCodeWriter.WriteCommaSeparatedList``1(``0[],System.Action{``0})">
+      <typeparam name="T"></typeparam>
+    </member>
+    <member name="M:System.Razor.Generator.BaseCodeWriter.WriteParameterSeparator"></member>
+    <member name="M:System.Razor.Generator.BaseCodeWriter.WriteSnippet(System.String)"></member>
+    <member name="T:System.Razor.Generator.CodeGenerationCompleteEventArgs"></member>
+    <member name="M:System.Razor.Generator.CodeGenerationCompleteEventArgs.#ctor(System.String,System.String,System.CodeDom.CodeCompileUnit)"></member>
+    <member name="P:System.Razor.Generator.CodeGenerationCompleteEventArgs.GeneratedCode">
+      <returns>Returns <see cref="T:System.CodeDom.CodeCompileUnit" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.CodeGenerationCompleteEventArgs.PhysicalPath">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.CodeGenerationCompleteEventArgs.VirtualPath">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="T:System.Razor.Generator.CodeWriter"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.#ctor"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.Clear"></member>
+    <member name="P:System.Razor.Generator.CodeWriter.Content">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.CodeWriter.Dispose"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.Dispose(System.Boolean)"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.EmitEndConstructor"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.EmitEndLambdaDelegate"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.EmitEndLambdaExpression"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.EmitEndMethodInvoke"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.EmitStartConstructor(System.String)"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.EmitStartLambdaDelegate(System.String[])"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.EmitStartLambdaExpression(System.String[])"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.EmitStartMethodInvoke(System.String)"></member>
+    <member name="P:System.Razor.Generator.CodeWriter.InnerWriter">
+      <returns>Returns <see cref="T:System.IO.StringWriter" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.CodeWriter.ToStatement">
+      <returns>Returns <see cref="T:System.CodeDom.CodeSnippetStatement" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.CodeWriter.ToTypeMember">
+      <returns>Returns <see cref="T:System.CodeDom.CodeSnippetTypeMember" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.CodeWriter.WriteEndConstructor"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.WriteEndLambdaDelegate"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.WriteEndLambdaExpression"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.WriteEndMethodInvoke"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.WriteEndStatement"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.WriteHelperHeaderPrefix(System.String)"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.WriteHelperHeaderSuffix(System.String)"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.WriteHelperTrailer"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.WriteIdentifier(System.String)"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.WriteLinePragma(System.Nullable{System.Int32},System.String)"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.WriteParameterSeparator"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.WriteReturn"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.WriteSnippet(System.String)"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.WriteStartAssignment(System.String)"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.WriteStartConstructor(System.String)"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.WriteStartLambdaDelegate(System.String[])"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.WriteStartLambdaExpression(System.String[])"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.WriteStartMethodInvoke(System.String)"></member>
+    <member name="M:System.Razor.Generator.CodeWriter.WriteStringLiteral(System.String)"></member>
+    <member name="T:System.Razor.Generator.CSharpCodeWriter"></member>
+    <member name="M:System.Razor.Generator.CSharpCodeWriter.#ctor"></member>
+    <member name="M:System.Razor.Generator.CSharpCodeWriter.EmitEndLambdaDelegate"></member>
+    <member name="M:System.Razor.Generator.CSharpCodeWriter.EmitStartConstructor(System.String)"></member>
+    <member name="M:System.Razor.Generator.CSharpCodeWriter.EmitStartLambdaDelegate(System.String[])"></member>
+    <member name="M:System.Razor.Generator.CSharpCodeWriter.EmitStartLambdaExpression(System.String[])"></member>
+    <member name="M:System.Razor.Generator.CSharpCodeWriter.WriteEndStatement"></member>
+    <member name="M:System.Razor.Generator.CSharpCodeWriter.WriteHelperHeaderPrefix(System.String)"></member>
+    <member name="M:System.Razor.Generator.CSharpCodeWriter.WriteIdentifier(System.String)"></member>
+    <member name="M:System.Razor.Generator.CSharpCodeWriter.WriteLinePragma(System.Nullable{System.Int32},System.String)"></member>
+    <member name="M:System.Razor.Generator.CSharpCodeWriter.WriteReturn"></member>
+    <member name="M:System.Razor.Generator.CSharpCodeWriter.WriteStringLiteral(System.String)"></member>
+    <member name="T:System.Razor.Generator.CSharpRazorCodeGenerator"></member>
+    <member name="M:System.Razor.Generator.CSharpRazorCodeGenerator.#ctor(System.String,System.String,System.String,System.Razor.RazorEngineHost)"></member>
+    <member name="M:System.Razor.Generator.CSharpRazorCodeGenerator.CreateCodeWriter">
+      <returns>Returns <see cref="T:System.Razor.Generator.CodeWriter" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.CSharpRazorCodeGenerator.WriteHelperVariable(System.String,System.String)"></member>
+    <member name="T:System.Razor.Generator.GeneratedClassContext"></member>
+    <member name="M:System.Razor.Generator.GeneratedClassContext.#ctor(System.String,System.String,System.String)"></member>
+    <member name="M:System.Razor.Generator.GeneratedClassContext.#ctor(System.String,System.String,System.String,System.String,System.String,System.String)"></member>
+    <member name="M:System.Razor.Generator.GeneratedClassContext.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String)"></member>
+    <member name="M:System.Razor.Generator.GeneratedClassContext.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)"></member>
+    <member name="P:System.Razor.Generator.GeneratedClassContext.AllowSections">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.GeneratedClassContext.AllowTemplates">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="F:System.Razor.Generator.GeneratedClassContext.Default"></member>
+    <member name="F:System.Razor.Generator.GeneratedClassContext.DefaultExecuteMethodName"></member>
+    <member name="F:System.Razor.Generator.GeneratedClassContext.DefaultWriteLiteralMethodName"></member>
+    <member name="F:System.Razor.Generator.GeneratedClassContext.DefaultWriteMethodName"></member>
+    <member name="P:System.Razor.Generator.GeneratedClassContext.DefineSectionMethodName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.GeneratedClassContext.Equals(System.Object)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.GeneratedClassContext.ExecuteMethodName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.GeneratedClassContext.GetHashCode">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.GeneratedClassContext.op_Equality(System.Razor.Generator.GeneratedClassContext,System.Razor.Generator.GeneratedClassContext)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.GeneratedClassContext.op_Inequality(System.Razor.Generator.GeneratedClassContext,System.Razor.Generator.GeneratedClassContext)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.GeneratedClassContext.TemplateTypeName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.GeneratedClassContext.ValidateRequestPropertyName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.GeneratedClassContext.WriteLiteralMethodName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.GeneratedClassContext.WriteLiteralToMethodName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.GeneratedClassContext.WriteMethodName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.GeneratedClassContext.WriteToMethodName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="T:System.Razor.Generator.GeneratedCodeMapping"></member>
+    <member name="M:System.Razor.Generator.GeneratedCodeMapping.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)"></member>
+    <member name="P:System.Razor.Generator.GeneratedCodeMapping.CodeLength">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.GeneratedCodeMapping.Equals(System.Object)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.GeneratedCodeMapping.GetHashCode">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.GeneratedCodeMapping.op_Equality(System.Razor.Generator.GeneratedCodeMapping,System.Razor.Generator.GeneratedCodeMapping)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.GeneratedCodeMapping.op_Inequality(System.Razor.Generator.GeneratedCodeMapping,System.Razor.Generator.GeneratedCodeMapping)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.GeneratedCodeMapping.StartColumn">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.GeneratedCodeMapping.StartGeneratedColumn">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.GeneratedCodeMapping.StartLine">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="T:System.Razor.Generator.RazorCodeGenerator"></member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.#ctor(System.String,System.String,System.String,System.Razor.RazorEngineHost)"></member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.ClassName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.CodeMappings">
+      <returns>Returns <see cref="T:System.Collections.Generic.IDictionary`2" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.CreateCodeWriter">
+      <returns>Returns <see cref="T:System.Razor.Generator.CodeWriter" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.CreateLinePragma(System.Razor.Generator.RazorCodeGenerator.BlockContext)">
+      <returns>Returns <see cref="T:System.CodeDom.CodeLinePragma" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.CreateLinePragma(System.Razor.Text.SourceLocation,System.Int32,System.Int32)">
+      <returns>Returns <see cref="T:System.CodeDom.CodeLinePragma" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.CreateStatement(System.Razor.Generator.RazorCodeGenerator.BlockContext)">
+      <returns>Returns <see cref="T:System.CodeDom.CodeSnippetStatement" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.CurrentBlock">
+      <returns>Returns <see cref="T:System.Razor.Generator.RazorCodeGenerator.BlockContext" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.CurrentWriteLiteralMethod">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.CurrentWriteMethod">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.CurrentWriterName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.DesignTimeMode">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.EndBlock(System.Razor.Generator.RazorCodeGenerator.BlockContext)"></member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.EndHelperBlock(System.Razor.Generator.RazorCodeGenerator.BlockContext,System.Razor.Parser.SyntaxTree.Span)"></member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.GeneratedClass">
+      <returns>Returns <see cref="T:System.CodeDom.CodeTypeDeclaration" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.GeneratedCode">
+      <returns>Returns <see cref="T:System.CodeDom.CodeCompileUnit" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.GeneratedExecuteMethod">
+      <returns>Returns <see cref="T:System.CodeDom.CodeMemberMethod" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.GeneratedNamespace">
+      <returns>Returns <see cref="T:System.CodeDom.CodeNamespace" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.GenerateLinePragmas">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.HelperVariablesMethod">
+      <returns>Returns <see cref="T:System.CodeDom.CodeMemberMethod" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.Host">
+      <returns>Returns <see cref="T:System.Razor.RazorEngineHost" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.InHelper">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="F:System.Razor.Generator.RazorCodeGenerator.InheritsHelperName"></member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.InNestedWriterBlock">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.InSection">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.InTemplate">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.IsCanceled">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.OnComplete"></member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.ResumeBlock(System.Razor.Generator.RazorCodeGenerator.BlockContext,System.Razor.Generator.RazorCodeGenerator.BlockContext)"></member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.RootNamespaceName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.SourceFileName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.StartBlock(System.Razor.Generator.RazorCodeGenerator.BlockContext)"></member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.SuspendBlock(System.Razor.Generator.RazorCodeGenerator.BlockContext,System.Razor.Generator.RazorCodeGenerator.BlockContext)"></member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.TryVisit``1(System.Razor.Parser.SyntaxTree.Span,System.Action{``0})">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+      <typeparam name="T"></typeparam>
+    </member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.TryVisitSpecialSpan(System.Razor.Parser.SyntaxTree.Span)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.VisitEndBlock(System.Razor.Parser.SyntaxTree.BlockType)"></member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.VisitError(System.Razor.Parser.SyntaxTree.RazorError)"></member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.VisitSpan(System.Razor.Parser.SyntaxTree.HelperHeaderSpan)"></member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.VisitSpan(System.Razor.Parser.SyntaxTree.InheritsSpan)"></member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.VisitSpan(System.Razor.Parser.SyntaxTree.NamespaceImportSpan)"></member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.VisitSpan(System.Razor.Parser.SyntaxTree.SectionHeaderSpan)"></member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.VisitSpan(System.Razor.Parser.SyntaxTree.Span)"></member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.VisitStartBlock(System.Razor.Parser.SyntaxTree.BlockType)"></member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.WriteHelperVariable(System.String,System.String)"></member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.WroteHelperPrefix">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="T:System.Razor.Generator.RazorCodeGenerator.BlockContext"></member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.BlockContext.#ctor(System.Razor.Parser.SyntaxTree.BlockType,System.Razor.Generator.CodeWriter)"></member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.BlockContext.BlockType">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.BlockType" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.BlockContext.GeneratedCodeLength">
+      <returns>Returns <see cref="T:System.Nullable`1" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.BlockContext.GeneratedCodeStart">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.BlockContext.HasContent">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.BlockContext.MarkEndGeneratedCode"></member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.BlockContext.MarkStartGeneratedCode"></member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.BlockContext.ResetBuffer"></member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.BlockContext.SourceCodeStart">
+      <returns>Returns <see cref="T:System.Nullable`1" />.</returns>
+    </member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.BlockContext.VisitedSpans">
+      <returns>Returns <see cref="T:System.Collections.Generic.IList`1" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.RazorCodeGenerator.BlockContext.VisitSpan(System.Razor.Parser.SyntaxTree.Span)"></member>
+    <member name="P:System.Razor.Generator.RazorCodeGenerator.BlockContext.Writer">
+      <returns>Returns <see cref="T:System.Razor.Generator.CodeWriter" />.</returns>
+    </member>
+    <member name="T:System.Razor.Generator.VBCodeWriter"></member>
+    <member name="M:System.Razor.Generator.VBCodeWriter.#ctor"></member>
+    <member name="M:System.Razor.Generator.VBCodeWriter.EmitEndLambdaDelegate"></member>
+    <member name="M:System.Razor.Generator.VBCodeWriter.EmitStartConstructor(System.String)"></member>
+    <member name="M:System.Razor.Generator.VBCodeWriter.EmitStartLambdaDelegate(System.String[])"></member>
+    <member name="M:System.Razor.Generator.VBCodeWriter.EmitStartLambdaExpression(System.String[])"></member>
+    <member name="M:System.Razor.Generator.VBCodeWriter.WriteEndStatement"></member>
+    <member name="M:System.Razor.Generator.VBCodeWriter.WriteHelperHeaderPrefix(System.String)"></member>
+    <member name="M:System.Razor.Generator.VBCodeWriter.WriteHelperHeaderSuffix(System.String)"></member>
+    <member name="M:System.Razor.Generator.VBCodeWriter.WriteHelperTrailer"></member>
+    <member name="M:System.Razor.Generator.VBCodeWriter.WriteLinePragma(System.Nullable{System.Int32},System.String)"></member>
+    <member name="M:System.Razor.Generator.VBCodeWriter.WriteReturn"></member>
+    <member name="M:System.Razor.Generator.VBCodeWriter.WriteStringLiteral(System.String)"></member>
+    <member name="T:System.Razor.Generator.VBRazorCodeGenerator"></member>
+    <member name="M:System.Razor.Generator.VBRazorCodeGenerator.#ctor(System.String,System.String,System.String,System.Razor.RazorEngineHost)"></member>
+    <member name="M:System.Razor.Generator.VBRazorCodeGenerator.CreateCodeWriter">
+      <returns>Returns <see cref="T:System.Razor.Generator.CodeWriter" />.</returns>
+    </member>
+    <member name="M:System.Razor.Generator.VBRazorCodeGenerator.VisitSpan(System.Razor.Parser.SyntaxTree.Span)"></member>
+    <member name="M:System.Razor.Generator.VBRazorCodeGenerator.VisitSpan(System.Razor.Parser.SyntaxTree.VBOptionSpan)"></member>
+    <member name="M:System.Razor.Generator.VBRazorCodeGenerator.WriteHelperVariable(System.String,System.String)"></member>
+    <member name="T:System.Razor.Parser.CallbackVisitor"></member>
+    <member name="M:System.Razor.Parser.CallbackVisitor.#ctor(System.Action{System.Razor.Parser.SyntaxTree.Span})"></member>
+    <member name="M:System.Razor.Parser.CallbackVisitor.#ctor(System.Action{System.Razor.Parser.SyntaxTree.Span},System.Action{System.Razor.Parser.SyntaxTree.RazorError})"></member>
+    <member name="M:System.Razor.Parser.CallbackVisitor.#ctor(System.Action{System.Razor.Parser.SyntaxTree.Span},System.Action{System.Razor.Parser.SyntaxTree.RazorError},System.Action{System.Razor.Parser.SyntaxTree.BlockType},System.Action{System.Razor.Parser.SyntaxTree.BlockType})"></member>
+    <member name="M:System.Razor.Parser.CallbackVisitor.#ctor(System.Action{System.Razor.Parser.SyntaxTree.Span},System.Action{System.Razor.Parser.SyntaxTree.RazorError},System.Action{System.Razor.Parser.SyntaxTree.BlockType},System.Action{System.Razor.Parser.SyntaxTree.BlockType},System.Action)"></member>
+    <member name="M:System.Razor.Parser.CallbackVisitor.OnComplete"></member>
+    <member name="P:System.Razor.Parser.CallbackVisitor.SynchronizationContext">
+      <returns>Returns <see cref="T:System.Threading.SynchronizationContext" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CallbackVisitor.VisitEndBlock(System.Razor.Parser.SyntaxTree.BlockType)"></member>
+    <member name="M:System.Razor.Parser.CallbackVisitor.VisitError(System.Razor.Parser.SyntaxTree.RazorError)"></member>
+    <member name="M:System.Razor.Parser.CallbackVisitor.VisitSpan(System.Razor.Parser.SyntaxTree.Span)"></member>
+    <member name="M:System.Razor.Parser.CallbackVisitor.VisitStartBlock(System.Razor.Parser.SyntaxTree.BlockType)"></member>
+    <member name="T:System.Razor.Parser.CodeBlockInfo"></member>
+    <member name="M:System.Razor.Parser.CodeBlockInfo.#ctor(System.String,System.Razor.Text.SourceLocation,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.CodeBlockInfo.#ctor(System.String,System.Razor.Text.SourceLocation,System.Boolean,System.Razor.Parser.SyntaxTree.Span,System.Razor.Parser.SyntaxTree.Span)"></member>
+    <member name="P:System.Razor.Parser.CodeBlockInfo.BlockType">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.BlockType" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.CodeBlockInfo.InitialSpan">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.Span" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.CodeBlockInfo.IsTopLevel">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.CodeBlockInfo.Name">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CodeBlockInfo.ResumeSpans(System.Razor.Parser.ParserContext)"></member>
+    <member name="P:System.Razor.Parser.CodeBlockInfo.Start">
+      <returns>Returns <see cref="T:System.Razor.Text.SourceLocation" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.CodeBlockInfo.TransitionSpan">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.Span" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.CodeParser"></member>
+    <member name="M:System.Razor.Parser.CodeParser.#ctor"></member>
+    <member name="M:System.Razor.Parser.CodeParser.AcceptDottedExpression(System.Boolean,System.Char[])">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CodeParser.AcceptGenericArgument"></member>
+    <member name="M:System.Razor.Parser.CodeParser.AcceptTypeName(System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.CodeParser.AcceptUntilUnquoted(System.Predicate{System.Char})"></member>
+    <member name="M:System.Razor.Parser.CodeParser.AcceptWhiteSpaceByLines"></member>
+    <member name="M:System.Razor.Parser.CodeParser.BalanceBrackets(System.Boolean,System.Nullable{System.Char},System.Boolean,System.Boolean,System.Razor.Parser.SyntaxTree.SpanFactory)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CodeParser.CreateImplicitExpressionSpan(System.Razor.Parser.ParserContext,System.Boolean,System.Boolean)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.ImplicitExpressionSpan" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CodeParser.HandleTransition(System.Razor.Parser.SyntaxTree.SpanFactory)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.CodeParser.OtherParser">
+      <returns>Returns <see cref="T:System.Razor.Parser.ParserBase" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CodeParser.ParseBlockStart(System.Boolean,System.Boolean)">
+      <returns>Returns <see cref="T:System.Razor.Parser.CodeBlockInfo" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.CodeParser.TopLevelKeywords">
+      <returns>Returns <see cref="T:System.Collections.Generic.ISet`1" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CodeParser.TryAcceptStringOrComment">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.CodeParser.BlockParser"></member>
+    <member name="T:System.Razor.Parser.CSharpCodeParser"></member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.#ctor"></member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.AcceptGenericArgument"></member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.AcceptWhiteSpaceAndComments"></member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.HandleTransition(System.Razor.Parser.SyntaxTree.SpanFactory)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.IsAtExplicitTransition">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.IsAtImplicitTransition">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.ParseBlock"></member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.ParseCaseBlock(System.Razor.Parser.CodeBlockInfo)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.ParseConditionalBlockStatement(System.Razor.Parser.CodeBlockInfo)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.ParseControlFlowBody(System.Razor.Parser.CodeBlockInfo)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.ParseDoStatement(System.Razor.Parser.CodeBlockInfo)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.ParseIfStatement(System.Razor.Parser.CodeBlockInfo)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.ParseImplicitExpression(System.Razor.Parser.CodeBlockInfo)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.ParseImplicitExpression(System.Razor.Parser.CodeBlockInfo,System.Boolean)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.ParseInheritsStatement(System.Razor.Parser.CodeBlockInfo)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.ParseInvalidMarkupSwitch"></member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.ParseStatement(System.Razor.Parser.CodeBlockInfo)"></member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.ParseTryStatement(System.Razor.Parser.CodeBlockInfo)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.CSharpCodeParser.RazorKeywords">
+      <returns>Returns <see cref="T:System.Collections.Generic.Dictionary`2" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.CSharpCodeParser.TopLevelKeywords">
+      <returns>Returns <see cref="T:System.Collections.Generic.ISet`1" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.TryAcceptStringOrComment">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.CSharpCodeParser.WrapSimpleBlockParser(System.Razor.Parser.SyntaxTree.BlockType,System.Razor.Parser.CodeParser.BlockParser)">
+      <returns>Returns <see cref="T:System.Razor.Parser.CodeParser.BlockParser" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.HtmlMarkupParser"></member>
+    <member name="M:System.Razor.Parser.HtmlMarkupParser.#ctor"></member>
+    <member name="M:System.Razor.Parser.HtmlMarkupParser.IsAtExplicitTransition">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.HtmlMarkupParser.IsAtImplicitTransition">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.HtmlMarkupParser.ParseBlock"></member>
+    <member name="M:System.Razor.Parser.HtmlMarkupParser.ParseDocument"></member>
+    <member name="M:System.Razor.Parser.HtmlMarkupParser.ParseSection(System.Tuple`2,System.Boolean)"></member>
+    <member name="T:System.Razor.Parser.MarkupParser"></member>
+    <member name="M:System.Razor.Parser.MarkupParser.#ctor"></member>
+    <member name="P:System.Razor.Parser.MarkupParser.OtherParser">
+      <returns>Returns <see cref="T:System.Razor.Parser.ParserBase" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.MarkupParser.ParseDocument"></member>
+    <member name="M:System.Razor.Parser.MarkupParser.ParseSection(System.Tuple`2,System.Boolean)"></member>
+    <member name="T:System.Razor.Parser.ParserBase"></member>
+    <member name="M:System.Razor.Parser.ParserBase.#ctor"></member>
+    <member name="M:System.Razor.Parser.ParserBase.AcceptLineWithBlockComments(System.Razor.Parser.ParserContext,System.Razor.Parser.SyntaxTree.SpanFactory)"></member>
+    <member name="P:System.Razor.Parser.ParserBase.Context">
+      <returns>Returns <see cref="T:System.Razor.Parser.ParserContext" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.ParserBase.CurrentCharacter">
+      <returns>Returns <see cref="T:System.Char" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.ParserBase.CurrentLocation">
+      <returns>Returns <see cref="T:System.Razor.Text.SourceLocation" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.ParserBase.DesignTimeMode">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserBase.End(System.Razor.Parser.SyntaxTree.Span)"></member>
+    <member name="M:System.Razor.Parser.ParserBase.End(System.Razor.Parser.SyntaxTree.SpanFactory)"></member>
+    <member name="M:System.Razor.Parser.ParserBase.End(System.Razor.Parser.SyntaxTree.SpanFactory,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.ParserBase.EndBlock"></member>
+    <member name="P:System.Razor.Parser.ParserBase.EndOfFile">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.ParserBase.HaveContent">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.ParserBase.InTemporaryBuffer">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserBase.IsAtExplicitTransition">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserBase.IsAtImplicitTransition">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserBase.IsAtTransition">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserBase.NextIsTransition(System.Boolean,System.Boolean)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserBase.OnError(System.Razor.Text.SourceLocation,System.String)"></member>
+    <member name="M:System.Razor.Parser.ParserBase.OnError(System.Razor.Text.SourceLocation,System.String,System.Object[])"></member>
+    <member name="P:System.Razor.Parser.ParserBase.OtherParser">
+      <returns>Returns <see cref="T:System.Razor.Parser.ParserBase" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserBase.Output(System.Razor.Parser.SyntaxTree.Span)"></member>
+    <member name="M:System.Razor.Parser.ParserBase.ParseBlock"></member>
+    <member name="M:System.Razor.Parser.ParserBase.ParseBlockWithOtherParser(System.Razor.Parser.SyntaxTree.SpanFactory,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.ParserBase.ParseComment"></member>
+    <member name="M:System.Razor.Parser.ParserBase.StartBlock(System.Razor.Parser.SyntaxTree.BlockType,System.Boolean)">
+      <returns>Returns <see cref="T:System.IDisposable" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserBase.TryParseComment(System.Razor.Parser.SyntaxTree.SpanFactory)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.ParserContext"></member>
+    <member name="M:System.Razor.Parser.ParserContext.#ctor(System.Razor.Text.LookaheadTextReader,System.Razor.Parser.ParserBase,System.Razor.Parser.MarkupParser,System.Razor.Parser.ParserBase,System.Razor.Parser.ParserVisitor)"></member>
+    <member name="M:System.Razor.Parser.ParserContext.AcceptCurrent">
+      <returns>Returns <see cref="T:System.Char" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContext.AcceptTemporaryBuffer"></member>
+    <member name="M:System.Razor.Parser.ParserContext.AcceptTemporaryBufferInDesignTimeMode"></member>
+    <member name="P:System.Razor.Parser.ParserContext.ActiveParser">
+      <returns>Returns <see cref="T:System.Razor.Parser.ParserBase" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContext.Append(System.String)">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.ParserContext.CodeParser">
+      <returns>Returns <see cref="T:System.Razor.Parser.ParserBase" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.ParserContext.ContentBuffer">
+      <returns>Returns <see cref="T:System.Text.StringBuilder" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.ParserContext.CurrentCharacter">
+      <returns>Returns <see cref="T:System.Char" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.ParserContext.CurrentLocation">
+      <returns>Returns <see cref="T:System.Razor.Text.SourceLocation" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.ParserContext.CurrentSpanStart">
+      <returns>Returns <see cref="T:System.Razor.Text.SourceLocation" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.ParserContext.DesignTimeMode">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContext.EndBlock"></member>
+    <member name="P:System.Razor.Parser.ParserContext.EndOfFile">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContext.FlushLastSpan"></member>
+    <member name="P:System.Razor.Parser.ParserContext.HaveContent">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.ParserContext.InTemporaryBuffer">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContext.IsEmailPrefixOrSuffixCharacter(System.Char)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.ParserContext.MarkupParser">
+      <returns>Returns <see cref="T:System.Razor.Parser.MarkupParser" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContext.OnComplete"></member>
+    <member name="M:System.Razor.Parser.ParserContext.OnError(System.Razor.Text.SourceLocation,System.String)"></member>
+    <member name="M:System.Razor.Parser.ParserContext.OnError(System.Razor.Text.SourceLocation,System.String,System.Object[])"></member>
+    <member name="M:System.Razor.Parser.ParserContext.OutputSpan(System.Razor.Parser.SyntaxTree.Span)"></member>
+    <member name="M:System.Razor.Parser.ParserContext.PopVisitor"></member>
+    <member name="M:System.Razor.Parser.ParserContext.PushVisitor(System.Razor.Parser.ParserVisitor)"></member>
+    <member name="M:System.Razor.Parser.ParserContext.RejectTemporaryBuffer"></member>
+    <member name="M:System.Razor.Parser.ParserContext.Replay(System.Collections.Generic.IEnumerable{System.Razor.Parser.SyntaxTree.SyntaxTreeNode},System.Collections.Generic.IEnumerable{System.Razor.Parser.SyntaxTree.RazorError})"></member>
+    <member name="M:System.Razor.Parser.ParserContext.ResetBuffers"></member>
+    <member name="M:System.Razor.Parser.ParserContext.ResumeSpan(System.Razor.Parser.SyntaxTree.Span)"></member>
+    <member name="P:System.Razor.Parser.ParserContext.SeenValidEmailPrefix">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContext.SkipCurrent">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.ParserContext.Source">
+      <returns>Returns <see cref="T:System.Razor.Text.LookaheadTextReader" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContext.StartBlock(System.Razor.Parser.SyntaxTree.BlockType,System.Boolean)">
+      <returns>Returns <see cref="T:System.IDisposable" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContext.StartTemporaryBuffer">
+      <returns>Returns <see cref="T:System.IDisposable" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContext.SwitchActiveParser"></member>
+    <member name="M:System.Razor.Parser.ParserContext.UpdateSeenValidEmailPrefix"></member>
+    <member name="P:System.Razor.Parser.ParserContext.WhiteSpaceIsImportantToAncestorBlock">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.ParserContextExtensions"></member>
+    <member name="M:System.Razor.Parser.ParserContextExtensions.Accept(System.Razor.Parser.ParserContext,System.String,System.Boolean)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContextExtensions.Accept(System.Razor.Parser.ParserContext,System.String,System.Nullable{System.Razor.Text.SourceLocation}@,System.Nullable{System.Char}@,System.Boolean)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContextExtensions.AcceptCharacters(System.Razor.Parser.ParserContext,System.Int32)"></member>
+    <member name="M:System.Razor.Parser.ParserContextExtensions.AcceptIdentifier(System.Razor.Parser.ParserContext)">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContextExtensions.AcceptLine(System.Razor.Parser.ParserContext,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.ParserContextExtensions.AcceptNewLine(System.Razor.Parser.ParserContext)"></member>
+    <member name="M:System.Razor.Parser.ParserContextExtensions.AcceptUntil(System.Razor.Parser.ParserContext,System.Char[])">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContextExtensions.AcceptUntil(System.Razor.Parser.ParserContext,System.Predicate{System.Char})">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContextExtensions.AcceptUntilInclusive(System.Razor.Parser.ParserContext,System.Char[])">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContextExtensions.AcceptWhile(System.Razor.Parser.ParserContext,System.Predicate{System.Char})">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContextExtensions.AcceptWhiteSpace(System.Razor.Parser.ParserContext,System.Boolean)">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContextExtensions.Expect(System.Razor.Parser.ParserContext,System.Char,System.String,System.Boolean,System.Nullable{System.Razor.Text.SourceLocation})">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContextExtensions.Expect(System.Razor.Parser.ParserContext,System.String,System.String,System.Boolean,System.Nullable{System.Razor.Text.SourceLocation})">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContextExtensions.ExpectIdentifier(System.Razor.Parser.ParserContext,System.String,System.Boolean,System.Nullable{System.Razor.Text.SourceLocation})">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContextExtensions.Peek(System.Razor.Parser.ParserContext,System.String,System.Boolean)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContextExtensions.PeekAny(System.Razor.Parser.ParserContext,System.Boolean,System.String[])">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContextExtensions.PeekAny(System.Razor.Parser.ParserContext,System.String[])">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserContextExtensions.ReadWhiteSpace(System.Razor.Parser.ParserContext,System.Boolean)">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.ParserVisitor"></member>
+    <member name="M:System.Razor.Parser.ParserVisitor.#ctor"></member>
+    <member name="P:System.Razor.Parser.ParserVisitor.CancelToken">
+      <returns>Returns <see cref="T:System.Nullable`1" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.ParserVisitor.IsCanceled">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.ParserVisitor.OnComplete"></member>
+    <member name="M:System.Razor.Parser.ParserVisitor.VisitEndBlock(System.Razor.Parser.SyntaxTree.BlockType)"></member>
+    <member name="M:System.Razor.Parser.ParserVisitor.VisitError(System.Razor.Parser.SyntaxTree.RazorError)"></member>
+    <member name="M:System.Razor.Parser.ParserVisitor.VisitSpan(System.Razor.Parser.SyntaxTree.Span)"></member>
+    <member name="M:System.Razor.Parser.ParserVisitor.VisitStartBlock(System.Razor.Parser.SyntaxTree.BlockType)"></member>
+    <member name="T:System.Razor.Parser.RazorParser"></member>
+    <member name="M:System.Razor.Parser.RazorParser.#ctor(System.Razor.Parser.ParserBase,System.Razor.Parser.MarkupParser)"></member>
+    <member name="M:System.Razor.Parser.RazorParser.CreateParseTask(System.IO.TextReader,System.Action{System.Razor.Parser.SyntaxTree.Span},System.Action{System.Razor.Parser.SyntaxTree.RazorError})">
+      <returns>Returns <see cref="T:System.Threading.Tasks.Task" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.RazorParser.CreateParseTask(System.IO.TextReader,System.Action{System.Razor.Parser.SyntaxTree.Span},System.Action{System.Razor.Parser.SyntaxTree.RazorError},System.Threading.CancellationToken)">
+      <returns>Returns <see cref="T:System.Threading.Tasks.Task" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.RazorParser.CreateParseTask(System.IO.TextReader,System.Action{System.Razor.Parser.SyntaxTree.Span},System.Action{System.Razor.Parser.SyntaxTree.RazorError},System.Threading.SynchronizationContext)">
+      <returns>Returns <see cref="T:System.Threading.Tasks.Task" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.RazorParser.CreateParseTask(System.IO.TextReader,System.Action{System.Razor.Parser.SyntaxTree.Span},System.Action{System.Razor.Parser.SyntaxTree.RazorError},System.Threading.SynchronizationContext,System.Threading.CancellationToken)">
+      <returns>Returns <see cref="T:System.Threading.Tasks.Task" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.RazorParser.CreateParseTask(System.IO.TextReader,System.Razor.Parser.ParserVisitor)">
+      <returns>Returns <see cref="T:System.Threading.Tasks.Task" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.RazorParser.DesignTimeMode">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="F:System.Razor.Parser.RazorParser.EndCommentSequence"></member>
+    <member name="M:System.Razor.Parser.RazorParser.Parse(System.IO.TextReader)">
+      <returns>Returns <see cref="T:System.Razor.ParserResults" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.RazorParser.Parse(System.IO.TextReader,System.Razor.Parser.ParserVisitor)"></member>
+    <member name="M:System.Razor.Parser.RazorParser.Parse(System.Razor.Text.LookaheadTextReader)">
+      <returns>Returns <see cref="T:System.Razor.ParserResults" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.RazorParser.Parse(System.Razor.Text.LookaheadTextReader,System.Razor.Parser.ParserVisitor)"></member>
+    <member name="F:System.Razor.Parser.RazorParser.StartCommentSequence"></member>
+    <member name="F:System.Razor.Parser.RazorParser.TransitionCharacter"></member>
+    <member name="F:System.Razor.Parser.RazorParser.TransitionString"></member>
+    <member name="T:System.Razor.Parser.VBCodeParser"></member>
+    <member name="M:System.Razor.Parser.VBCodeParser.#ctor"></member>
+    <member name="M:System.Razor.Parser.VBCodeParser.AcceptGenericArgument"></member>
+    <member name="M:System.Razor.Parser.VBCodeParser.HandleTransition(System.Razor.Parser.SyntaxTree.SpanFactory)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.VBCodeParser.IsAtExplicitTransition">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.VBCodeParser.IsAtImplicitTransition">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.VBCodeParser.KeywordHandlers">
+      <returns>Returns <see cref="T:System.Collections.Generic.Dictionary`2" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.VBCodeParser.ParseBlock"></member>
+    <member name="M:System.Razor.Parser.VBCodeParser.ParseInheritsStatement(System.Razor.Parser.CodeBlockInfo)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.VBCodeParser.TopLevelKeywords">
+      <returns>Returns <see cref="T:System.Collections.Generic.ISet`1" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.VBCodeParser.TryAcceptStringOrComment">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.SyntaxTree.Block"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Block.#ctor(System.Razor.Parser.SyntaxTree.BlockType,System.Collections.Generic.IEnumerable{System.Razor.Parser.SyntaxTree.SyntaxTreeNode})"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Block.#ctor(System.Razor.Parser.SyntaxTree.BlockType,System.Collections.Generic.IEnumerable{System.Razor.Parser.SyntaxTree.SyntaxTreeNode},System.String)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Block.Accept(System.Razor.Parser.ParserVisitor)"></member>
+    <member name="P:System.Razor.Parser.SyntaxTree.Block.Children">
+      <returns>Returns <see cref="T:System.Collections.Generic.IEnumerable`1" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Block.FindFirstDescendentSpan">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.Span" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Block.FindLastDescendentSpan">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.Span" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Block.Flatten">
+      <returns>Returns <see cref="T:System.Collections.Generic.IEnumerable`1" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.Block.IsBlock">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.Block.Length">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Block.LocateOwner(System.Razor.Text.TextChange)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.Span" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.Block.Name">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.Block.Start">
+      <returns>Returns <see cref="T:System.Razor.Text.SourceLocation" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Block.ToString">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.Block.Type">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.BlockType" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.SyntaxTree.BlockType"></member>
+    <member name="F:System.Razor.Parser.SyntaxTree.BlockType.Statement">
+      <summary />
+    </member>
+    <member name="F:System.Razor.Parser.SyntaxTree.BlockType.Directive">
+      <summary />
+    </member>
+    <member name="F:System.Razor.Parser.SyntaxTree.BlockType.Functions">
+      <summary />
+    </member>
+    <member name="F:System.Razor.Parser.SyntaxTree.BlockType.Expression">
+      <summary />
+    </member>
+    <member name="F:System.Razor.Parser.SyntaxTree.BlockType.Helper">
+      <summary />
+    </member>
+    <member name="F:System.Razor.Parser.SyntaxTree.BlockType.Markup">
+      <summary />
+    </member>
+    <member name="F:System.Razor.Parser.SyntaxTree.BlockType.Section">
+      <summary />
+    </member>
+    <member name="F:System.Razor.Parser.SyntaxTree.BlockType.Template">
+      <summary />
+    </member>
+    <member name="F:System.Razor.Parser.SyntaxTree.BlockType.Comment">
+      <summary />
+    </member>
+    <member name="T:System.Razor.Parser.SyntaxTree.CodeSpan"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.CodeSpan.#ctor(System.Razor.Text.SourceLocation,System.String)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.CodeSpan.#ctor(System.Razor.Text.SourceLocation,System.String,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.CodeSpan.#ctor(System.Razor.Text.SourceLocation,System.String,System.Boolean,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.CodeSpan.Create(System.Razor.Parser.ParserContext)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.CodeSpan" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.CodeSpan.Create(System.Razor.Parser.ParserContext,System.Boolean)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.CodeSpan" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.CodeSpan.Create(System.Razor.Parser.ParserContext,System.Boolean,System.Boolean)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.CodeSpan" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.SyntaxTree.CommentSpan"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.CommentSpan.#ctor(System.Razor.Text.SourceLocation,System.String)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.CommentSpan.#ctor(System.Razor.Text.SourceLocation,System.String,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.CommentSpan.#ctor(System.Razor.Text.SourceLocation,System.String,System.Boolean,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.CommentSpan.Create(System.Razor.Parser.ParserContext)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.CommentSpan" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.CommentSpan.Create(System.Razor.Parser.ParserContext,System.Boolean)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.CommentSpan" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.CommentSpan.Create(System.Razor.Parser.ParserContext,System.Boolean,System.Boolean)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.CommentSpan" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.SyntaxTree.HelperHeaderSpan"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.HelperHeaderSpan.#ctor(System.Razor.Text.SourceLocation,System.String,System.Boolean)"></member>
+    <member name="P:System.Razor.Parser.SyntaxTree.HelperHeaderSpan.Complete">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.HelperHeaderSpan.Create(System.Razor.Parser.ParserContext,System.Boolean)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.HelperHeaderSpan" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.HelperHeaderSpan.Equals(System.Object)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.HelperHeaderSpan.GetHashCode">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.HelperHeaderSpan.ToString">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.SyntaxTree.ImplicitExpressionSpan"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.ImplicitExpressionSpan.#ctor(System.Razor.Text.SourceLocation,System.String,System.Collections.Generic.ISet{System.String},System.Boolean,System.Boolean)"></member>
+    <member name="P:System.Razor.Parser.SyntaxTree.ImplicitExpressionSpan.AcceptTrailingWhiteSpace">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.ImplicitExpressionSpan.ApplyChange(System.Razor.Text.TextChange)">
+      <returns>Returns <see cref="T:System.Razor.PartialParseResult" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.ImplicitExpressionSpan.Create(System.Razor.Parser.ParserContext,System.Collections.Generic.ISet{System.String},System.Boolean,System.Boolean)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.ImplicitExpressionSpan" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.ImplicitExpressionSpan.Equals(System.Object)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.ImplicitExpressionSpan.GetHashCode">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.ImplicitExpressionSpan.ToString">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.SyntaxTree.InheritsSpan"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.InheritsSpan.#ctor(System.Razor.Text.SourceLocation,System.String,System.String)"></member>
+    <member name="P:System.Razor.Parser.SyntaxTree.InheritsSpan.BaseClass">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.InheritsSpan.Create(System.Razor.Parser.ParserContext,System.String)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.InheritsSpan" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.InheritsSpan.Equals(System.Object)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.InheritsSpan.GetHashCode">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.InheritsSpan.ToString">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.SyntaxTree.MarkupSpan"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.MarkupSpan.#ctor(System.Razor.Text.SourceLocation,System.String)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.MarkupSpan.#ctor(System.Razor.Text.SourceLocation,System.String,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.MarkupSpan.#ctor(System.Razor.Text.SourceLocation,System.String,System.Boolean,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.MarkupSpan.Create(System.Razor.Parser.ParserContext)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.MarkupSpan" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.MarkupSpan.Create(System.Razor.Parser.ParserContext,System.Boolean)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.MarkupSpan" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.MarkupSpan.Create(System.Razor.Parser.ParserContext,System.Boolean,System.Boolean)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.MarkupSpan" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.SyntaxTree.MetaCodeSpan"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.MetaCodeSpan.#ctor(System.Razor.Text.SourceLocation,System.String)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.MetaCodeSpan.#ctor(System.Razor.Text.SourceLocation,System.String,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.MetaCodeSpan.#ctor(System.Razor.Text.SourceLocation,System.String,System.Boolean,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.MetaCodeSpan.Create(System.Razor.Parser.ParserContext)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.MetaCodeSpan" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.MetaCodeSpan.Create(System.Razor.Parser.ParserContext,System.Boolean)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.MetaCodeSpan" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.MetaCodeSpan.Create(System.Razor.Parser.ParserContext,System.Boolean,System.Boolean)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.MetaCodeSpan" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.SyntaxTree.NamespaceImportSpan"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.NamespaceImportSpan.#ctor(System.Razor.Parser.SyntaxTree.SpanKind,System.Razor.Text.SourceLocation,System.String,System.Boolean,System.String,System.Int32)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.NamespaceImportSpan.Create(System.Razor.Parser.ParserContext,System.Boolean,System.Razor.Parser.SyntaxTree.SpanKind,System.String,System.Int32)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.NamespaceImportSpan" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.NamespaceImportSpan.Equals(System.Object)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.NamespaceImportSpan.GetHashCode">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.NamespaceImportSpan.Namespace">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.NamespaceImportSpan.NamespaceKeywordLength">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.NamespaceImportSpan.ToString">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.SyntaxTree.RazorError"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.RazorError.#ctor(System.String,System.Razor.Text.SourceLocation)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.RazorError.#ctor(System.String,System.Razor.Text.SourceLocation,System.Int32)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.RazorError.Equals(System.Object)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.RazorError.Equals(System.Razor.Parser.SyntaxTree.RazorError)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.RazorError.GetHashCode">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.RazorError.Length">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.RazorError.Location">
+      <returns>Returns <see cref="T:System.Razor.Text.SourceLocation" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.RazorError.Message">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.RazorError.ToString">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.SyntaxTree.SectionHeaderSpan"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.SectionHeaderSpan.#ctor(System.Razor.Text.SourceLocation,System.String,System.String)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.SectionHeaderSpan.Create(System.Razor.Parser.ParserContext,System.String)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.SectionHeaderSpan" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.SectionHeaderSpan.Equals(System.Object)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.SectionHeaderSpan.GetHashCode">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.SectionHeaderSpan.SectionName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.SectionHeaderSpan.ToString">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.SyntaxTree.SingleLineMarkupSpan"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.SingleLineMarkupSpan.#ctor(System.Razor.Text.SourceLocation,System.String)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.SingleLineMarkupSpan.#ctor(System.Razor.Text.SourceLocation,System.String,System.Boolean,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.SingleLineMarkupSpan.Create(System.Razor.Parser.ParserContext)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.SingleLineMarkupSpan" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.SingleLineMarkupSpan.Equals(System.Object)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.SingleLineMarkupSpan.GetHashCode">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.SyntaxTree.Span"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Span.#ctor(System.Razor.Parser.ParserContext,System.Razor.Parser.SyntaxTree.SpanKind)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Span.#ctor(System.Razor.Parser.ParserContext,System.Razor.Parser.SyntaxTree.SpanKind,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Span.#ctor(System.Razor.Parser.ParserContext,System.Razor.Parser.SyntaxTree.SpanKind,System.Boolean,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Span.#ctor(System.Razor.Parser.SyntaxTree.SpanKind,System.Razor.Text.SourceLocation,System.String)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Span.#ctor(System.Razor.Parser.SyntaxTree.SpanKind,System.Razor.Text.SourceLocation,System.String,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Span.#ctor(System.Razor.Parser.SyntaxTree.SpanKind,System.Razor.Text.SourceLocation,System.String,System.Boolean,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Span.Accept(System.Razor.Parser.ParserVisitor)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Span.ApplyChange(System.Razor.Text.TextChange)">
+      <returns>Returns <see cref="T:System.Razor.PartialParseResult" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.Span.CanGrow">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.Span.Content">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Span.Equals(System.Object)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Span.GetHashCode">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Span.GetInserted(System.Razor.Text.TextChange)">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Span.GetSpanTypeName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.Span.Hidden">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.Span.IsBlock">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Span.IsEndDeletion(System.Razor.Text.TextChange)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Span.IsEndInsertion(System.Razor.Text.TextChange)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.Span.Kind">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.SpanKind" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.Span.Length">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.Span.Next">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.Span" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Span.OwnsChange(System.Razor.Text.TextChange)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.Span.Start">
+      <returns>Returns <see cref="T:System.Razor.Text.SourceLocation" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Span.ToString">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Span.TryMergeWith(System.Razor.Parser.SyntaxTree.Span)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.Span.UpdateStartPoints(System.Razor.Parser.SyntaxTree.Span,System.Razor.Text.SourceLocation)"></member>
+    <member name="T:System.Razor.Parser.SyntaxTree.SpanFactory"></member>
+    <member name="T:System.Razor.Parser.SyntaxTree.SpanKind"></member>
+    <member name="F:System.Razor.Parser.SyntaxTree.SpanKind.Transition">
+      <summary />
+    </member>
+    <member name="F:System.Razor.Parser.SyntaxTree.SpanKind.MetaCode">
+      <summary />
+    </member>
+    <member name="F:System.Razor.Parser.SyntaxTree.SpanKind.Comment">
+      <summary />
+    </member>
+    <member name="F:System.Razor.Parser.SyntaxTree.SpanKind.Code">
+      <summary />
+    </member>
+    <member name="F:System.Razor.Parser.SyntaxTree.SpanKind.Markup">
+      <summary />
+    </member>
+    <member name="T:System.Razor.Parser.SyntaxTree.SyntaxTreeBuilderVisitor"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.SyntaxTreeBuilderVisitor.#ctor"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.SyntaxTreeBuilderVisitor.OnComplete"></member>
+    <member name="P:System.Razor.Parser.SyntaxTree.SyntaxTreeBuilderVisitor.Results">
+      <returns>Returns <see cref="T:System.Razor.ParserResults" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.SyntaxTreeBuilderVisitor.VisitEndBlock(System.Razor.Parser.SyntaxTree.BlockType)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.SyntaxTreeBuilderVisitor.VisitError(System.Razor.Parser.SyntaxTree.RazorError)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.SyntaxTreeBuilderVisitor.VisitSpan(System.Razor.Parser.SyntaxTree.Span)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.SyntaxTreeBuilderVisitor.VisitStartBlock(System.Razor.Parser.SyntaxTree.BlockType)"></member>
+    <member name="T:System.Razor.Parser.SyntaxTree.SyntaxTreeNode"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.SyntaxTreeNode.#ctor"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.SyntaxTreeNode.Accept(System.Razor.Parser.ParserVisitor)"></member>
+    <member name="P:System.Razor.Parser.SyntaxTree.SyntaxTreeNode.IsBlock">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.SyntaxTreeNode.Length">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.SyntaxTreeNode.Parent">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.Block" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.SyntaxTreeNode.Start">
+      <returns>Returns <see cref="T:System.Razor.Text.SourceLocation" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.SyntaxTree.TransitionSpan"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.TransitionSpan.#ctor(System.Razor.Text.SourceLocation,System.String)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.TransitionSpan.#ctor(System.Razor.Text.SourceLocation,System.String,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.TransitionSpan.#ctor(System.Razor.Text.SourceLocation,System.String,System.Boolean,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.TransitionSpan.Create(System.Razor.Parser.ParserContext)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.TransitionSpan" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.TransitionSpan.Create(System.Razor.Parser.ParserContext,System.Boolean)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.TransitionSpan" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.TransitionSpan.Create(System.Razor.Parser.ParserContext,System.Boolean,System.Boolean)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.TransitionSpan" />.</returns>
+    </member>
+    <member name="T:System.Razor.Parser.SyntaxTree.VBOptionSpan"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.VBOptionSpan.#ctor(System.Razor.Text.SourceLocation,System.String,System.String,System.Boolean)"></member>
+    <member name="M:System.Razor.Parser.SyntaxTree.VBOptionSpan.Create(System.Razor.Parser.ParserContext,System.String,System.Boolean)">
+      <returns>Returns <see cref="T:System.Razor.Parser.SyntaxTree.VBOptionSpan" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.VBOptionSpan.Equals(System.Object)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.VBOptionSpan.GetHashCode">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.VBOptionSpan.OptionName">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:System.Razor.Parser.SyntaxTree.VBOptionSpan.ToString">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:System.Razor.Parser.SyntaxTree.VBOptionSpan.Value">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="T:System.Razor.Text.BufferingTextReader"></member>
+    <member name="M:System.Razor.Text.BufferingTextReader.#ctor(System.IO.TextReader)"></member>
+    <member name="M:System.Razor.Text.BufferingTextReader.BeginLookahead">
+      <returns>Returns <see cref="T:System.IDisposable" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.BufferingTextReader.CancelBacktrack"></member>
+    <member name="P:System.Razor.Text.BufferingTextReader.CurrentCharacter">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="P:System.Razor.Text.BufferingTextReader.CurrentLocation">
+      <returns>Returns <see cref="T:System.Razor.Text.SourceLocation" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.BufferingTextReader.Dispose(System.Boolean)"></member>
+    <member name="M:System.Razor.Text.BufferingTextReader.ExpandBuffer">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.BufferingTextReader.NextCharacter"></member>
+    <member name="M:System.Razor.Text.BufferingTextReader.Peek">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.BufferingTextReader.Read">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="T:System.Razor.Text.ITextBuffer"></member>
+    <member name="P:System.Razor.Text.ITextBuffer.Length">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.ITextBuffer.Peek">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="P:System.Razor.Text.ITextBuffer.Position">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.ITextBuffer.Read">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="T:System.Razor.Text.LookaheadTextReader"></member>
+    <member name="M:System.Razor.Text.LookaheadTextReader.#ctor"></member>
+    <member name="M:System.Razor.Text.LookaheadTextReader.BeginLookahead">
+      <returns>Returns <see cref="T:System.IDisposable" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.LookaheadTextReader.CancelBacktrack"></member>
+    <member name="P:System.Razor.Text.LookaheadTextReader.CurrentLocation">
+      <returns>Returns <see cref="T:System.Razor.Text.SourceLocation" />.</returns>
+    </member>
+    <member name="T:System.Razor.Text.SourceLocation"></member>
+    <member name="M:System.Razor.Text.SourceLocation.#ctor(System.Int32,System.Int32,System.Int32)"></member>
+    <member name="P:System.Razor.Text.SourceLocation.AbsoluteIndex">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.SourceLocation.Add(System.Razor.Text.SourceLocation,System.Razor.Text.SourceLocation)">
+      <returns>Returns <see cref="T:System.Razor.Text.SourceLocation" />.</returns>
+    </member>
+    <member name="P:System.Razor.Text.SourceLocation.CharacterIndex">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.SourceLocation.CompareTo(System.Razor.Text.SourceLocation)">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.SourceLocation.Equals(System.Object)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.SourceLocation.Equals(System.Razor.Text.SourceLocation)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.SourceLocation.GetHashCode">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="P:System.Razor.Text.SourceLocation.LineIndex">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.SourceLocation.op_Addition(System.Razor.Text.SourceLocation,System.Razor.Text.SourceLocation)">
+      <returns>Returns <see cref="T:System.Razor.Text.SourceLocation" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.SourceLocation.op_Equality(System.Razor.Text.SourceLocation,System.Razor.Text.SourceLocation)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.SourceLocation.op_GreaterThan(System.Razor.Text.SourceLocation,System.Razor.Text.SourceLocation)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.SourceLocation.op_Inequality(System.Razor.Text.SourceLocation,System.Razor.Text.SourceLocation)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.SourceLocation.op_LessThan(System.Razor.Text.SourceLocation,System.Razor.Text.SourceLocation)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.SourceLocation.op_Subtraction(System.Razor.Text.SourceLocation,System.Razor.Text.SourceLocation)">
+      <returns>Returns <see cref="T:System.Razor.Text.SourceLocation" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.SourceLocation.Subtract(System.Razor.Text.SourceLocation,System.Razor.Text.SourceLocation)">
+      <returns>Returns <see cref="T:System.Razor.Text.SourceLocation" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.SourceLocation.ToString">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="F:System.Razor.Text.SourceLocation.Zero"></member>
+    <member name="T:System.Razor.Text.SourceLocationTracker"></member>
+    <member name="M:System.Razor.Text.SourceLocationTracker.#ctor"></member>
+    <member name="M:System.Razor.Text.SourceLocationTracker.#ctor(System.Razor.Text.SourceLocation)"></member>
+    <member name="P:System.Razor.Text.SourceLocationTracker.CurrentLocation">
+      <returns>Returns <see cref="T:System.Razor.Text.SourceLocation" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.SourceLocationTracker.UpdateLocation(System.Char,System.Func`1)"></member>
+    <member name="M:System.Razor.Text.SourceLocationTracker.UpdateLocation(System.String)"></member>
+    <member name="T:System.Razor.Text.TextBufferReader"></member>
+    <member name="M:System.Razor.Text.TextBufferReader.#ctor(System.Razor.Text.ITextBuffer)"></member>
+    <member name="M:System.Razor.Text.TextBufferReader.BeginLookahead">
+      <returns>Returns <see cref="T:System.IDisposable" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.TextBufferReader.CancelBacktrack"></member>
+    <member name="P:System.Razor.Text.TextBufferReader.CurrentLocation">
+      <returns>Returns <see cref="T:System.Razor.Text.SourceLocation" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.TextBufferReader.Dispose(System.Boolean)"></member>
+    <member name="M:System.Razor.Text.TextBufferReader.Peek">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.TextBufferReader.Read">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="T:System.Razor.Text.TextChange"></member>
+    <member name="M:System.Razor.Text.TextChange.#ctor(System.Int32,System.Int32,System.Int32,System.Razor.Text.ITextBuffer)"></member>
+    <member name="P:System.Razor.Text.TextChange.Buffer">
+      <returns>Returns <see cref="T:System.Razor.Text.ITextBuffer" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.TextChange.Equals(System.Object)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.TextChange.GetHashCode">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="P:System.Razor.Text.TextChange.NewLength">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="P:System.Razor.Text.TextChange.OldLength">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.TextChange.op_Equality(System.Razor.Text.TextChange,System.Razor.Text.TextChange)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.TextChange.op_Inequality(System.Razor.Text.TextChange,System.Razor.Text.TextChange)">
+      <returns>Returns <see cref="T:System.Boolean" />.</returns>
+    </member>
+    <member name="P:System.Razor.Text.TextChange.Position">
+      <returns>Returns <see cref="T:System.Int32" />.</returns>
+    </member>
+    <member name="M:System.Razor.Text.TextChange.ToString">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="T:System.Razor.Text.TextChangeType"></member>
+    <member name="F:System.Razor.Text.TextChangeType.Insert">
+      <summary />
+    </member>
+    <member name="F:System.Razor.Text.TextChangeType.Remove">
+      <summary />
+    </member>
+  </members>
+</doc>
