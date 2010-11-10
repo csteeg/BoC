@@ -35,6 +35,7 @@
       <HintPath>..\..\lib\atheken-NoRM\Norm.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,7 +46,7 @@
   <ItemGroup>
     <Compile Include="DefaultSessionFactory.cs" />
     <Compile Include="DefaultSetupTasks\AutoNormConfigurator.cs" />
-    <Compile Include="DefaultSetupTasks\AutoXpoRepositoryGenerator.cs" />
+    <Compile Include="DefaultSetupTasks\AutoNormRepositoryGenerator.cs" />
     <Compile Include="ISessionFactory.cs" />
     <Compile Include="ISessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

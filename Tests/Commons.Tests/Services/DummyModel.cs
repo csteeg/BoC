@@ -37,7 +37,7 @@ namespace BoC.Tests.Services
             throw new NotImplementedException();
         }
 
-        public DummyModel Update(DummyModel entity)
+        public DummyModel SaveOrUpdate(DummyModel entity)
         {
             throw new NotImplementedException();
         }
@@ -89,7 +89,7 @@ namespace BoC.Tests.Services
             throw new NotImplementedException();
         }
 
-        public DummyModel2 Update(DummyModel2 entity)
+        public DummyModel2 SaveOrUpdate(DummyModel2 entity)
         {
             throw new NotImplementedException();
         }
@@ -142,7 +142,7 @@ namespace BoC.Tests.Services
             throw new NotImplementedException();
         }
 
-        public T Update(T entity)
+        public T SaveOrUpdate(T entity)
         {
             throw new NotImplementedException();
         }

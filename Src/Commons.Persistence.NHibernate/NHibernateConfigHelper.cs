@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Reflection.Emit;
 using BoC.InversionOfControl;
 using BoC.Persistence.NHibernate.Cache;
 using FluentNHibernate;
@@ -10,10 +9,9 @@ using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Alterations;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Conventions.Helpers;
-using FluentNHibernate.Conventions.Inspections;
-using FluentNHibernate.Conventions.Instances;
 using NHibernate;
 using FluentNHibernate.Cfg;
+using NHibernate.ByteCode.LinFu;
 using NHibernate.Caches.SysCache;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
@@ -45,7 +43,7 @@ namespace BoC.Persistence.NHibernate
 #if DEBUG
                 .ShowSql()
 #endif
-                .ProxyFactoryFactory("NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu")
+                .ProxyFactoryFactory(typeof(ProxyFactoryFactory))
                 .CurrentSessionContext(CurrentSessionContextClass);
         }
 

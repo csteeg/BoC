@@ -23,7 +23,6 @@ namespace ToDoList
         protected override void InitializeApplication()
         {
             base.InitializeApplication();
-
             MongoConfiguration.Initialize(config =>
                             config.For<User>(c => c.ForProperty(u => u.Identity).Ignore()));
         }

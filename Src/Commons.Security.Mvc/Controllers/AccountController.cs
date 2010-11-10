@@ -38,7 +38,7 @@ namespace BoC.Security.Mvc.Controllers
                 // Attempt to register the user
                 try
                 {
-                    var user = service.CreateUser(new User
+                    var user = service.Insert(new User
                                                       {
                                                           Email = registration.Email,
                                                           Login = registration.UserName,
@@ -80,7 +80,7 @@ namespace BoC.Security.Mvc.Controllers
             }
 
             try {
-                if (service.ChangePassword(User.Identity.Name, currentPassword, newPassword)) {
+                if (service.ChangePassword(service.GetByPrincipal(User), currentPassword, newPassword)) {
                     return RedirectToAction("ChangePasswordSuccess");
                 } else {
                     ModelState.AddModelError("_FORM", "The current password is incorrect or the new password is invalid.");

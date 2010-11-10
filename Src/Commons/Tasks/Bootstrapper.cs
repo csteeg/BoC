@@ -5,12 +5,12 @@ using BoC.InversionOfControl;
 
 namespace BoC.Tasks
 {
-    public class BootstrapperTasksInitializer: IContainerInitializer
+    public class Bootstrapper
     {
         private readonly IDependencyResolver dependencyResolver;
         private readonly IAppDomainHelper[] appDomainHelpers;
 
-        public BootstrapperTasksInitializer(IDependencyResolver dependencyResolver, IAppDomainHelper[] appDomainHelpers)
+        public Bootstrapper(IDependencyResolver dependencyResolver, IAppDomainHelper[] appDomainHelpers)
         {
             this.dependencyResolver = dependencyResolver;
             this.appDomainHelpers = appDomainHelpers;
@@ -23,7 +23,7 @@ namespace BoC.Tasks
             set { taskFilter = value; }
         }
 
-        public void RegisterAllTasks()
+        private void RegisterAllTasks()
         {
             var tasks = appDomainHelpers
                         .SelectMany(helper => helper
@@ -35,7 +35,7 @@ namespace BoC.Tasks
 
         }
 
-        public void Run()
+        private void ExecuteTasks()
         {
             var tasks = dependencyResolver.ResolveAll<IBootstrapperTask>();
             foreach (var task in tasks)
@@ -44,10 +44,10 @@ namespace BoC.Tasks
             }
         }
 
-        public void Execute()
+        public void Run()
         {
             RegisterAllTasks();
-            Run();
+            ExecuteTasks();
         }
     }
 }

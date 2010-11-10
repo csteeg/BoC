@@ -1,18 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Net;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using BoC.Security.Model;
 using BoC.Security.Services;
+using BoC.Services;
 using BoC.Validation;
 using BoC.Web.Mvc.Controllers;
 using DotNetOpenAuth.Messaging;
 using DotNetOpenAuth.OpenId;
+using DotNetOpenAuth.OpenId.Extensions.SimpleRegistration;
 using DotNetOpenAuth.OpenId.RelyingParty;
-using DotNetOpenAuth.OpenId.Extensions.AttributeExchange;
 
 namespace BoC.Security.Mvc.Controllers
 {
@@ -20,114 +22,179 @@ namespace BoC.Security.Mvc.Controllers
     public class AuthController : CommonBaseController
     {
         public IFormsAuthentication FormsAuthentication { get; set; }
-        private readonly IUserService service;
+        public IOpenIdRelyingParty RelyingParty { get; private set; }
 
-        // This constructor is not used by the MVC framework but is instead provided for ease
+        private readonly IUserService service;
+    	private readonly IModelService<AuthenticationToken> authTokenService;
+
+    	// This constructor is not used by the MVC framework but is instead provided for ease
         // of unit testing this type. See the comments at the end of this file for more
         // information.
-        public AuthController(IUserService service)
+        public AuthController(IUserService service, IModelService<AuthenticationToken> authTokenService)
         {
             FormsAuthentication = new FormsAuthenticationWrapper();
+            RelyingParty = new OpenIdRelyingPartyService();
             this.service = service;
+        	this.authTokenService = authTokenService;
         }
 
-        public virtual ActionResult OpenId(string openid_identifier, string returnUrl) {
-            var openid = new OpenIdRelyingParty();
-            var response = openid.GetResponse();
-            if (response == null) {
-                // Stage 2: user submitting Identifier
-                Identifier id;
-                if (Identifier.TryParse(openid_identifier, out id)) {
-                    try {
-                        IAuthenticationRequest req = openid.CreateRequest(openid_identifier);
+		public virtual ActionResult OpenId(string openid_identifier)
+		{
+			// Stage 2: user submitting Identifier, this is the non-ajax way and probably not used in the current scenario
+			Identifier id;
+			if (Identifier.TryParse(openid_identifier, out id))
+			{
+				try
+				{
+					var req = RelyingParty.CreateRequest(openid_identifier, Realm.AutoDetect, Request.Url, new Uri(Request.Url, Url.Action("PrivacyStatement")));
+					return req.RedirectingResponse.AsActionResult();
+				}
+				catch (ProtocolException ex)
+				{
+					ViewData.ModelState.AddModelError("openid_identifier", ex);
+					return View("Logon");
+				}
+			}
+			else
+			{
+				ViewData.ModelState.AddModelError("openid_identifier", "Invalid identifier");
+				return View("Logon");
+			}
+		}
+		/// <summary>
+		/// Handles the positive assertion that comes from Providers.
+		/// </summary>
+		/// <param name="openid_openidAuthData">The positive assertion obtained via AJAX.</param>
+		/// <returns>The action result.</returns>
+		/// <remarks>
+		/// This method instructs ASP.NET MVC to <i>not</i> validate input
+		/// because some OpenID positive assertions messages otherwise look like
+		/// hack attempts and result in errors when validation is turned on.
+		/// </remarks>
+		[AcceptVerbs(HttpVerbs.Post), ValidateInput(false)]
+		public virtual ActionResult OpenId(string openid_openidAuthData, string returnUrl)
+		{
+			IAuthenticationResponse response;
+			if (!string.IsNullOrEmpty(openid_openidAuthData))
+			{
+				var auth = new Uri(openid_openidAuthData);
+				var headers = new WebHeaderCollection();
+				foreach (string header in Request.Headers)
+				{
+					headers[header] = Request.Headers[header];
+				}
 
-                        var fetch = new FetchRequest();
-                        //ask for more info - the email address
-                        var item = new AttributeRequest(WellKnownAttributes.Contact.Email);
-                        item.IsRequired=true;
-                        fetch.Attributes.Add(item);
-                        req.AddExtension(fetch);
+				// Always say it's a GET since the payload is all in the URL, even the large ones.
+				HttpRequestInfo clientResponseInfo = new HttpRequestInfo("GET", auth, auth.PathAndQuery, headers, null);
+				response = this.RelyingParty.GetResponse(clientResponseInfo);
+			}
+			else
+			{
+				response = this.RelyingParty.GetResponse();
+			}
 
-                        return req.RedirectingResponse.AsActionResult();
-                    } catch (ProtocolException ex) {
-                        ViewData.ModelState.AddModelError("openid_identifier", ex);
-                        return View("Logon");
-                    }
-                } else {
-                    ViewData.ModelState.AddModelError("openid_identifier", "Invalid identifier");
-                    return View("Logon");
-                }
-            } else {
-                // Stage 3: OpenID Provider sending assertion response
-                switch (response.Status) {
-                    case AuthenticationStatus.Authenticated:
+			try
+			{
+				if (response != null)
+				{
+					// Stage 3: OpenID Provider sending assertion response
+					switch (response.Status)
+					{
+						case AuthenticationStatus.Authenticated:
 
-                        var user = service.FindUser(response.ClaimedIdentifier);
-                        //checks:
-                        if (user != null)
-                        {
-                            if (user.IsLockedOut)
-                            {
-                                this.ModelState.AddModelError("_FORM", "Your account is locked out");
-                                return View("Logon");
-                            }
-                            if (!user.IsApproved)
-                            {
-                                this.ModelState.AddModelError("_FORM", "Your account is not yet approved");
-                                return View("Logon");
-                            }
-                        }
+							User user = null;
+							var authtoken =
+								authTokenService.Find(token => token.ClaimedIdentifier == response.ClaimedIdentifier.ToString()).FirstOrDefault();
+							if (authtoken != null) user = authtoken.User;
+							//checks:
+							if (user != null)
+							{
+								if (user.IsLockedOut)
+								{
+									this.ModelState.AddModelError("_FORM", "Your account is locked out");
+									break;
+								}
+								if (!user.IsApproved)
+								{
+									this.ModelState.AddModelError("_FORM", "Your account is not yet approved");
+									break;
+								}
+							}
 
+							var claims = response.GetExtension<ClaimsResponse>();
+							var name = claims != null ? claims.FullName ?? "" : "";
+							var email = claims != null ? claims.Email ?? "" : "";
 
-                        var fetch = response.GetExtension<FetchResponse>();
-                        string name = response.FriendlyIdentifierForDisplay ?? "";
-                        string email = "";
+							if (user != null)
+							{
+								//Sync the email from OpenID provider.
+								if (string.IsNullOrEmpty(user.Email))
+								{
+									user.Email = email;
+								}
+								if (string.IsNullOrEmpty(user.Name))
+								{
+									user.Name = name;
+								}
+							}
+							else
+							{
+								user = new User
+								       	{
+								       		Email = email,
+								       		Name = name
+								       	};
+							}
+							user.LastActivity = DateTime.Now;
+							user = service.SaveOrUpdate(user);
 
-                        if (fetch != null)
-                        {
-                            IList<string> emailAddresses =
-                                fetch.Attributes[WellKnownAttributes.Contact.Email].Values;
-                            email = emailAddresses.Count > 0 ? emailAddresses[0] : "";
-                        }
+							var isNew = authtoken == null;
+							if (isNew)
+							{
+								authtoken = new AuthenticationToken
+								            	{
+								            		ClaimedIdentifier = response.ClaimedIdentifier.ToString(),
+								            		User = user
+								            	};
+							}
+							authtoken.FriendlyIdentifier = response.FriendlyIdentifierForDisplay;
+							authtoken.LastUsed = DateTime.Now;
+							authtoken = authTokenService.SaveOrUpdate(authtoken);
 
-                        if (user != null)
-                        {
-                            //Sync the email from OpenID provider.
-                            if (!email.Equals(user.Email, StringComparison.OrdinalIgnoreCase) ||
-                                !name.Equals(user.Name, StringComparison.OrdinalIgnoreCase))
-                            {
-                                user.Email = email;
-                                user.Name = name;
-                                service.Update(user);
-                            }
-                        }
-                        else
-                        {
-                            user = new User()
-                                       {
-                                           Login = response.ClaimedIdentifier,
-                                           Email = email,
-                                           Name = name
-                                       };
-                            service.Insert(user);
-                        }
-                        FormsAuthentication.SignIn(user.Id.ToString(), false);
+							if (isNew)
+							{
+								user.AuthenticationTokens.Add(authtoken);
+								user = service.SaveOrUpdate(user);
+							}
 
-                        return Redirect(returnUrl ?? VirtualPathUtility.ToAbsolute("~/"));
-                    case AuthenticationStatus.Canceled:
-                        ViewData.ModelState.AddModelError("openid_identifier", "Canceled at provider");
-                        return View("Logon");
-                    case AuthenticationStatus.Failed:
-                        ViewData.ModelState.AddModelError("openid_identifier", response.Exception);
-                        return View("Logon");
-                }
-            }
-            return new EmptyResult();
+							FormsAuthentication.SignIn(user.Id.ToString(), false);
 
-        }
+							return Redirect(returnUrl ?? VirtualPathUtility.ToAbsolute("~/"));
+						case AuthenticationStatus.Canceled:
+							ViewData.ModelState.AddModelError("openid_identifier", "Canceled at provider");
+							break;
+						case AuthenticationStatus.Failed:
+							ViewData.ModelState.AddModelError("openid_identifier", response.Exception);
+							break;
+					}
+				}
+			}
+			catch(RulesException rulesException)
+			{
+				foreach (var error in rulesException.Errors)
+				{
+					ViewData.ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+				}
+			}
+			// If we're to this point, login didn't complete successfully.
+			// Show the LogOn view again to show the user any errors and
+			// give another chance to complete login.
+			return View("LogOn");
+		}
 
-        public virtual ActionResult LogOn() {
-
+        public virtual ActionResult LogOn()
+        {
+        	PreloadDiscoveryResults();
             return View();
         }
 
@@ -174,7 +241,6 @@ namespace BoC.Security.Mvc.Controllers
         public virtual ActionResult LogOff() {
 
             FormsAuthentication.SignOut();
-
             return RedirectToAction("Index", "Home");
         }
 
@@ -183,6 +249,54 @@ namespace BoC.Security.Mvc.Controllers
                 throw new InvalidOperationException("Windows authentication is not supported.");
             }
         }
+
+        /// <summary>
+        /// Performs discovery on a given identifier.
+        /// </summary>
+        /// <param name="identifier">The identifier on which to perform discovery.</param>
+        /// <returns>The JSON result of discovery.</returns>
+        public ActionResult Discover(string identifier)
+        {
+            if (!this.Request.IsAjaxRequest())
+            {
+                throw new InvalidOperationException();
+            }
+
+            return this.RelyingParty.AjaxDiscovery(
+                identifier,
+                Realm.AutoDetect,
+                new Uri(Request.Url, Url.Action("PopUpReturnTo")),
+                new Uri(Request.Url, Url.Action("PrivacyStatement")));
+        }
+        
+        /// <summary>
+        /// Handles the positive assertion that comes from Providers to Javascript running in the browser.
+        /// </summary>
+        /// <returns>The action result.</returns>
+        /// <remarks>
+        /// This method instructs ASP.NET MVC to <i>not</i> validate input
+        /// because some OpenID positive assertions messages otherwise look like
+        /// hack attempts and result in errors when validation is turned on.
+        /// </remarks>
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post), ValidateInput(false)]
+        public ActionResult PopUpReturnTo()
+        {
+            return this.RelyingParty.ProcessAjaxOpenIdResponse();
+        }
+
+		/// <summary>
+		/// Preloads discovery results for the OP buttons we display on the selector in the ViewData.
+		/// </summary>
+		private void PreloadDiscoveryResults()
+		{
+			this.ViewData["PreloadedDiscoveryResults"] = this.RelyingParty.PreloadDiscoveryResults(
+				Realm.AutoDetect,
+				new Uri(Request.Url, Url.Action("PopUpReturnTo")),
+                new Uri(Request.Url, Url.Action("PrivacyStatement")),
+				"https://me.yahoo.com/",
+				"https://www.google.com/accounts/o8/id");
+		}
+
 
         #region Validation Methods
 

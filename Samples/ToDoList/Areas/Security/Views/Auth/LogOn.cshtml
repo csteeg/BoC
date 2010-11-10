@@ -1,0 +1,14 @@
+﻿@inherits System.Web.Mvc.WebViewPage<BoC.Security.Mvc.ViewModels.LogOnModel>
+@using DotNetOpenAuth.Mvc;
+@{
+    View.Title = "Log On";
+}
+@section head {
+    <link type="text/css" rel="Stylesheet" href="@Html.GetResourceUrl(typeof(DotNetOpenAuth.OpenId.RelyingParty.OpenIdSelector), "DotNetOpenAuth.OpenId.RelyingParty.OpenIdSelector.css")" />
+    <link type="text/css" rel="Stylesheet" href="@Html.GetResourceUrl(typeof(DotNetOpenAuth.OpenId.RelyingParty.OpenIdSelector), "DotNetOpenAuth.OpenId.RelyingParty.OpenIdAjaxTextBox.css")" />
+    @MvcHtmlString.Create(Html.OpenIdSelectorStyles())
+}
+
+@Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
+@Html.Partial("_LogonOpenId")
+@Html.Partial("_LogonNative")

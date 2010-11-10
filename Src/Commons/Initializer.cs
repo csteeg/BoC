@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using BoC.Helpers;
 using BoC.InversionOfControl;
+using BoC.Tasks;
 
 namespace BoC
 {
@@ -17,7 +18,7 @@ namespace BoC
 
         public static void Execute(params IAppDomainHelper[] appDomainHelpers)
         {
-            var depResolverTypeName = ConfigurationManager.AppSettings["dependencyResolverTypeName"];
+            var depResolverTypeName = ConfigurationManager.AppSettings["BoC.IoC.ResolverTypeName"];
             Type depresolverType = null;
             if (depResolverTypeName != null)
             {
@@ -45,6 +46,7 @@ namespace BoC
             }
 
             IoC.InitializeWith(dependencyResolver);
+            dependencyResolver.Resolve<Bootstrapper>().Run();
         }
     }
 }

@@ -96,11 +96,6 @@ namespace BoC.Web
             PublishEvent<WebSessionEndEvent, SessionEndEventArgs>(() => new SessionEndEventArgs(new HttpSessionStateWrapper(Session)));
         }
 
-        virtual protected void Application_PostAuthorizeRequest()
-        {
-            
-        }
-
         private void PublishEvent<T, TEventArgs>(Func<TEventArgs> args) where T: BaseEvent<TEventArgs>, new()
         {
             var eventAggregator = IoC.Resolver.Resolve<IEventAggregator>();

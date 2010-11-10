@@ -89,7 +89,7 @@ namespace BoC.Services
                                      });
         }
 
-        public virtual TModel Update(TModel entity)
+        public virtual TModel SaveOrUpdate(TModel entity)
         {
             TModel retValue = default(TModel);
             ExecuteInTransaction(() =>

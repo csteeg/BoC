@@ -3,8 +3,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using BoC.EventAggregator;
 using BoC.InversionOfControl;
 using BoC.Tasks;
+using BoC.Web.Events;
 using BoC.Web.Mvc.Binders;
 using IDependencyResolver = BoC.InversionOfControl.IDependencyResolver;
 
@@ -13,10 +15,14 @@ namespace BoC.Web.Mvc.Init
     public class SetDefaults : IBootstrapperTask
     {
         private readonly IDependencyResolver dependencyResolver;
+        private readonly IEventAggregator eventAggregator;
 
-        public SetDefaults(IDependencyResolver dependencyResolver)
+        private SubscriptionToken subscriptionToken;
+
+        public SetDefaults(IDependencyResolver dependencyResolver, IEventAggregator eventAggregator)
         {
             this.dependencyResolver = dependencyResolver;
+            this.eventAggregator = eventAggregator;
         }
 
         public void Execute()
@@ -27,6 +33,15 @@ namespace BoC.Web.Mvc.Init
             SetDefaultViewEngine();
             RegisterAllAreas();
             RegisterDefaultRoutes(RouteTable.Routes);
+
+            subscriptionToken = eventAggregator.GetEvent<WebApplicationStartEvent>().Subscribe(args =>
+                {
+                    var rootNamespace = args.ApplicationInstance.GetType().BaseType.Namespace;
+                    ControllerBuilder.Current.DefaultNamespaces.Add(rootNamespace + ".*");
+
+                    eventAggregator.GetEvent<WebApplicationStartEvent>().Unsubscribe(subscriptionToken);
+                }
+            );
             
             dependencyResolver.RegisterType<IControllerFactory,AutoScaffoldControllerFactory>();
 
@@ -92,7 +107,8 @@ namespace BoC.Web.Mvc.Init
                     "Default",
                     "{controller}/{action}/{id}",
                     new { controller = "Home", action = "Index", id = "" },
-                    new { controller = "[^\\.]*", action = "[^\\.]*" }
+                    new { controller = "[^\\.]*", action = "[^\\.]*" },
+                    new []{"ToDoList.Controllers"}
                 );
             }
         }

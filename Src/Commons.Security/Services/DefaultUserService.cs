@@ -5,7 +5,6 @@ using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Text;
 using System.Transactions;
-using System.Web;
 using System.Web.Configuration;
 using BoC.EventAggregator;
 using BoC.Extensions;
@@ -22,9 +21,8 @@ namespace BoC.Security.Services
         private readonly IRepository<Role> roleRepository;
         private readonly IModelValidator modelValidator;
         private readonly IRepository<User> userRepository;
-        private const Int32 newPasswordLength = 8;
 
-        public DefaultUserService(IEventAggregator eventAggregator, IRepository<User> userRepository, IRepository<Role> roleRepository, IModelValidator modelValidator) : 
+    	public DefaultUserService(IEventAggregator eventAggregator, IRepository<User> userRepository, IRepository<Role> roleRepository, IModelValidator modelValidator) : 
             base(modelValidator, eventAggregator, userRepository)
         {
             this.userRepository = userRepository;
@@ -37,7 +35,7 @@ namespace BoC.Security.Services
             PasswordFormat = PasswordFormat.Hashed;
             PasswordAttemptWindowMinutes = 10;
             MaxInvalidPasswordAttempts = 10;
-            RequiresUniqueEmail = true;
+            RequiresUniqueEmail = false;
             RequiresApproval = false;
         }
 
@@ -53,18 +51,13 @@ namespace BoC.Security.Services
         public string PasswordStrengthRegularExpression { get; set; }
 
         #endregion
-        public virtual User FindUser(String login)
-        {
-            return (
-                       from u in userRepository.Query()
-                       where u.Login == login
-                       select u
-                   ).FirstOrDefault();
-        }
-
         public virtual Boolean UserExists(String login)
         {
-            return (
+            if (String.IsNullOrEmpty(login))
+            {
+            	return false;
+            }
+			return (
                        from u in userRepository.Query()
                        where u.Login == login
                        select u
@@ -92,32 +85,7 @@ namespace BoC.Security.Services
             return result;
         }
 
-        public virtual Boolean ChangePassword(String login, String oldPassword, String newPassword)
-        {
-            using (var scope = new TransactionScope())
-            {
-                Boolean succeeded = ChangePassword(
-                    FindUser(login),
-                    EncodePassword(oldPassword),
-                    EncodePassword(newPassword)
-                    );
-                scope.Complete();
-                return succeeded;
-            }
-        }
-
-        public virtual void SetPassword(String login, String password)
-        {
-            User user = FindUser(login);
-            if (user == null)
-            {
-                throw new UserNotFoundException(login);
-            }
-
-            SetPassword(user, password);
-        }
-
-        public virtual void SetPassword(User user, String password)
+        public virtual void SetPassword(User user, string password)
         {
             if (user == null)
             {
@@ -134,87 +102,67 @@ namespace BoC.Security.Services
             }
         }
 
-        public virtual User CreateUser(
-            User user,
-            String password)
-        {
+		public override User Insert(User user)
+		{
+			return Insert(user, null);
+		}
+
+		public virtual User Insert(User user, string password)
+		{
             if (user == null)
             {
                 throw new ArgumentNullException("user");
             }
-            if (RequiresUniqueEmail && !String.IsNullOrEmpty(user.Email) && FindLoginByEmail(user.Email) != null)
+            if (RequiresUniqueEmail && !String.IsNullOrEmpty(user.Email) && FindByEmail(user.Email) != null)
             {
                 throw new EmailInUseException(user.Email);
             }
-            if (UserExists(user.Login))
+            if (FindByLogin(user.Login) != null)
             {
                 throw new LoginInUseException(user.Login);
             }
-            ValidateUser(user);
-            user.Password = EncodePassword(password);
-            user.IsApproved = user.IsApproved || RequiresApproval;
+			if (password != null)
+			{
+				user.Password = EncodePassword(password);
+			}
+			user.IsApproved = user.IsApproved || RequiresApproval;
 
-            using (var scope = new TransactionScope())
+			ValidateEntity(user);
+			
+			using (var scope = new TransactionScope())
             {
-                user = userRepository.Save(user);
+                user = base.Insert(user);
                 scope.Complete();
             }
             return user;
         }
 
-        private void ValidateUser(User user)
-        {
-            var errors = modelValidator.Validate(user);
-        }
+    	public override User SaveOrUpdate(User user)
+    	{
+    		if (!String.IsNullOrEmpty(user.Email) && RequiresUniqueEmail)
+    		{
+    			var otheruser = FindByEmail(user.Email);
+    			if (otheruser != null && otheruser.Id != user.Id)
+    			{
+    				throw new EmailInUseException(user.Email);
+    			}
+    		}
 
-        public virtual void UpdateUser(
-            string login,
-            string email,
-            string name,
-            bool isApproved)
-        {
-            User user = FindUser(login);
-            if (user == null)
-            {
-                throw new UserNotFoundException(login);
-            }
-            else
-            {
-                user.Email = email;
-                user.Name = name;
-                user.IsApproved = isApproved;
-                Update(user);
-            }
-        }
+			if (!String.IsNullOrEmpty(user.Login))
+			{
+				var otheruser = FindByLogin(user.Login);
+				if (otheruser != null && otheruser.Id != user.Id)
+				{
+					throw new LoginInUseException(user.Login);
+				}
+			}
 
-        public override User Update(User user)
-        {
-            if (!String.IsNullOrEmpty(user.Email))
-            {
-                if (RequiresUniqueEmail)
-                {
-                    User otheruser = userRepository.Query().Where(u => u.Email == user.Email).FirstOrDefault();
-                    if (otheruser != null && otheruser.Id != user.Id)
-                    {
-                        throw new EmailInUseException(user.Email);
-                    }
-                }
-            }
+			return user.Id <= 0 ? 
+				Insert(user) 
+				: base.SaveOrUpdate(user);
+    	}
 
-            return base.Update(user);
-        }
-
-        public virtual void DeleteUser(String login)
-        {
-            User user = FindUser(login);
-            if (user == null)
-            {
-                throw new UserNotFoundException(login);
-            }
-            DeleteUser(user);
-        }
-
-        public virtual void DeleteUser(User user)
+    	public virtual void DeleteUser(User user)
         {
             if (user == null)
             {
@@ -237,35 +185,7 @@ namespace BoC.Security.Services
                  select u).Count();
         }
 
-        public virtual void UpdateActivity(String login)
-        {
-            User user = FindUser(login);
-            if (user == null)
-            {
-                throw new UserNotFoundException(login);
-            }
-
-            UpdateActivity(user);
-        }
-
-        public virtual void UpdateActivity(User user)
-        {
-            using (var scope = new TransactionScope())
-            {
-                if (user == null)
-                {
-                    throw new UserNotFoundException();
-                }
-
-                user.LastActivity = DateTime.Now;
-
-                userRepository.SaveOrUpdate(user);
-
-                scope.Complete();
-            }
-        }
-
-        public virtual void UnlockUser(User user)
+    	public virtual void UnlockUser(User user)
         {
             using (var scope = new TransactionScope())
             {
@@ -284,41 +204,7 @@ namespace BoC.Security.Services
             }
         }
 
-        public virtual void UnlockUser(String login)
-        {
-            using (var scope = new TransactionScope())
-            {
-                User user = FindUser(login);
-                if (user == null)
-                {
-                    throw new UserNotFoundException();
-                }
-                else
-                {
-                    UnlockUser(user);
-                }
-                scope.Complete();
-            }
-        }
-
-        public virtual void LockUser(String login)
-        {
-            using (var scope = new TransactionScope())
-            {
-                User user = FindUser(login);
-                if (user == null)
-                {
-                    throw new UserNotFoundException();
-                }
-                else
-                {
-                    LockUser(user);
-                }
-                scope.Complete();
-            }
-        }
-
-        public virtual void LockUser(User user)
+    	public virtual void LockUser(User user)
         {
             using (var scope = new TransactionScope())
             {
@@ -330,13 +216,20 @@ namespace BoC.Security.Services
             }
         }
 
-        public virtual String FindLoginByEmail(String email)
+        public virtual User FindByEmail(string email)
         {
-            User user = userRepository.Query().Where(u => u.Email == email).FirstOrDefault();
-            return user != null ? user.Login : null;
+            return userRepository.Query().Where(u => u.Email == email).FirstOrDefault();
         }
 
-        public virtual IEnumerable<User> FindUsersByPartialLogin(String login)
+		public virtual User FindByLogin(string login)
+		{
+			if (string.IsNullOrEmpty(login))
+				return null;
+			
+			return userRepository.Query().Where(u => u.Login == login).FirstOrDefault();
+		}
+		
+		public virtual IEnumerable<User> FindUsersByPartialLogin(String login)
         {
             return from u in userRepository.Query()
                     where u.Login.Contains(login)
@@ -366,7 +259,10 @@ namespace BoC.Security.Services
 
         public virtual User Authenticate(String login, String password)
         {
-            User user = null;
+			if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
+				return null;
+
+			User user = null;
             using (var scope = new TransactionScope())
             {
                 //password = EncodePassword(password);
@@ -400,27 +296,7 @@ namespace BoC.Security.Services
             }
         }
 
-        public User GetContextUser(HttpContextBase contextBase, bool setToContext)
-        {
-            if (contextBase == null || contextBase.User == null)
-            {
-                return null;
-            }
-
-            if (contextBase.User is User)
-            {
-                return contextBase.User as User;
-            }
-
-            var user = GetByPrincipal(contextBase.User);
-            if (user != null && setToContext)
-            {
-                contextBase.User = user;
-            }
-            return user;
-        }
-
-        #region roles
+    	#region roles
 
         public virtual void CreateRole(String roleName)
         {
@@ -508,6 +384,9 @@ namespace BoC.Security.Services
 
         public User GetByPrincipal(IPrincipal principal)
         {
+			if (principal is User)
+				return principal as User;
+
             if (principal == null || !principal.Identity.IsAuthenticated || String.IsNullOrEmpty(principal.Identity.Name))
             {
                 return null;

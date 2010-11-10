@@ -23,6 +23,10 @@ namespace BoC.Persistence.DefaultSetupTasks
 
         public void Execute()
         {
+            var orm = ConfigurationManager.AppSettings["BoC.Persistence.Orm"];
+            if (orm != null && !orm.Equals("nhibernate", StringComparison.InvariantCultureIgnoreCase))
+                return;
+
             IPersistenceConfigurer db = null;
             if (!dependencyResolver.IsRegistered<IPersistenceConfigurer>())
             {
@@ -54,7 +58,7 @@ namespace BoC.Persistence.DefaultSetupTasks
                 throw new Exception("Could not find a connectionstring that ends with 'nhibernate'. If you want to configure your own db connection, you should register an IPersistenceConfigurer");
             }
 
-
+            dependencyResolver.RegisterInstance<IPersistenceConfigurer>(db);
             if (!dependencyResolver.IsRegistered<ISessionFactory>())
             {
                 NHibernateConfigHelper.SetupAutoMapperForEntities(dependencyResolver);

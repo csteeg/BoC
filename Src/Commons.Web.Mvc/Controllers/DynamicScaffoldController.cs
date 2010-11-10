@@ -257,7 +257,7 @@ namespace BoC.Web.Mvc.Controllers
                 return OnEdit(entity);
             }
 
-            service.Update(entity);
+            service.SaveOrUpdate(entity);
 
             if (!ViewData.ModelState.IsValid)
             {

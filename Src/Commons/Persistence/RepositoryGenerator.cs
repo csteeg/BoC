@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using BoC.Helpers;
 using BoC.InversionOfControl;
 
 namespace BoC.Persistence
@@ -20,17 +21,8 @@ namespace BoC.Persistence
 
             //below should work fine for all situations :)
             ModuleBuilder mb = null;
-            var types =
-                AppDomain.CurrentDomain.GetAssemblies().ToList()
-                    .SelectMany(s =>
-                                    {
-                                        try{return s.GetTypes() as IEnumerable<Type>;}
-                                        catch (NotSupportedException)
-                                        {
-                                            return new List<Type>() as IEnumerable<Type>;
-                                        }
-                                    });
-
+            var types = dependencyResolver.ResolveAll<IAppDomainHelper>().SelectMany(
+                helper => helper.GetTypes(t => true));
 
             var entities = from t in types
                            where t.IsClass

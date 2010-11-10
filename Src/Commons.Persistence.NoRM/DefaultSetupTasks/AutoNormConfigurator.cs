@@ -1,3 +1,5 @@
+using System;
+using System.Configuration;
 using BoC.InversionOfControl;
 using BoC.Persistence.Norm;
 using BoC.Persistence.Norm.UnitOfWork;
@@ -16,6 +18,10 @@ namespace BoC.Persistence.Norm.DefaultSetupTasks
 
         public void Execute()
         {
+            var orm = ConfigurationManager.AppSettings["BoC.Persistence.Orm"];
+            if (orm != null && !orm.Equals("norm", StringComparison.InvariantCultureIgnoreCase))
+                return;
+
             if (!dependencyResolver.IsRegistered<ISessionFactory>())
             {
                 dependencyResolver.RegisterType<ISessionFactory, DefaultSessionFactory>();

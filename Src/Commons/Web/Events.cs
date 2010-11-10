@@ -39,11 +39,11 @@ namespace BoC.Web.Events
 
     public class WebApplicationEventArgs
     {
-        public CommonHttpApplication ApplicationState { get; set; }
+        public HttpApplication ApplicationInstance { get; set; }
 
-        public WebApplicationEventArgs(CommonHttpApplication applicationState)
+        public WebApplicationEventArgs(HttpApplication applicationState)
         {
-            ApplicationState = applicationState;
+            ApplicationInstance = applicationState;
         }
     }
 }

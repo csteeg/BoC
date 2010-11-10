@@ -16,7 +16,7 @@ namespace BoC.Tests.Services.BaseModelServiceFixtures
             eventAggregator.Setup(ev => ev.GetEvent<UpdatingEvent<DummyModel>>()).Returns(new UpdatingEvent<DummyModel>());
             eventAggregator.Setup(ev => ev.GetEvent<UpdatedEvent<DummyModel>>()).Returns(new UpdatedEvent<DummyModel>());
 
-            service.Object.Update(dummy1);
+            service.Object.SaveOrUpdate(dummy1);
 
             repository.Verify(r => r.SaveOrUpdate(dummy1), Times.Once());
         }
@@ -38,7 +38,7 @@ namespace BoC.Tests.Services.BaseModelServiceFixtures
                                                          Assert.False(args.Item.Saved); //onUpdating should be called before actual save
                                                      }).Verifiable();
             Assert.False(dummy1.Saved);
-            service.Object.Update(dummy1);
+            service.Object.SaveOrUpdate(dummy1);
 
             eventAggregator.Verify();
             updateEvent.Verify();
@@ -58,7 +58,7 @@ namespace BoC.Tests.Services.BaseModelServiceFixtures
                 .Verifiable();
             
             Assert.False(dummy1.Saved);
-            Assert.Throws<Exception>(() => service.Object.Update(dummy1));
+            Assert.Throws<Exception>(() => service.Object.SaveOrUpdate(dummy1));
             Assert.False(dummy1.Saved);
             eventAggregator.Verify();
             UpdatingEvent.Verify();
@@ -87,7 +87,7 @@ namespace BoC.Tests.Services.BaseModelServiceFixtures
                 .Callback(() => Assert.True(Transaction.Current.TransactionInformation.Status == TransactionStatus.Active))
                 .Verifiable();
 
-            service.Object.Update(dummy1);
+            service.Object.SaveOrUpdate(dummy1);
 
             eventAggregator.Verify();
             updatingEvent.Verify();

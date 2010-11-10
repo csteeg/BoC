@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
-using System.Web;
 using BoC.Security.Model;
 using BoC.Services;
 
@@ -17,13 +16,10 @@ namespace BoC.Security.Services
 
     public interface IUserService : IModelService<User>
     {
-        User FindUser(String login);
-        User CreateUser(User user, String password);
+        User Insert(User user, String password);
 
         Boolean UserExists(String login);
-        Boolean ChangePassword(String userName, String oldPassword, String newPassword);
         Boolean ChangePassword(User user, String oldPassword, String newPassword);
-        void SetPassword(String login, String password);
         void SetPassword(User user, String password);
         String EncodePassword(String password);
         Boolean CheckPassword(String password, String dbpassword);
@@ -35,19 +31,15 @@ namespace BoC.Security.Services
 
         Int32 CountOnlineUsers(TimeSpan activitySpan);
 
-        void UpdateActivity(String login);
-        void UpdateActivity(User user);
-        void UnlockUser(String login);
-        void UnlockUser(User user);
-        void LockUser(String login);
-        void LockUser(User user);
+    	void UnlockUser(User user);
+    	void LockUser(User user);
 
-        String FindLoginByEmail(String email);
+        User FindByEmail(string email);
+		User FindByLogin(string login);
 
         User Authenticate(String login, String password);
-        
-        User GetContextUser(HttpContextBase contextBase, bool setToContext);
-        User GetByPrincipal(IPrincipal principal);
+
+    	User GetByPrincipal(IPrincipal principal);
 
         #region Roles
         void AddUsersToRoles(IEnumerable<User> users, IEnumerable<Role> roles);

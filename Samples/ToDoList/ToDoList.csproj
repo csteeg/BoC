@@ -39,6 +39,9 @@
     <Reference Include="Commons.Logging.Log4Net">
       <HintPath>..\..\Build\Commons.Logging.Log4Net.dll</HintPath>
     </Reference>
+    <Reference Include="Commons.Persistence.NHibernate">
+      <HintPath>..\..\Build\Commons.Persistence.NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="Commons.Persistence.NoRM">
       <HintPath>..\..\Build\Commons.Persistence.NoRM.dll</HintPath>
     </Reference>
@@ -47,6 +50,9 @@
     </Reference>
     <Reference Include="Commons.Security.Mvc">
       <HintPath>..\..\Build\Commons.Security.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Commons.Security.NHibernate">
+      <HintPath>..\..\Build\Commons.Security.NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Commons.Web.Mvc">
       <HintPath>..\..\Build\Commons.Web.Mvc.dll</HintPath>
@@ -65,7 +71,11 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\aspnetmvc3\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -77,13 +87,22 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="App_Data\todosample.mdf" />
+    <Content Include="Content\images\google.gif" />
+    <Content Include="Content\images\infocard_23x16.png" />
+    <Content Include="Content\images\myopenid.png" />
+    <Content Include="Content\images\openid.png" />
+    <Content Include="Content\images\openid_login.png" />
+    <Content Include="Content\images\verisign.gif" />
+    <Content Include="Content\images\yahoo.gif" />
+    <Content Include="Content\images\yahoo_login.png" />
+    <Content Include="Scripts\jquery.cookie.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -123,10 +142,14 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LogOnPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Security\Controllers\" />
+    <Folder Include="Areas\Security\Models\" />
+    <Folder Include="Areas\Security\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Src\Commons\Commons.csproj">
@@ -135,6 +158,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Security\Views\Account\Register.cshtml" />
+    <Content Include="Areas\Security\Views\Web.config" />
+    <None Include="Areas\Security\Views\Auth\LogOn.cshtml" />
+    <None Include="Areas\Security\Views\Auth\_LogOnNative.cshtml" />
+    <None Include="Areas\Security\Views\Auth\_LogOnOpenId.cshtml" />
+    <None Include="Areas\Security\Views\_ViewStart.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

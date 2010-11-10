@@ -40,7 +40,12 @@ namespace BoC.Helpers
 
         public IEnumerable<Type> GetTypes(Func<Type, bool> where)
         {
-            return GetAssemblies().SelectMany(a => a.GetTypes()).Where(where);
+            return GetAssemblies().SelectMany(
+                a =>
+                    {
+                        try { return a.GetTypes().Where(where); }
+                        catch { return new Type[0]; }
+                    });
         }
 
         public void Refresh()

@@ -11,6 +11,10 @@ namespace BoC.Security.Mvc
             context.MapRoute("security_default", "Security/{controller}/{action}/{id}",
                              new {controller = "Home", action = "index", id = ""},
                              new [] {typeof(AccountController).Namespace});
+            
+            context.MapRoute(
+                "OpenIdDiscover",
+                "Security/Auth/Discover");
         }
 
         public override string AreaName

@@ -11,7 +11,7 @@ namespace BoC.Services
         new TModel Get(object id);
         TModel Insert(TModel entity);
         void Delete(TModel entity);
-        TModel Update(TModel entity);
+        TModel SaveOrUpdate(TModel entity);
         void ValidateEntity(TModel entity);
         IEnumerable<TModel> ListAll();
         IEnumerable<TModel> Find(Expression<Func<TModel, bool>> where);

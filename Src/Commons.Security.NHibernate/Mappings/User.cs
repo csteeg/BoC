@@ -9,6 +9,7 @@ namespace BoC.Security.Model.Mappings
         public void Override(AutoMapping<User> m)
         {
             m.HasManyToMany<Role>(u => u.Roles).Cascade.SaveUpdate().AsSet();
+        	m.HasMany(u => u.AuthenticationTokens).Cascade.AllDeleteOrphan().AsSet();
             m.IgnoreProperty(u => u.IsOnLine);
             m.IgnoreProperty(u => u.Identity);
         }

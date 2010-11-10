@@ -35,47 +35,29 @@ namespace BoC.Security.Model
         }
 
         #region properties
-        [Required]
         virtual public string Login { get; set; }
 
         virtual public String Name { get; set; }
 
-        [Required]
         [DataType(DataType.EmailAddress)]
         virtual public String Email { get; set; }
 
-        [Required]
         [DataType(DataType.Password)]
         virtual public String Password { get; set; }
-
         virtual public Boolean IsApproved { get; set; }
-
         virtual public DateTime? LastActivity { get; set; }
-
         virtual public DateTime? LastLogin { get; set; }
-
         virtual public DateTime? LastPasswordChange { get; set; }
-
         virtual public DateTime? CreationDate { get; set; }
-
         virtual public Boolean IsOnLine { get; set; }
-
         virtual public Boolean IsLockedOut { get; set; }
-
         virtual public DateTime? LastLockedOut { get; set; }
-
         virtual public Int32 FailedPasswordAttemptCount { get; set; }
-
         virtual public DateTime? FailedPasswordAttemptWindowStart { get; set; }
-
         virtual public Int32 FailedPasswordAnswerAttemptCount { get; set; }
-
         virtual public DateTime? FailedPasswordAnswerAttemptWindowStart { get; set; }
-
         virtual public String PasswordQuestion { get; set; }
-
         virtual public String PasswordAnswer { get; set; }
-
         #endregion
 
         virtual public Boolean IsInRole(String role)
@@ -92,7 +74,7 @@ namespace BoC.Security.Model
         [ScaffoldColumn(false)]
         virtual public IIdentity Identity
         {
-            get { return new GenericIdentity(Login, "boc.authentication"); }
+            get { return new GenericIdentity(Id.ToString(), "boc.authentication"); }
         }
 
         private ICollection<Role> roles = new HashSet<Role>();
@@ -102,8 +84,14 @@ namespace BoC.Security.Model
             protected set { roles = value; }
         }
 
+		private ICollection<AuthenticationToken> authenticationTokens = new HashSet<AuthenticationToken>();
+		virtual public ICollection<AuthenticationToken> AuthenticationTokens
+		{
+			get { return authenticationTokens; }
+			protected set { authenticationTokens = value; }
+		}
 
-        /// <summary>
+		/// <summary>
         /// Changes the user's password if the old one given is correct
         /// </summary>
         /// <param name="oldPassword"></param>

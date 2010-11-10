@@ -101,6 +101,7 @@
     <Compile Include="DefaultSetupTasks\RegisterDefaultUserServices.cs" />
     <Compile Include="EmailInUseException.cs" />
     <Compile Include="LoginInUseException.cs" />
+    <Compile Include="Model\AuthenticationToken.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

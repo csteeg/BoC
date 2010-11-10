@@ -1,4 +1,5 @@
 using System;
+using System.Configuration;
 using BoC.InversionOfControl;
 using BoC.Persistence.NHibernate;
 
@@ -15,8 +16,12 @@ namespace BoC.Persistence.DefaultSetupTasks
 
         public void Execute()
         {
+            var orm = ConfigurationManager.AppSettings["BoC.Persistence.Orm"];
+            if (orm != null && !orm.Equals("nhibernate", StringComparison.InvariantCultureIgnoreCase))
+                return;
+
             var defaultBaseType = typeof(NHRepository<>);
-            var constructorParams = new Type[] { typeof(ISessionManager) };
+            var constructorParams = new[] { typeof(ISessionManager) };
 
             RepositoryGenerator.GenerateRepositories(dependencyResolver, defaultBaseType, constructorParams);
         }

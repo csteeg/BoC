@@ -197,20 +197,20 @@ namespace BoC.Web.Mvc.ScriptManager
         /// <summary>
         /// Renders the SimpleScriptManager to the Page
         /// </summary>
-        public void Render()
+        public HtmlString Render()
         {
-            var writer = this.htmlHelper.ViewContext.HttpContext.Response.Output;
+        	var writer = new StringBuilder();
 
             // Render All Script Includes to the Page
             foreach (var scriptInclude in this.scriptIncludes)
             {
-                writer.WriteLine(String.Format("<script language=\"javascript\" type=\"text/javascript\" src=\"{0}\"></script>", scriptInclude.Value));
+                writer.AppendLine(String.Format("<script language=\"javascript\" type=\"text/javascript\" src=\"{0}\"></script>", scriptInclude.Value));
             }
 
             // Render All other scripts to the Page
             if (this.scripts.Count > 0)
             {
-                writer.WriteLine("<script type=\"text/javascript\">");
+				writer.AppendLine("<script type=\"text/javascript\">");
 
                 if (this.scripts.Count > 0)
                 {
@@ -218,18 +218,17 @@ namespace BoC.Web.Mvc.ScriptManager
                     {
                         if (script.Value != null)
                         {
-                            writer.WriteLine(script.Value);
+							writer.AppendLine(script.Value);
                         }
                     }
                 }
 
-                writer.WriteLine("</script>");
+				writer.AppendLine("</script>");
             }
+
+        	return new HtmlString(writer.ToString());
         }
 
-
-        private static MethodInfo _getWebResourceUrlMethod;
-        private static object _getWebResourceUrlLock = new object();
 
         private static string getWebResourceUrl<T>(string resourceName)
         {
@@ -238,21 +237,7 @@ namespace BoC.Web.Mvc.ScriptManager
                 throw new ArgumentNullException("resourceName");
             }
 
-            if (_getWebResourceUrlMethod == null)
-            {
-                lock (_getWebResourceUrlLock)
-                {
-                    if (_getWebResourceUrlMethod == null)
-                    {
-                        _getWebResourceUrlMethod = typeof(System.Web.Handlers.AssemblyResourceLoader).GetMethod(
-                            "GetWebResourceUrlInternal",
-                            BindingFlags.NonPublic | BindingFlags.Static);
-                    }
-                }
-            }
-
-            return "/" + (string)_getWebResourceUrlMethod.Invoke(null,
-                                                                 new object[] { Assembly.GetAssembly(typeof(T)), resourceName, false });
+            return HtmlHelperExtensions.GetResourceUrl<T>(null, resourceName);
         }
 
     }

@@ -100,7 +100,7 @@
     <Reference Include="System.Web.Extensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\aspnetmvc3\System.Web.Mvc.dll</HintPath>
     </Reference>
@@ -140,7 +140,7 @@
     <Compile Include="DefaultViewViewEngine.cs" />
     <Compile Include="Events\ActionEvents.cs" />
     <Compile Include="Extensions\ActionDescriptorExtensions.cs" />
-    <Compile Include="Extensions\HtmlHelperScriptManager.cs" />
+    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Extensions\HttpRequestBaseExtensions.cs" />
     <Compile Include="Extensions\HttpSessionStateBaseExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
