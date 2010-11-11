@@ -152,6 +152,10 @@
     <Folder Include="Areas\Security\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Src\Commons.Persistence.NHibernate\Commons.Persistence.NHibernate.csproj">
+      <Project>{0F48E392-9474-4714-884A-129253F68997}</Project>
+      <Name>Commons.Persistence.NHibernate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Src\Commons\Commons.csproj">
       <Project>{25C350AF-4957-47E8-960A-6C59794C5DEF}</Project>
       <Name>Commons</Name>

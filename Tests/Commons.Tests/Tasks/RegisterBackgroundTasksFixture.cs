@@ -33,7 +33,7 @@ namespace BoC.Tests.Tasks
                 .Callback<Func<Type, bool>>(func => func(typeof (FindableBackgroundTask)))
                 .Returns(new Type[0]);
 
-            RegisterBackgroundTasks.TaskFilter = type => filtered = true;
+            RegisterBackgroundTasks.TaskFilters.Add(type => filtered = true);
             new RegisterBackgroundTasks(resolver.Object, new[] {appdomainHelper.Object}).Execute();
 
             Assert.True(filtered);

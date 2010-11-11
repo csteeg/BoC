@@ -7,6 +7,7 @@ using BoC.EventAggregator;
 using BoC.InversionOfControl;
 using BoC.Tasks;
 using BoC.Web.Events;
+using BoC.Web.Mvc.Attributes;
 using BoC.Web.Mvc.Binders;
 using IDependencyResolver = BoC.InversionOfControl.IDependencyResolver;
 
@@ -27,27 +28,37 @@ namespace BoC.Web.Mvc.Init
 
         public void Execute()
         {
-            System.Web.Mvc.DependencyResolver.SetResolver(
-                this.dependencyResolver.Resolve,
+            DependencyResolver.SetResolver(
+                this.dependencyResolver.Resolve, 
                 (t) => this.dependencyResolver.ResolveAll(t).Cast<object>());
             SetDefaultViewEngine();
             RegisterAllAreas();
             RegisterDefaultRoutes(RouteTable.Routes);
-
-            subscriptionToken = eventAggregator.GetEvent<WebApplicationStartEvent>().Subscribe(args =>
-                {
-                    var rootNamespace = args.ApplicationInstance.GetType().BaseType.Namespace;
-                    ControllerBuilder.Current.DefaultNamespaces.Add(rootNamespace + ".*");
-
-                    eventAggregator.GetEvent<WebApplicationStartEvent>().Unsubscribe(subscriptionToken);
-                }
-            );
-            
+            SetDefaultNameSpace();
+            RegisterGlobalFilters(GlobalFilters.Filters);
             dependencyResolver.RegisterType<IControllerFactory,AutoScaffoldControllerFactory>();
 
             ModelBinders.Binders.DefaultBinder = new CommonModelBinder(dependencyResolver);
             ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder());
             ModelBinders.Binders.Add(typeof(DateTime?), new DateTimeModelBinder());
+        }
+
+        private void RegisterGlobalFilters(GlobalFilterCollection filters)
+        {
+            filters.Add(new AjaxControllerAttribute());
+            filters.Add(new EventTriggerAttribute());
+            filters.Add(new HandleErrorAttribute());
+        }
+
+        private void SetDefaultNameSpace()
+        {
+            subscriptionToken = eventAggregator.GetEvent<WebApplicationStartEvent>().Subscribe(args =>
+            {
+                var rootNamespace = args.ApplicationInstance.GetType().BaseType.Namespace;
+                ControllerBuilder.Current.DefaultNamespaces.Add(rootNamespace + ".*");
+
+                eventAggregator.GetEvent<WebApplicationStartEvent>().Unsubscribe(subscriptionToken);
+            });
         }
 
         protected virtual void RegisterAllAreas()

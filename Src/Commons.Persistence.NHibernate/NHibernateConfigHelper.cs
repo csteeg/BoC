@@ -99,7 +99,9 @@ namespace BoC.Persistence.NHibernate
                 {
                     Assembly automapper = assembly;
 
-                    autoPersistenceModel.AddEntityAssembly(automapper)
+                    config.Mappings(m => m.HbmMappings.AddFromAssembly(automapper));
+                    autoPersistenceModel
+                        .AddEntityAssembly(automapper)
                         .Conventions.AddAssembly(automapper)
                         .Alterations(alterations => alterations.AddFromAssembly(automapper))
                         .Alterations(collection => collection.Add(new AutoMappingOverrideAlteration(automapper))) //same as: UseOverridesFromAssemblyOf<Tentity>()
@@ -109,7 +111,7 @@ namespace BoC.Persistence.NHibernate
                     //new AutoMappingOverrideAlteration(automapper).Alter(autoPersistenceModel);
                 }
             }
-
+            
             // Evil hack, since adding to the Alterations does NOT work.
             //foreach (var overrideAssembly in ass)
             //{

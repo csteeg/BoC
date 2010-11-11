@@ -11,8 +11,7 @@ using BoC.Web.Mvc.Controllers;
 
 namespace BoC.Security.Mvc.Controllers
 {
-    [HandleError]
-    public class AccountController : CommonBaseController
+    public class AccountController : Controller
     {
         private readonly IModelValidator modelValidator;
         private readonly IUserService service;

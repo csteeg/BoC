@@ -18,8 +18,7 @@ using DotNetOpenAuth.OpenId.RelyingParty;
 
 namespace BoC.Security.Mvc.Controllers
 {
-    [HandleError]
-    public class AuthController : CommonBaseController
+    public class AuthController : Controller
     {
         public IFormsAuthentication FormsAuthentication { get; set; }
         public IOpenIdRelyingParty RelyingParty { get; private set; }

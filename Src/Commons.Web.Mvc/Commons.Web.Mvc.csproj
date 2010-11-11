@@ -124,7 +124,6 @@
     <Compile Include="ActionResults\DataContractXmlResult.cs" />
     <Compile Include="ActionResults\XmlResult.cs" />
     <Compile Include="Attributes\AjaxControllerAttribute.cs" />
-    <Compile Include="Attributes\DefaultViewAttribute.cs" />
     <Compile Include="Attributes\EventTriggerAttribute.cs" />
     <Compile Include="Attributes\JsonRequestBehaviorAttribute.cs" />
     <Compile Include="Attributes\ValidationExceptionAttribute.cs" />
@@ -133,8 +132,6 @@
     <Compile Include="CommonViewUserControl.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controllers\CommonBaseController.cs" />
-    <Compile Include="Controllers\CommonBaseAsyncController.cs" />
     <Compile Include="Controllers\DynamicScaffoldController.cs" />
     <Compile Include="AutoScaffoldControllerFactory.cs" />
     <Compile Include="DefaultViewViewEngine.cs" />

@@ -13,7 +13,7 @@ using BoC.Web.Mvc.Validation;
 
 namespace BoC.Web.Mvc.Controllers
 {
-    public class DynamicScaffoldController<TEntity> : CommonBaseController where TEntity : IBaseEntity, new()
+    public class DynamicScaffoldController<TEntity> : Controller where TEntity : IBaseEntity, new()
     {
         private readonly IModelService<TEntity> service;
 
