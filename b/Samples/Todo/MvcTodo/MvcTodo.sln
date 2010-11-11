@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTodo", "MvcTodo.csproj", "{BE963BCE-0C4E-4BB2-88EE-CEF0880E4C62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcTodo.Tests", "..\MvcTodo.Tests\MvcTodo.Tests.csproj", "{5555D867-57BD-4FB4-94F8-D1BD2459E8C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons", "..\..\..\Src\Commons\Commons.csproj", "{25C350AF-4957-47E8-960A-6C59794C5DEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.Persistence.NHibernate", "..\..\..\Src\Commons.Persistence.NHibernate\Commons.Persistence.NHibernate.csproj", "{0F48E392-9474-4714-884A-129253F68997}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.Web.Mvc", "..\..\..\Src\Commons.Web.Mvc\Commons.Web.Mvc.csproj", "{D21291A8-98DB-48F0-A864-CC468BA44EB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.InverionOfControl.Unity", "..\..\..\Src\Commons.InverionOfControl.Unity\Commons.InverionOfControl.Unity.csproj", "{5E953013-A5C4-4AB5-BF99-108C6D4D21CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE963BCE-0C4E-4BB2-88EE-CEF0880E4C62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE963BCE-0C4E-4BB2-88EE-CEF0880E4C62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE963BCE-0C4E-4BB2-88EE-CEF0880E4C62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE963BCE-0C4E-4BB2-88EE-CEF0880E4C62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5555D867-57BD-4FB4-94F8-D1BD2459E8C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5555D867-57BD-4FB4-94F8-D1BD2459E8C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5555D867-57BD-4FB4-94F8-D1BD2459E8C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5555D867-57BD-4FB4-94F8-D1BD2459E8C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25C350AF-4957-47E8-960A-6C59794C5DEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25C350AF-4957-47E8-960A-6C59794C5DEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25C350AF-4957-47E8-960A-6C59794C5DEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25C350AF-4957-47E8-960A-6C59794C5DEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F48E392-9474-4714-884A-129253F68997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F48E392-9474-4714-884A-129253F68997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F48E392-9474-4714-884A-129253F68997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F48E392-9474-4714-884A-129253F68997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D21291A8-98DB-48F0-A864-CC468BA44EB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D21291A8-98DB-48F0-A864-CC468BA44EB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D21291A8-98DB-48F0-A864-CC468BA44EB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D21291A8-98DB-48F0-A864-CC468BA44EB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E953013-A5C4-4AB5-BF99-108C6D4D21CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E953013-A5C4-4AB5-BF99-108C6D4D21CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E953013-A5C4-4AB5-BF99-108C6D4D21CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E953013-A5C4-4AB5-BF99-108C6D4D21CE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

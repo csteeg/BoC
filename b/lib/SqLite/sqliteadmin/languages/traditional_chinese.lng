@@ -1,0 +1,326 @@
+;#########################################
+;Traditional Chinese Translation by Ben Su
+;#########################################
+
+[frmMain]
+tsSQL=SQL 查詢
+tsResult=結果
+tsEdit=編輯資料
+pEditTop=
+lblTable=資料表:
+lblFilterField=篩檢程式列:
+lblFilter=篩檢程式:
+miDatabase=資料庫
+miNew=開新資料庫
+miOpen=開啟資料庫
+miCleanUp=清除資料庫
+miClose=關閉資料庫
+miCreationSQL=資料庫 SQL
+miMigrate=遷移到 SQLite3
+miRecentList=最近開啟的資料庫
+miExit=結束
+miTable=資料表
+miNewTable=開新資料表
+miEditTable=編輯資料表
+miDeleteTable=刪除資料表
+miIndex=索引
+miNewIndex=開新索引
+miEditIndex=編輯索引
+miDeleteIndex=刪除索引
+miView=查詢
+miNewView=開新預覽
+miEditView=編輯預覽
+miDeleteView=刪除預覽
+miTrigger=觸發器
+miNewTrigger=開新觸發器
+miEditTrigger=編輯觸發器
+miDeleteTrigger=刪除觸發器
+Abfrage1=查詢
+miAddQuery=新增查詢
+miShowQuery=開啟查詢
+miSaveQueryMain=保存查詢
+miDelQuery=刪除查詢
+miOpenSQL=查詢並返回結果集
+miExecSQL=查詢不返回結果集
+miInsertInNewViewMain=在新查詢中使用
+miInsertInNewTriggerMain=在新觸發器中使用
+Daten1=資料
+miExport=匯出資料
+miSendToExcel=發送到 Excel
+miImport=匯入資料
+miHelp=說明
+miInfo=關於Sqliteadmin
+Fehlerbericht1=錯誤日誌
+pmiRefresh=重新整理
+pmiShowSQL=顯示 SQL
+pmiNewTable=建立資料表
+pmiEditTable=編輯資料表
+pmiDelTable=刪除資料表
+pmiNewIndex=建立索引
+pmiEditIndex=編輯索引
+pmiDelIndex=刪除索引
+pmiNewView=建立預覽
+pmiEditView=編輯預覽
+pmiDelView=刪除預覽
+pmiNewTrigger=建立觸發器
+pmiEditTrigger=編輯觸發器
+pmiDelTrigger=刪除觸發器
+pmiFindQuery=查找查詢
+pmiAddQuery=新增查詢
+pmiShowQuery=開啟舊檔查詢
+pmiDelQuery=刪除查詢
+miAddTab=建立新的查詢
+miSaveQuery=保存到資料庫
+miSaveToFile=保存到檔
+miUndo=復原
+miRedo=重複
+miCut=剪下
+miCopy=複製
+miPaste=貼上
+miSelAll=全選
+miCopyToDelphi=複製為 Delphi 代碼
+miComment=切換代碼注釋
+miInsertInNewView=在新查詢中使用
+miInsertInNewTrigger=在新觸發器中使用
+miDeleteTab=關閉檔案查詢
+miMemo=顯示備註
+miPicture=顯示圖片
+tbbNewDatabase=建立資料庫
+tbbOpenDatabase=開啟（最近使用的）資料庫
+tbbCleanUp=清除資料庫
+tbbCloseDatabase=關閉資料庫
+tbbNewTable=建立資料表
+tbbEditTable=編輯資料表
+tbbDeleteTable=刪除資料表
+tbbNewIndex=建立索引
+tbbEditIndex=編輯索引
+tbbDeleteIndex=刪除索引
+tbbNewView=建立預覽
+tbbEditView=編輯預覽
+tbbDeleteView=刪除預覽
+tbbNewTrigger=建立觸發器
+tbbEditTrigger=編輯觸發器
+tbbDeleteTrigger=刪除觸發器
+tbbAddSQL=新增新的查詢
+tbbSaveSQL=保存查詢到資料庫
+tbbOpenSQL=執行返回結果的 SQL 查詢 (SELECT) F9
+tbbExecSQL=執行不返回結果的 SQL 查詢 (INSERT,UPDATE,DELETE) F8 
+
+tbbViewHierarchy=樹狀查詢
+tbbShowTables=顯示資料表
+tbbShowFields=顯示欄位
+tbbShowTriggers=顯示觸發器
+tbbShowIndexes=顯示索引
+tbbShowViews=顯示查詢
+tbbShowSysEntrys=顯示系統記錄
+tbbShowQueries=顯示查詢
+
+[frmTable]
+lblTablename=資料表名稱:
+gbFields="    資料表字段"
+btnAdd=新增欄位
+btnDel=刪除欄位
+btnChange=編輯欄位
+btnOK=確定
+btnCancel=取消
+btnPrimaryKey=主鍵
+
+[frmField]
+lblFieldName=欄位名稱:
+lblFieldType=欄位類別:
+lblDefaultValue=預設值:
+cbUnique=惟一值
+cbNotNull=非空
+cbPrimaryKey=主鍵
+cbAutoInc=自動遞增
+btnAdd=確定
+btnCancel=取消
+
+[frmIndex]
+lblIndexName=索引名稱:
+lblTable=資料表:
+cbUnique=惟一索引
+gbFields="    欄位"
+lblSrcFields=可用欄位:
+lblDestFields=索引欄位:
+btnCreate=確定
+btnCancel=取消
+
+[frmView]
+lblViewName=查詢名稱:
+gbSQL="     SQL 選擇語句"
+btnCreate=確定
+btnCancel=取消
+[frmPicture]
+btnPic=更改圖片
+btnDel=刪除圖片
+btnSave=保存圖片...
+
+[frmTrigger]
+lblTriggername=觸發器名稱:
+tsEvent=觸發器事件
+lblTable=資料表:
+lblView=預覽:
+gbFields="    欄位"
+lblSrcFields=可用欄位:
+lblDestFields=事件欄位:
+gbTriggerEvent=觸發器事件
+rbBefore=語句執行前觸發
+rbAfter=語句執行後觸發
+rbInsteadOf=替代執行語句
+gbEvents=事件
+gbFOR=動作
+rbEachRow=每行
+rbEachStatement=每個語句
+tsSQL=觸發器 SQL
+gbTriggerSQL="     在觸發器事件發生時執行的 SQL 語句 (OLD. / NEW. = Ref)"
+lblCondition=條件:
+btnCreate=確定
+btnCancel=取消
+
+[frmImport]
+Caption=匯入資料
+gbMapping=資料列映射
+lblSourceFields=源欄位:
+lblTargetFields=目的欄位:
+lblDestTable=目的表:
+cbClearTable=在匯入前清空表
+btnLoadFile=開啟舊檔文件
+btnImport=匯入資料
+btnClose=關閉檔案
+
+[frmLog]
+Caption=錯誤日誌
+
+[frmMemoEdit]
+Caption=編輯備註
+
+[MessageStrings]
+lngInfo=關於Sqliteadmin
+lngWarning=警告:
+lngCreate=確定
+lngEdit=編輯
+lngAdd=新增
+
+lngNameAlreadyExists=已存在相同名稱的物件
+lngInvalidChars=名稱不能包含“sqlite_”首碼、任何符號和空格
+lngEnterSQLSource=請輸入 SQL 語句
+
+lngCreateView=建立查詢
+lngEditView=編輯預覽
+lngEnterViewName=請輸入預覽名稱
+lngEnterTriggerName=請輸入觸發器名稱
+lngSelectTable=請選擇表
+lngSelectView=請選擇預覽
+lngSelectEvent=請選擇事件
+lngSelectFields=請選擇欄位
+lngSemiNotFound=在 SQL 語句後缺少分號
+lngCreateTrigger=建立觸發器
+lngEditTrigger=編輯觸發器
+lngBlobFileSize=基於安全性的原因，最大的檔大小限制為 500KB. SQLite 2.8 x 則支援每資料行最大 1 MB 的資料。
+lngSeperator=分隔符號
+lngEnterSeperatorChar=請輸入分隔符號字元
+lngContainsHeaderFieldNames=第一行是否包含欄位名稱?
+lngFieldAlreadyChoosen=不要重複選擇欄位
+lngSeperatedValues=符號分隔數值
+lngEnterFieldName=請輸入欄位名稱
+lngEnterFieldType=請輸入或選擇欄位類型
+lngPKAlreadyExist=不能重複指派主鍵
+lngFieldSize=列大小:
+lngEnterFieldSize=請輸入欄位大小:
+lngEditField=編輯欄位
+lngAddField=新增欄位
+lngEnterIndexName=請輸入索引名稱
+lngEditIndex=編輯索引
+lngCreateIndex=建立索引
+lngEnterTableName=請輸入表名
+lngAddTableFields=請新增表字段
+lngEditTable=編輯資料表
+lngCreateTable=建立資料表
+lngTableFieldName=欄位名稱
+lngTableFieldType=資料類型
+lngTableFieldConstraint=限制
+lngSendToExcelSuccess=已成功將資料匯出到 Excel。
+lngSendToExcelWait=正在將資料匯出到 Excel，請稍候……
+lngNoDataToSend=沒有可以匯出的資料
+lngFailToSave=不能保存檔
+lngError=錯誤:
+lngNoDataToExport=沒有可以匯出的資料
+lngExcelFormat=Excel 相容格式
+lngCSVFormat=符號分隔數值的格式
+lngXMLFormat=XML 格式
+lngHTMLFormat=HTML 格式
+lngCCFunction="函數  "
+lngCCField=   "欄位  "
+lngCCTable=   "資料表"
+lngCCView=    "預覽  "
+lngCCIndex=   "索引  "
+lngCCTrigger= "觸發器"
+lngReservedWordQuery=%s 是保留字
+lngQueryIdent=查詢
+lngEnterName=請輸入名稱
+lngSaveQuery=保存查詢:
+lngEnterQueryNamePrompt=請輸入此查詢的名稱:
+lngCleanUpMessage=資料庫在整理後刪除了 %s 無用的資料 
+lngDeleteConfirmation=是否確定要刪除?
+lngConfirmation=請確定:
+lngDBDisconnected=已經斷開和資料庫的連接
+lngDBConnected=已經連接資料庫
+lngDisconnected=尚未連到資料庫
+lngOpenDatabase=開啟舊檔資料庫:
+lngTVQueries=查詢
+lngTVTriggers=觸發器
+lngTVViews=預覽
+lngTVIndexes=索引
+lngTVTables=資料表
+lngTVFields=欄位
+lngQueryExecTime=查詢耗時 %d 毫秒
+lngQueryExecuted=查詢已完成
+lngDBCreated=已建立資料庫
+lngSelectDBSaveTarget=請選擇新資料庫的目標位置:
+lngTableFieldDefault=預設值
+lngMultiPrimaryKey=要使用多欄位主鍵，則不能使用單字段的主鍵
+lngMigrationSuccess=已經成功完成資料庫遷移
+lngMigrationInProgress=正在遷移名稱為“%s”的表，請稍候……
+
+;##############################################
+;########## Begin Language Updates ############
+;## Send updates to "sqliteadmin@orbmu2k.de" ##
+;##############################################
+
+lngSQLiteDB=SQLite Database
+lngAnyFile=Any File
+lngImportDone=Import done!
+lngBtnFirst=First
+lngBtnPrev=Previos
+lngBtnLast=Last
+lngBtnNext=Next
+lngBtnAdd=Insert
+lngBtnRemove=Delete
+lngBtnEdit=Edit
+lngBtnApply=Post
+lngBtnCancel=Cancel
+lngBtnRefresh=Refresh
+
+;##############################################
+;########### End Language Updates ############# 
+;##############################################
+
+[StrfTimeHint]
+Line0=
+Line1=格式限制:
+Line2=
+Line3=%d   當月中的天數
+Line4=%f   ** 帶小數的秒  SS.SSS
+Line5=%H   小時 00-24
+Line6=%j   年內的天數 001-366
+Line7=%J   ** Julian 日期
+Line8=%m   月份 01-12
+Line9=%M   分 00-59
+Line10=%s   在 1970-01-01 以後經歷的秒數
+Line11=%S   秒 00-59
+Line12=%w   星期中的天數 0-6  星期天==0
+Line13=%W   年內的星期數 00-53
+Line14=%Y   年份 0000-9999
+Line15=%%   %
+

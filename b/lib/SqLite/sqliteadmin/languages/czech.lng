@@ -1,0 +1,326 @@
+;#################################
+;Czech Translation by Robert Hroch
+;#################################
+
+
+[frmMain]
+tsSQL=SQL Dotaz
+tsResult=Výsledek
+tsEdit=Upravit Data
+pEditTop=
+lblTable=Tabulka:
+lblFilterField=Filtruj podle:
+lblFilter=Filtr:
+miDatabase=Databáze
+miNew=Nový
+miOpen=Otevøít
+miCleanUp=Vyèistit
+miClose=Zavøít
+miCreationSQL=Databáze SQL
+miMigrate=Migrovat do SQLite3
+miRecentList=Poslední otevøený
+miExit=Exit
+miTable=Tabulka
+miNewTable=Nový
+miEditTable=Upravit
+miDeleteTable=Smazat
+miIndex=Index
+miNewIndex=Nový
+miEditIndex=Upravit
+miDeleteIndex=Smazat
+miView=Pohled
+miNewView=Nový
+miEditView=Upravit
+miDeleteView=Smazat
+miTrigger=Trigger-Spouštìè
+miNewTrigger=Nový
+miEditTrigger=Upravit
+miDeleteTrigger=Smazat
+Abfrage1=Dotaz
+miAddQuery=Pøidat
+miShowQuery=Otevøít
+miSaveQueryMain=Uložit
+miDelQuery=Smazat
+miOpenSQL=Vykonat s výsledkem
+miExecSQL=Vykonat bez výsledku
+miInsertInNewViewMain=Použít v novém pohledu
+miInsertInNewTriggerMain=Použít v novém triggeru
+Daten1=Data
+miExport=Export
+miSendToExcel=Poslat do Excelu
+miImport=Import Dat
+miHelp=Nápovìda
+miInfo=Info
+Fehlerbericht1=Log
+pmiRefresh=Refresh-Obnova
+pmiShowSQL=Ukázat SQL
+pmiNewTable=Vytvoøit Tabulku
+pmiEditTable=Upravit Tabulku
+pmiDelTable=Smazat Tabulku
+pmiNewIndex=Vytvoøit Index
+pmiEditIndex=Upravit Index
+pmiDelIndex=Smazat Index
+pmiNewView=Vytvoøit View
+pmiEditView=Upravit View
+pmiDelView=Smazat View
+pmiNewTrigger=Vytvoøit Trigger
+pmiEditTrigger=Upravit Trigger
+pmiDelTrigger=Smazat Trigger
+pmiFindQuery=Najít dotaz
+pmiAddQuery=Pøidat dotaz
+pmiShowQuery=Otevøít dotaz
+pmiDelQuery=Smazat Query
+miAddTab=Vytvoøit nový dotaz
+miSaveQuery=Uložit do databáze
+miSaveToFile=Uložit do souboru
+miUndo=Zpìt
+miRedo=Zpìt dopøedu
+miCut=Vystøihnout
+miCopy=Zkopírovat
+miPaste=Uložit
+miSelAll=Oznaèit vše
+miCopyToDelphi=Kopírovat jako Delphi zdroj
+miComment=Pøepínaè - komentáø
+miInsertInNewView=Použít v novém pohledu 
+miInsertInNewTrigger= Použít v novém triggeru
+miDeleteTab=Zavøít dotaz
+miMemo=Ukázat Memo
+miPicture=Ukáyat obrázek
+tbbNewDatabase=Vytvoøit databázi
+tbbOpenDatabase=Otevøít (poslední) databázi
+tbbCleanUp=Vyèistit databázi
+tbbCloseDatabase=Zavøít databázi
+tbbNewTable=Vytvoøit tabulku 
+tbbEditTable=Upravit tabulku
+tbbDeleteTable=Smazat tabulku
+tbbNewIndex=Vytvoøit Index
+tbbEditIndex=Upravit Index
+tbbDeleteIndex=Smazat Index
+tbbNewView=Vytvoøit pohled
+tbbEditView=Upravit pohled
+tbbDeleteView=Smazay pohled
+tbbNewTrigger=Vytvoøit trigger
+tbbEditTrigger=Upravit trigger
+tbbDeleteTrigger=Smazat trigger
+tbbAddSQL=Pøidat nový dotaz
+tbbSaveSQL=Uložit dotaz do databáze
+tbbOpenSQL=Vykonat SQL dotaz s výsledky (select) F9
+tbbExecSQL=Vykonat SQL dotaz bez výsledkù (insert,update,delete) F8 
+
+tbbViewHierarchy=Struktura(hiearchie) pohledu
+tbbShowTables=Ukázat tabulky
+tbbShowFields=Ukázat pole
+tbbShowTriggers=Ukázat Triggery
+tbbShowIndexes=Ukázat Indexes
+tbbShowViews=Ukázat pohledy 
+tbbShowSysEntrys=Ukázat systémové vstupy 
+tbbShowQueries=Ukázat dotazy
+
+[frmTable]
+lblTablename=Jméno tabulky:
+gbFields="     Pole tabulky"
+btnAdd=Pøidat pole
+btnDel=Smazat pole
+btnChange=Upravit pole
+btnOK=Vytvoøit
+btnCancel=Zpìt
+btnPrimaryKey=Primární klíè
+
+[frmField]
+lblFieldName=Název pole:
+lblFieldType=Datový typ pole:
+lblDefaultValue=Default hodnota:
+cbUnique=Unikátní
+cbNotNull=Not NULL
+cbPrimaryKey=Primární klíè
+cbAutoInc=Auto Increment
+btnAdd=Pøidat
+btnCancel=Zpìt
+
+[frmIndex]
+lblIndexName=Název indexu:
+lblTable=Tabulka:
+cbUnique=Unikátní
+gbFields="     Pole"
+lblSrcFields=Dostupná pole:
+lblDestFields=Indexovaná pole:
+btnCreate=Vytvoøit
+btnCancel=Zpìt
+
+[frmView]
+lblViewName=Název pohledu:
+gbSQL="     SQL Select"
+btnCreate=Vytvoøit
+btnCancel=Zpìt
+[frmPicture]
+btnPic=Zmìnit obrázek
+btnDel=Smazat obrázek
+btnSave=Uližit obrázek jako
+
+[frmTrigger]
+lblTriggername=Název triggeru:
+tsEvent=Událost triggeru
+lblTable=Tabulka:
+lblView=Pohled:
+gbFields="     Pole"
+lblSrcFields=Dostupná pole:
+lblDestFields=Event Fields:
+gbTriggerEvent=Trigger událost
+rbBefore=Pøed
+rbAfter=Potom
+rbInsteadOf=Místo..
+gbEvents=Událost
+gbFOR=Akce
+rbEachRow=Každý øádek
+rbEachStatement=každý pøíkaz
+tsSQL=SQL trigger
+gbTriggerSQL="     SQL zdroj s vykonáním v Trigger události (old / new = Ref)"
+lblCondition=Podmínka:
+btnCreate=Vytvoøit
+btnCancel=Zpìt
+
+[frmImport]
+Caption=Import Dat
+gbMapping=Mapování pole
+lblSourceFields=Zdrojová pole:
+lblTargetFields=Cílová pole:
+lblDestTable=Cílová Tabulka:
+cbClearTable=Smazat tabulku pøed importem
+btnLoadFile=Otevøít soubor
+btnImport=Import dat
+btnClose=Zavøít
+
+[frmLog]
+Caption=Error Log
+
+[frmMemoEdit]
+Caption=Upravit Memo 
+
+[MessageStrings]
+lngInfo=Info
+lngWarning=Varování:
+lngCreate=Vytvoøit
+lngEdit=Upravit
+lngAdd=Pøidat
+
+lngNameAlreadyExists=Název už je použit!
+lngInvalidChars=Název nesmí obsahovat 'sqlite_' prefix, speciální nebo "blanks"! 
+lngEnterSQLSource=Prosím vložte SQL dotaz
+
+lngCreateView=Vytvoøit pohled 
+lngEditView=Upravit pohled 
+lngEnterViewName=Prosím vložte název pohledu!
+lngEnterTriggerName=Prosím vložte název triggeru!
+lngSelectTable=Prosím vyberte tabulku!
+lngSelectView=Prosím vyberte  pohled!
+lngSelectEvent=Prosím vyberte událost!
+lngSelectFields=Prosím vyberte pole!
+lngSemiNotFound=nebyl nalezen støedník ukonèující SQL pøíkaz! 
+lngCreateTrigger=Vytvoøit trigger
+lngEditTrigger=Upravit trigger
+lngBlobFileSize=Z bezpeènostních dùvodù je velikost souboru omezena na 500kb.SQLite 2.8 x podporuje max. 1MB datový øádek
+lngSeperator=Seperátor
+lngEnterSeperatorChar=Prosím vložte separátor(znak)!
+lngContainsHeaderFieldNames=Obsahuje první øádek jména polí?
+lngFieldAlreadyChoosen=Pole bylo zmìnìno!
+lngSeperatedValues=Separovat hodnoty
+lngEnterFieldName=Prosím vložte název pole!
+lngEnterFieldType=Prosím vložte datový typ pole!
+lngPKAlreadyExist=Primární klíè je již alokován!
+lngFieldSize=Velikost pole:
+lngEnterFieldSize=Prosím vložte velikost pole:
+lngEditField=Upravit pole
+lngAddField=Pøidat pole
+lngEnterIndexName=Prosím vložte název indexu!
+lngEditIndex=Upravit index
+lngCreateIndex=Vytvoøit index
+lngEnterTableName=Prosím vložte název tabulky!
+lngAddTableFields=Prosím pøidejte pole tabulky!
+lngEditTable=Upravit tabulku
+lngCreateTable=Vytvoøit tabulku
+lngTableFieldName=Název pole
+lngTableFieldType=Typ pole
+lngTableFieldConstraint=Omezení pole
+lngSendToExcelSuccess=Zaslání dat do Excelu  bylo úspìšné.
+lngSendToExcelWait=Zasílají se data do Excelu, prosím èekejte...
+lngNoDataToSend=Nebyla nalezena data pro zaslání!
+lngFailToSave=Soubor nelze uložit!
+lngError=Chyba:
+lngNoDataToExport=Nebyla nalezena data pro export!
+lngExcelFormat=Excel kompatibilní formát
+lngCSVFormat=Hodnotou separovaný formát
+lngXMLFormat=XML formát
+lngHTMLFormat=HTML formát
+lngCCFunction="Funkce "
+lngCCField=   "Pole   "
+lngCCTable=   "Tabulka"
+lngCCView=    "Pohled "
+lngCCIndex=   "Index  "
+lngCCTrigger= "Trigger"
+lngReservedWordQuery=%s je rezervovaní slovo
+lngQueryIdent=Dotaz
+lngEnterName=Vložte název!
+lngSaveQuery=Uložit dotaz:
+lngEnterQueryNamePrompt=Prosím vložte název SQL dotazu:
+lngCleanUpMessage=Databáze byla vyèištìna od % nepotebných dat.
+lngDeleteConfirmation=Opravdu smazat?
+lngConfirmation=Potvrzení:
+lngDBDisconnected=Databáze odpojena
+lngDBConnected=Databáze pøipojena
+lngDisconnected=Nepøipojeno
+lngOpenDatabase=Otevøít databázi:
+lngTVQueries=Dotazy
+lngTVTriggers=Triggery
+lngTVViews=Pohledy
+lngTVIndexes=Indexes
+lngTVTables=Tabulky
+lngTVFields=Pole
+lngQueryExecTime=Dotaz vykonán za %dms
+lngQueryExecuted=Dotaz vykonán
+lngDBCreated=Databáze vytvoøena
+lngSelectDBSaveTarget=Zadejte novou databázi:
+lngTableFieldDefault=Default hodnota
+lngMultiPrimaryKey=Vícenásobný primární klíè pouze pokud není zvolen jednoduchý primární klíè!
+lngMigrationSuccess=Migrace databáze probìhla vpoøádku!
+lngMigrationInProgress=Tabulka "%s" je právì migrována, prosím èekejte...
+lngSQLiteDB=SQLite databáze
+lngAnyFile=Nìjaký soubor
+lngImportDone=Import hotov!
+
+;##############################################
+;########## Begin Language Updates ############
+;## Send updates to "sqliteadmin@orbmu2k.de" ##
+;##############################################
+
+lngBtnFirst=First
+lngBtnPrev=Previos
+lngBtnLast=Last
+lngBtnNext=Next
+lngBtnAdd=Insert
+lngBtnRemove=Delete
+lngBtnEdit=Edit
+lngBtnApply=Post
+lngBtnCancel=Cancel
+lngBtnRefresh=Refresh
+
+;##############################################
+;########### End Language Updates #############
+;##############################################
+
+[StrfTimeHint]
+Line0=
+Line1=Konstanty formátu:
+Line2=
+Line3=%d   den v mìsíci
+Line4=%f   ** sekce ve vteøinách  SS.SSS
+Line5=%H   hodina 00-24
+Line6=%j   den v roce 001-366
+Line7=%J   ** Julianùv formát
+Line8=%m   mìsíc 01-12
+Line9=%M   minuta 00-59
+Line10=%s   vteøiny od 1970-01-01
+Line11=%S   vteøiny 00-59
+Line12=%w   dan v týdnu 0-6  sunday==0
+Line13=%W   týden v roce 00-53
+Line14=%Y   rok 0000-9999
+Line15=%%   %
