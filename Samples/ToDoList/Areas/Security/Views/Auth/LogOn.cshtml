@@ -10,5 +10,6 @@
 }
 
 @Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
+@Html.ValidationMessage("_FORM")
 @Html.Partial("_LogonOpenId")
 @Html.Partial("_LogonNative")
