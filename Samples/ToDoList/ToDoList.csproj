@@ -173,7 +173,7 @@
   <ItemGroup>
     <Content Include="Areas\Security\Views\Account\Register.cshtml" />
     <Content Include="Areas\Security\Views\Web.config" />
-    <None Include="Areas\Security\Views\Auth\LogOn.cshtml" />
+    <None Include="LogOn.cshtml" />
     <None Include="Areas\Security\Views\Auth\_LogOnNative.cshtml" />
     <None Include="Areas\Security\Views\Auth\_LogOnOpenId.cshtml" />
     <None Include="Areas\Security\Views\_ViewStart.cshtml" />

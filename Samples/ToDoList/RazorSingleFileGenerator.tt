@@ -26,7 +26,7 @@
 <#@ import namespace="System.Web.WebPages.Razor.Configuration" #>
 <#
 var appRoot = @"C:\Projects\BoC\Samples\ToDoList";
-var virtualPath = "~/Areas/Security/Views/Auth/LogOn.cshtml";
+var virtualPath = "~/LogOn.cshtml";
 var FileNameSpace = "mytest";
 			var configFile = this.Host.ResolvePath("web.config");
 			

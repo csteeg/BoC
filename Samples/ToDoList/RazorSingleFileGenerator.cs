@@ -40,7 +40,7 @@ namespace mytest
 	using System.Web.Routing;
 	using DotNetOpenAuth.Mvc;
 	
-	[System.Web.WebPages.PageVirtualPathAttribute("~/Areas/Security/Views/Auth/LogOn.cshtml")]
+	[System.Web.WebPages.PageVirtualPathAttribute("~/LogOn.cshtml")]
 	public class LogOn_cshtml : System.Web.Mvc.WebViewPage<BoC.Security.Mvc.ViewModels.LogOnModel>
 	{
 #line hidden
