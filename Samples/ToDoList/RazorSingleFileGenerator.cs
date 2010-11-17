@@ -8,37 +8,52 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Web.Mvc;
-using System.Web.Mvc.Html;
-
 namespace mytest
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Net;
-    using System.Web;
-    using System.Web.Helpers;
-    using System.Web.Security;
-    using System.Web.UI;
-    using System.Web.WebPages;
-    using System.Web.WebPages.Html;
-    using DotNetOpenAuth.Mvc;
-    
-    public class LogOn_cshtml : System.Web.Mvc.WebViewPage<BoC.Security.Mvc.ViewModels.LogOnModel>
-    {
+	using System;
+	using System.Collections.Generic;
+	using System.IO;
+	using System.Linq;
+	using System.Net;
+	using System.Web;
+	using System.Web.Helpers;
+	using System.Web.Security;
+	using System.Web.UI;
+	using System.Web.WebPages;
+	using System.ComponentModel.DataAnnotations;
+	using System.Collections.Specialized;
+	using System.Collections;
+	using System.Configuration;
+	using System.Text;
+	using System.Text.RegularExpressions;
+	using System.Web.Caching;
+	using System.Web.DynamicData;
+	using System.Web.SessionState;
+	using System.Web.Profile;
+	using System.Web.UI.WebControls;
+	using System.Web.UI.WebControls.WebParts;
+	using System.Web.UI.HtmlControls;
+	using System.Xml.Linq;
+	using System.Web.Mvc;
+	using System.Web.Mvc.Ajax;
+	using System.Web.Mvc.Html;
+	using System.Web.Routing;
+	using DotNetOpenAuth.Mvc;
+	
+	[System.Web.WebPages.PageVirtualPathAttribute("~/Areas/Security/Views/Auth/LogOn.cshtml")]
+	public class LogOn_cshtml : System.Web.Mvc.WebViewPage<BoC.Security.Mvc.ViewModels.LogOnModel>
+	{
 #line hidden
 
-        protected System.Web.HttpApplication ApplicationInstance
-        {
-            get
-            {
-                return ((System.Web.HttpApplication)(Context.ApplicationInstance));
-            }
-        }
-        public override void Execute()
-        {
+		protected System.Web.HttpApplication ApplicationInstance
+		{
+			get
+			{
+				return ((System.Web.HttpApplication)(Context.ApplicationInstance));
+			}
+		}
+		public override void Execute()
+		{
 
 WriteLiteral("\r\n");
 
@@ -94,7 +109,7 @@ Write(Html.Partial("_LogonNative"));
 WriteLiteral("\r\n");
 
 
-        }
-    }
+		}
+	}
 }
 

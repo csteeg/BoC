@@ -1,9 +1,13 @@
-﻿<#@ template language="C#" #>
+﻿<#@ template language="C#" hostspecific="true" debug="true" #>
+<#@ assembly name="System.Web" #>
+<#@ assembly name="System.Configuration" #>
 <#@ assembly name="System.Web.Razor" #>
+<#@ assembly name="System.Web.Mvc" #>
 <#@ assembly name="System.Web.WebPages" #>
 <#@ assembly name="System.Web.WebPages.Razor" #>
 <#@ output extension="cs" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Web.Configuration" #>
 <#@ import namespace="System.Diagnostics" #>
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System" #>
@@ -15,27 +19,48 @@
 <#@ import namespace="System.Web.Razor" #>
 <#@ import namespace="System.Web.Razor.Parser" #>
 <#@ import namespace="System.Web.Razor.Parser.SyntaxTree" #>
+<#@ import namespace="System.Web.WebPages" #>
 <#@ import namespace="System.Web.WebPages.Razor" #>
 <#@ import namespace="System.Web" #>
+<#@ import namespace="System.Web.Mvc" #>
+<#@ import namespace="System.Web.WebPages.Razor.Configuration" #>
 <#
-var InputFilePath = @"C:\Projects\BoC\Samples\ToDoList\Areas\Security\Views\Auth\LogOn.cshtml";
 var appRoot = @"C:\Projects\BoC\Samples\ToDoList";
 var virtualPath = "~/Areas/Security/Views/Auth/LogOn.cshtml";
 var FileNameSpace = "mytest";
-var inputFileContent = File.ReadAllText(InputFilePath);
-            // Determine the project-relative path
+			var configFile = this.Host.ResolvePath("web.config");
+			
+			var vdm = new VirtualDirectoryMapping(Path.GetDirectoryName(configFile), true);
+			var wcfm = new WebConfigurationFileMap();
+			wcfm.VirtualDirectories.Add("/", vdm);
+
+			var config = WebConfigurationManager.OpenMappedWebConfiguration(wcfm, "/");
+			//System.Configuration.ConfigurationManager.OpenExeConfiguration(configFile);
+
+			var InputFilePath = this.Host.ResolvePath(virtualPath.Substring(2));
+			var inputFileContent = File.ReadAllText(InputFilePath);
+
+			// Determine the project-relative path
             string projectRelativePath = InputFilePath.Substring(appRoot.Length);
-
+  			
+			var sectGroup = new RazorWebSectionGroup();
+    		sectGroup.Host = (HostSection) config.GetSection(HostSection.SectionName) ?? new HostSection{ FactoryType = typeof(MvcWebRazorHostFactory).AssemblyQualifiedName };
+    		sectGroup.Pages = (RazorPagesSection) config.GetSection(RazorPagesSection.SectionName);
+			
             // Create the same type of Razor host that's used to process Razor files in App_Code
-            var host = new WebPageRazorHost(virtualPath, InputFilePath);
-
+            var host = WebRazorHostFactory.CreateHostFromConfig(sectGroup, virtualPath, InputFilePath);
+						//new MvcWebPageRazorHost(virtualPath, InputFilePath);
+			
+			
             // Set the namespace to be the same as what's used by default for regular .cs files
             host.DefaultNamespace = FileNameSpace;
+
+			var systemWebPages = config.GetSection("system.web/pages") as PagesSection;
+			foreach (NamespaceInfo ns in systemWebPages.Namespaces)
+			{
+				host.NamespaceImports.Add(ns.Namespace);
+			}
 			
-			// Remove the WebMatrix.Data namespaces which is not typically used in MVC
-            host.NamespaceImports.Remove("WebMatrix.Data");
-            host.NamespaceImports.Remove("WebMatrix.WebData");
-            
 			// Create a Razor engine nad pass it our host
 var engine = new RazorTemplateEngine(host);
 // Generate code
@@ -63,16 +88,16 @@ catch (Exception e) {
                     CodeGeneratorOptions options = new CodeGeneratorOptions();
                     options.BlankLinesBetweenMembers = false;
                     options.BracingStyle = "C";
+					options.IndentString = "\t";
 
                     // Add a GeneratedCode attribute to the generated class
                     CodeCompileUnit generatedCode = results.GeneratedCode;
                     CodeTypeDeclaration generatedType = generatedCode.Namespaces[0].Types[0];
-                    /*generatedType.CustomAttributes.Add(
+                    generatedType.CustomAttributes.Add(
                         new CodeAttributeDeclaration(
-                            new CodeTypeReference(typeof(GeneratedCodeAttribute)),
-                            new CodeAttributeArgument(new CodePrimitiveExpression("RazorSingleFileGenerator")),
-                            new CodeAttributeArgument(new CodePrimitiveExpression("1.0"))));
-*/
+                            new CodeTypeReference(typeof(PageVirtualPathAttribute)),
+                            new CodeAttributeArgument(new CodePrimitiveExpression(virtualPath))));
+
                     //Generate the code
                     provider.GenerateCodeFromCompileUnit(generatedCode, writer, options);
 

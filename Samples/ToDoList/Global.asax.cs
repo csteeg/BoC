@@ -1,6 +1,9 @@
-﻿using System.Web;
+﻿using System.Configuration;
+using System.IO;
+using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using BoC.Security.Model;
 using BoC.Web;
 using Norm.Configuration;
@@ -21,6 +24,9 @@ namespace ToDoList
         protected override void InitializeApplication()
         {
 			base.InitializeApplication();
+            
+            System.Web.WebPages.ApplicationPart.Register(new ApplicationPart(typeof(MvcApplication).Assembly, "~/ToDoList"));
+
             MongoConfiguration.Initialize(config =>
                             config.For<User>(c => c.ForProperty(u => u.Identity).Ignore()));
         }

@@ -95,11 +95,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Areas\Security\Views\Auth\_LogOnOpenId.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_LogOnOpenId.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -180,10 +175,7 @@
     <Content Include="Areas\Security\Views\Web.config" />
     <None Include="Areas\Security\Views\Auth\LogOn.cshtml" />
     <None Include="Areas\Security\Views\Auth\_LogOnNative.cshtml" />
-    <None Include="Areas\Security\Views\Auth\_LogOnOpenId.cshtml">
-      <Generator>RazorClassGenerator</Generator>
-      <LastGenOutput>_LogOnOpenId.cs</LastGenOutput>
-    </None>
+    <None Include="Areas\Security\Views\Auth\_LogOnOpenId.cshtml" />
     <None Include="Areas\Security\Views\_ViewStart.cshtml" />
     <None Include="RazorSingleFileGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
