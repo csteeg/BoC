@@ -13,6 +13,12 @@ using ToDoList;
 
 namespace ToDoList
 {
+    /// <summary>
+    /// Allow to embed precompiled razorviews (or any other webviewpage)
+    /// Things that would be nice to have in Microsoft's code:
+    ///     - public access to VirtualPathFactoryManager.Instance
+    ///     - public access to VirtualPathFactoryManager.PageExists
+    /// </summary>
 	public class VirtualPathFactoryManagerViewEngine : VirtualPathProviderViewEngine
 	{
 		public VirtualPathFactoryManagerViewEngine()
