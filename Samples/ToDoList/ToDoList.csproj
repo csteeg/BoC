@@ -165,6 +165,10 @@
     <Folder Include="Areas\Security\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Src\Commons.Web.Mvc.PrecompiledViews\Commons.Web.Mvc.PrecompiledViews.csproj">
+      <Project>{46C9FDE4-328A-4E80-8504-AED5E2196AE1}</Project>
+      <Name>Commons.Web.Mvc.PrecompiledViews</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Src\Commons\Commons.csproj">
       <Project>{25C350AF-4957-47E8-960A-6C59794C5DEF}</Project>
       <Name>Commons</Name>
