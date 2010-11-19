@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Tests", "Samples\T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.Web.Mvc.PrecompiledViews", "Src\Commons.Web.Mvc.PrecompiledViews\Commons.Web.Mvc.PrecompiledViews.csproj", "{46C9FDE4-328A-4E80-8504-AED5E2196AE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorSingleFileGenerator", "Src\RazorSingleFileGenerator\RazorSingleFileGenerator.csproj", "{461089E7-008E-4737-BA17-E1FCD1CC3D0E}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -144,6 +146,12 @@ Global
 		{46C9FDE4-328A-4E80-8504-AED5E2196AE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46C9FDE4-328A-4E80-8504-AED5E2196AE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46C9FDE4-328A-4E80-8504-AED5E2196AE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{461089E7-008E-4737-BA17-E1FCD1CC3D0E}..NET 3.5 DEBUG|Any CPU.ActiveCfg = Release|Any CPU
+		{461089E7-008E-4737-BA17-E1FCD1CC3D0E}..NET 3.5 DEBUG|Any CPU.Build.0 = Release|Any CPU
+		{461089E7-008E-4737-BA17-E1FCD1CC3D0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{461089E7-008E-4737-BA17-E1FCD1CC3D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{461089E7-008E-4737-BA17-E1FCD1CC3D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{461089E7-008E-4737-BA17-E1FCD1CC3D0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

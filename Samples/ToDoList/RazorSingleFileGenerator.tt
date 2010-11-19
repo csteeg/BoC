@@ -50,8 +50,6 @@ var FileNameSpace = "mytest";
             // Create the same type of Razor host that's used to process Razor files in App_Code
             var host = WebRazorHostFactory.CreateHostFromConfig(sectGroup, virtualPath, InputFilePath);
 						//new MvcWebPageRazorHost(virtualPath, InputFilePath);
-			
-			
             // Set the namespace to be the same as what's used by default for regular .cs files
             host.DefaultNamespace = FileNameSpace;
 
