@@ -47,6 +47,7 @@
     <Compile Include="CompiledRazorBuildProvider.cs" />
     <Compile Include="CompiledVirtualFile.cs" />
     <Compile Include="CompiledVirtualPathProvider.cs" />
+    <Compile Include="DictionaryBasedApplicationPartRegistry.cs" />
     <Compile Include="IApplicationPartRegistry.cs" />
     <Compile Include="PreApplicationStartCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -25,7 +25,8 @@ namespace Commons.Web.Mvc.PrecompiledViews
 		{
 			if (IsCompiledFile)
 			{
-				//return typeof (LogOn_cshtml);
+				var compiledFile = HostingEnvironment.VirtualPathProvider.GetFile(VirtualPath) as CompiledVirtualFile;
+				if (compiledFile != null) return compiledFile.CompiledType;
 			}
 			return base.GetGeneratedType(results);
 		}

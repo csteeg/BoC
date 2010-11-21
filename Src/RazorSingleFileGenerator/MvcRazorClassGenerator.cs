@@ -10,22 +10,17 @@ PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 ***************************************************************************/
 
 using System;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.CodeDom.Compiler;
 using System.CodeDom;
 using System.IO;
 using System.Text;
 using System.Web.Configuration;
-using System.Xml;
-using System.Xml.Schema;
-using Microsoft.Win32;
+using System.Web.Mvc;
+using System.Web.WebPages.Razor.Configuration;
 using Microsoft.VisualStudio.Shell;
 using VSLangProj80;
-using Microsoft.VisualStudio.Shell.Interop;
-using EnvDTE;
 using System.Web.Razor;
-using System.Web.Razor.Parser;
 using System.Web.Razor.Parser.SyntaxTree;
 using System.Web.WebPages.Razor;
 using System.Web;
@@ -38,15 +33,11 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
     /// to the project system
     /// </summary>
     [ComVisible(true)]
-    [Guid("52B316AA-1997-4c81-9969-83604C09EEB4")]
-    [CodeGeneratorRegistration(typeof(RazorClassGenerator), "C# Razor Generator (.cshtml)", vsContextGuids.vsContextGuidVCSProject, GeneratesDesignTimeSource = true)]
-    //[CodeGeneratorRegistration(typeof(RazorClassGenerator), "VB Razor Generator (.vbhtml)", vsContextGuids.vsContextGuidVBProject, GeneratesDesignTimeSource = true)]
-    [ProvideObject(typeof(RazorClassGenerator))]
-    public class RazorClassGenerator : BaseCodeGeneratorWithSite {
-#pragma warning disable 0414
-        //The name of this generator (use for 'Custom Tool' property of project item)
-        internal static string name = "RazorClassGenerator";
-#pragma warning restore 0414
+	[Guid("D9AD1CBB-3527-4445-AE1E-4782E32C601F")]
+    [CodeGeneratorRegistration(typeof(MvcRazorClassGenerator), "C# Razor Generator (.cshtml)", vsContextGuids.vsContextGuidVCSProject, GeneratesDesignTimeSource = true)]
+    //[CodeGeneratorRegistration(typeof(MvcRazorClassGenerator), "VB Razor Generator (.vbhtml)", vsContextGuids.vsContextGuidVBProject, GeneratesDesignTimeSource = true)]
+    [ProvideObject(typeof(MvcRazorClassGenerator))]
+    public class MvcRazorClassGenerator : BaseCodeGeneratorWithSite {
 
         /// <summary>
         /// Function that builds the contents of the generated file based on the contents of the input file
@@ -67,28 +58,32 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
             // Turn it into a virtual path by prepending ~ and fixing it up
             string virtualPath = VirtualPathUtility.ToAppRelative("~" + projectRelativePath);
 
-            //Find a web.config in this project
-            var webconfigItem =
-                this.GetProject().ProjectItems.Cast<ProjectItem>().FirstOrDefault(
-                    item => "web.config".Equals(item.Name, StringComparison.InvariantCultureIgnoreCase));
+			var vdm = new VirtualDirectoryMapping(appRoot, true);
+			var wcfm = new WebConfigurationFileMap();
+			wcfm.VirtualDirectories.Add("/", vdm);
 
-            var vdm = new VirtualDirectoryMapping(Path.GetDirectoryName(webconfigItem.FileNames[0]), true);
-            var wcfm = new WebConfigurationFileMap();
-            wcfm.VirtualDirectories.Add("/", vdm);
+			var config = WebConfigurationManager.OpenMappedWebConfiguration(wcfm, "/");
+			//System.Configuration.ConfigurationManager.OpenExeConfiguration(configFile);
 
-            var config = WebConfigurationManager.OpenMappedWebConfiguration(wcfm, "/");
+			var sectGroup = new RazorWebSectionGroup
+			                	{
+			                		Host = (HostSection) config.GetSection(HostSection.SectionName) ??
+			                			new HostSection {FactoryType = typeof (MvcWebRazorHostFactory).AssemblyQualifiedName},
+			                		Pages = (RazorPagesSection) config.GetSection(RazorPagesSection.SectionName)
+			                	};
 
+        	// Create the same type of Razor host that's used to process Razor files in App_Code
+			var host = WebRazorHostFactory.CreateHostFromConfig(sectGroup, virtualPath, InputFilePath);
+			//new MvcWebPageRazorHost(virtualPath, InputFilePath);
+			// Set the namespace to be the same as what's used by default for regular .cs files
+			host.DefaultNamespace = FileNameSpace;
 
-            // Create the same type of Razor host that's used to process Razor files in App_Code
-            //var host = new WebCodeRazorHost(virtualPath, InputFilePath);
-            var host = WebRazorHostFactory.CreateDefaultHost().CreateHostFromConfig(sectGroup, virtualPath, InputFilePath));
-
-            // Set the namespace to be the same as what's used by default for regular .cs files
-            host.DefaultNamespace = FileNameSpace;
-
-            // Remove the WebMatrix.Data namespaces which is not typically used in MVC
-            host.NamespaceImports.Remove("WebMatrix.Data");
-            host.NamespaceImports.Remove("WebMatrix.WebData");
+			var systemWebPages = config.GetSection("system.web/pages") as PagesSection;
+			foreach (NamespaceInfo ns in systemWebPages.Namespaces)
+			{
+				host.NamespaceImports.Add(ns.Namespace);
+			}
+			
             
             // Create a Razor engine nad pass it our host
             var engine = new RazorTemplateEngine(host);

@@ -166,15 +166,26 @@
     <Folder Include="Areas\Security\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Src\Commons.Web.PrecompiledViews\Commons.Web.PrecompiledViews.csproj">
+      <Project>{46C9FDE4-328A-4E80-8504-AED5E2196AE1}</Project>
+      <Name>Commons.Web.PrecompiledViews</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Src\Commons\Commons.csproj">
       <Project>{25C350AF-4957-47E8-960A-6C59794C5DEF}</Project>
       <Name>Commons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Src\RazorSingleFileGenerator\RazorSingleFileGenerator.csproj">
+      <Project>{461089E7-008E-4737-BA17-E1FCD1CC3D0E}</Project>
+      <Name>RazorSingleFileGenerator</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Security\Views\Account\Register.cshtml" />
     <Content Include="Areas\Security\Views\Web.config" />
-    <None Include="LogOn.cshtml" />
+    <None Include="LogOn.cshtml">
+      <Generator>Commons.Web.RazorSingleFileGenerator.RazorClassGenerator</Generator>
+      <LastGenOutput>LogOn.cs</LastGenOutput>
+    </None>
     <None Include="Areas\Security\Views\Auth\_LogOnNative.cshtml" />
     <None Include="Areas\Security\Views\Auth\_LogOnOpenId.cshtml" />
     <None Include="Areas\Security\Views\_ViewStart.cshtml" />

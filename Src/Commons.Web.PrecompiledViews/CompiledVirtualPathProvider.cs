@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web.Hosting;
@@ -25,15 +26,13 @@ namespace Commons.Web.Mvc.PrecompiledViews
 		public override bool FileExists(string virtualPath)
 		{
 			return
-				CompiledViewExists(virtualPath)
+				GetCompiledType(virtualPath) != null 
 				|| virtualPathProvider.FileExists(virtualPath);
 		}
 
-		private bool CompiledViewExists(string virtualPath)
+		private Type GetCompiledType(string virtualPath)
 		{
-			if (virtualPath.StartsWith("/"))
-				virtualPath = "~" + virtualPath;
-			return VirtualPathFactories.Any(f => f.Exists(virtualPath));
+			return ApplicationPartRegistry.Instance.GetCompiledType(virtualPath);
 		}
 
 		/// <summary>
@@ -45,48 +44,17 @@ namespace Commons.Web.Mvc.PrecompiledViews
 		/// <param name="virtualPath">The path to the virtual file.</param>
 		public override VirtualFile GetFile(string virtualPath)
 		{
-			return
-				virtualPathProvider.FileExists(virtualPath)
-					? virtualPathProvider.GetFile(virtualPath)
-					: CompiledViewExists(virtualPath)
-					  	? new CompiledVirtualFile(virtualPath)
-					  	: null;
-		}
-
-		#region reflection stuff
-
-		static VirtualPathFactoryManager virtualPathFactoryManager;
-		static internal VirtualPathFactoryManager VirtualPathFactoryManager
-		{
-			get
+			if (virtualPathProvider.FileExists(virtualPath))
 			{
-				if (virtualPathFactoryManager == null)
-				{
-					var getter = typeof(VirtualPathFactoryManager).GetProperty("Instance", BindingFlags.Static | BindingFlags.NonPublic);
-					virtualPathFactoryManager = getter.GetValue(null, null) as VirtualPathFactoryManager;
-				}
-				return virtualPathFactoryManager;
-
+				return virtualPathProvider.GetFile(virtualPath);
 			}
-		}
-
-		private List<IVirtualPathFactory> virtualPathFactories;
-		private List<IVirtualPathFactory> VirtualPathFactories
-		{
-			get
+			var compiledType = GetCompiledType(virtualPath);
+			if (compiledType != null)
 			{
-				if (virtualPathFactories == null)
-					virtualPathFactories = FindVirtualPathFactories();
-				return virtualPathFactories;
+				return new CompiledVirtualFile(virtualPath, compiledType);
 			}
+			return null;
 		}
-		private List<IVirtualPathFactory> FindVirtualPathFactories()
-		{
-			return
-				typeof (VirtualPathFactoryManager)
-					.GetField("_virtualPathFactories", BindingFlags.NonPublic | BindingFlags.Instance)
-					.GetValue(VirtualPathFactoryManager) as List<IVirtualPathFactory>;
-		}
-		#endregion
+
 	}
 }

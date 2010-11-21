@@ -8,78 +8,40 @@ using Commons.Web.Mvc.PrecompiledViews;
 
 namespace Commons.Web.Mvc.PrecompiledViews
 {
-	public class ApplicationPartRegistry : IApplicationPartRegistry
+	public static class ApplicationPartRegistry
 	{
-		private readonly Dictionary<string, Type> registeredPaths = new Dictionary<string, Type>();
-		private static readonly Type webPageType = typeof(WebPageRenderingBase);
-
 		static ApplicationPartRegistry()
 		{
-			Instance = new ApplicationPartRegistry();
+			Instance = new DictionaryBasedApplicationPartRegistry();
 		}
 		public static IApplicationPartRegistry Instance
 		{
 			get;
-			private set;
+			set;
 		}
 
-		public Type GetCompiledType(string virtualPath)
+		public static Type GetCompiledType(string virtualPath)
 		{
-			if (virtualPath == null) throw new ArgumentNullException("virtualPath");
-			return registeredPaths[virtualPath.ToLower()];
+			return Instance.GetCompiledType(virtualPath);
 		}
 
-		public bool CompiledTypeExists(string virtualPath)
+		public static void Register(Assembly applicationPart)
 		{
-			if (virtualPath == null) throw new ArgumentNullException("virtualPath");
-			return registeredPaths.ContainsKey(virtualPath.ToLower());
+			Register(applicationPart);
 		}
 
-		public void Register(Assembly applicationPart)
+		public static void Register(Assembly applicationPart, string rootVirtualPath)
 		{
-			Register(applicationPart, null);
-		}
-		
-		public virtual void Register(Assembly applicationPart, string rootVirtualPath)
-		{
-			foreach (var type in applicationPart.GetTypes().Where(type => type.IsSubclassOf(webPageType)))
-			{
-				RegisterWebPage(type, rootVirtualPath);
-			}
+			Instance.Register(applicationPart, rootVirtualPath);
 		}
 
-		public virtual void RegisterWebPage(Type type)
+		public static void RegisterWebPage(Type type)
 		{
-			RegisterWebPage(type, string.Empty);
+			RegisterWebPage(type);
 		}
-		public virtual void RegisterWebPage(Type type, string rootVirtualPath)
+		public static void RegisterWebPage(Type type, string rootVirtualPath)
 		{
-			var attribute = webPageType.GetCustomAttributes(typeof(PageVirtualPathAttribute), false).Cast<PageVirtualPathAttribute>().SingleOrDefault<PageVirtualPathAttribute>();
-			if (attribute != null)
-			{
-				var rootRelativeVirtualPath = GetRootRelativeVirtualPath(rootVirtualPath ?? "", attribute.VirtualPath);
-				registeredPaths[rootRelativeVirtualPath.ToLower()] = type;
-			}
+			Instance.RegisterWebPage(type, rootVirtualPath);
 		}
-		internal static string GetRootRelativeVirtualPath(string rootVirtualPath, string pageVirtualPath)
-		{
-			string relativePath = pageVirtualPath;
-			if (relativePath.StartsWith("~/", StringComparison.Ordinal))
-			{
-				relativePath = relativePath.Substring(2);
-			}
-			if (!rootVirtualPath.EndsWith("/", StringComparison.OrdinalIgnoreCase))
-			{
-				rootVirtualPath = rootVirtualPath + "/";
-			}
-			relativePath = VirtualPathUtility.Combine(rootVirtualPath, relativePath);
-			if (!relativePath.StartsWith("~"))
-			{
-				return relativePath.StartsWith("/") ? "~/" + relativePath : "~" + relativePath;
-			}
-			return relativePath;
-		}
-
-
 	}
 }

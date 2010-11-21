@@ -12,6 +12,7 @@ using System.Web.WebPages;
 using System.Web.WebPages.Razor;
 using BoC.Security.Model;
 using BoC.Web;
+using Commons.Web.Mvc.PrecompiledViews;
 using Norm.Configuration;
 
 namespace ToDoList
@@ -28,7 +29,7 @@ namespace ToDoList
         {
 			base.InitializeApplication();
 			//ViewEngines.Engines.Add(new VirtualPathFactoryManagerViewEngine());
-        	ApplicationPart.Register(new ApplicationPart(typeof (MvcApplication).Assembly, "~/Areas/Security/Views/Auth/"));
+        	ApplicationPartRegistry.Register(typeof (MvcApplication).Assembly, "~/Areas/Security/Views/Auth/");
 
 			MongoConfiguration.Initialize(config =>
                             config.For<User>(c => c.ForProperty(u => u.Identity).Ignore()));
