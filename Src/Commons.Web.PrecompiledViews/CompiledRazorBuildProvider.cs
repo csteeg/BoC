@@ -37,8 +37,8 @@ namespace BoC.Web.Mvc.PrecompiledViews
 		{
 			get
 			{
-				if (base.VirtualPathDependencies == null)
-					return null;
+				if (base.VirtualPathDependencies == null || !IsCompiledFile)
+					return base.VirtualPathDependencies;
 
 				return base.VirtualPathDependencies.Cast<string>().Where(s => File.Exists(s) || Directory.Exists(s)).ToList();
 			}
