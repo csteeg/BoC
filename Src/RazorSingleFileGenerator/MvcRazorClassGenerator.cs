@@ -63,7 +63,7 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
             // Turn it into a virtual path by prepending ~ and fixing it up
             string virtualPath = VirtualPathUtility.ToAppRelative("~" + projectRelativePath);
 
-			var vdm = new VirtualDirectoryMapping(appRoot, true);
+			var vdm = new VirtualDirectoryMapping(Path.GetDirectoryName(InputFilePath), true);
 			var wcfm = new WebConfigurationFileMap();
 			wcfm.VirtualDirectories.Add("/", vdm);
 
