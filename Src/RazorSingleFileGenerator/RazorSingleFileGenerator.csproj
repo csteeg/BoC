@@ -180,10 +180,10 @@
     <Content Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="LogOn.cshtml">
-      <Generator>MvcRazorClassGenerator</Generator>
-      <LastGenOutput>LogOn.cs</LastGenOutput>
-    </None>
+    <ProjectReference Include="..\Commons.Web.PrecompiledViews\Commons.Web.PrecompiledViews.csproj">
+      <Project>{46C9FDE4-328A-4E80-8504-AED5E2196AE1}</Project>
+      <Name>Commons.Web.PrecompiledViews</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <!--

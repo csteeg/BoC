@@ -17,7 +17,9 @@ using System.IO;
 using System.Text;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using System.Web.WebPages.Razor.Configuration;
+using Commons.Web.Mvc.PrecompiledViews;
 using Microsoft.VisualStudio.Shell;
 using VSLangProj80;
 using System.Web.Razor;
@@ -45,6 +47,9 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
         /// <param name="inputFileContent">Content of the input file</param>
         /// <returns>Generated file as a byte array</returns>
         protected override byte[] GenerateCode(string inputFileContent) {
+            //add reference to our buildprovider and virtualpathprovider
+            GetVSProject().References.Add(typeof (CompiledRazorBuildProvider).Assembly.Location);
+
             // Get the root folder of the project
             var appRoot = Path.GetDirectoryName(GetProject().FullName);
 
@@ -83,7 +88,6 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
 			{
 				host.NamespaceImports.Add(ns.Namespace);
 			}
-			
             
             // Create a Razor engine nad pass it our host
             var engine = new RazorTemplateEngine(host);
@@ -125,8 +129,13 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
                     generatedType.CustomAttributes.Add(
                         new CodeAttributeDeclaration(
                             new CodeTypeReference(typeof(GeneratedCodeAttribute)),
-                            new CodeAttributeArgument(new CodePrimitiveExpression("RazorSingleFileGenerator")),
+                            new CodeAttributeArgument(new CodePrimitiveExpression("MvcRazorClassGenerator")),
                             new CodeAttributeArgument(new CodePrimitiveExpression("1.0"))));
+
+                    generatedType.CustomAttributes.Add(
+                        new CodeAttributeDeclaration(
+                            new CodeTypeReference(typeof(PageVirtualPathAttribute)),
+                            new CodeAttributeArgument(new CodePrimitiveExpression(virtualPath))));
 
                     //Generate the code
                     provider.GenerateCodeFromCompileUnit(generatedCode, writer, options);
