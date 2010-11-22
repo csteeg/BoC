@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.IO;
-using System.Reflection;
-using System.Web;
-using System.Web.Compilation;
-using System.Web.Configuration;
-using System.Web.Hosting;
-using System.Web.Mvc;
-using System.Web.WebPages;
-using System.Web.WebPages.Razor;
+﻿using System.Web.Mvc;
 using BoC.Security.Model;
 using BoC.Web;
-using Commons.Web.Mvc.PrecompiledViews;
+using BoC.Web.Mvc.PrecompiledViews;
 using Norm.Configuration;
 
 namespace ToDoList

@@ -1,11 +1,11 @@
 ﻿using System.Web;
 using System.Web.Compilation;
 using System.Web.Hosting;
-using Commons.Web.Mvc.PrecompiledViews;
+using BoC.Web.Mvc.PrecompiledViews;
 
 [assembly: PreApplicationStartMethod(typeof(PreApplicationStartCode), "Start")]
 
-namespace Commons.Web.Mvc.PrecompiledViews
+namespace BoC.Web.Mvc.PrecompiledViews
 {
 	public static class PreApplicationStartCode
 	{

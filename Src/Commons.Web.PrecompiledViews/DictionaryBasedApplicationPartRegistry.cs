@@ -4,9 +4,9 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.WebPages;
-using Commons.Web.Mvc.PrecompiledViews;
+using BoC.Web.Mvc.PrecompiledViews;
 
-namespace Commons.Web.Mvc.PrecompiledViews
+namespace BoC.Web.Mvc.PrecompiledViews
 {
 	public class DictionaryBasedApplicationPartRegistry : IApplicationPartRegistry
 	{

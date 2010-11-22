@@ -4,8 +4,9 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Hosting;
 using System.Web.WebPages;
+using BoC.Web.Mvc.PrecompiledViews;
 
-namespace Commons.Web.Mvc.PrecompiledViews
+namespace BoC.Web.Mvc.PrecompiledViews
 {
 	public class CompiledVirtualPathProvider: VirtualPathProvider
 	{

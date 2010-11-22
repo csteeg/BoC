@@ -2,7 +2,7 @@
 using System.IO;
 using System.Web.Hosting;
 
-namespace Commons.Web.Mvc.PrecompiledViews
+namespace BoC.Web.Mvc.PrecompiledViews
 {
 	public class CompiledVirtualFile : VirtualFile
 	{

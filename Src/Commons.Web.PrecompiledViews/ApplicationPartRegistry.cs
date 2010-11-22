@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Web;
-using System.Web.WebPages;
-using Commons.Web.Mvc.PrecompiledViews;
+using BoC.Web.Mvc.PrecompiledViews;
 
-namespace Commons.Web.Mvc.PrecompiledViews
+namespace BoC.Web.Mvc.PrecompiledViews
 {
 	public static class ApplicationPartRegistry
 	{
@@ -27,7 +23,7 @@ namespace Commons.Web.Mvc.PrecompiledViews
 
 		public static void Register(Assembly applicationPart)
 		{
-			Register(applicationPart);
+			Register(applicationPart, null);
 		}
 
 		public static void Register(Assembly applicationPart, string rootVirtualPath)
@@ -37,7 +33,7 @@ namespace Commons.Web.Mvc.PrecompiledViews
 
 		public static void RegisterWebPage(Type type)
 		{
-			RegisterWebPage(type);
+			RegisterWebPage(type, null);
 		}
 		public static void RegisterWebPage(Type type, string rootVirtualPath)
 		{

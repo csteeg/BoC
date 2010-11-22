@@ -19,7 +19,7 @@ using System.Web.Configuration;
 using System.Web.Mvc;
 using System.Web.WebPages;
 using System.Web.WebPages.Razor.Configuration;
-using Commons.Web.Mvc.PrecompiledViews;
+using BoC.Web.Mvc.PrecompiledViews;
 using Microsoft.VisualStudio.Shell;
 using VSLangProj80;
 using System.Web.Razor;
@@ -56,18 +56,14 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
             // Determine the project-relative path
             string projectRelativePath = InputFilePath.Substring(appRoot.Length);
 
-            //let's remove 'views' from the path, so we can store our views in the /views/ folder
-            if (projectRelativePath.ToLower().StartsWith("/views"))
-                projectRelativePath = projectRelativePath.Substring("/views".Length);
-
             // Turn it into a virtual path by prepending ~ and fixing it up
             string virtualPath = VirtualPathUtility.ToAppRelative("~" + projectRelativePath);
 
-			var vdm = new VirtualDirectoryMapping(Path.GetDirectoryName(InputFilePath), true);
+			var vdm = new VirtualDirectoryMapping(appRoot, true);
 			var wcfm = new WebConfigurationFileMap();
 			wcfm.VirtualDirectories.Add("/", vdm);
 
-			var config = WebConfigurationManager.OpenMappedWebConfiguration(wcfm, "/");
+			var config = WebConfigurationManager.OpenMappedWebConfiguration(wcfm, projectRelativePath);
 			//System.Configuration.ConfigurationManager.OpenExeConfiguration(configFile);
 
 			var sectGroup = new RazorWebSectionGroup
@@ -84,12 +80,26 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
 			host.DefaultNamespace = FileNameSpace;
 
 			var systemWebPages = config.GetSection("system.web/pages") as PagesSection;
-			foreach (NamespaceInfo ns in systemWebPages.Namespaces)
+			if (systemWebPages != null)
 			{
-				host.NamespaceImports.Add(ns.Namespace);
+				foreach (NamespaceInfo ns in systemWebPages.Namespaces)
+				{
+					host.NamespaceImports.Add(ns.Namespace);
+				}
 			}
-            
-            // Create a Razor engine nad pass it our host
+
+			var compilationSection = config.GetSection("system.web/compilation") as CompilationSection;
+			if (compilationSection != null)
+			{
+				foreach (AssemblyInfo assembly in compilationSection.Assemblies)
+				{
+					if (assembly.Assembly != "*")
+					{
+						GetVSProject().References.Add(assembly.Assembly);
+					}
+				}
+			}
+			// Create a Razor engine nad pass it our host
             var engine = new RazorTemplateEngine(host);
 
             // Generate code

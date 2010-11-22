@@ -6,8 +6,10 @@ using System.IO;
 using System.Web.Compilation;
 using System.Web.Hosting;
 using System.Web.WebPages.Razor;
+using System.Linq;
+using System.Linq.Expressions;
 
-namespace Commons.Web.Mvc.PrecompiledViews
+namespace BoC.Web.Mvc.PrecompiledViews
 {
 	[BuildProviderAppliesTo(BuildProviderAppliesTo.Web | BuildProviderAppliesTo.Code)]
 	public class CompiledRazorBuildProvider : RazorBuildProvider
@@ -29,6 +31,17 @@ namespace Commons.Web.Mvc.PrecompiledViews
 				if (compiledFile != null) return compiledFile.CompiledType;
 			}
 			return base.GetGeneratedType(results);
+		}
+
+		public override ICollection VirtualPathDependencies
+		{
+			get
+			{
+				if (base.VirtualPathDependencies == null)
+					return null;
+
+				return base.VirtualPathDependencies.Cast<string>().Where(s => File.Exists(s) || Directory.Exists(s)).ToList();
+			}
 		}
 
 		/// <summary>

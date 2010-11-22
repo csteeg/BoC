@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Commons.Web.Mvc.PrecompiledViews
+namespace BoC.Web.Mvc.PrecompiledViews
 {
 	public interface IApplicationPartRegistry
 	{
