@@ -292,6 +292,7 @@ namespace BoC.Security.Mvc.Controllers
 				Realm.AutoDetect,
 				new Uri(Request.Url, Url.Action("PopUpReturnTo")),
                 new Uri(Request.Url, Url.Action("PrivacyStatement")),
+				"http://hyves.nl/",
 				"https://me.yahoo.com/",
 				"https://www.google.com/accounts/o8/id");
 		}

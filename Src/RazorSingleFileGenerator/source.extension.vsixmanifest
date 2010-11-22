@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Vsix xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
+    <Identifier Id="AC78A4E9-84DF-4346-B71B-5A5E7F7FB292">
+        <Name>Razor Single File Generator for MVC</Name>
+        <Author> Chris van de Steeg</Author>
+        <Version>1.0.0</Version>
+        <Description xml:space="preserve">Single File Generator for Razor View files (.cshtml files)</Description>
+        <Locale>1033</Locale>
+        <MoreInfoUrl>http://code.google.com/p/webdotnet/</MoreInfoUrl>
+        <SupportedProducts>
+            <VisualStudio Version="10.0">
+                <Edition>Ultimate</Edition>
+                <Edition>Premium</Edition>
+                <Edition>Pro</Edition>
+            </VisualStudio>
+        </SupportedProducts>
+        <SupportedFrameworkRuntimeEdition MinVersion="4.0" MaxVersion="4.0" />
+    </Identifier>
+    <References />
+    <Content />
+</Vsix>
