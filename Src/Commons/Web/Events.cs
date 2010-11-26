@@ -1,3 +1,4 @@
+using System;
 using System.Web;
 using BoC.EventAggregator;
 
@@ -15,7 +16,7 @@ namespace BoC.Web.Events
     public class WebRequestPreHandlerExecute : BaseEvent<WebRequestEventArgs> { }
     public class WebRequestPostHandlerExecute : BaseEvent<WebRequestEventArgs> { }
     public class WebApplicationStartEvent : BaseEvent<WebApplicationEventArgs> { }
-    public class WebApplicationEndEvent : BaseEvent<WebApplicationEventArgs> { }
+    public class WebApplicationEndEvent : BaseEvent<EventArgs> { }
 
     public class WebRequestEventArgs
     {

@@ -175,6 +175,7 @@
     <Compile Include="Web\CookieAwareWebClient.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Web\EventTriggeringHttpModule.cs" />
     <Compile Include="Web\Events.cs" />
   </ItemGroup>
   <ItemGroup>
