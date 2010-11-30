@@ -57,6 +57,7 @@
     <Reference Include="Commons.Web.Mvc">
       <HintPath>..\..\Build\Commons.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Commons.Web.Mvc.PrecompiledViews, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="DotNetOpenAuth, Version=3.4.6.10316, Culture=neutral, PublicKeyToken=2726ea45d0d37018, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\DotNetOpenAuth\DotNetOpenAuth.dll</HintPath>
@@ -67,14 +68,22 @@
       <HintPath>..\..\lib\atheken-NoRM\Norm.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
+    <Reference Include="System.ServiceModel.Activities" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\aspnetmvc3\System.Web.Mvc.dll</HintPath>
@@ -84,7 +93,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\aspnetmvc3\System.Web.WebPages.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.WorkflowServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -99,11 +110,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="LogOn.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LogOn.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -165,11 +171,7 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\Security\Controllers\" />
-    <Folder Include="Areas\Security\Models\" />
-    <Folder Include="Areas\Security\Views\Shared\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\Src\Commons.Persistence.NHibernate\Commons.Persistence.NHibernate.csproj">
       <Project>{0F48E392-9474-4714-884A-129253F68997}</Project>
@@ -189,15 +191,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Security\Views\Account\Register.cshtml" />
-    <Content Include="Areas\Security\Views\Web.config" />
-    <None Include="LogOn.cshtml">
-      <Generator>MvcRazorClassGenerator</Generator>
-      <LastGenOutput>LogOn.cs</LastGenOutput>
-    </None>
-    <None Include="Areas\Security\Views\Auth\_LogOnNative.cshtml" />
-    <None Include="Areas\Security\Views\Auth\_LogOnOpenId.cshtml" />
-    <None Include="Areas\Security\Views\_ViewStart.cshtml" />
     <None Include="RazorSingleFileGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RazorSingleFileGenerator.cs</LastGenOutput>

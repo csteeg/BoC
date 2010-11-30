@@ -1,0 +1,43 @@
+﻿@model dynamic
+@using DotNetOpenAuth.Mvc;
+@using DotNetOpenAuth.OpenId.RelyingParty;
+
+    <div>
+        <fieldset>
+            <legend>Login using an account you already use.</legend>
+@using (Html.BeginForm("OpenId", "Auth")) {
+    @Html.Hidden("ReturnUrl", Request.QueryString["ReturnUrl"], new { id = "ReturnUrl" })
+    @Html.Hidden("openid_openidAuthData")
+    <div>
+    @MvcHtmlString.Create(Html.OpenIdSelector(new SelectorButton[] {
+        new SelectorProviderButton("http://www.hyves.nl/", Url.Content("~/Content/images/hyves.gif")),
+	    new SelectorProviderButton("https://me.yahoo.com/", Url.Content("~/Content/images/yahoo.gif")),
+	    new SelectorProviderButton("https://www.google.com/accounts/o8/id", Url.Content("~/Content/images/google.gif")),
+	    new SelectorOpenIdButton(Url.Content("~/Content/images/openid.png")),
+    }))
+
+	    <div class="helpDoc">
+		    <p>
+			    If you have logged in previously, click the same button you did last time!!
+		    </p>
+		    <p>
+			    If you don't have an account with any of these services, just pick Google. They'll
+			    help you set up an account.
+		    </p>
+	    </div>
+
+    </div>
+}
+        </fieldset>
+    </div>
+@{
+    var options = new OpenIdAjaxOptions
+    {
+        PreloadedDiscoveryResults = (string)this.ViewData["PreloadedDiscoveryResults"],
+    };
+    Html.ScriptManager()
+      .ScriptInclude("~/Scripts/jquery.cookie.js")
+      .Script("openidselectorscripts_opener", "</script>")
+      .Script("openidselectorscripts", Html.OpenIdSelectorScripts(new OpenIdSelector{DownloadYahooUILibrary = false}, options))
+      .Script("openidselectorscripts_closer", "<script>");
+}

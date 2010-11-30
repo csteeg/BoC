@@ -1,0 +1,13 @@
+﻿@inherits System.Web.Mvc.WebViewPage<BoC.Security.Mvc.ViewModels.LogOnModel>
+@using DotNetOpenAuth.Mvc;
+@{
+    View.Title = "Log On";
+}
+@section head {
+    @MvcHtmlString.Create(Html.OpenIdSelectorStyles())
+}
+
+@Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
+@Html.ValidationMessage("_FORM")
+@Html.Partial("_LogonOpenId")
+@Html.Partial("_LogonNative")

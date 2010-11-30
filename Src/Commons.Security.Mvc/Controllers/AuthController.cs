@@ -18,24 +18,24 @@ using DotNetOpenAuth.OpenId.RelyingParty;
 
 namespace BoC.Security.Mvc.Controllers
 {
-    public class AuthController : Controller
-    {
-        public IFormsAuthentication FormsAuthentication { get; set; }
-        public IOpenIdRelyingParty RelyingParty { get; private set; }
+	public class AuthController : Controller
+	{
+		public IFormsAuthentication FormsAuthentication { get; set; }
+		public IOpenIdRelyingParty RelyingParty { get; private set; }
 
-        private readonly IUserService service;
-    	private readonly IModelService<AuthenticationToken> authTokenService;
+		private readonly IUserService service;
+		private readonly IModelService<AuthenticationToken> authTokenService;
 
-    	// This constructor is not used by the MVC framework but is instead provided for ease
-        // of unit testing this type. See the comments at the end of this file for more
-        // information.
-        public AuthController(IUserService service, IModelService<AuthenticationToken> authTokenService)
-        {
-            FormsAuthentication = new FormsAuthenticationWrapper();
-            RelyingParty = new OpenIdRelyingPartyService();
-            this.service = service;
-        	this.authTokenService = authTokenService;
-        }
+		// This constructor is not used by the MVC framework but is instead provided for ease
+		// of unit testing this type. See the comments at the end of this file for more
+		// information.
+		public AuthController(IUserService service, IModelService<AuthenticationToken> authTokenService)
+		{
+			FormsAuthentication = new FormsAuthenticationWrapper();
+			RelyingParty = new OpenIdRelyingPartyService();
+			this.service = service;
+			this.authTokenService = authTokenService;
+		}
 
 		public virtual ActionResult OpenId(string openid_identifier)
 		{
@@ -139,10 +139,10 @@ namespace BoC.Security.Mvc.Controllers
 							else
 							{
 								user = new User
-								       	{
-								       		Email = email,
-								       		Name = name
-								       	};
+										{
+											Email = email,
+											Name = name
+										};
 							}
 							user.LastActivity = DateTime.Now;
 							user = service.SaveOrUpdate(user);
@@ -151,10 +151,10 @@ namespace BoC.Security.Mvc.Controllers
 							if (isNew)
 							{
 								authtoken = new AuthenticationToken
-								            	{
-								            		ClaimedIdentifier = response.ClaimedIdentifier.ToString(),
-								            		User = user
-								            	};
+												{
+													ClaimedIdentifier = response.ClaimedIdentifier.ToString(),
+													User = user
+												};
 							}
 							authtoken.FriendlyIdentifier = response.FriendlyIdentifierForDisplay;
 							authtoken.LastUsed = DateTime.Now;
@@ -191,97 +191,97 @@ namespace BoC.Security.Mvc.Controllers
 			return View("LogOn");
 		}
 
-        public virtual ActionResult LogOn()
-        {
-        	PreloadDiscoveryResults();
-            return View();
-        }
+		public virtual ActionResult LogOn()
+		{
+			PreloadDiscoveryResults();
+			return View();
+		}
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings",
-            Justification = "Needs to take same parameter type as Controller.Redirect()")]
-        public virtual ActionResult LogOn(string userName, string password, bool rememberMe, string returnUrl) {
+		[AcceptVerbs(HttpVerbs.Post)]
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings",
+			Justification = "Needs to take same parameter type as Controller.Redirect()")]
+		public virtual ActionResult LogOn(string userName, string password, bool rememberMe, string returnUrl) {
 
-            if (!ValidateLogOn(userName, password)) {
-                return View();
-            }
+			if (!ValidateLogOn(userName, password)) {
+				return View();
+			}
 
-            User user = null;
+			User user = null;
 
-            try
-            {
-                user = service.Authenticate(userName, password);
-            }
-            catch (RulesException rulesException)
-            {
-                foreach (ErrorInfo info in rulesException.Errors)
-                {
-                    ModelState.AddModelError("_FORM", info.ErrorMessage);
-                }
-                return View();
-            }
+			try
+			{
+				user = service.Authenticate(userName, password);
+			}
+			catch (RulesException rulesException)
+			{
+				foreach (ErrorInfo info in rulesException.Errors)
+				{
+					ModelState.AddModelError("_FORM", info.ErrorMessage);
+				}
+				return View();
+			}
 
-            if (user == null)
-            {
-                ModelState.AddModelError("_FORM", "The username or password provided is incorrect.");
-                return View();
-            }
+			if (user == null)
+			{
+				ModelState.AddModelError("_FORM", "The username or password provided is incorrect.");
+				return View();
+			}
 
-            FormsAuthentication.SignIn(user.Id.ToString(), rememberMe);
-            HttpContext.User = user;
+			FormsAuthentication.SignIn(user.Id.ToString(), rememberMe);
+			HttpContext.User = user;
 
-            if (!String.IsNullOrEmpty(returnUrl)) {
-                return Redirect(returnUrl);
-            } else {
-                return RedirectToAction("Index", "Home");
-            }
-        }
+			if (!String.IsNullOrEmpty(returnUrl)) {
+				return Redirect(returnUrl);
+			} else {
+				return RedirectToAction("Index", "Home");
+			}
+		}
 
-        public virtual ActionResult LogOff() {
+		public virtual ActionResult LogOff() {
 
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
-        }
+			FormsAuthentication.SignOut();
+			return RedirectToAction("Index", "Home");
+		}
 
-        protected override void OnActionExecuting(ActionExecutingContext filterContext) {
-            if (filterContext.HttpContext.User.Identity is WindowsIdentity) {
-                throw new InvalidOperationException("Windows authentication is not supported.");
-            }
-        }
+		protected override void OnActionExecuting(ActionExecutingContext filterContext) {
+			if (filterContext.HttpContext.User.Identity is WindowsIdentity) {
+				throw new InvalidOperationException("Windows authentication is not supported.");
+			}
+		}
 
-        /// <summary>
-        /// Performs discovery on a given identifier.
-        /// </summary>
-        /// <param name="identifier">The identifier on which to perform discovery.</param>
-        /// <returns>The JSON result of discovery.</returns>
-        public ActionResult Discover(string identifier)
-        {
-            if (!this.Request.IsAjaxRequest())
-            {
-                throw new InvalidOperationException();
-            }
+		/// <summary>
+		/// Performs discovery on a given identifier.
+		/// </summary>
+		/// <param name="identifier">The identifier on which to perform discovery.</param>
+		/// <returns>The JSON result of discovery.</returns>
+		public ActionResult Discover(string identifier)
+		{
+			if (!this.Request.IsAjaxRequest())
+			{
+				throw new InvalidOperationException();
+			}
 
-            return this.RelyingParty.AjaxDiscovery(
-                identifier,
-                Realm.AutoDetect,
-                new Uri(Request.Url, Url.Action("PopUpReturnTo")),
-                new Uri(Request.Url, Url.Action("PrivacyStatement")));
-        }
-        
-        /// <summary>
-        /// Handles the positive assertion that comes from Providers to Javascript running in the browser.
-        /// </summary>
-        /// <returns>The action result.</returns>
-        /// <remarks>
-        /// This method instructs ASP.NET MVC to <i>not</i> validate input
-        /// because some OpenID positive assertions messages otherwise look like
-        /// hack attempts and result in errors when validation is turned on.
-        /// </remarks>
-        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post), ValidateInput(false)]
-        public ActionResult PopUpReturnTo()
-        {
-            return this.RelyingParty.ProcessAjaxOpenIdResponse();
-        }
+			return this.RelyingParty.AjaxDiscovery(
+				identifier,
+				Realm.AutoDetect,
+				new Uri(Request.Url, Url.Action("PopUpReturnTo")),
+				new Uri(Request.Url, Url.Action("PrivacyStatement")));
+		}
+		
+		/// <summary>
+		/// Handles the positive assertion that comes from Providers to Javascript running in the browser.
+		/// </summary>
+		/// <returns>The action result.</returns>
+		/// <remarks>
+		/// This method instructs ASP.NET MVC to <i>not</i> validate input
+		/// because some OpenID positive assertions messages otherwise look like
+		/// hack attempts and result in errors when validation is turned on.
+		/// </remarks>
+		[AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post), ValidateInput(false)]
+		public ActionResult PopUpReturnTo()
+		{
+			return this.RelyingParty.ProcessAjaxOpenIdResponse();
+		}
 
 		/// <summary>
 		/// Preloads discovery results for the OP buttons we display on the selector in the ViewData.
@@ -291,58 +291,58 @@ namespace BoC.Security.Mvc.Controllers
 			this.ViewData["PreloadedDiscoveryResults"] = this.RelyingParty.PreloadDiscoveryResults(
 				Realm.AutoDetect,
 				new Uri(Request.Url, Url.Action("PopUpReturnTo")),
-                new Uri(Request.Url, Url.Action("PrivacyStatement")),
+				new Uri(Request.Url, Url.Action("PrivacyStatement")),
 				"http://hyves.nl/",
 				"https://me.yahoo.com/",
 				"https://www.google.com/accounts/o8/id");
 		}
 
 
-        #region Validation Methods
+		#region Validation Methods
 
-        public virtual bool ValidateChangePassword(string currentPassword, string newPassword, string confirmPassword) {
-            if (String.IsNullOrEmpty(currentPassword)) {
-                ModelState.AddModelError("currentPassword", "You must specify a current password.");
-            }
-            if (newPassword == null || newPassword.Length < service.MinRequiredPasswordLength) {
-                ModelState.AddModelError("newPassword",
-                                         String.Format(CultureInfo.CurrentCulture,
-                                                       "You must specify a new password of {0} or more characters.",
-                                                       service.MinRequiredPasswordLength));
-            }
+		public virtual bool ValidateChangePassword(string currentPassword, string newPassword, string confirmPassword) {
+			if (String.IsNullOrEmpty(currentPassword)) {
+				ModelState.AddModelError("currentPassword", "You must specify a current password.");
+			}
+			if (newPassword == null || newPassword.Length < service.MinRequiredPasswordLength) {
+				ModelState.AddModelError("newPassword",
+										 String.Format(CultureInfo.CurrentCulture,
+													   "You must specify a new password of {0} or more characters.",
+													   service.MinRequiredPasswordLength));
+			}
 
-            if (!String.Equals(newPassword, confirmPassword, StringComparison.Ordinal)) {
-                ModelState.AddModelError("_FORM", "The new password and confirmation password do not match.");
-            }
+			if (!String.Equals(newPassword, confirmPassword, StringComparison.Ordinal)) {
+				ModelState.AddModelError("_FORM", "The new password and confirmation password do not match.");
+			}
 
-            return ModelState.IsValid;
-        }
+			return ModelState.IsValid;
+		}
 
-        public virtual bool ValidateLogOn(string userName, string password) {
-            if (String.IsNullOrEmpty(userName)) {
-                ModelState.AddModelError("username", "You must specify a username.");
-            }
-            if (String.IsNullOrEmpty(password)) {
-                ModelState.AddModelError("password", "You must specify a password.");
-            }
+		public virtual bool ValidateLogOn(string userName, string password) {
+			if (String.IsNullOrEmpty(userName)) {
+				ModelState.AddModelError("username", "You must specify a username.");
+			}
+			if (String.IsNullOrEmpty(password)) {
+				ModelState.AddModelError("password", "You must specify a password.");
+			}
 
-            return ModelState.IsValid;
-        }
+			return ModelState.IsValid;
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 
-    public interface IFormsAuthentication {
-        void SignIn(string userName, bool createPersistentCookie);
-        void SignOut();
-    }
+	public interface IFormsAuthentication {
+		void SignIn(string userName, bool createPersistentCookie);
+		void SignOut();
+	}
 
-    public class FormsAuthenticationWrapper : IFormsAuthentication {
-        public void SignIn(string userName, bool createPersistentCookie) {
-            FormsAuthentication.SetAuthCookie(userName, createPersistentCookie);
-        }
-        public void SignOut() {
-            FormsAuthentication.SignOut();
-        }
-    }
+	public class FormsAuthenticationWrapper : IFormsAuthentication {
+		public void SignIn(string userName, bool createPersistentCookie) {
+			FormsAuthentication.SetAuthCookie(userName, createPersistentCookie);
+		}
+		public void SignOut() {
+			FormsAuthentication.SignOut();
+		}
+	}
 }

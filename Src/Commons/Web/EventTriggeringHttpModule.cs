@@ -1,110 +1,125 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Net.Mime;
 using System.Web;
 using BoC.EventAggregator;
 using BoC.InversionOfControl;
 using BoC.UnitOfWork;
+using BoC.Web;
 using BoC.Web.Events;
+using Microsoft.Web.Infrastructure;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
+[assembly: PreApplicationStartMethod(typeof(PreApplicationStartCode), "Start")]
 namespace BoC.Web
 {
-    public class EventTriggeringHttpModule : IHttpModule
-    {
-        private static string unitofworkkey = "BoC.Web.CommonHttpApplication.OuterUnitOfWork";
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public static class PreApplicationStartCode
+	{
+		private static bool _startWasCalled;
 
-        private volatile static bool initialized = false;
+		public static void Start()
+		{
+			if (_startWasCalled) return;
 
-        protected virtual void InitializeApplication()
-        {
-            if (!initialized)
-            {
-                initialized = true;
-                InitializeBoC();
-            }
-        }
+			_startWasCalled = true;
 
-        protected virtual void InitializeBoC()
-        {
-            Initializer.Execute();
-        }
+			DynamicModuleUtility.RegisterModule(typeof(EventTriggeringHttpModule));
+		}
+	}
 
+	public class EventTriggeringHttpModule : IHttpModule
+	{
+		private static string unitofworkkey = "BoC.Web.CommonHttpApplication.OuterUnitOfWork";
+		private static object lockObject = new object();
+		private static bool startWasCalled = false;
 
-        virtual protected void Session_Start()
-        {
-            PublishEvent<WebSessionBeginEvent>();
-        }
+		public static void StartApplication(HttpApplication context)
+		{
+			if (startWasCalled)
+				return;
 
-        virtual protected void Session_End(object sender, EventArgs e)
-        {
-            PublishEvent<WebSessionEndEvent, SessionEndEventArgs>(() => new SessionEndEventArgs(new HttpSessionStateWrapper(Session)));
-        }
+			try
+			{
+				lock (lockObject)
+				{
+					if (startWasCalled)
+						return;
+					Initializer.Execute();
+					startWasCalled = true;
+				}
+			}
+			catch
+			{
+				InfrastructureHelper.UnloadAppDomain();
+				throw;
+			}
 
-        private void PublishEvent<T, TEventArgs>(Func<TEventArgs> args) where T: BaseEvent<TEventArgs>, new()
-        {
-            var eventAggregator = IoC.Resolver.Resolve<IEventAggregator>();
-            if (eventAggregator != null)
-            {
-                eventAggregator.GetEvent<T>().Publish(args());
-            }
+			PublishEvent<WebApplicationStartEvent, WebApplicationEventArgs>(() => new WebApplicationEventArgs(context));
+		}
 
-        }
+		private static void PublishEvent<T, TEventArgs>(Func<TEventArgs> args) where T: BaseEvent<TEventArgs>, new()
+		{
+			var eventAggregator = IoC.Resolver.Resolve<IEventAggregator>();
+			if (eventAggregator != null)
+			{
+				eventAggregator.GetEvent<T>().Publish(args());
+			}
 
-        private void PublishEvent<T>() where T : BaseEvent<WebRequestEventArgs>, new()
-        {
-            var eventAggregator = IoC.Resolver.Resolve<IEventAggregator>();
-            if (eventAggregator != null)
-            {
-                eventAggregator.GetEvent<T>().Publish(new WebRequestEventArgs(new HttpContextWrapper(HttpContext.Current)));
-            }
+		}
 
-        }
+		private static void PublishEvent<T>() where T : BaseEvent<WebRequestEventArgs>, new()
+		{
+			var eventAggregator = IoC.Resolver.Resolve<IEventAggregator>();
+			if (eventAggregator != null)
+			{
+				eventAggregator.GetEvent<T>().Publish(new WebRequestEventArgs(new HttpContextWrapper(HttpContext.Current)));
+			}
 
-        public void Init(HttpApplication context)
-        {
-            context.BeginRequest += (sender, args) =>
-            {
-                ((HttpApplication)sender).Context.Items[unitofworkkey] = UnitOfWork.UnitOfWork.BeginUnitOfWork();
-                PublishEvent<WebRequestBeginEvent>();
-            };
-            context.EndRequest += (sender, args) =>
-            {
-                PublishEvent<WebRequestEndEvent>();
+		}
 
-                var unitOfWork = ((HttpApplication)sender).Context.Items[unitofworkkey] as IUnitOfWork;
-                if (unitOfWork != null)
-                {
-                    unitOfWork.Dispose();
-                }
-                ((HttpApplication)sender).Context.Items.Remove(unitofworkkey);
-            };
-            context.PostAuthorizeRequest += (sender, args) => PublishEvent<WebPostAuthorizeEvent>();
-            context.AuthorizeRequest += (sender, args) => PublishEvent<WebPostAuthorizeEvent>();
-            context.AuthenticateRequest += (sender, args) => PublishEvent<WebAuthenticateEvent>();
-            context.PostAuthenticateRequest += (sender, args) => PublishEvent<WebPostAuthenticateEvent>();
-            context.Error += (sender, args) => PublishEvent<WebRequestErrorEvent>();
-            context.PreRequestHandlerExecute += (sender, args) => PublishEvent<WebRequestPreHandlerExecute>();
-            context.PostRequestHandlerExecute += (sender, args) => PublishEvent<WebRequestPostHandlerExecute>();
+		public void Init(HttpApplication context)
+		{
+			if (!startWasCalled)
+			{
+				try
+				{
+					context.Application.Lock();
+					StartApplication(context);
+				}
+				finally
+				{
+					context.Application.UnLock();
+				}
+			}
 
-            if (!initialized)
-            try
-            {
-                context.Application.Lock();
-                lock (typeof(EventTriggeringHttpModule))
-                {
-                    InitializeApplication();
-                }
-            }
-            finally
-            {
-                context.Application.UnLock();
-            }
+			context.BeginRequest += (sender, args) =>
+			{
+				((HttpApplication)sender).Context.Items[unitofworkkey] = UnitOfWork.UnitOfWork.BeginUnitOfWork();
+				PublishEvent<WebRequestBeginEvent>();
+			};
+			context.EndRequest += (sender, args) =>
+			{
+				PublishEvent<WebRequestEndEvent>();
 
-            PublishEvent<WebApplicationStartEvent, WebApplicationEventArgs>(() => new WebApplicationEventArgs(context));
-        }
+				var unitOfWork = ((HttpApplication)sender).Context.Items[unitofworkkey] as IUnitOfWork;
+				if (unitOfWork != null)
+				{
+					unitOfWork.Dispose();
+				}
+				((HttpApplication)sender).Context.Items.Remove(unitofworkkey);
+			};
+			context.PostAuthorizeRequest += (sender, args) => PublishEvent<WebPostAuthorizeEvent>();
+			context.AuthorizeRequest += (sender, args) => PublishEvent<WebPostAuthorizeEvent>();
+			context.AuthenticateRequest += (sender, args) => PublishEvent<WebAuthenticateEvent>();
+			context.PostAuthenticateRequest += (sender, args) => PublishEvent<WebPostAuthenticateEvent>();
+			context.Error += (sender, args) => PublishEvent<WebRequestErrorEvent>();
+			context.PreRequestHandlerExecute += (sender, args) => PublishEvent<WebRequestPreHandlerExecute>();
+			context.PostRequestHandlerExecute += (sender, args) => PublishEvent<WebRequestPostHandlerExecute>();
+		}
 
-        public void Dispose()
-        {
-            PublishEvent<WebApplicationEndEvent, EventArgs>(() => new EventArgs());
-        }
-    }
+		public void Dispose()
+		{
+		}
+	}
 }

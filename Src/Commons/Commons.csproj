@@ -73,6 +73,9 @@
     <AssemblyOriginatorKeyFile>../Boc.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -171,7 +174,6 @@
     <Compile Include="Validation\IModelValidator.cs" />
     <Compile Include="Validation\RulesException.cs" />
     <Compile Include="Validation\Expressions.cs" />
-    <Compile Include="Web\CommonHttpApplication.cs" />
     <Compile Include="Web\CookieAwareWebClient.cs">
       <SubType>Component</SubType>
     </Compile>
