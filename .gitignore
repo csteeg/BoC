@@ -1,0 +1,7 @@
+
+*.ReSharper*
+*.suo
+Build/*
+bin/
+Release/
+Debug/
