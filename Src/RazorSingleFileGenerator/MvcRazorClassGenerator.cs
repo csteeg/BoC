@@ -46,9 +46,13 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
         /// </summary>
         /// <param name="inputFileContent">Content of the input file</param>
         /// <returns>Generated file as a byte array</returns>
-        protected override byte[] GenerateCode(string inputFileContent) {
-            //add reference to our buildprovider and virtualpathprovider
-            GetVSProject().References.Add(typeof (CompiledRazorBuildProvider).Assembly.Location);
+        protected override byte[] GenerateCode(string inputFileContent) 
+		{
+			var references = GetVSProject().References;
+			//add reference to our buildprovider and virtualpathprovider
+        	var buildprovAssembly = typeof (CompiledRazorBuildProvider).Assembly;
+			if (references.Find(buildprovAssembly.GetName().Name) == null)
+				references.Add(buildprovAssembly.Location);
 
             // Get the root folder of the project
             var appRoot = Path.GetDirectoryName(GetProject().FullName);
@@ -84,7 +88,8 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
 			{
 				foreach (NamespaceInfo ns in systemWebPages.Namespaces)
 				{
-					host.NamespaceImports.Add(ns.Namespace);
+					if (!host.NamespaceImports.Contains(ns.Namespace))
+						host.NamespaceImports.Add(ns.Namespace);
 				}
 			}
 
@@ -93,9 +98,10 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
 			{
 				foreach (AssemblyInfo assembly in compilationSection.Assemblies)
 				{
-					if (assembly.Assembly != "*")
+
+					if (assembly.Assembly != "*" && references.Find(assembly.Assembly) == null)
 					{
-						GetVSProject().References.Add(assembly.Assembly);
+							references.Add(assembly.Assembly);
 					}
 				}
 			}

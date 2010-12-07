@@ -1,7 +1,7 @@
-
-*.ReSharper*
-*.suo
-Build/*
+_ReSharper.**.suo
+*.ReSharper
+*.user
+Build/
 bin/
-Release/
-Debug/
+obj/
+Samples/*/App_Data/*
