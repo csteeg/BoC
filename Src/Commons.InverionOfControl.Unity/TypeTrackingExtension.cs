@@ -57,6 +57,9 @@ namespace BoC.InversionOfControl.Unity
         }
         private void OnNewType(object sender, RegisterEventArgs e)
         {
+            if (e.TypeFrom == null)
+                return;
+
             HashSet<string> names;
             string name = string.IsNullOrEmpty(e.Name) ? string.Empty : e.Name;
             if (!registeredTypes.TryGetValue(e.TypeFrom, out names))
