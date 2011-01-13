@@ -74,7 +74,7 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Commons.Web.Mvc.PrecompiledViews, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Commons.Web.Mvc.PrecompiledViews, Version=1.0.2.0, Culture=neutral, PublicKeyToken=b66b1a10e1d96b4d, processorArchitecture=MSIL" />
     <Reference Include="DotNetOpenAuth, Version=3.0.0.9087, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\DotNetOpenAuth\DotNetOpenAuth.dll</HintPath>
@@ -191,7 +191,9 @@
       <Generator>MvcRazorClassGenerator</Generator>
       <LastGenOutput>LogOn.cs</LastGenOutput>
     </None>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Views\_ViewStart.cshtml">
       <Generator>MvcRazorClassGenerator</Generator>
       <LastGenOutput>_ViewStart.cs</LastGenOutput>

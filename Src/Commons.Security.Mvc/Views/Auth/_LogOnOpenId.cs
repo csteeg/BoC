@@ -20,9 +20,9 @@ namespace BoC.Security.Mvc.Views.Auth
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using System.Web.Mvc.Html;
-    using System.Web.Mvc.Ajax;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
+    using System.Web.Mvc.Html;
     using System.Web.Routing;
     using System.Collections;
     using System.Collections.Specialized;
@@ -43,10 +43,13 @@ namespace BoC.Security.Mvc.Views.Auth
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("MvcRazorClassGenerator", "1.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Auth/_LogOnOpenId.cshtml")]
-    public class _LogOnOpenId_cshtml : System.Web.Mvc.WebViewPage<dynamic>
+    public class _Page_Views_Auth__LogOnOpenId_cshtml : System.Web.Mvc.WebViewPage<dynamic>
     {
 #line hidden
 
+        public _Page_Views_Auth__LogOnOpenId_cshtml()
+        {
+        }
         protected System.Web.HttpApplication ApplicationInstance
         {
             get
@@ -57,12 +60,10 @@ namespace BoC.Security.Mvc.Views.Auth
         public override void Execute()
         {
 
-WriteLiteral("\r\n");
 
 
-
-WriteLiteral("\r\n    <div>\r\n        <fieldset>\r\n            <legend>Login using an account you a" +
-"lready use.</legend>\r\n");
+WriteLiteral("\n    <div>\n        <fieldset>\n            <legend>Login using an account you alre" +
+"ady use.</legend>\n");
 
 
  using (Html.BeginForm("OpenId", "Auth")) {
@@ -75,7 +76,7 @@ Write(Html.Hidden("openid_openidAuthData"));
 
                                          
 
-WriteLiteral("    <div>\r\n    ");
+WriteLiteral("    <div>\n    ");
 
 
 Write(MvcHtmlString.Create(Html.OpenIdSelector(new SelectorButton[] {
@@ -103,7 +104,7 @@ WriteLiteral(@"
 
 }
 
-WriteLiteral("        </fieldset>\r\n    </div>\r\n");
+WriteLiteral("        </fieldset>\n    </div>\n");
 
 
   

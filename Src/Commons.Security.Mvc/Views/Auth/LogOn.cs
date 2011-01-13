@@ -20,9 +20,9 @@ namespace BoC.Security.Mvc.Views.Auth
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using System.Web.Mvc.Html;
-    using System.Web.Mvc.Ajax;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
+    using System.Web.Mvc.Html;
     using System.Web.Routing;
     using System.Collections;
     using System.Collections.Specialized;
@@ -42,10 +42,13 @@ namespace BoC.Security.Mvc.Views.Auth
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("MvcRazorClassGenerator", "1.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Auth/LogOn.cshtml")]
-    public class LogOn_cshtml : System.Web.Mvc.WebViewPage<BoC.Security.Mvc.ViewModels.LogOnModel>
+    public class _Page_Views_Auth_LogOn_cshtml : System.Web.Mvc.WebViewPage<BoC.Security.Mvc.ViewModels.LogOnModel>
     {
 #line hidden
 
+        public _Page_Views_Auth_LogOn_cshtml()
+        {
+        }
         protected System.Web.HttpApplication ApplicationInstance
         {
             get
@@ -56,48 +59,46 @@ namespace BoC.Security.Mvc.Views.Auth
         public override void Execute()
         {
 
-WriteLiteral("\r\n");
-
 
 
   
-    View.Title = "Log On";
+    ViewBag.Title = "Log On";
 
 
 
 DefineSection("head", () => {
 
-WriteLiteral("\r\n    ");
+WriteLiteral("\n    ");
 
 
 Write(MvcHtmlString.Create(Html.OpenIdSelectorStyles()));
 
-WriteLiteral("\r\n");
+WriteLiteral("\n");
 
 
 });
 
-WriteLiteral("\r\n\r\n");
+WriteLiteral("\n\n");
 
 
 Write(Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again."));
 
-WriteLiteral("\r\n");
+WriteLiteral("\n");
 
 
 Write(Html.ValidationMessage("_FORM"));
 
-WriteLiteral("\r\n");
+WriteLiteral("\n");
 
 
 Write(Html.Partial("_LogonOpenId"));
 
-WriteLiteral("\r\n");
+WriteLiteral("\n");
 
 
 Write(Html.Partial("_LogonNative"));
 
-WriteLiteral("\r\n");
+WriteLiteral("\n");
 
 
         }

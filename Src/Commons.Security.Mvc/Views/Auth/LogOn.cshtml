@@ -1,7 +1,7 @@
 ﻿@inherits System.Web.Mvc.WebViewPage<BoC.Security.Mvc.ViewModels.LogOnModel>
 @using DotNetOpenAuth.Mvc;
 @{
-    View.Title = "Log On";
+    ViewBag.Title = "Log On";
 }
 @section head {
     @MvcHtmlString.Create(Html.OpenIdSelectorStyles())

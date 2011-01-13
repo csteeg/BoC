@@ -57,7 +57,6 @@
     <Reference Include="Commons.Web.Mvc">
       <HintPath>..\..\Build\Commons.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Commons.Web.Mvc.PrecompiledViews, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="DotNetOpenAuth, Version=3.4.6.10316, Culture=neutral, PublicKeyToken=2726ea45d0d37018, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\DotNetOpenAuth\DotNetOpenAuth.dll</HintPath>
@@ -113,11 +112,6 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RazorSingleFileGenerator.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RazorSingleFileGenerator.tt</DependentUpon>
-    </Compile>
     <Content Include="App_Data\todosample.mdf" />
     <Content Include="Content\images\google.gif" />
     <Content Include="Content\images\infocard_23x16.png" />
@@ -177,10 +171,6 @@
       <Project>{0F48E392-9474-4714-884A-129253F68997}</Project>
       <Name>Commons.Persistence.NHibernate</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Src\Commons.Web.PrecompiledViews\Commons.Web.PrecompiledViews.csproj">
-      <Project>{46C9FDE4-328A-4E80-8504-AED5E2196AE1}</Project>
-      <Name>Commons.Web.PrecompiledViews</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Src\Commons\Commons.csproj">
       <Project>{25C350AF-4957-47E8-960A-6C59794C5DEF}</Project>
       <Name>Commons</Name>
@@ -191,10 +181,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="RazorSingleFileGenerator.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>RazorSingleFileGenerator.cs</LastGenOutput>
-    </None>
     <None Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
