@@ -1,5 +1,4 @@
-
-_ReSharper.*
+_ReSharper.**.suo
 *.ReSharper
 *.user
 Build/

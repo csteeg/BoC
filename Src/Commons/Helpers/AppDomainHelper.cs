@@ -69,11 +69,13 @@ namespace BoC.Helpers
                     if (!String.IsNullOrEmpty(DomainPath))
                     {
                         var paths = DomainPath.Split(';');
+                        var filters = FileFilter.Split('|');
                         foreach (var path in paths)
                         {
                             try
                             {
-                                loadedAssemblies.AddRange(Directory.GetFiles(path, FileFilter).Select(Assembly.LoadFrom));
+                                loadedAssemblies.AddRange(
+                                    filters.SelectMany(s => Directory.GetFiles(path, s)).Select(Assembly.LoadFrom));
                                 Loaded = true;
                             }
                                 // Files should always exists but don't blow up here if they don't
@@ -133,7 +135,7 @@ namespace BoC.Helpers
             return
                 new AppDomainHelper(
                     AppDomain.CurrentDomain.SetupInformation.PrivateBinPath ?? AppDomain.CurrentDomain.BaseDirectory,
-                    "*.dll");
+                    "*.dll|*.exe");
         }
     }
 }

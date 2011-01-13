@@ -83,7 +83,10 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
 			// Set the namespace to be the same as what's used by default for regular .cs files
 			host.DefaultNamespace = FileNameSpace;
 
-			var systemWebPages = config.GetSection("system.web/pages") as PagesSection;
+            host.NamespaceImports.Remove("WebMatrix.Data");
+            host.NamespaceImports.Remove("WebMatrix.WebData");
+            
+            var systemWebPages = config.GetSection("system.web/pages") as PagesSection;
 			if (systemWebPages != null)
 			{
 				foreach (NamespaceInfo ns in systemWebPages.Namespaces)

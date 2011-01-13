@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Web.Caching;
 using System.Web.Hosting;
 using System.Web.WebPages;
 using BoC.Web.Mvc.PrecompiledViews;
@@ -10,13 +11,6 @@ namespace BoC.Web.Mvc.PrecompiledViews
 {
 	public class CompiledVirtualPathProvider: VirtualPathProvider
 	{
-		private readonly VirtualPathProvider virtualPathProvider;
-
-		public CompiledVirtualPathProvider(VirtualPathProvider defaultPathProvider)
-		{
-			this.virtualPathProvider = defaultPathProvider;
-		}
-
 		/// <summary>
 		/// Gets a value that indicates whether a file exists in the virtual file system.
 		/// </summary>
@@ -28,7 +22,7 @@ namespace BoC.Web.Mvc.PrecompiledViews
 		{
 			return
 				GetCompiledType(virtualPath) != null 
-				|| virtualPathProvider.FileExists(virtualPath);
+				|| Previous.FileExists(virtualPath);
 		}
 
 		private Type GetCompiledType(string virtualPath)
@@ -45,9 +39,9 @@ namespace BoC.Web.Mvc.PrecompiledViews
 		/// <param name="virtualPath">The path to the virtual file.</param>
 		public override VirtualFile GetFile(string virtualPath)
 		{
-			if (virtualPathProvider.FileExists(virtualPath))
+            if (Previous.FileExists(virtualPath))
 			{
-				return virtualPathProvider.GetFile(virtualPath);
+                return Previous.GetFile(virtualPath);
 			}
 			var compiledType = GetCompiledType(virtualPath);
 			if (compiledType != null)
@@ -56,6 +50,18 @@ namespace BoC.Web.Mvc.PrecompiledViews
 			}
 			return null;
 		}
+
+        public override System.Web.Caching.CacheDependency GetCacheDependency(string virtualPath, System.Collections.IEnumerable virtualPathDependencies, DateTime utcStart)
+        {
+            if (virtualPathDependencies == null)
+                return Previous.GetCacheDependency(virtualPath, virtualPathDependencies, utcStart);
+
+            return Previous.GetCacheDependency(virtualPath, 
+                    from vp in virtualPathDependencies.Cast<string>()
+                    where GetCompiledType(vp) == null
+                    select vp 
+                  , utcStart);
+        }
 
 	}
 }

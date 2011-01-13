@@ -20,9 +20,9 @@ namespace BoC.Security.Mvc.Views
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using System.Web.Mvc.Html;
-    using System.Web.Mvc.Ajax;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
+    using System.Web.Mvc.Html;
     using System.Web.Routing;
     using System.Collections;
     using System.Collections.Specialized;
@@ -41,10 +41,13 @@ namespace BoC.Security.Mvc.Views
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("MvcRazorClassGenerator", "1.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/_ViewStart.cshtml")]
-    public class _ViewStart_cshtml : System.Web.Mvc.ViewStartPage
+    public class _Page_Views__ViewStart_cshtml : System.Web.Mvc.ViewStartPage
     {
 #line hidden
 
+        public _Page_Views__ViewStart_cshtml()
+        {
+        }
         protected System.Web.HttpApplication ApplicationInstance
         {
             get

@@ -20,9 +20,9 @@ namespace BoC.Security.Mvc.Views.Auth
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using System.Web.Mvc.Html;
-    using System.Web.Mvc.Ajax;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
+    using System.Web.Mvc.Html;
     using System.Web.Routing;
     using System.Collections;
     using System.Collections.Specialized;
@@ -41,10 +41,13 @@ namespace BoC.Security.Mvc.Views.Auth
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("MvcRazorClassGenerator", "1.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Auth/_LogOnNative.cshtml")]
-    public class _LogOnNative_cshtml : System.Web.Mvc.WebViewPage<BoC.Security.Mvc.ViewModels.LogOnModel>
+    public class _Page_Views_Auth__LogOnNative_cshtml : System.Web.Mvc.WebViewPage<BoC.Security.Mvc.ViewModels.LogOnModel>
     {
 #line hidden
 
+        public _Page_Views_Auth__LogOnNative_cshtml()
+        {
+        }
         protected System.Web.HttpApplication ApplicationInstance
         {
             get
@@ -55,59 +58,59 @@ namespace BoC.Security.Mvc.Views.Auth
         public override void Execute()
         {
 
-WriteLiteral("\r\n\r\n<h2>Log On</h2>\r\n<p>\r\n    Please enter your username and password. ");
+WriteLiteral("\n<h2>Log On</h2>\n<p>\n    Please enter your username and password. ");
 
 
                                         Write(Html.ActionLink("Register", "Register"));
 
-WriteLiteral(" if you don\'t have an account.\r\n</p>\r\n");
+WriteLiteral(" if you don\'t have an account.\n</p>\n");
 
 
  using (Html.BeginForm()) {
 
-WriteLiteral("    <div>\r\n        <fieldset>\r\n            <legend>Sign in with a username/passwo" +
-"rd</legend>\r\n\r\n            <div class=\"editor-label\">\r\n                ");
+WriteLiteral("    <div>\n        <fieldset>\n            <legend>Sign in with a username/password" +
+"</legend>\n\n            <div class=\"editor-label\">\n                ");
 
 
            Write(Html.LabelFor(m => m.UserName));
 
-WriteLiteral("\r\n            </div>\r\n            <div class=\"editor-field\">\r\n                ");
+WriteLiteral("\n            </div>\n            <div class=\"editor-field\">\n                ");
 
 
            Write(Html.TextBoxFor(m => m.UserName));
 
-WriteLiteral("\r\n                ");
+WriteLiteral("\n                ");
 
 
            Write(Html.ValidationMessageFor(m => m.UserName));
 
-WriteLiteral("\r\n            </div>\r\n\r\n            <div class=\"editor-label\">\r\n                ");
+WriteLiteral("\n            </div>\n\n            <div class=\"editor-label\">\n                ");
 
 
            Write(Html.LabelFor(m => m.Password));
 
-WriteLiteral("\r\n            </div>\r\n            <div class=\"editor-field\">\r\n                ");
+WriteLiteral("\n            </div>\n            <div class=\"editor-field\">\n                ");
 
 
            Write(Html.PasswordFor(m => m.Password));
 
-WriteLiteral("\r\n                ");
+WriteLiteral("\n                ");
 
 
            Write(Html.ValidationMessageFor(m => m.Password));
 
-WriteLiteral("\r\n            </div>\r\n\r\n            <div class=\"editor-label\">\r\n                ");
+WriteLiteral("\n            </div>\n\n            <div class=\"editor-label\">\n                ");
 
 
            Write(Html.CheckBoxFor(m => m.RememberMe));
 
-WriteLiteral("\r\n                ");
+WriteLiteral("\n                ");
 
 
            Write(Html.LabelFor(m => m.RememberMe));
 
-WriteLiteral("\r\n            </div>\r\n\r\n            <p>\r\n                <input type=\"submit\" val" +
-"ue=\"Log On\" />\r\n            </p>\r\n        </fieldset>\r\n    </div>\r\n");
+WriteLiteral("\n            </div>\n\n            <p>\n                <input type=\"submit\" value=\"" +
+"Log On\" />\n            </p>\n        </fieldset>\n    </div>\n");
 
 
 }

@@ -20,9 +20,9 @@ namespace BoC.Security.Mvc.Views.Account
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
-    using System.Web.Mvc.Html;
-    using System.Web.Mvc.Ajax;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
+    using System.Web.Mvc.Html;
     using System.Web.Routing;
     using System.Collections;
     using System.Collections.Specialized;
@@ -41,10 +41,13 @@ namespace BoC.Security.Mvc.Views.Account
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("MvcRazorClassGenerator", "1.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Account/Register.cshtml")]
-    public class Register_cshtml : System.Web.Mvc.WebViewPage<BoC.Security.Mvc.ViewModels.RegisterModel>
+    public class _Page_Views_Account_Register_cshtml : System.Web.Mvc.WebViewPage<BoC.Security.Mvc.ViewModels.RegisterModel>
     {
 #line hidden
 
+        public _Page_Views_Account_Register_cshtml()
+        {
+        }
         protected System.Web.HttpApplication ApplicationInstance
         {
             get
@@ -55,21 +58,21 @@ namespace BoC.Security.Mvc.Views.Account
         public override void Execute()
         {
 
-WriteLiteral("\r\n\r\n");
+WriteLiteral("\n");
 
 
   
-    View.Title = "Register";
+    ViewBag.Title = "Register";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 
 
-WriteLiteral("\r\n<h2>Create a New Account</h2>\r\n<p>\r\n    Use the form below to create a new acco" +
-"unt. \r\n</p>\r\n<p>\r\n    Passwords are required to be a minimum of ");
+WriteLiteral("\n<h2>Create a New Account</h2>\n<p>\n    Use the form below to create a new account" +
+". \n</p>\n<p>\n    Passwords are required to be a minimum of ");
 
 
-                                         Write(View.PasswordLength);
+                                         Write(ViewBag.PasswordLength);
 
-WriteLiteral(" characters in length.\r\n</p>\r\ndoei\r\n");
+WriteLiteral(" characters in length.\n</p>\ndoei\n");
 
 
  using (Html.BeginForm()) {
@@ -78,69 +81,69 @@ Write(Html.ValidationSummary(true, "Account creation was unsuccessful. Please co
 
                                                                                                                 
 
-WriteLiteral("    <div>\r\n        <fieldset>\r\n            <legend>Account Information</legend>\r\n" +
-"\r\n            <div class=\"editor-label\">\r\n                ");
+WriteLiteral("    <div>\n        <fieldset>\n            <legend>Account Information</legend>\n\n  " +
+"          <div class=\"editor-label\">\n                ");
 
 
            Write(Html.LabelFor(m => m.UserName));
 
-WriteLiteral("\r\n            </div>\r\n            <div class=\"editor-field\">\r\n                ");
+WriteLiteral("\n            </div>\n            <div class=\"editor-field\">\n                ");
 
 
            Write(Html.TextBoxFor(m => m.UserName));
 
-WriteLiteral("\r\n                ");
+WriteLiteral("\n                ");
 
 
            Write(Html.ValidationMessageFor(m => m.UserName));
 
-WriteLiteral("\r\n            </div>\r\n\r\n            <div class=\"editor-label\">\r\n                ");
+WriteLiteral("\n            </div>\n\n            <div class=\"editor-label\">\n                ");
 
 
            Write(Html.LabelFor(m => m.Email));
 
-WriteLiteral("\r\n            </div>\r\n            <div class=\"editor-field\">\r\n                ");
+WriteLiteral("\n            </div>\n            <div class=\"editor-field\">\n                ");
 
 
            Write(Html.TextBoxFor(m => m.Email));
 
-WriteLiteral("\r\n                ");
+WriteLiteral("\n                ");
 
 
            Write(Html.ValidationMessageFor(m => m.Email));
 
-WriteLiteral("\r\n            </div>\r\n\r\n            <div class=\"editor-label\">\r\n                ");
+WriteLiteral("\n            </div>\n\n            <div class=\"editor-label\">\n                ");
 
 
            Write(Html.LabelFor(m => m.Password));
 
-WriteLiteral("\r\n            </div>\r\n            <div class=\"editor-field\">\r\n                ");
+WriteLiteral("\n            </div>\n            <div class=\"editor-field\">\n                ");
 
 
            Write(Html.PasswordFor(m => m.Password));
 
-WriteLiteral("\r\n                ");
+WriteLiteral("\n                ");
 
 
            Write(Html.ValidationMessageFor(m => m.Password));
 
-WriteLiteral("\r\n            </div>\r\n\r\n            <div class=\"editor-label\">\r\n                ");
+WriteLiteral("\n            </div>\n\n            <div class=\"editor-label\">\n                ");
 
 
            Write(Html.LabelFor(m => m.ConfirmPassword));
 
-WriteLiteral("\r\n            </div>\r\n            <div class=\"editor-field\">\r\n                ");
+WriteLiteral("\n            </div>\n            <div class=\"editor-field\">\n                ");
 
 
            Write(Html.PasswordFor(m => m.ConfirmPassword));
 
-WriteLiteral("\r\n                ");
+WriteLiteral("\n                ");
 
 
            Write(Html.ValidationMessageFor(m => m.ConfirmPassword));
 
-WriteLiteral("\r\n            </div>\r\n\r\n            <p>\r\n                <input type=\"submit\" val" +
-"ue=\"Register\" />\r\n            </p>\r\n        </fieldset>\r\n    </div>\r\n");
+WriteLiteral("\n            </div>\n\n            <p>\n                <input type=\"submit\" value=\"" +
+"Register\" />\n            </p>\n        </fieldset>\n    </div>\n");
 
 
 }

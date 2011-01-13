@@ -4,7 +4,6 @@ using BoC.EventAggregator;
 using BoC.InversionOfControl;
 using BoC.Security.Model;
 using BoC.Web;
-using BoC.Web.Mvc.PrecompiledViews;
 using Norm.Configuration;
 
 namespace ToDoList

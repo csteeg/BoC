@@ -23,7 +23,7 @@ namespace BoC.Web.Mvc.PrecompiledViews
 			System.Web.WebPages.PreApplicationStartCode.Start();
 			System.Web.WebPages.Razor.PreApplicationStartCode.Start();
 
-			HostingEnvironment.RegisterVirtualPathProvider(new CompiledVirtualPathProvider(HostingEnvironment.VirtualPathProvider));
+			HostingEnvironment.RegisterVirtualPathProvider(new CompiledVirtualPathProvider());
 			BuildProvider.RegisterBuildProvider(".cshtml", typeof(CompiledRazorBuildProvider));
 		}
 	}

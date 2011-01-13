@@ -24,7 +24,7 @@ namespace BoC.Security.Mvc.Controllers
 
         public ActionResult Register()
         {
-            ViewModel.PasswordLength = service.MinRequiredPasswordLength;
+            ViewBag.PasswordLength = service.MinRequiredPasswordLength;
 
             return View(new RegisterModel());
         }
@@ -54,7 +54,7 @@ namespace BoC.Security.Mvc.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            ViewModel.PasswordLength = service.MinRequiredPasswordLength;
+            ViewBag.PasswordLength = service.MinRequiredPasswordLength;
 
             return View(registration);
         }
