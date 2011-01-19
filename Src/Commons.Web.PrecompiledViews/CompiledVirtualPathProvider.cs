@@ -51,6 +51,30 @@ namespace BoC.Web.Mvc.PrecompiledViews
 			return null;
 		}
 
+        public override string GetFileHash(string virtualPath, System.Collections.IEnumerable virtualPathDependencies)
+        {
+            if (Previous.FileExists(virtualPath))
+            {
+                return Previous.GetFileHash(virtualPath, virtualPathDependencies);
+            }
+            var compiledType = GetCompiledType(virtualPath);
+            if (compiledType != null)
+            {
+                //for some reason, caching of our custom build result fails
+                //making this a unique value will cause our custom buildprovider
+                //always. Shouldn't be too bad, since it doesn't have to compile
+                //anyway.
+                return DateTime.Now.Ticks + "";
+                //return compiledType.Assembly.Location.GetHashCode() + "";
+            }
+            return base.GetFileHash(virtualPath, virtualPathDependencies);
+        }
+
+        public override string GetCacheKey(string virtualPath)
+        {
+            return base.GetCacheKey(virtualPath);
+        }
+
         public override System.Web.Caching.CacheDependency GetCacheDependency(string virtualPath, System.Collections.IEnumerable virtualPathDependencies, DateTime utcStart)
         {
             if (virtualPathDependencies == null)
@@ -59,7 +83,7 @@ namespace BoC.Web.Mvc.PrecompiledViews
             return Previous.GetCacheDependency(virtualPath, 
                     from vp in virtualPathDependencies.Cast<string>()
                     where GetCompiledType(vp) == null
-                    select vp 
+                    select vp
                   , utcStart);
         }
 
