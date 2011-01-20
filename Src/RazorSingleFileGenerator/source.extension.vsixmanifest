@@ -3,7 +3,7 @@
     <Identifier Id="AC78A4E9-84DF-4346-B71B-5A5E7F7FB292">
         <Name>Razor Single File Generator for MVC</Name>
         <Author>Chris van de Steeg</Author>
-        <Version>1.0.2</Version>
+        <Version>1.0.3</Version>
         <Description xml:space="preserve">Single File Generator for Razor View files (.cshtml files) in an mvc project.
 
 Allows you to compile your razor views and thus distribute them without source code.</Description>
