@@ -21,6 +21,8 @@ namespace BoC.Web.Mvc.PrecompiledViews
 		public virtual Type GetCompiledType(string virtualPath)
 		{
 			if (virtualPath == null) throw new ArgumentNullException("virtualPath");
+			if (virtualPath.StartsWith("/"))
+				virtualPath = VirtualPathUtility.ToAppRelative(virtualPath);
 			if (!virtualPath.StartsWith("~"))
 				virtualPath = !virtualPath.StartsWith("/") ? "~/" + virtualPath : "~" + virtualPath;
 			virtualPath = virtualPath.ToLower();

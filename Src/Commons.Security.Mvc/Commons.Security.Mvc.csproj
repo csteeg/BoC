@@ -74,7 +74,6 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Commons.Web.Mvc.PrecompiledViews, Version=1.0.2.0, Culture=neutral, PublicKeyToken=b66b1a10e1d96b4d, processorArchitecture=MSIL" />
     <Reference Include="DotNetOpenAuth, Version=3.0.0.9087, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\DotNetOpenAuth\DotNetOpenAuth.dll</HintPath>
@@ -168,6 +167,10 @@
     <ProjectReference Include="..\Commons.Web.Mvc\Commons.Web.Mvc.csproj">
       <Project>{D21291A8-98DB-48F0-A864-CC468BA44EB1}</Project>
       <Name>Commons.Web.Mvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Commons.Web.PrecompiledViews\Commons.Web.PrecompiledViews.csproj">
+      <Project>{46C9FDE4-328A-4E80-8504-AED5E2196AE1}</Project>
+      <Name>Commons.Web.PrecompiledViews</Name>
     </ProjectReference>
     <ProjectReference Include="..\Commons\Commons.csproj">
       <Project>{25C350AF-4957-47E8-960A-6C59794C5DEF}</Project>
