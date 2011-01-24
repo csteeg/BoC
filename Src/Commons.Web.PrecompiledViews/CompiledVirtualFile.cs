@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Web.Hosting;
 
 namespace BoC.Web.Mvc.PrecompiledViews
@@ -12,7 +13,6 @@ namespace BoC.Web.Mvc.PrecompiledViews
 		}
 
 		public Type CompiledType { get; set; }
-		public CompiledVirtualFile Type { get; set; }
 
 		/// <summary>
 		/// When overridden in a derived class, returns a read-only stream to the virtual resource.
@@ -22,7 +22,7 @@ namespace BoC.Web.Mvc.PrecompiledViews
 		/// </returns>
 		public override Stream Open()
 		{
-			return Stream.Null;
+            return new MemoryStream(Encoding.ASCII.GetBytes("@inherits " + CompiledType.AssemblyQualifiedName + "\n@{base.Execute();}"));
 		}
 	}
 }

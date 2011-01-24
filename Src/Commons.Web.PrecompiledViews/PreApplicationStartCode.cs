@@ -19,12 +19,7 @@ namespace BoC.Web.Mvc.PrecompiledViews
 			}
 			_startWasCalled = true;
 
-			//be sure default buildproviders are registered first
-			System.Web.WebPages.PreApplicationStartCode.Start();
-			System.Web.WebPages.Razor.PreApplicationStartCode.Start();
-
 			HostingEnvironment.RegisterVirtualPathProvider(new CompiledVirtualPathProvider());
-			BuildProvider.RegisterBuildProvider(".cshtml", typeof(CompiledRazorBuildProvider));
 		}
 	}
 }

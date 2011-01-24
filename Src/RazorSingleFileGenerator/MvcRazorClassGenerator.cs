@@ -50,7 +50,7 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
 		{
 			var references = GetVSProject().References;
 			//add reference to our buildprovider and virtualpathprovider
-			var buildprovAssembly = typeof (CompiledRazorBuildProvider).Assembly;
+			var buildprovAssembly = typeof (CompiledVirtualPathProvider).Assembly;
 			if (references.Find(buildprovAssembly.GetName().Name) == null)
 				references.Add(buildprovAssembly.Location);
 
