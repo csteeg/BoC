@@ -65,7 +65,7 @@ namespace BoC.Tests.Tasks
                 .Setup(h => h.GetTypes(It.IsAny<Func<Type, bool>>()))
                 .Callback<Func<Type, bool>>(func => func(typeof(FindableBootstrapperTask)))
                 .Returns(new Type[0]);
-            Bootstrapper.TaskFilter = type => filtered = true;
+            Bootstrapper.TaskFilters.Add(type => filtered = true);
 
             new Bootstrapper(resolver.Object, new[] { appdomainHelper.Object }).Run();
 

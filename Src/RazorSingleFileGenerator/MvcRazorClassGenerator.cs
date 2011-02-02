@@ -110,7 +110,7 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
 			}
 			// Create a Razor engine nad pass it our host
 			var engine = new RazorTemplateEngine(host);
-
+            
 			// Generate code
 			GeneratorResults results = null;
 			try {
@@ -142,7 +142,7 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
 					options.BlankLinesBetweenMembers = false;
 					options.BracingStyle = "C";
 
-					// Add a GeneratedCode attribute to the generated class
+                    // Add a GeneratedCode attribute to the generated class
 					CodeCompileUnit generatedCode = results.GeneratedCode;
 					CodeTypeDeclaration generatedType = generatedCode.Namespaces[0].Types[0];
 					generatedType.CustomAttributes.Add(

@@ -17,7 +17,13 @@ namespace BoC.Tasks
             this.appDomainHelpers = appDomainHelpers;
         }
 
-        volatile private static ICollection<Func<Type, bool>> taskFilters = new List<Func<Type,bool>>(){type => true};
+        volatile private static ICollection<Func<Type, bool>> taskFilters = new List<Func<Type,bool>>()
+            {
+                type => type.IsClass,
+                type => !type.IsAbstract,
+                type => !type.Assembly.GetName().Name.StartsWith("System"),
+                type => typeof (IBackgroundTask).IsAssignableFrom(type)
+            };
         public static ICollection<Func<Type, bool>> TaskFilters
         {
             get { return taskFilters; }
@@ -27,10 +33,7 @@ namespace BoC.Tasks
         public void Execute()
         {
             var tasks = appDomainHelpers.SelectMany(
-                helpers => helpers.GetTypes(
-                    t => t.IsClass && !t.IsAbstract && !t.Assembly.GetName().Name.StartsWith("System")
-                         && typeof (IBackgroundTask).IsAssignableFrom(t)
-                         && TaskFilters.All(func => func(t))));
+                helpers => helpers.GetTypes(t => TaskFilters.All(func => func(t))));
             foreach (var type in tasks)
             {
                 dependencyResolver.RegisterType(typeof(IBackgroundTask), type);

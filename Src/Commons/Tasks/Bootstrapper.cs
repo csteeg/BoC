@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using BoC.Helpers;
 using BoC.InversionOfControl;
@@ -16,18 +17,22 @@ namespace BoC.Tasks
             this.appDomainHelpers = appDomainHelpers;
         }
 
-        volatile private static Func<Type, bool> taskFilter = t => true;
-        public static Func<Type, bool> TaskFilter
+        volatile private static ICollection<Func<Type, bool>> taskFilters = new List<Func<Type, bool>>() 
+            { 
+                type => typeof(IBootstrapperTask).IsAssignableFrom(type),
+                type => !type.IsAbstract,
+                type => type.IsClass
+            };
+        public static ICollection<Func<Type, bool>> TaskFilters
         {
-            get { return taskFilter; }
-            set { taskFilter = value; }
+            get { return taskFilters; }
         }
 
         private void RegisterAllTasks()
         {
             var tasks = appDomainHelpers
-                        .SelectMany(helper => helper
-                            .GetTypes(t => t.IsClass && !t.IsAbstract && typeof(IBootstrapperTask).IsAssignableFrom(t) && TaskFilter(t)));
+                        .SelectMany(helper =>
+                            helper.GetTypes(t => TaskFilters.All(func => func(t))));
             foreach (var t in tasks)
             {
                 dependencyResolver.RegisterType(typeof(IBootstrapperTask), t);
