@@ -144,6 +144,7 @@
     <Compile Include="Extensions\RouteCollectionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="HttpStatusCodeResult.cs" />
+    <Compile Include="Init\SetDefaultModelMetaDataProvider.cs" />
     <Compile Include="Init\SetDefaultModelBinders.cs" />
     <Compile Include="Init\SetDefaultNameSpace.cs" />
     <Compile Include="Init\RegisterDefaultRoutes.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Init\SetDefaultViewEngine.cs" />
     <Compile Include="Init\SetDefaultMvcDependencyResolver.cs" />
     <Compile Include="Init\RegisterGlobalFilters.cs" />
+    <Compile Include="MetaData\ExtraAnnotationsModelMetaDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptManager\SimpleScriptManager.cs" />
     <Compile Include="SimleException.cs" />
