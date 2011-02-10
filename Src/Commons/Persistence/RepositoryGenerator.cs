@@ -22,7 +22,7 @@ namespace BoC.Persistence
             //below should work fine for all situations :)
             ModuleBuilder mb = null;
             var types = dependencyResolver.ResolveAll<IAppDomainHelper>().SelectMany(
-                helper => helper.GetTypes(t => true));
+                helper => helper.GetTypes(t => true)).ToArray();
 
             var entities = from t in types
                            where t.IsClass
@@ -32,7 +32,7 @@ namespace BoC.Persistence
                            select t;
 
             int typeNum = 0;
-            foreach (var type in entities)
+            foreach (var type in entities.ToArray())
             {
                 var idProp = type.GetProperty(idPropertyName);
                 var idType = idProp == null ? typeof(object) : idProp.PropertyType;
