@@ -11,7 +11,6 @@ namespace BoC.UnitOfWork
     {
         [ThreadStatic]
         private static IUnitOfWork outerUnitOfWork_threadstatic = null;
-
         private static readonly string outerunitofworkmapkey = "NHibernateUnitOfWork.outerUnitOfWork";
 
         protected BaseThreadSafeSingleUnitOfWork()
@@ -73,12 +72,12 @@ namespace BoC.UnitOfWork
         {
             if (OuterUnitOfWork == this)
             {
-                CleanUp();
+                CleanUpOuterUnitOfWork();
                 OuterUnitOfWork = null;
             }
         }
 
-        protected abstract void CleanUp();
+        protected abstract void CleanUpOuterUnitOfWork();
 
         private static WcfStateExtension WcfOperationState
         {

@@ -36,7 +36,7 @@ namespace BoC.Persistence.NHibernate.UnitOfWork
             return isDirty;
         }
 
-        override protected void CleanUp()
+        override protected void CleanUpOuterUnitOfWork()
         {
             if (session != null)
             {

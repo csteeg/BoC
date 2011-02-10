@@ -13,7 +13,7 @@ namespace BoC.Persistence.Norm.UnitOfWork
             this.sessionFactory = sessionFactory;
         }
 
-        override protected void CleanUp()
+        override protected void CleanUpOuterUnitOfWork()
         {
             if (mongo == null) return;
 
