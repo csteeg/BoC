@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorSingleFileGenerator", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.InversionOfControl.Unity", "Src\Commons.InversionOfControl.Unity\Commons.InversionOfControl.Unity.csproj", "{5E953013-A5C4-4AB5-BF99-108C6D4D21CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.InversionOfControl.Unity.Tests", "Tests\Commons.InversionOfControl.Unity.Tests\Commons.InversionOfControl.Unity.Tests.csproj", "{7C6C7E1E-8769-433B-9257-2C117DDA0DB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		.NET 3.5 DEBUG|Any CPU = .NET 3.5 DEBUG|Any CPU
@@ -140,12 +142,19 @@ Global
 		{5E953013-A5C4-4AB5-BF99-108C6D4D21CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E953013-A5C4-4AB5-BF99-108C6D4D21CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E953013-A5C4-4AB5-BF99-108C6D4D21CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C6C7E1E-8769-433B-9257-2C117DDA0DB4}..NET 3.5 DEBUG|Any CPU.ActiveCfg = Release|Any CPU
+		{7C6C7E1E-8769-433B-9257-2C117DDA0DB4}..NET 3.5 DEBUG|Any CPU.Build.0 = Release|Any CPU
+		{7C6C7E1E-8769-433B-9257-2C117DDA0DB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C6C7E1E-8769-433B-9257-2C117DDA0DB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C6C7E1E-8769-433B-9257-2C117DDA0DB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C6C7E1E-8769-433B-9257-2C117DDA0DB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A0D3CBAC-14B4-4805-8B2F-227957986CB4} = {D75EF326-E1BC-4DFB-ABA8-5BE622875649}
+		{7C6C7E1E-8769-433B-9257-2C117DDA0DB4} = {D75EF326-E1BC-4DFB-ABA8-5BE622875649}
 		{4CBF9499-F91D-4B95-976D-EE8CAB079C79} = {D700FEE1-83DE-4496-9305-7651BEE8AAC8}
 		{3C19162C-4815-4736-810A-237FDECF4146} = {D700FEE1-83DE-4496-9305-7651BEE8AAC8}
 	EndGlobalSection
