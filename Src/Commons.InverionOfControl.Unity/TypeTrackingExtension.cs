@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using BoC.InverionOfControl.Unity;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.ObjectBuilder;
 

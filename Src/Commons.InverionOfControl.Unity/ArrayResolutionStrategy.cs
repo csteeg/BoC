@@ -6,7 +6,7 @@ using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Utility;
 
-namespace BoC.InverionOfControl.Unity
+namespace BoC.InversionOfControl.Unity
 {
     /// <summary>
     /// This strategy implements the logic that will call container.ResolveAll
