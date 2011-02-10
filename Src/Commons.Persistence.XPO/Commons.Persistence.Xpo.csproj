@@ -76,7 +76,7 @@
     <Compile Include="DefaultSetupTasks\AutoXpoConfigurator.cs" />
     <Compile Include="DefaultSetupTasks\AutoXpoRepositoryGenerator.cs" />
     <Compile Include="ISessionManager.cs" />
-    <Compile Include="DefaultSessionFactory.cs" />
+    <Compile Include="UnitOfWork\XpoUnitOfWorkSessionFactory.cs" />
     <Compile Include="ISessionFactory.cs" />
     <Compile Include="UnitOfWork\XpoUnitOfWork.cs" />
     <Compile Include="UnitOfWork\XpoUnitOfWorkSessionManager.cs" />

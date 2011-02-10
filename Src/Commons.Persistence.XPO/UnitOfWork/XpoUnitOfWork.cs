@@ -7,13 +7,28 @@ namespace BoC.Persistence.Xpo.UnitOfWork
     {
         private readonly ISessionFactory sessionFactory;
         private Session session;
+        private NestedUnitOfWork nestedUnitOfWOrk;
 
         public XpoUnitOfWork(ISessionFactory sessionFactory)
         {
             this.sessionFactory = sessionFactory;
+            if (OuterUnitOfWork != this)
+            {
+                nestedUnitOfWOrk = Session.BeginNestedUnitOfWork();
+            }
         }
 
-        override protected void CleanUp()
+        protected override void Dispose(bool disposing)
+        {
+            if (nestedUnitOfWOrk != null)
+            {
+                nestedUnitOfWOrk.CommitChanges();
+                nestedUnitOfWOrk = null;
+            }
+            base.Dispose(disposing);
+        }
+
+        override protected void CleanUpOuterUnitOfWork()
         {
             if (session != null)
             {
@@ -38,20 +53,13 @@ namespace BoC.Persistence.Xpo.UnitOfWork
             {
                 if (OuterUnitOfWork == this)
                 {
-                    if (session == null)
-                    {
-                        session = sessionFactory.OpenSession();
-                    }
-                    return session;
+                    return session ?? (session = sessionFactory.OpenSession());
                 }
-                else if (OuterUnitOfWork != null)
+                if (OuterUnitOfWork != null)
                 {
                     return ((XpoUnitOfWork)OuterUnitOfWork).Session;
                 }
-                else
-                {
-                    return null;
-                }
+                return null;
             }
         }
     }

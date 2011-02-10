@@ -17,7 +17,7 @@ namespace BoC.Persistence.Xpo.DefaultSetupTasks
         {
             if (!dependencyResolver.IsRegistered<ISessionFactory>())
             {
-                dependencyResolver.RegisterType<ISessionFactory, DefaultSessionFactory>();
+                dependencyResolver.RegisterType<ISessionFactory, XpoUnitOfWorkSessionFactory>();
             }
 
             if (!dependencyResolver.IsRegistered<ISessionManager>())
