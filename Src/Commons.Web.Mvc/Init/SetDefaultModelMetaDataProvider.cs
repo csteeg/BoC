@@ -16,22 +16,12 @@ namespace BoC.Web.Mvc.Init
             this.dependencyResolver = dependencyResolver;
         }
 
-        private static Func<ModelMetadataProvider> _baseModelMetaDataProvider =
-            () => new DataAnnotationsModelMetadataProvider();
-
-        public static Func<ModelMetadataProvider> BaseModelMetaDataProvider
-        {
-            get { return _baseModelMetaDataProvider; }
-            set { _baseModelMetaDataProvider = value; }
-        }
-
         public void Execute()
         {
-            if ((IoC.Resolver.IsRegistered(typeof (ModelMetadataProvider)))) 
-                return;
-
-            var instance = new ExtraAnnotationsModelMetaDataProvider(_baseModelMetaDataProvider());
-            dependencyResolver.RegisterInstance<ModelMetadataProvider>(instance);
+            if (!(dependencyResolver.IsRegistered(typeof(ModelMetadataProvider))))
+            {
+                dependencyResolver.RegisterInstance<ModelMetadataProvider>(new ExtraModelMetadataProvider());
+            }
         }
 
    }

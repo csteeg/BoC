@@ -10,8 +10,8 @@ namespace BoC.UnitOfWork
     public abstract class BaseThreadSafeSingleUnitOfWork: IUnitOfWork
     {
         [ThreadStatic]
-        private static IUnitOfWork outerUnitOfWork_threadstatic = null;
-        private static readonly string outerunitofworkmapkey = "NHibernateUnitOfWork.outerUnitOfWork";
+        private static IUnitOfWork _outerUnitOfWorkThreadstatic;
+        private const string Outerunitofworkmapkey = "IUnitOfWork.outerUnitOfWork";
 
         protected BaseThreadSafeSingleUnitOfWork()
         {
@@ -32,19 +32,19 @@ namespace BoC.UnitOfWork
             {
                 if (HttpContext.Current != null)
                 {
-                    return HttpContext.Current.Items[outerunitofworkmapkey] as IUnitOfWork;
+                    return HttpContext.Current.Items[Outerunitofworkmapkey] as IUnitOfWork;
                 }
                 if (OperationContext.Current != null)
                 {
                     return WcfOperationState.OuterUnitOfWork as IUnitOfWork;
                 }
-                return outerUnitOfWork_threadstatic;
+                return _outerUnitOfWorkThreadstatic;
             }
             private set
             {
                 if (HttpContext.Current != null)
                 {
-                    HttpContext.Current.Items[outerunitofworkmapkey] = value;
+                    HttpContext.Current.Items[Outerunitofworkmapkey] = value;
                 }
                 else if (OperationContext.Current != null)
                 {
@@ -52,7 +52,7 @@ namespace BoC.UnitOfWork
                 }
                 else
                 {
-                    outerUnitOfWork_threadstatic = value;
+                    _outerUnitOfWorkThreadstatic = value;
                 }
 
             }

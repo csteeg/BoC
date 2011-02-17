@@ -1,4 +1,5 @@
-﻿using BoC.UnitOfWork;
+﻿using System.Transactions;
+using BoC.UnitOfWork;
 using DevExpress.Xpo;
 
 namespace BoC.Persistence.Xpo.UnitOfWork
@@ -34,10 +35,14 @@ namespace BoC.Persistence.Xpo.UnitOfWork
             {
                 try
                 {
-                    if (session.InTransaction)
+                    if (session is DevExpress.Xpo.UnitOfWork)
+                    {
+                        ((DevExpress.Xpo.UnitOfWork)session).CommitChanges();
+                    } 
+                    else if (session.InTransaction) //
                     {
                         session.RollbackTransaction();
-                    }
+                    } 
                     session.Dispose();
                 }
                 finally

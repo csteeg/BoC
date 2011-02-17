@@ -22,12 +22,12 @@ namespace BoC.Persistence.NHibernate.UnitOfWork
             base.Dispose(disposing);
         }
 
-        private bool SafeIsDirty(ISession session1)
+        private static bool SafeIsDirty(ISession sess)
         {
             var isDirty = false;
             try
             {
-                isDirty = Session.IsDirty();
+                isDirty = sess.IsDirty();
             }
             catch (AssertionFailure)
             {
@@ -35,6 +35,7 @@ namespace BoC.Persistence.NHibernate.UnitOfWork
             }
             return isDirty;
         }
+
 
         override protected void CleanUpOuterUnitOfWork()
         {
