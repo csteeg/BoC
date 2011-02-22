@@ -71,15 +71,18 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
 			//System.Configuration.ConfigurationManager.OpenExeConfiguration(configFile);
 
 			var sectGroup = new RazorWebSectionGroup
-								{
-									Host = (HostSection) config.GetSection(HostSection.SectionName) ??
-										new HostSection {FactoryType = typeof (MvcWebRazorHostFactory).AssemblyQualifiedName},
-									Pages = (RazorPagesSection) config.GetSection(RazorPagesSection.SectionName)
-								};
+			{
+				Host = (HostSection) config.GetSection(HostSection.SectionName) ??
+					new HostSection {FactoryType = typeof (MvcWebRazorHostFactory).AssemblyQualifiedName},
+				Pages = (RazorPagesSection) config.GetSection(RazorPagesSection.SectionName)
+			};
 
 			// Create the same type of Razor host that's used to process Razor files in App_Code
-			var host = WebRazorHostFactory.CreateHostFromConfig(sectGroup, virtualPath, InputFilePath);
-			//new MvcWebPageRazorHost(virtualPath, InputFilePath);
+			var host = IsHelper ?
+				new WebCodeRazorHost(virtualPath, InputFilePath) :
+				WebRazorHostFactory.CreateHostFromConfig(sectGroup, virtualPath, InputFilePath);
+			
+
 			// Set the namespace to be the same as what's used by default for regular .cs files
 			host.DefaultNamespace = FileNameSpace;
 
@@ -108,7 +111,7 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
 					}
 				}
 			}
-			// Create a Razor engine nad pass it our host
+			// Create a Razor engine and pass it our host
 			var engine = new RazorTemplateEngine(host);
             
 			// Generate code
@@ -143,18 +146,22 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
 					options.BracingStyle = "C";
 
                     // Add a GeneratedCode attribute to the generated class
-					CodeCompileUnit generatedCode = results.GeneratedCode;
-					CodeTypeDeclaration generatedType = generatedCode.Namespaces[0].Types[0];
-					generatedType.CustomAttributes.Add(
-						new CodeAttributeDeclaration(
-							new CodeTypeReference(typeof(GeneratedCodeAttribute)),
-							new CodeAttributeArgument(new CodePrimitiveExpression("MvcRazorClassGenerator")),
-							new CodeAttributeArgument(new CodePrimitiveExpression("1.0"))));
+                    CodeCompileUnit generatedCode = results.GeneratedCode;
+                    var ns = generatedCode.Namespaces[0];
+                    CodeTypeDeclaration generatedType = ns.Types[0];
+                    generatedType.CustomAttributes.Add(
+                        new CodeAttributeDeclaration(
+                            new CodeTypeReference(typeof(GeneratedCodeAttribute)),
+                            new CodeAttributeArgument(new CodePrimitiveExpression("MvcRazorClassGenerator")),
+                            new CodeAttributeArgument(new CodePrimitiveExpression("1.0"))));
 
-					generatedType.CustomAttributes.Add(
-						new CodeAttributeDeclaration(
-							new CodeTypeReference(typeof(PageVirtualPathAttribute)),
-							new CodeAttributeArgument(new CodePrimitiveExpression(virtualPath))));
+					if(!IsHelper)
+					{
+						generatedType.CustomAttributes.Add(
+							new CodeAttributeDeclaration(
+								new CodeTypeReference(typeof(PageVirtualPathAttribute)),
+								new CodeAttributeArgument(new CodePrimitiveExpression(virtualPath))));
+					}
 
 					//Generate the code
 					provider.GenerateCodeFromCompileUnit(generatedCode, writer, options);
@@ -187,6 +194,15 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
 				this.GeneratorError(4, e.ToString(), 1, 1);
 				//Returning null signifies that generation has failed
 				return null;
+			}
+		}
+
+		private bool IsHelper
+		{
+			get
+			{
+				return Path.GetFileName(InputFilePath).EndsWith("Helpers") ||
+				       Path.GetDirectoryName(InputFilePath).EndsWith("Helpers");
 			}
 		}
 	}
