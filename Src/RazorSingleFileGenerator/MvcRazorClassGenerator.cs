@@ -17,6 +17,7 @@ using System.IO;
 using System.Text;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using System.Web.Razor.Generator;
 using System.Web.WebPages;
 using System.Web.WebPages.Razor.Configuration;
 using BoC.Web.Mvc.PrecompiledViews;
@@ -50,9 +51,9 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
 		{
 			var references = GetVSProject().References;
 			//add reference to our buildprovider and virtualpathprovider
-			var buildprovAssembly = typeof (CompiledVirtualPathProvider).Assembly;
-			if (references.Find(buildprovAssembly.GetName().Name) == null)
-				references.Add(buildprovAssembly.Location);
+            var buildprovAssembly = typeof(CompiledVirtualPathProvider).Assembly;
+            if (references.Find(buildprovAssembly.GetName().Name) == null)
+                references.Add(buildprovAssembly.Location);
 
 			// Get the root folder of the project
 			var appRoot = Path.GetDirectoryName(GetProject().FullName);
@@ -81,7 +82,6 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
 			var host = IsHelper ?
 				new WebCodeRazorHost(virtualPath, InputFilePath) :
 				WebRazorHostFactory.CreateHostFromConfig(sectGroup, virtualPath, InputFilePath);
-			
 
 			// Set the namespace to be the same as what's used by default for regular .cs files
 			host.DefaultNamespace = FileNameSpace;
@@ -111,6 +111,7 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
 					}
 				}
 			}
+
 			// Create a Razor engine and pass it our host
 			var engine = new RazorTemplateEngine(host);
             
@@ -118,7 +119,7 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
 			GeneratorResults results = null;
 			try {
 				using (TextReader reader = new StringReader(inputFileContent)) {
-					results = engine.GenerateCode(reader);
+					results = engine.GenerateCode(reader,null,null,InputFilePath);
 				}
 			}
 			catch (Exception e) {
@@ -196,7 +197,7 @@ namespace Microsoft.Web.RazorSingleFileGenerator {
 				return null;
 			}
 		}
-
+        
 		private bool IsHelper
 		{
 			get
