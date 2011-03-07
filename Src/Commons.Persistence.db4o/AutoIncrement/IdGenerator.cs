@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Db4objects.Db4o;
 
-namespace Commons.Persistence.db4o.AutoIncrement
+namespace BoC.Persistence.db4o.AutoIncrement
 {
     internal class IdGenerator
     {

@@ -7,8 +7,9 @@ using System.Threading;
 using BoC;
 using BoC.InversionOfControl;
 using BoC.Persistence;
+using BoC.Persistence.db4o;
+using BoC.Persistence.db4o.UnitOfWork;
 using Commons.Persistence.db4o.Tests.Model;
-using Commons.Persistence.db4o.UnitOfWork;
 using Db4objects.Db4o;
 using Xunit;
 

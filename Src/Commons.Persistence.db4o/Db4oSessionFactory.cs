@@ -4,12 +4,12 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using BoC.InversionOfControl;
-using Commons.Persistence.db4o.AutoIncrement;
+using BoC.Persistence.db4o.AutoIncrement;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Config;
 using Db4objects.Db4o.TA;
 
-namespace Commons.Persistence.db4o
+namespace BoC.Persistence.db4o
 {
     public class Db4oSessionFactory : ISessionFactory
     {
@@ -50,7 +50,13 @@ namespace Commons.Persistence.db4o
             config.Common.UpdateDepth = Int32.MaxValue;
 
             dependencyResolver.RegisterInstance<IEmbeddedConfiguration>(config);
-            
+
+            var configExtenders = dependencyResolver.ResolveAll<IConfigurationExtender>() ?? new IConfigurationExtender[0];
+            foreach (var extender in configExtenders)
+            {
+                extender.Configure(config);
+            }
+
             var db = Db4oEmbedded.OpenFile(config, databaseName);
             AutoIncrementSupport.Install(db);
             return new Db4oSessionFactory(db);

@@ -5,13 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using BoC.InversionOfControl;
+using BoC.Persistence.db4o.UnitOfWork;
 using BoC.UnitOfWork;
-using Commons.Persistence.db4o.UnitOfWork;
-using Db4objects.Db4o;
-using Db4objects.Db4o.Config;
-using Db4objects.Db4o.TA;
 
-namespace Commons.Persistence.db4o.DefaultSetupTasks
+namespace BoC.Persistence.db4o.DefaultSetupTasks
 {
     public class AutoDb4oConfigurator : IContainerInitializer
     {

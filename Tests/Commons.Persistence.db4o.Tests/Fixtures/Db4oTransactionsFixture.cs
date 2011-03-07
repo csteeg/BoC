@@ -7,6 +7,7 @@ using System.Transactions;
 using BoC;
 using BoC.InversionOfControl;
 using BoC.Persistence;
+using BoC.Persistence.db4o;
 using Commons.Persistence.db4o.Tests.Model;
 using Xunit;
 

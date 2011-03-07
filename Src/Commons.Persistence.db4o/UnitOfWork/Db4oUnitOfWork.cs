@@ -6,7 +6,7 @@ using System.Transactions;
 using BoC.UnitOfWork;
 using Db4objects.Db4o;
 
-namespace Commons.Persistence.db4o.UnitOfWork
+namespace BoC.Persistence.db4o.UnitOfWork
 {
     public class Db4oUnitOfWork : BaseThreadSafeSingleUnitOfWork
     {

@@ -65,7 +65,10 @@
     <Compile Include="Fixtures\Db4oTransactionsFixture.cs" />
     <Compile Include="Fixtures\Db4oUnitOfWorkFixture.cs" />
     <Compile Include="Model\Address.cs" />
+    <Compile Include="Model\Child.cs" />
+    <Compile Include="Model\Parent.cs" />
     <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\ParentConfigExtender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

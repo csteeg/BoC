@@ -2,7 +2,7 @@
 
 using Db4objects.Db4o;
 
-namespace Commons.Persistence.db4o.Repository
+namespace BoC.Persistence.db4o.Repository
 {
     public class Db4oEnlist : IEnlistmentNotification
     {

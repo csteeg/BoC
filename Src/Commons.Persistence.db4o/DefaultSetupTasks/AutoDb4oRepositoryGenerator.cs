@@ -2,9 +2,9 @@ using System;
 using System.Configuration;
 using BoC.InversionOfControl;
 using BoC.Persistence;
-using Commons.Persistence.db4o.Repository;
+using BoC.Persistence.db4o.Repository;
 
-namespace Commons.Persistence.db4o.DefaultSetupTasks
+namespace BoC.Persistence.db4o.DefaultSetupTasks
 {
     public class AutoDb4oRepositoryGenerator : IContainerInitializer
     {

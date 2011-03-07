@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Transactions;
-using BoC.Persistence;
-using Db4objects.Db4o;
 using Db4objects.Db4o.Linq;
 
-namespace Commons.Persistence.db4o.Repository
+namespace BoC.Persistence.db4o.Repository
 {
     public class Db4oRepository<T> : IRepository<T> where T : class, IBaseEntity
     {
-        private readonly ISessionManager _sessionManager;
+        private readonly ISessionManager sessionManager;
 
         public Db4oRepository(ISessionManager sessionManager)
         {
-            _sessionManager = sessionManager;
+            this.sessionManager = sessionManager;
         }
 
         object IRepository.Get(object id)
@@ -50,64 +46,93 @@ namespace Commons.Persistence.db4o.Repository
 
         public void Delete(T target)
         {
-            var enlist = new Db4oEnlist(_sessionManager.Session, target);
-            var inTransaction = Enlist(enlist);
-            _sessionManager.Session.Delete(target);
+            if (target == null)
+                return; // Silently fail.
 
-            if (!inTransaction)
-            {
-                _sessionManager.Session.Commit();
-            }
+            TryCatch(() =>
+                         {
+                             if (!sessionManager.Session.Ext().IsActive(target))
+                             {
+                                 target = Get(target.Id);
+                             }
+
+                             var enlist = new Db4oEnlist(sessionManager.Session, target);
+                             var inTransaction = Enlist(enlist);
+                             sessionManager.Session.Delete(target);
+
+                             if (!inTransaction)
+                             {
+                                 sessionManager.Session.Commit();
+                             }
+                             return null;
+                         });
         }
 
         public void DeleteById(object id)
         {
-            T obj = Get(id);
-            if(obj != null)
-            {
-                Delete(obj);
-            }
+            TryCatch(() =>
+                         {
+                             T obj = Get(id);
+                             if (obj != null)
+                             {
+                                 Delete(obj);
+                             }
+                             return null;
+                         });
         }
 
         public IQueryable<T> Query()
         {
-            return _sessionManager.Session.AsQueryable<T>();
+            return sessionManager.Session.AsQueryable<T>();
         }
 
         public T Save(T target)
         {
-            return SaveOrUpdate(target);
+            return TryCatch(() => SaveOrUpdate(target));
         }
 
         public T Update(T target)
         {
-            _sessionManager.Session.Store(target);
-            return target;
+            return TryCatch(() =>
+                                {
+                                    if (!sessionManager.Session.Ext().IsStored(target))
+                                    {
+                                        //TODO: enforce updates / saves?
+                                        return SaveOrUpdate(target);
+                                    }
+                                    else
+                                    {
+                                        return SaveOrUpdate(target);
+                                    }
+                                });
         }
 
         public T SaveOrUpdate(T target)
         {
-            var enlist = new Db4oEnlist(_sessionManager.Session, target);
-            bool inTransaction = Enlist(enlist);
-            _sessionManager.Session.Store(target);
-            if (!inTransaction)
-            {
-                _sessionManager.Session.Commit();
-            }
+            return TryCatch(() =>
+                                {
+                                    var enlist = new Db4oEnlist(sessionManager.Session, target);
+                                    bool inTransaction = Enlist(enlist);
+                                    sessionManager.Session.Store(target);
+                                    if (!inTransaction)
+                                    {
+                                        sessionManager.Session.Commit();
+                                    }
 
-            return target;
+                                    return target;
+                                });
         }
 
         public void Evict(T target)
         {
-            _sessionManager.Session.Ext().Purge(target);
+            sessionManager.Session.Ext().Purge(target);
         }
 
         public T Get(object id)
         {
-            return (from T obj in _sessionManager.Session
-                   where obj.Id == id
-                   select obj).FirstOrDefault();
+            return TryCatch(() => (from obj in Query()
+                                   where obj.Id.Equals(id)
+                                   select obj).FirstOrDefault());
         }
 
         private static bool Enlist(IEnlistmentNotification enlist)
@@ -119,6 +144,20 @@ namespace Commons.Persistence.db4o.Repository
                 return true;
             }
             return false;
+        }
+
+        protected virtual T TryCatch(Func<T> func)
+        {
+            try
+            {
+                return func();
+            }
+            catch (Exception ex)
+            {
+                //TODO: convert to BoC exceptions
+                
+                throw;
+            }
         }
     }
 }

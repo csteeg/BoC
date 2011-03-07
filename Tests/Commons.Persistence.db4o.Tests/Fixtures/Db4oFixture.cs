@@ -8,8 +8,9 @@ using BoC;
 using BoC.InversionOfControl;
 using BoC.InversionOfControl.Unity;
 using BoC.Persistence;
+using BoC.Persistence.db4o;
+using BoC.Persistence.db4o.UnitOfWork;
 using Commons.Persistence.db4o.Tests.Model;
-using Commons.Persistence.db4o.UnitOfWork;
 using Xunit;
 
 namespace Commons.Persistence.db4o.Tests.Fixtures
@@ -53,6 +54,22 @@ namespace Commons.Persistence.db4o.Tests.Fixtures
             using (BoC.UnitOfWork.UnitOfWork.BeginUnitOfWork())
             {
                 Assert.Equal(1, _repository.Query().Count());
+            }
+        }
+
+        [Fact]
+        public void TestGetEntityById()
+        {
+            var person = new Person();
+
+            using (BoC.UnitOfWork.UnitOfWork.BeginUnitOfWork())
+            {
+                person = _repository.Save(person);
+            }
+
+            using (BoC.UnitOfWork.UnitOfWork.BeginUnitOfWork())
+            {
+                Assert.NotNull(_repository.Get(person.Id));
             }
         }
 
@@ -180,6 +197,33 @@ namespace Commons.Persistence.db4o.Tests.Fixtures
                 {
                     Assert.NotEqual(0, address.Id);
                 }
+            }
+        }
+
+        [Fact]
+        public void TestConfigurationExtender()
+        {
+            var parentRepository = IoC.Resolver.Resolve<IRepository<Parent>>();
+            var childRepository = IoC.Resolver.Resolve<IRepository<Child>>();
+
+            var parent = new Parent
+                             {
+                                 Child = new Child()
+                             };
+
+            using(BoC.UnitOfWork.UnitOfWork.BeginUnitOfWork())
+            {
+                parent = parentRepository.SaveOrUpdate(parent);
+
+                Assert.Equal(1, childRepository.Query().Count());
+            }
+
+            using(BoC.UnitOfWork.UnitOfWork.BeginUnitOfWork())
+            {
+                parentRepository.Delete(parent);
+
+                // cascades should be setup, so no more children.
+                Assert.Equal(0, childRepository.Query().Count());
             }
         }
     }

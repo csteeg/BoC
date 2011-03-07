@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using Db4objects.Db4o;
 
-namespace Commons.Persistence.db4o.UnitOfWork
+namespace BoC.Persistence.db4o.UnitOfWork
 {
     public class Db4oUnitOfWorkSessionManager : ISessionManager
     {

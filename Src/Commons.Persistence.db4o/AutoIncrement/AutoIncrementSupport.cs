@@ -6,7 +6,7 @@ using BoC.Persistence;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Events;
 
-namespace Commons.Persistence.db4o.AutoIncrement
+namespace BoC.Persistence.db4o.AutoIncrement
 {
     public class AutoIncrementSupport
     {
