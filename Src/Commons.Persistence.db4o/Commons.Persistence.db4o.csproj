@@ -81,7 +81,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoIncrement\AutoIncrementAttribute.cs" />
     <Compile Include="AutoIncrement\AutoIncrementSupport.cs" />
     <Compile Include="AutoIncrement\IdGenerator.cs" />
     <Compile Include="Db4oSessionFactory.cs" />

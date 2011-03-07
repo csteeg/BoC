@@ -2,13 +2,13 @@
 
 namespace BoC.Persistence
 {
-    public interface IBaseEntity<out TKey> : IBaseEntity
+    public interface IBaseEntity<TKey> : IBaseEntity
     {
-        new TKey Id { get; }
+        new TKey Id { get; set; }
     }
 
     public interface IBaseEntity : IEquatable<IBaseEntity>
     {
-        object Id { get; }
+        object Id { get; set; }
     }
 }

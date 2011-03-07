@@ -47,6 +47,7 @@ namespace BoC.Persistence
         object IBaseEntity.Id
         {
             get { return Id; }
+            set { Id = (Tkey)System.Convert.ChangeType(value, typeof(Tkey)); }
         }
     }
 }
