@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using BoC.InversionOfControl;
+using Commons.Persistence.db4o.AutoIncrement;
 using Db4objects.Db4o;
 using Db4objects.Db4o.Config;
 using Db4objects.Db4o.TA;
@@ -51,6 +52,7 @@ namespace Commons.Persistence.db4o
             dependencyResolver.RegisterInstance<IEmbeddedConfiguration>(config);
             
             var db = Db4oEmbedded.OpenFile(config, databaseName);
+            AutoIncrementSupport.Install(db);
             return new Db4oSessionFactory(db);
         }
 

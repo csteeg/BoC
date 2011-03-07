@@ -140,5 +140,47 @@ namespace Commons.Persistence.db4o.Tests.Fixtures
 
             }
         }
+
+        [Fact]
+        public void TestAutoIncrementIdProperty()
+        {
+            var person = new Person();
+
+            using (BoC.UnitOfWork.UnitOfWork.BeginUnitOfWork())
+            {
+                _repository.Save(person);
+            }
+
+            using (BoC.UnitOfWork.UnitOfWork.BeginUnitOfWork())
+            {
+                var persistentPerson = _repository.Query().FirstOrDefault();
+                Assert.NotEqual(0, persistentPerson.Id);
+            }
+        }
+
+        [Fact]
+        public void TestAutoIncrementIdPropertyWithRelations()
+        {
+            var person = new Person();
+            person.HomeAddress = new Address { Type = "Home" };
+            person.WorkAddress = new Address { Type = "Work" };
+
+            using (BoC.UnitOfWork.UnitOfWork.BeginUnitOfWork())
+            {
+                _repository.Save(person);
+            }
+
+            using (BoC.UnitOfWork.UnitOfWork.BeginUnitOfWork())
+            {
+                var persistentPerson = _repository.Query().FirstOrDefault();
+                Assert.NotEqual(0, persistentPerson.Id);
+                
+                var addressRepository = IoC.Resolver.Resolve<IRepository<Address>>();
+                foreach (var address in addressRepository.Query())
+                {
+                    Assert.NotEqual(0, address.Id);
+                }
+            }
+        }
     }
 }
