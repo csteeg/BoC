@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -16,7 +17,9 @@ namespace BoC.Web.Mvc.MetaData
 
         public void Extend(Type type, Type with)
         {
-            AddAttribute(type, new ExtendWithTypeAttribute(with));
+            //AddAttribute(type, new ExtendWithTypeAttribute(with));
+            TypeDescriptor.AddProvider(new ExtraModelMetadataTypeDescriptionProvider(type), type);
+            TypeDescriptor.AddAttributes(type, new ExtendWithTypeAttribute(with));
         }
 
         public void AddAttribute(Type onType, Attribute attribute)

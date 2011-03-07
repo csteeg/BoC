@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Web.Mvc;
 using BoC.InversionOfControl;
 using BoC.Tasks;
@@ -18,9 +19,13 @@ namespace BoC.Web.Mvc.Init
 
         public void Execute()
         {
+            if (!(dependencyResolver.IsRegistered(typeof(IExtraModelMetadataRegistry))))
+            {
+                dependencyResolver.RegisterSingleton<IExtraModelMetadataRegistry, ExtraModelMetadataRegistry>();
+            }
             if (!(dependencyResolver.IsRegistered(typeof(ModelMetadataProvider))))
             {
-                dependencyResolver.RegisterInstance<ModelMetadataProvider>(new ExtraModelMetadataProvider());
+                dependencyResolver.RegisterSingleton<ModelMetadataProvider, ExtraModelMetadataProvider>();
             }
         }
 

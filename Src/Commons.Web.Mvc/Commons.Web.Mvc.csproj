@@ -152,6 +152,7 @@
     <Compile Include="Init\SetDefaultViewEngine.cs" />
     <Compile Include="Init\SetDefaultMvcDependencyResolver.cs" />
     <Compile Include="Init\RegisterGlobalFilters.cs" />
+    <Compile Include="MetaData\ExtraMetaDataPropertyDescriptor.cs" />
     <Compile Include="MetaData\ExtraModelMetadataTypeDescriptor.cs" />
     <Compile Include="MetaData\ExtendWithTypeAttribute.cs" />
     <Compile Include="MetaData\ExtraModelMetadataProvider.cs" />

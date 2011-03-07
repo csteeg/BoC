@@ -1,54 +1,60 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 
 namespace BoC.Web.Mvc.MetaData
 {
-    public class ExtraModelMetadataTypeDescriptor : CustomTypeDescriptor
+    public class ExtraModelMetadataTypeDescriptionProvider : TypeDescriptionProvider
     {
-        private readonly Type type;
-        private readonly ExtraModelMetadataProvider metadataProvider;
-
-        public ExtraModelMetadataTypeDescriptor(
-            Type type,
-            ExtraModelMetadataProvider metadataProvider, 
-            ICustomTypeDescriptor parent): base(parent)
+        public ExtraModelMetadataTypeDescriptionProvider(Type type): base(TypeDescriptor.GetProvider(type))
         {
-            this.type = type;
-            this.metadataProvider = metadataProvider;
         }
 
-        public override AttributeCollection GetAttributes()
+        public override ICustomTypeDescriptor GetTypeDescriptor(Type objectType, object instance)
+        {
+            return new ExtraModelMetadataTypeDescriptor(objectType, base.GetTypeDescriptor(objectType, instance));
+        }
+    }
+    public class ExtraModelMetadataTypeDescriptor : CustomTypeDescriptor
+    {
+        private readonly Type componentType;
+
+        public ExtraModelMetadataTypeDescriptor(Type componentType, ICustomTypeDescriptor parent): base(parent)
+        {
+            this.componentType = componentType;
+        }
+
+        /*public override AttributeCollection GetAttributes()
         {
             return new AttributeCollection(
                 base.GetAttributes().Cast<Attribute>().Union(metadataProvider.ExtraModelMetaDataRegistry.GetExtraAttributes(type)).ToArray());
-        }
+        }*/
 
         public override PropertyDescriptorCollection GetProperties()
         {
             return new PropertyDescriptorCollection(
                 base.GetProperties().Cast<PropertyDescriptor>()
-                    .Union(GetAttributes()
+                    .Union(TypeDescriptor.GetAttributes(componentType)
                         .OfType<ExtendWithTypeAttribute>()
-                        .SelectMany(et => metadataProvider
-                                .GetExtraModelMetaDataTypeDescriptor(et.With)
-                                .GetProperties().Cast<PropertyDescriptor>()))
-                    .ToArray());
+                        .SelectMany(et => 
+                            from prop in TypeDescriptor.GetProperties(et.With).Cast<PropertyDescriptor>()
+                            select new ExtraMetaDataPropertyDescriptor(prop, et.With)
+                    )).ToArray());
         }
 
         public override PropertyDescriptorCollection GetProperties(Attribute[] attributes)
         {
             return new PropertyDescriptorCollection(
                 base.GetProperties(attributes).Cast<PropertyDescriptor>()
-                    .Union(GetAttributes()
+                    .Union(TypeDescriptor.GetAttributes(componentType)
                         .OfType<ExtendWithTypeAttribute>()
-                        .SelectMany(et => metadataProvider
-                                .GetExtraModelMetaDataTypeDescriptor(et.With)
-                                .GetProperties(attributes).Cast<PropertyDescriptor>()))
-                    .ToArray());
+                        .SelectMany(et =>
+                            from prop in TypeDescriptor.GetProperties(et.With, attributes).Cast<PropertyDescriptor>()
+                                select new ExtraMetaDataPropertyDescriptor(prop, et.With)
+                    )).ToArray());
         }
     }
 }

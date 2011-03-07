@@ -13,10 +13,6 @@ namespace BoC.Persistence.Xpo.UnitOfWork
         public XpoUnitOfWork(ISessionFactory sessionFactory)
         {
             this.sessionFactory = sessionFactory;
-            if (OuterUnitOfWork != this)
-            {
-                nestedUnitOfWOrk = Session.BeginNestedUnitOfWork();
-            }
         }
 
         protected override void Dispose(bool disposing)
@@ -62,7 +58,7 @@ namespace BoC.Persistence.Xpo.UnitOfWork
                 }
                 if (OuterUnitOfWork != null)
                 {
-                    return ((XpoUnitOfWork)OuterUnitOfWork).Session;
+                    return nestedUnitOfWOrk ?? (nestedUnitOfWOrk = Session.BeginNestedUnitOfWork());
                 }
                 return null;
             }

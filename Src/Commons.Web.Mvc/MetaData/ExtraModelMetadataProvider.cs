@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using BoC.InversionOfControl;
 
 namespace BoC.Web.Mvc.MetaData
 {
     public class ExtraModelMetadataProvider : DataAnnotationsModelMetadataProvider
     {
         private readonly IExtraModelMetadataRegistry registry;
-        public ExtraModelMetadataProvider() : this(new ExtraModelMetadataRegistry()) {}
         public ExtraModelMetadataProvider(IExtraModelMetadataRegistry registry)
         {
             this.registry = registry;
@@ -47,7 +47,7 @@ namespace BoC.Web.Mvc.MetaData
         {
             return Modify(base.GetMetadataForType(modelAccessor, modelType));
         }
-
+        /*
         protected override System.ComponentModel.ICustomTypeDescriptor GetTypeDescriptor(Type type)
         {
             return GetExtraModelMetaDataTypeDescriptor(type);
@@ -61,6 +61,6 @@ namespace BoC.Web.Mvc.MetaData
         internal System.ComponentModel.ICustomTypeDescriptor GetDefaultDataTypeDescriptor(Type type)
         {
             return base.GetTypeDescriptor(type);
-        }
+        }*/
     }
 }
