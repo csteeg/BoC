@@ -131,9 +131,6 @@ namespace Commons.Persistence.db4o.Tests.Fixtures
 
             using(var unitOfWork = BoC.UnitOfWork.UnitOfWork.BeginUnitOfWork() as Db4oUnitOfWork)
             {
-                unitOfWork.Session.Ext().Configure()
-                    .ObjectClass(typeof(Person)).CascadeOnDelete(true);
-
                 _repository.Delete(_repository.Query().First());
 
                 Assert.Equal(0, _repository.Query().Count());

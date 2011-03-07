@@ -1,25 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Web.Mvc;
-using BoC.InversionOfControl;
 
 namespace BoC.Web.Mvc.MetaData
 {
     public class ExtraModelMetadataProvider : DataAnnotationsModelMetadataProvider
     {
-        private readonly IExtraModelMetadataRegistry registry;
-        public ExtraModelMetadataProvider(IExtraModelMetadataRegistry registry)
-        {
-            this.registry = registry;
-        }
-
-        public IExtraModelMetadataRegistry ExtraModelMetaDataRegistry
-        {
-            get { return registry; }
-        }
-
         public override IEnumerable<ModelMetadata> GetMetadataForProperties(object container, Type containerType)
         {
             return base.GetMetadataForProperties(container, containerType).Select(Modify);
@@ -47,20 +34,5 @@ namespace BoC.Web.Mvc.MetaData
         {
             return Modify(base.GetMetadataForType(modelAccessor, modelType));
         }
-        /*
-        protected override System.ComponentModel.ICustomTypeDescriptor GetTypeDescriptor(Type type)
-        {
-            return GetExtraModelMetaDataTypeDescriptor(type);
-        }
-
-        internal System.ComponentModel.ICustomTypeDescriptor GetExtraModelMetaDataTypeDescriptor(Type type)
-        {
-            return new ExtraModelMetadataTypeDescriptor(type, this, GetDefaultDataTypeDescriptor(type));
-        }
-
-        internal System.ComponentModel.ICustomTypeDescriptor GetDefaultDataTypeDescriptor(Type type)
-        {
-            return base.GetTypeDescriptor(type);
-        }*/
     }
 }

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
-namespace BoC.Web.Mvc.MetaData
+namespace BoC.ComponentModel.TypeExtension
 {
-    public class ExtraMetaDataPropertyDescriptor : PropertyDescriptor
+    public class ExtendedPropertyDescriptor : PropertyDescriptor
     {
         private readonly PropertyDescriptor baseDescriptor;
         private readonly Type extensionType;
 
-        public ExtraMetaDataPropertyDescriptor(PropertyDescriptor baseDescriptor, Type extensionType): base(baseDescriptor)
+        public ExtendedPropertyDescriptor(PropertyDescriptor baseDescriptor, Type extensionType): base(baseDescriptor)
         {
             this.baseDescriptor = baseDescriptor;
             this.extensionType = extensionType;

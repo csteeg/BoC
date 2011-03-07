@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BoC.Web.Mvc.MetaData
+namespace BoC.ComponentModel.TypeExtension
 {
     public class ExtendWithTypeAttribute : Attribute
     {
