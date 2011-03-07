@@ -5,3 +5,5 @@ Build/
 bin/
 obj/
 Samples/*/App_Data/*
+
+/Samples/Commons.Sample.Web.NerdDinner
