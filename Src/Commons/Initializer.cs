@@ -11,13 +11,20 @@ namespace BoC
 {
     public static class Initializer
     {
+        private static object initializer_lock = new object();
+        public static bool Executed { get; private set; }
         public static void Execute()
         {
+            if (Executed)
+                return;
             Execute(AppDomainHelper.CreateDefault());
         }
 
         public static void Execute(params IAppDomainHelper[] appDomainHelpers)
         {
+            if (Executed)
+                return;
+
             var depResolverTypeName = ConfigurationManager.AppSettings["BoC.IoC.ResolverTypeName"];
             Type depresolverType = null;
             if (depResolverTypeName != null)
@@ -27,7 +34,7 @@ namespace BoC
             if (depresolverType == null && appDomainHelpers != null)
             {
                 depresolverType = appDomainHelpers.SelectMany(
-                    a => a.GetTypes(t => typeof (IDependencyResolver).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract &&t.IsPublic)).FirstOrDefault();
+                    a => a.GetTypes(t => typeof(IDependencyResolver).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract && t.IsPublic)).FirstOrDefault();
             }
             if (depresolverType != null)
             {
@@ -37,16 +44,24 @@ namespace BoC
 
         public static void Execute(IDependencyResolver dependencyResolver, params IAppDomainHelper[] appDomainHelpers)
         {
-            if (appDomainHelpers != null)
+            if (Executed)
+                return;
+
+            lock (initializer_lock)
             {
-                foreach (var appDomainHelper in appDomainHelpers)
+                if (appDomainHelpers != null)
                 {
-                    dependencyResolver.RegisterInstance<IAppDomainHelper>(appDomainHelper);
+                    foreach (var appDomainHelper in appDomainHelpers)
+                    {
+                        dependencyResolver.RegisterInstance<IAppDomainHelper>(appDomainHelper);
+                    }
                 }
+
+                IoC.InitializeWith(dependencyResolver);
+                dependencyResolver.Resolve<Bootstrapper>().Run();
+                Executed = true;
             }
 
-            IoC.InitializeWith(dependencyResolver);
-            dependencyResolver.Resolve<Bootstrapper>().Run();
         }
     }
 }

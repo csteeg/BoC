@@ -17,27 +17,20 @@ namespace BoC.Tasks
             this.appDomainHelpers = appDomainHelpers;
         }
 
-        volatile private static ICollection<Func<Type, bool>> taskFilters = new List<Func<Type, bool>>() 
+        ICollection<Func<Type, bool>> taskFilters = new List<Func<Type, bool>>() 
             { 
                 type => typeof(IBootstrapperTask).IsAssignableFrom(type),
                 type => !type.IsAbstract,
                 type => type.IsClass
             };
-        public static ICollection<Func<Type, bool>> TaskFilters
-        {
-            get { return taskFilters; }
-        }
 
         private void RegisterAllTasks()
         {
-            var tasks = appDomainHelpers
-                        .SelectMany(helper =>
-                            helper.GetTypes(t => TaskFilters.All(func => func(t))));
+            var tasks = appDomainHelpers.SelectMany(helper => helper.GetTypes(t => taskFilters.All(func => func(t))));
             foreach (var t in tasks)
             {
                 dependencyResolver.RegisterType(typeof(IBootstrapperTask), t);
             }
-
         }
 
         private void ExecuteTasks()

@@ -55,7 +55,7 @@ namespace BoC.Tests.Tasks
             task1.Verify(t => t.Execute(), Times.Once());
         }
 
-
+        /*
         [Fact]
         public void Register_Should_Use_Static_Filter()
         {
@@ -71,7 +71,7 @@ namespace BoC.Tests.Tasks
 
             Assert.True(filtered);
         }
-
+        */
     }
 
     public class FindableBootstrapperTask: IBootstrapperTask
