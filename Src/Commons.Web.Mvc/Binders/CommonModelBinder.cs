@@ -24,47 +24,6 @@ namespace BoC.Web.Mvc.Binders
             this.dependencyResolver = dependencyResolver;
         }
 
-        /// <summary>
-        /// After the model is updated, there may be a number of ModelState errors added by ASP.NET MVC for 
-        /// and data casting problems that it runs into while binding the object.  This gets rid of those
-        /// casting errors
-        /// </summary>
-        protected override void OnModelUpdated(ControllerContext controllerContext, ModelBindingContext bindingContext)
-        {
-            foreach (string key in bindingContext.ModelState.Keys)
-            {
-                for (int i = 0; i < bindingContext.ModelState[key].Errors.Count; i++)
-                {
-                    ModelError modelError = bindingContext.ModelState[key].Errors[i];
-
-                    // Get rid of all the MVC errors except those associated with parsing info; e.g., parsing DateTime fields
-                    if (IsModelErrorAddedByMvc(modelError) && !IsMvcModelBinderFormatException(modelError))
-                    {
-                        bindingContext.ModelState[key].Errors.RemoveAt(i);
-                        // Decrement the counter since we've shortened the list
-                        i--;
-                    }
-                }
-            }
-        }
-
-        private bool IsModelErrorAddedByMvc(ModelError modelError)
-        {
-            return modelError.Exception != null &&
-                modelError.Exception is InvalidOperationException;
-        }
-
-        private bool IsMvcModelBinderFormatException(ModelError modelError)
-        {
-            return modelError.Exception != null &&
-                   modelError.Exception.InnerException != null &&
-                   (
-                       modelError.Exception.InnerException is FormatException
-                       ||
-                       (modelError.Exception.InnerException.InnerException != null && modelError.Exception.InnerException.InnerException is FormatException)
-                   );
-        }
-
         public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
             SetEntityModel(controllerContext, bindingContext);
@@ -107,36 +66,6 @@ namespace BoC.Web.Mvc.Binders
                 }
 
             }
-        }
-
-        /// <summary>
-        /// The base implementation of this uses IDataErrorInfo to check for validation errors and 
-        /// adds them to the ModelState. This override prevents that from occurring by doing nothing at all.
-        /// </summary>
-        protected override void OnPropertyValidated(ControllerContext controllerContext, ModelBindingContext bindingContext, PropertyDescriptor propertyDescriptor, object value)
-        {
-        }
-
-        /// <summary>
-        /// The base implementatoin of this looks to see if a property value provided via a form is 
-        /// bindable to the property and adds an error to the ModelState if it's not.  For example, if 
-        /// a text box is left blank and the binding property is of type int, then the base implementation
-        /// will add an error with the message "A value is required." to the ModelState.  We don't want 
-        /// this to occur as we want these type of validation problems to be verified by our business rules.
-        /// </summary>
-        protected override bool OnPropertyValidating(ControllerContext controllerContext, ModelBindingContext bindingContext, PropertyDescriptor propertyDescriptor, object value)
-        {
-            return true;
-        }
-
-        protected override object CreateModel(ControllerContext controllerContext, ModelBindingContext bindingContext, Type modelType)
-        {
-            return base.CreateModel(controllerContext, bindingContext, modelType);
-        }
-
-        protected override void SetProperty(ControllerContext controllerContext, ModelBindingContext bindingContext, PropertyDescriptor propertyDescriptor, object value)
-        {
-            base.SetProperty(controllerContext, bindingContext, propertyDescriptor, value);
         }
 
         /// <summary>
@@ -247,11 +176,6 @@ namespace BoC.Web.Mvc.Binders
                     }
                 }
             }
-        }
-
-        protected override object GetPropertyValue(ControllerContext controllerContext, ModelBindingContext bindingContext, PropertyDescriptor propertyDescriptor, IModelBinder propertyBinder)
-        {
-            return base.GetPropertyValue(controllerContext, bindingContext, propertyDescriptor, propertyBinder);
         }
 
         protected override void BindProperty(ControllerContext controllerContext, ModelBindingContext bindingContext, PropertyDescriptor propertyDescriptor)
