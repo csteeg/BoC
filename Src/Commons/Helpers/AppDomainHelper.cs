@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using BoC.InversionOfControl;
+using BoC.Tasks;
 
 namespace BoC.Helpers
 {
@@ -13,6 +14,15 @@ namespace BoC.Helpers
         private readonly string fileFilter;
         private List<Assembly> loadedAssemblies = new List<Assembly>();
         static private readonly object loadlock = new object();
+
+        ICollection<Func<Type, bool>> typeFilters = new List<Func<Type, bool>>()
+            { 
+                type => true
+            };
+        public ICollection<Func<Type, bool>> TypeFilters
+        {
+            get { return typeFilters; }
+        }
 
         public AppDomainHelper(string domainPath, string fileFilter)
         {
@@ -43,7 +53,10 @@ namespace BoC.Helpers
             return GetAssemblies().SelectMany(
                 a =>
                     {
-                        try { return a.GetTypes().Where(where); }
+                        try 
+                        { 
+                            return a.GetTypes().Where(t => where(t) && TypeFilters.All(func => func(t))); 
+                        }
                         catch { return new Type[0]; }
                     });
         }
@@ -130,7 +143,7 @@ namespace BoC.Helpers
         }
 
 
-        public static IAppDomainHelper CreateDefault()
+        public static AppDomainHelper CreateDefault()
         {
             return
                 new AppDomainHelper(
