@@ -25,7 +25,7 @@ namespace BoC.Web.Mvc.PrecompiledViews
 				|| Previous.FileExists(virtualPath);
 		}
 
-		private Type GetCompiledType(string virtualPath)
+		public Type GetCompiledType(string virtualPath)
 		{
 			return ApplicationPartRegistry.Instance.GetCompiledType(virtualPath);
 		}

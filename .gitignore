@@ -8,3 +8,4 @@ Samples/*/App_Data/*
 
 /Samples/Commons.Sample.Web.NerdDinner
 *.suo
+**.svn**
