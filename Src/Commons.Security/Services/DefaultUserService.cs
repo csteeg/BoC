@@ -109,27 +109,15 @@ namespace BoC.Security.Services
 
 		public virtual User Insert(User user, string password)
 		{
-			if (user == null)
-			{
-				throw new ArgumentNullException("user");
-			}
-			if (RequiresUniqueEmail && !String.IsNullOrEmpty(user.Email) && FindByEmail(user.Email) != null)
-			{
-				throw new EmailInUseException(user.Email);
-			}
-			if (FindByLogin(user.Login) != null)
-			{
-				throw new LoginInUseException(user.Login);
-			}
-			if (password != null)
-			{
-				user.Password = EncodePassword(password);
-			}
-			user.IsApproved = user.IsApproved || RequiresApproval;
+			ValidateNewUser(user);
 
-			ValidateEntity(user);
-			
-			using (var scope = new TransactionScope())
+            if (password != null)
+            {
+                user.Password = EncodePassword(password);
+            }
+            user.IsApproved = user.IsApproved || RequiresApproval;
+            
+            using (var scope = new TransactionScope())
 			{
 				user = base.Insert(user);
 				scope.Complete();
@@ -137,7 +125,25 @@ namespace BoC.Security.Services
 			return user;
 		}
 
-		public override User SaveOrUpdate(User user)
+	    protected virtual void ValidateNewUser(User user)
+	    {
+	        if (user == null)
+	        {
+	            throw new ArgumentNullException("user");
+	        }
+	        if (RequiresUniqueEmail && !String.IsNullOrEmpty(user.Email) && FindByEmail(user.Email) != null)
+	        {
+	            throw new EmailInUseException(user.Email);
+	        }
+	        if (UserExists(user.Login))
+	        {
+	            throw new LoginInUseException(user.Login);
+	        }
+
+	        ValidateEntity(user);
+	    }
+
+	    public override User SaveOrUpdate(User user)
 		{
 			if (!String.IsNullOrEmpty(user.Email) && RequiresUniqueEmail)
 			{
