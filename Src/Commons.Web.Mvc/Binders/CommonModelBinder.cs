@@ -159,8 +159,7 @@ namespace BoC.Web.Mvc.Binders
                             try
                             {
                                 var jsonSerializer = new JavaScriptSerializer();
-                                var deserialize = typeof(JavaScriptSerializer).GetMethod("Deserialize").MakeGenericMethod(entityType);
-                                obj = deserialize.Invoke(jsonSerializer, new[] { value });
+                                obj = jsonSerializer.Deserialize(value, entityType);
                             }
                             catch {}
                         }
