@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web;
 using System.Web.Routing;
+using BoC.InversionOfControl;
 using BoC.Web.Mvc.ActionResults;
 
 namespace BoC.Web.Mvc.Attributes
@@ -110,25 +111,13 @@ namespace BoC.Web.Mvc.Attributes
 
                     if (responseType == ResponseType.Json)
                     {
-                        //see if custom JsonRequestBehavior has been set
-                        var attrib = filterContext.ActionDescriptor.GetCustomAttributes(typeof (JsonRequestBehaviorAttribute), true).OfType<JsonRequestBehaviorAttribute>().FirstOrDefault();
-                        if (attrib == null)
-                        {
-                            attrib = filterContext.ActionDescriptor.ControllerDescriptor.GetCustomAttributes(typeof (JsonRequestBehaviorAttribute), true).OfType<JsonRequestBehaviorAttribute>().FirstOrDefault();
-                        }
-
                         if (!(filterContext.Result is JsonResult))
                         {
-                            filterContext.Result = new JsonResult()
-                                                       {
-                                                           Data = model ?? new object(),
-                                                           JsonRequestBehavior = (attrib == null) ? JsonRequestBehavior.DenyGet : attrib.JsonRequestBehavior
-                                                       };
+                            var jsonresult =    IoC.Resolver.IsRegistered<JsonResult>() ?
+                                                IoC.Resolver.Resolve<JsonResult>() : new JsonResult();
+                            jsonresult .Data = model ?? new object();
+                            filterContext.Result = jsonresult;
                         } 
-                        else if (attrib != null)
-                        {
-                            (filterContext.Result as JsonResult).JsonRequestBehavior = attrib.JsonRequestBehavior;
-                        }
                     }
                     else if (!(filterContext.Result is XmlResult))
                     {

@@ -3,7 +3,7 @@ using System.Web.Mvc;
 
 namespace BoC.Web.Mvc.Attributes
 {
-    public class JsonRequestBehaviorAttribute: Attribute
+    public class JsonRequestBehaviorAttribute: ActionFilterAttribute
     {
         public JsonRequestBehaviorAttribute(JsonRequestBehavior jsonRequestBehavior)
         {
@@ -11,5 +11,14 @@ namespace BoC.Web.Mvc.Attributes
         }
 
         public JsonRequestBehavior JsonRequestBehavior { get; set;}
+
+        public override void OnResultExecuting(ResultExecutingContext filterContext)
+        {
+            if ((filterContext.Result is JsonResult))
+            {
+                ((JsonResult) filterContext.Result).JsonRequestBehavior = JsonRequestBehavior;
+            }
+            base.OnResultExecuting(filterContext);
+        }
     }
 }

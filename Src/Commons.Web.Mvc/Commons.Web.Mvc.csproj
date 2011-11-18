@@ -74,6 +74,9 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\lib\JsonNet\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations, Version=99.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -121,6 +124,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionResults\JsonNetJsonResult.cs" />
+    <Compile Include="ActionResults\DataContractJsonResult.cs" />
     <Compile Include="ActionResults\DataContractXmlResult.cs" />
     <Compile Include="ActionResults\XmlResult.cs" />
     <Compile Include="Attributes\AjaxControllerAttribute.cs" />
