@@ -104,6 +104,7 @@ namespace BoC.Web.Mvc.Attributes
                         {
                             filterContext.HttpContext.Response.StatusCode = 500;
                         }
+						filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
                         filterContext.HttpContext.Response.StatusDescription = exc.Message;
                         filterContext.ExceptionHandled = true;
                         model = new SimpleException(exc);

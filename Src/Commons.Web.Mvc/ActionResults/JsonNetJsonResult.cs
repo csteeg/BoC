@@ -53,6 +53,10 @@ namespace BoC.Web.Mvc.ActionResults
                 }
                 response.Write(JsonConvert.SerializeObject(Data, Formatting.None, settings));
                 response.Flush();
+				
+				//seems sometimes an error is output AFTER the json result, really don't get it :(
+				if (!response.TrySkipIisCustomErrors)
+            		response.End();
             }
         }
     }
