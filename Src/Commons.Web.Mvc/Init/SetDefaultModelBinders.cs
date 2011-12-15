@@ -26,6 +26,9 @@ namespace BoC.Web.Mvc.Init
             ModelBinders.Binders.DefaultBinder = new CommonModelBinder(dependencyResolver);
             ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder());
             ModelBinders.Binders.Add(typeof(DateTime?), new DateTimeModelBinder());
+			ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
+			ModelBinders.Binders.Add(typeof(decimal?), new DecimalModelBinder());
+
         }
 
     }

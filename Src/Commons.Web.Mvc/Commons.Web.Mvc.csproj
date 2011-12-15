@@ -134,6 +134,7 @@
     <Compile Include="Attributes\ValidationExceptionAttribute.cs" />
     <Compile Include="Binders\CommonModelBinder.cs" />
     <Compile Include="Binders\DateTimeModelBinder.cs" />
+    <Compile Include="Binders\DecimalModelBinder.cs" />
     <Compile Include="CommonViewUserControl.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
