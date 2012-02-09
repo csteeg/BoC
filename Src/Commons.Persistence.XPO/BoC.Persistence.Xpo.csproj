@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BoC.Persistence.Xpo</RootNamespace>
-    <AssemblyName>Commons.Persistence.Xpo</AssemblyName>
+    <AssemblyName>BoC.Persistence.Xpo</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -85,9 +85,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Commons\Commons.csproj">
+    <ProjectReference Include="..\Commons\BoC.csproj">
       <Project>{25C350AF-4957-47E8-960A-6C59794C5DEF}</Project>
-      <Name>Commons</Name>
+      <Name>BoC</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

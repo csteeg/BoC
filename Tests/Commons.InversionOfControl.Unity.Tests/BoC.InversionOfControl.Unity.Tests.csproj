@@ -47,13 +47,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Src\Commons.InversionOfControl.Unity\Commons.InversionOfControl.Unity.csproj">
+    <ProjectReference Include="..\..\Src\Commons.InversionOfControl.Unity\BoC.InversionOfControl.Unity.csproj">
       <Project>{5E953013-A5C4-4AB5-BF99-108C6D4D21CE}</Project>
-      <Name>Commons.InversionOfControl.Unity</Name>
+      <Name>BoC.InversionOfControl.Unity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Src\Commons\Commons.csproj">
+    <ProjectReference Include="..\..\Src\Commons\BoC.csproj">
       <Project>{25C350AF-4957-47E8-960A-6C59794C5DEF}</Project>
-      <Name>Commons</Name>
+      <Name>BoC</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

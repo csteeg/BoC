@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BoC.Web.Mvc</RootNamespace>
-    <AssemblyName>Commons.Web.Mvc</AssemblyName>
+    <AssemblyName>BoC.Web.Mvc</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -171,9 +171,9 @@
     <Compile Include="Validation\RulesExceptionExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Commons\Commons.csproj">
+    <ProjectReference Include="..\Commons\BoC.csproj">
       <Project>{25C350AF-4957-47E8-960A-6C59794C5DEF}</Project>
-      <Name>Commons</Name>
+      <Name>BoC</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

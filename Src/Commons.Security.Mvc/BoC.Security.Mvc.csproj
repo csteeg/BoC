@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BoC.Security.Mvc</RootNamespace>
-    <AssemblyName>Commons.Security.Mvc</AssemblyName>
+    <AssemblyName>BoC.Security.Mvc</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -160,21 +160,21 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Commons.Security\Commons.Security.csproj">
+    <ProjectReference Include="..\Commons.Security\BoC.Security.csproj">
       <Project>{387BC181-5A33-4657-9C19-07A8FA48A916}</Project>
-      <Name>Commons.Security</Name>
+      <Name>BoC.Security</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Commons.Web.Mvc\Commons.Web.Mvc.csproj">
+    <ProjectReference Include="..\Commons.Web.Mvc\BoC.Web.Mvc.csproj">
       <Project>{D21291A8-98DB-48F0-A864-CC468BA44EB1}</Project>
-      <Name>Commons.Web.Mvc</Name>
+      <Name>BoC.Web.Mvc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Commons.Web.PrecompiledViews\Commons.Web.PrecompiledViews.csproj">
+    <ProjectReference Include="..\Commons.Web.PrecompiledViews\BoC.Web.PrecompiledViews.csproj">
       <Project>{46C9FDE4-328A-4E80-8504-AED5E2196AE1}</Project>
-      <Name>Commons.Web.PrecompiledViews</Name>
+      <Name>BoC.Web.PrecompiledViews</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Commons\Commons.csproj">
+    <ProjectReference Include="..\Commons\BoC.csproj">
       <Project>{25C350AF-4957-47E8-960A-6C59794C5DEF}</Project>
-      <Name>Commons</Name>
+      <Name>BoC</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

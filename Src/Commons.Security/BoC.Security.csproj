@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BoC.Security</RootNamespace>
-    <AssemblyName>Commons.Security</AssemblyName>
+    <AssemblyName>BoC.Security</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -115,9 +115,9 @@
     <Compile Include="UserServiceException.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Commons\Commons.csproj">
+    <ProjectReference Include="..\Commons\BoC.csproj">
       <Project>{25C350AF-4957-47E8-960A-6C59794C5DEF}</Project>
-      <Name>Commons</Name>
+      <Name>BoC</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

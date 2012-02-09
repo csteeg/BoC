@@ -111,9 +111,9 @@
     <Folder Include="Web\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Src\Commons\Commons.csproj">
+    <ProjectReference Include="..\..\Src\Commons\BoC.csproj">
       <Project>{25C350AF-4957-47E8-960A-6C59794C5DEF}</Project>
-      <Name>Commons</Name>
+      <Name>BoC</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
