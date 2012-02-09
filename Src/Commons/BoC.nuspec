@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
-<package >
-  <metadata>
-    <id>BoC.Base</id>
-    <version>1.1.0</version>
-    <title>BoC</title>
-    <authors>Chris van de Steeg</authors>
-    <owners>Chris van de Steeg</owners>
-    <licenseUrl>https://github.com/csteeg/BoC/blob/master/License.txt</licenseUrl>
-    <projectUrl>https://github.com/csteeg/BoC</projectUrl>
-    <iconUrl></iconUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>
+<package>
+	<metadata>
+		<id>$id$</id>
+		<version>$version$</version>
+		<title>$title$</title>
+		<authors>$author$</authors>
+		<owners>$author$</owners>
+		<licenseUrl>https://github.com/csteeg/BoC/blob/master/License.txt</licenseUrl>
+		<projectUrl>https://github.com/csteeg/BoC</projectUrl>
+		<iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>
 			BoC needs some documentation, but contains lots of usefull stuff like
 			-EventAggregator pattern implementation
 			-Inversion of Control wrapper (see other BoC packages like BoC.InversionOfControl.Unity for implementations)
@@ -19,8 +19,8 @@
 			-Logging wrapper (see BoC.Logging.log4net for implementation)
 			-Persistence repository and service pattern implementation (see other BoC packages like BoC.Persistence.NHibernate for implementations)
 		</description>
-    <releaseNotes>First official release.</releaseNotes>
-    <copyright>Copyright 2012</copyright>
-    <tags>Tag1 Tag2</tags>
-  </metadata>
+		<releaseNotes>First official release.</releaseNotes>
+		<copyright>Copyright 2012</copyright>
+		<tags>EventAggregator,inversion of control,library,bootstrapper,persistence,logging</tags>
+	</metadata>
 </package>
