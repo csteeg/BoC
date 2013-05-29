@@ -31,16 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Commons">
-      <HintPath>..\..\Build\Commons.dll</HintPath>
+    <Reference Include="Db4objects.Db4o">
+      <HintPath>..\..\lib\db4o 8.0\Db4objects.Db4o.dll</HintPath>
     </Reference>
-    <Reference Include="Commons.InversionOfControl.Unity">
-      <HintPath>..\..\Build\Commons.InversionOfControl.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="Commons.Persistence.db4o">
-      <HintPath>..\..\Build\Commons.Persistence.db4o.dll</HintPath>
-    </Reference>
-    <Reference Include="Db4objects.Db4o, Version=8.0.184.15484, Culture=neutral, PublicKeyToken=6199cd4f203aa8eb, processorArchitecture=MSIL" />
     <Reference Include="Moq">
       <HintPath>..\lib\Moq\NET40\Moq.dll</HintPath>
     </Reference>
@@ -73,6 +66,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Src\Commons.InversionOfControl.Unity\BoC.InversionOfControl.Unity.csproj">
+      <Project>{5e953013-a5c4-4ab5-bf99-108c6d4d21ce}</Project>
+      <Name>BoC.InversionOfControl.Unity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Src\Commons.Persistence.db4o\BoC.Persistence.db4o.csproj">
+      <Project>{3cb44ae3-e282-4271-bab9-be4075cef44b}</Project>
+      <Name>BoC.Persistence.db4o</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Src\Commons\BoC.csproj">
+      <Project>{25c350af-4957-47e8-960a-6c59794c5def}</Project>
+      <Name>BoC</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
