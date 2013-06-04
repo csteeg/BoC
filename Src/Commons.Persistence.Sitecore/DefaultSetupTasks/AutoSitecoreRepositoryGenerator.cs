@@ -1,6 +1,7 @@
 using System;
 using System.Configuration;
 using BoC.InversionOfControl;
+using BoC.Logging;
 
 namespace BoC.Persistence.SitecoreGlass.DefaultSetupTasks
 {
@@ -20,7 +21,7 @@ namespace BoC.Persistence.SitecoreGlass.DefaultSetupTasks
                 return;
 
             var defaultBaseType = typeof(SitecoreRepository<>);
-            var constructorParams = new[] { typeof(IDatabaseProvider), typeof(ISitecoreServiceProvider), typeof(IIndexNameProvider) };
+            var constructorParams = new[] { typeof(IDatabaseProvider), typeof(ISitecoreServiceProvider), typeof(IProviderSearchContextProvider), typeof(ILogger) };
 
             RepositoryGenerator.GenerateRepositories(dependencyResolver, defaultBaseType, constructorParams);
         }
