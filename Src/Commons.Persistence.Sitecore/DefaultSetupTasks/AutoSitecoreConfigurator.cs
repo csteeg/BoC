@@ -2,6 +2,7 @@ using System;
 using System.Configuration;
 using BoC.InversionOfControl;
 using BoC.Persistence.SitecoreGlass.UnitOfWork;
+using BoC.UnitOfWork;
 
 namespace BoC.Persistence.SitecoreGlass.DefaultSetupTasks
 {
@@ -35,10 +36,16 @@ namespace BoC.Persistence.SitecoreGlass.DefaultSetupTasks
                 dependencyResolver.RegisterSingleton<IIndexNameProvider, SystemIndexNameProvider>();
             }
 
+            if (!dependencyResolver.IsRegistered<IUnitOfWork>())
+            {
+                dependencyResolver.RegisterSingleton<IUnitOfWork, SitecoreUnitOfWork>();
+            }
+
             if (!dependencyResolver.IsRegistered<IProviderSearchContextProvider>())
             {
                 dependencyResolver.RegisterSingleton<IProviderSearchContextProvider, SitecoreUnitOfWorkIndexSearchContextProvider>();
             }
+            
         }
     }
 }
