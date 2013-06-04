@@ -12,6 +12,7 @@ namespace BoC.Web
     public class UnitOfWorkPerRequestHttpModule : IHttpModule
     {
         private const string unitofworkkey = "BoC.UnitOfWork.Web.OuterUnitOfWork";
+        public static bool Enabled = false;
 
         public void Init(HttpApplication context)
         {
@@ -25,6 +26,11 @@ namespace BoC.Web
 
         private void OnEndRequest(object sender, EventArgs eventArgs)
         {
+            if (!Enabled)
+            {
+                return;
+            }
+
             var unitOfWork = ((HttpApplication)sender).Context.Items[unitofworkkey] as IUnitOfWork;
             if (unitOfWork != null)
             {
@@ -35,7 +41,8 @@ namespace BoC.Web
 
         private void OnBeginRequest(object sender, EventArgs eventArgs)
         {
-            ((HttpApplication)sender).Context.Items[unitofworkkey] = UnitOfWork.UnitOfWork.BeginUnitOfWork();
+            if (Enabled)
+                ((HttpApplication)sender).Context.Items[unitofworkkey] = UnitOfWork.UnitOfWork.BeginUnitOfWork();
         }
 
     }

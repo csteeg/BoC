@@ -32,12 +32,12 @@ namespace BoC.Web
 
 		public void Init(HttpApplication context)
 		{
-			if (!startWasCalled)
+            context.BeginRequest += (sender, args) => StartApplication();
+            if (!startWasCalled)
 			{
 				try
 				{
 					context.Application.Lock();
-				    context.BeginRequest += (sender, args) => StartApplication();
 					StartApplication();
 				}
 				finally
