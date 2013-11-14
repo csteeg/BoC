@@ -128,12 +128,14 @@
     <Compile Include="Initializer.cs" />
     <Compile Include="InversionOfControl\IContainerInitializer.cs" />
     <Compile Include="Linq\Dynamic.cs" />
+    <Compile Include="Logging\ILogContext.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="ComponentModel\TypeExtension\ExtendWithTypeAttribute.cs" />
     <Compile Include="ComponentModel\TypeExtension\ExtendedPropertyDescriptor.cs" />
     <Compile Include="ComponentModel\TypeExtension\ExtendedTypesRegistry.cs" />
     <Compile Include="ComponentModel\TypeExtension\ExtendedTypeDescriptionProvider.cs" />
     <Compile Include="ComponentModel\TypeExtension\IExtendedTypesRegistry.cs" />
+    <Compile Include="Logging\LogContext.cs" />
     <Compile Include="Persistence\Exceptions.cs" />
     <Compile Include="Persistence\RepositoryGenerator.cs" />
     <Compile Include="ServiceModel\ServiceErrorLoggerBehavior.cs" />

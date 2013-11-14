@@ -159,7 +159,12 @@ namespace BoC.Persistence.SitecoreGlass
 
         public virtual T Get(string path)
         {
-            return GetAndConvertItem<T>(path, GetLanguage(_dbProvider));
+            return Get(path, GetLanguage(_dbProvider));
+        }
+
+        public virtual T Get(string path, Language language)
+        {
+            return GetAndConvertItem<T>(path, language);
         }
 
         public virtual T Get(Guid id)
