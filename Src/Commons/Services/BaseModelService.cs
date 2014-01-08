@@ -68,36 +68,24 @@ namespace BoC.Services
 
         public virtual TModel Insert(TModel entity)
         {
-            TModel retValue = default(TModel);
-            ExecuteInTransaction(() =>
-                                     {
-                                         OnInserting(entity);
-                                         retValue = repository.Save(entity);
-                                         OnInserted(retValue);
-                                     });
+            OnInserting(entity);
+            TModel retValue = repository.Save(entity);
+            OnInserted(retValue);
             return retValue;
         }
 
         public virtual void Delete(TModel entity)
         {
-            ExecuteInTransaction(() =>
-                                     {
-                                         OnDeleting(entity);
-                                         repository.Delete(entity);
-                                         OnDeleted(entity);
-
-                                     });
+            OnDeleting(entity);
+            repository.Delete(entity);
+            OnDeleted(entity);
         }
 
         public virtual TModel SaveOrUpdate(TModel entity)
         {
-            TModel retValue = default(TModel);
-            ExecuteInTransaction(() =>
-                                     {
-                                         OnUpdating(entity);
-                                         retValue = repository.SaveOrUpdate(entity);
-                                         OnUpdated(retValue);
-                                     });
+            OnUpdating(entity);
+            var retValue = repository.SaveOrUpdate(entity);
+            OnUpdated(retValue);
             return retValue;
         }
 
@@ -111,15 +99,6 @@ namespace BoC.Services
         object IModelService.Get(object id)
         {
             return Get(id);
-        }
-
-        private void ExecuteInTransaction(Action action)
-        {
-            using(var transaction = new TransactionScope(TransactionScopeOption.Required))
-            {
-                action();
-                transaction.Complete();
-            }
         }
 
         #region Events

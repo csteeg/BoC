@@ -85,13 +85,13 @@
     <Compile Include="UnitOfWork\UnitOfWorkException.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Commons\BoC.csproj">
       <Project>{25c350af-4957-47e8-960a-6c59794c5def}</Project>
       <Name>BoC</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
