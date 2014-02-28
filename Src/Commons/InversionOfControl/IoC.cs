@@ -17,6 +17,7 @@ namespace BoC.InversionOfControl
                     throw new ApplicationException("IoC already initialized");
                 
                 IoC.Resolver = resolver;
+                resolver.RegisterInstance<IDependencyResolver>(resolver);
                 RunContainerInitializers(resolver);
             }
         }

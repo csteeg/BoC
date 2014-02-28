@@ -38,7 +38,7 @@ namespace BoC.Persistence.SitecoreGlass.DefaultSetupTasks
 
             if (!dependencyResolver.IsRegistered<IUnitOfWork>())
             {
-                dependencyResolver.RegisterSingleton<IUnitOfWork, SitecoreUnitOfWork>();
+                dependencyResolver.RegisterType<IUnitOfWork, SitecoreUnitOfWork>();
             }
 
             if (!dependencyResolver.IsRegistered<IProviderSearchContextProvider>())

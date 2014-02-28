@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D75EF326-E1BC-4DFB-ABA8-5BE622875649}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{D700FEE1-83DE-4496-9305-7651BEE8AAC8}"
@@ -36,10 +38,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList", "Samples\ToDoLis
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Tests", "Samples\ToDoList.Tests\ToDoList.Tests.csproj", "{3C19162C-4815-4736-810A-237FDECF4146}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoC.Web.PrecompiledViews", "Src\Commons.Web.PrecompiledViews\BoC.Web.PrecompiledViews.csproj", "{46C9FDE4-328A-4E80-8504-AED5E2196AE1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorSingleFileGenerator", "Src\RazorSingleFileGenerator\RazorSingleFileGenerator.csproj", "{461089E7-008E-4737-BA17-E1FCD1CC3D0E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoC.InversionOfControl.Unity", "Src\Commons.InversionOfControl.Unity\BoC.InversionOfControl.Unity.csproj", "{5E953013-A5C4-4AB5-BF99-108C6D4D21CE}"
 EndProject
@@ -130,18 +128,6 @@ Global
 		{3C19162C-4815-4736-810A-237FDECF4146}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C19162C-4815-4736-810A-237FDECF4146}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C19162C-4815-4736-810A-237FDECF4146}.Release|Any CPU.Build.0 = Release|Any CPU
-		{46C9FDE4-328A-4E80-8504-AED5E2196AE1}..NET 3.5 DEBUG|Any CPU.ActiveCfg = Release|Any CPU
-		{46C9FDE4-328A-4E80-8504-AED5E2196AE1}..NET 3.5 DEBUG|Any CPU.Build.0 = Release|Any CPU
-		{46C9FDE4-328A-4E80-8504-AED5E2196AE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{46C9FDE4-328A-4E80-8504-AED5E2196AE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{46C9FDE4-328A-4E80-8504-AED5E2196AE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{46C9FDE4-328A-4E80-8504-AED5E2196AE1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{461089E7-008E-4737-BA17-E1FCD1CC3D0E}..NET 3.5 DEBUG|Any CPU.ActiveCfg = Release|Any CPU
-		{461089E7-008E-4737-BA17-E1FCD1CC3D0E}..NET 3.5 DEBUG|Any CPU.Build.0 = Release|Any CPU
-		{461089E7-008E-4737-BA17-E1FCD1CC3D0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{461089E7-008E-4737-BA17-E1FCD1CC3D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{461089E7-008E-4737-BA17-E1FCD1CC3D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{461089E7-008E-4737-BA17-E1FCD1CC3D0E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5E953013-A5C4-4AB5-BF99-108C6D4D21CE}..NET 3.5 DEBUG|Any CPU.ActiveCfg = .NET 3.5 DEBUG|Any CPU
 		{5E953013-A5C4-4AB5-BF99-108C6D4D21CE}..NET 3.5 DEBUG|Any CPU.Build.0 = .NET 3.5 DEBUG|Any CPU
 		{5E953013-A5C4-4AB5-BF99-108C6D4D21CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

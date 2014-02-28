@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Web.Security;
-using BoC.Validation.DataAnnotations;
 
 namespace BoC.Security.Mvc.ViewModels
 {
