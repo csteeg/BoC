@@ -11,8 +11,8 @@ using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Conventions.Helpers;
 using NHibernate;
 using FluentNHibernate.Cfg;
-using NHibernate.ByteCode.LinFu;
-using NHibernate.Caches.SysCache;
+using NHibernate.Bytecode;
+using NHibernate.Caches.SysCache2;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 
@@ -27,30 +27,30 @@ namespace BoC.Persistence.NHibernate
         {
             return MsSqlConfiguration.MsSql2005.ConnectionString(c => c.FromConnectionStringWithKey(connectionStringKey))
                 .UseReflectionOptimizer()
-                .Cache(cache => cache.UseQueryCache().ProviderClass<SysCacheProvider>().QueryCacheFactory<ProjectionEnabledQueryCacheFactory>())
             #if DEBUG
                 .ShowSql()
             #endif
-                .ProxyFactoryFactory("NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu")
-                .CurrentSessionContext(CurrentSessionContextClass);
+                ;
         }
 
         public static IPersistenceConfigurer GetDefaultSQLiteConfig(string connectionStringKey)
         {
             return SQLiteConfiguration.Standard.ConnectionString(c => c.FromConnectionStringWithKey(connectionStringKey))
                 .UseReflectionOptimizer()
-                .Cache(cache => cache.UseQueryCache().ProviderClass<SysCacheProvider>().QueryCacheFactory<ProjectionEnabledQueryCacheFactory>())
 #if DEBUG
                 .ShowSql()
 #endif
-                .ProxyFactoryFactory(typeof(ProxyFactoryFactory))
-                .CurrentSessionContext(CurrentSessionContextClass);
+                ;
         }
 
         public static void SetupAutoMapperForEntities(IDependencyResolver dependencyResolver, params Assembly[] assemblies)
         {
             var database = dependencyResolver.Resolve<IPersistenceConfigurer>();
-            var config = Fluently.Configure().Database(database);
+            var config = Fluently.Configure().Database(database)
+                .Cache(cache => cache.UseQueryCache().ProviderClass<SysCacheProvider>().QueryCacheFactory<ProjectionEnabledQueryCacheFactory>())
+                .ProxyFactoryFactory(typeof(DefaultProxyFactoryFactory))
+                .CurrentSessionContext(CurrentSessionContextClass);
+
             var stringPropertyconvention = ConventionBuilder.Property.When(x => x.Expect(p => p.Property.PropertyType == typeof (string)), a => a.Length(255));
             
             var cacheConvention = ConventionBuilder.Class.Always(c => c.Cache.ReadWrite());

@@ -7,7 +7,7 @@ using BoC.Persistence.NHibernate.UnitOfWork;
 using BoC.UnitOfWork;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
-using NHibernate.Caches.SysCache;
+using NHibernate.Caches.SysCache2;
 using NHibernate.Context;
 
 namespace BoC.Persistence.DefaultSetupTasks

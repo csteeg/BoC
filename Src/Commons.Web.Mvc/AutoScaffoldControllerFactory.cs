@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-using System.Web;
 using System.Web.Mvc;
 using System.Collections;
 using System.Linq;
-using System.Reflection;
-using System.Web.Mvc;
 using System.Web.Routing;
-using BoC.InversionOfControl;
 using BoC.Persistence;
 using BoC.Web.Mvc.Controllers;
 
