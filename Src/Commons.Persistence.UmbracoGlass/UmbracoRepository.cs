@@ -1,25 +1,21 @@
 ﻿using System;
 using System.Linq;
+using Glass.Mapper.Configuration;
+using Umbraco.Core.Models;
 
 namespace BoC.Persistence.UmbracoGlass
 {
-    public class UmbracoRepository<T> : IRepository<T> where T : class, IBaseEntity<Guid>, new()
+    public class UmbracoRepository<T> : IRepository<T> where T : class, IBaseEntity<int>, new()
     {
         private readonly IUmbracoServiceProvider _umbracoServiceProvider;
+        private readonly ParentConfiguration _parentProperty;
 
         public UmbracoRepository(IUmbracoServiceProvider umbracoServiceProvider)
         {
             _umbracoServiceProvider = umbracoServiceProvider;
-        }
 
-        public void Delete(T target)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteById(object id)
-        {
-            throw new NotImplementedException();
+            var classInfo = _umbracoServiceProvider.GetUmbracoService().GlassContext[typeof(T)];
+            _parentProperty = classInfo.Properties.OfType<ParentConfiguration>().FirstOrDefault();
         }
 
         public IQueryable<T> Query()
@@ -29,22 +25,29 @@ namespace BoC.Persistence.UmbracoGlass
 
         public T Save(T target)
         {
-            throw new NotImplementedException();
+            target.Id = default(int);
+            return SaveOrUpdate(target);
         }
 
         public T Update(T target)
         {
-            throw new NotImplementedException();
+            return SaveOrUpdate(target);
         }
 
         public T SaveOrUpdate(T target)
         {
-            throw new NotImplementedException();
-        }
+            var parent = GetParent(target);
+            var umbracoService = _umbracoServiceProvider.GetUmbracoService();
+            if (target.Id == 0)
+            {
+                target = umbracoService.Create(parent, target);
+            }
+            else
+            {
+                umbracoService.Save(target);
+            }
 
-        public void Evict(T target)
-        {
-            throw new NotImplementedException();
+            return target;
         }
 
         public virtual T Get(object id)
@@ -54,41 +57,75 @@ namespace BoC.Persistence.UmbracoGlass
             return null;
         }
 
-        public void Delete(object target)
+        public void Delete(T target)
+        {
+            _umbracoServiceProvider.GetUmbracoService().Delete(target);
+        }
+
+        public void Evict(T target)
         {
             throw new NotImplementedException();
         }
 
-        public object Save(object target)
+        private IBaseEntity<int> GetParent(T model)
         {
-            throw new NotImplementedException();
-        }
+            if (model == null) return null;
 
-        public object Update(object target)
-        {
-            throw new NotImplementedException();
-        }
+            if (_parentProperty != null)
+            {
+                return _parentProperty.PropertyInfo.GetValue(model, null) as IBaseEntity<int>;
+            }
 
-        public object SaveOrUpdate(object target)
-        {
-            throw new NotImplementedException();
-        }
+            if (model.Id != 0)
+            {
+                var item = _umbracoServiceProvider.GetUmbracoService().ContentService.GetById(model.Id);
+                if (item != null && item.Parent() != null)
+                {
+                    var result = Get(item.Parent().Id);
+                    if (result != null) return result;
+                }
+            }
 
-        public void Evict(object target)
-        {
-            throw new NotImplementedException();
+            return null;
         }
 
         #region IRepository implementation
 
-        T IRepository<T>.Get(object id)
-        {
-            return this.Get(id);
-        }
-
         object IRepository.Get(object id)
         {
             return Get(id);
+        }
+
+        object IRepository.Save(object target)
+        {
+            return SaveOrUpdate(target as T);
+        }
+
+        object IRepository.Update(object target)
+        {
+            return SaveOrUpdate(target as T);
+        }
+
+        object IRepository.SaveOrUpdate(object target)
+        {
+            return SaveOrUpdate(target as T);
+        }
+
+        void IRepository<T>.DeleteById(object id)
+        {
+            var item = ((IRepository<T>)this).Get(id);
+            if (item != null) Delete(item);
+        }
+
+        void IRepository.Delete(object target)
+        {
+            Delete(target as T);
+        }
+
+        void IRepository.Evict(object target)
+        {
+            var t = target as T;
+            if (t != null) Evict(t);
         }
 
         #endregion

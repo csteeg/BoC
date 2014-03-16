@@ -39,12 +39,6 @@
     <Reference Include="businesslogic">
       <HintPath>..\..\packages\UmbracoCms.Core.7.0.4\lib\businesslogic.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Core">
-      <HintPath>..\..\packages\Castle.Core.3.2.0\lib\net45\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Windsor">
-      <HintPath>..\..\packages\Castle.Windsor.3.2.0\lib\net45\Castle.Windsor.dll</HintPath>
-    </Reference>
     <Reference Include="ClientDependency.Core">
       <HintPath>..\..\packages\UmbracoCms.Core.7.0.4\lib\ClientDependency.Core.dll</HintPath>
     </Reference>
@@ -63,14 +57,17 @@
     <Reference Include="Examine">
       <HintPath>..\..\packages\UmbracoCms.Core.7.0.4\lib\Examine.dll</HintPath>
     </Reference>
-    <Reference Include="Glass.Mapper">
-      <HintPath>..\..\packages\Glass.Mapper.3.0.9.21\lib\net45\Glass.Mapper.dll</HintPath>
+    <Reference Include="Glass.Mapper, Version=3.0.9.21, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\umbracoglass\Glass.Mapper.dll</HintPath>
     </Reference>
-    <Reference Include="Glass.Mapper.Umb">
-      <HintPath>..\..\packages\Glass.Mapper.Umb.3.0.3.5\lib\net45\Glass.Mapper.Umb.dll</HintPath>
+    <Reference Include="Glass.Mapper.Umb, Version=3.0.3.5, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\umbracoglass\Glass.Mapper.Umb.dll</HintPath>
     </Reference>
-    <Reference Include="Glass.Mapper.Umb.CastleWindsor">
-      <HintPath>..\..\packages\Glass.Mapper.Umb.CastleWindsor.3.0.2.3\lib\net45\Glass.Mapper.Umb.CastleWindsor.dll</HintPath>
+    <Reference Include="Glass.Mapper.Umb.CastleWindsor, Version=3.0.2.3, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\umbracoglass\Glass.Mapper.Umb.CastleWindsor.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
@@ -202,9 +199,6 @@
     <Reference Include="UrlRewritingNet.UrlRewriter">
       <HintPath>..\..\packages\UmbracoCms.Core.7.0.4\lib\UrlRewritingNet.UrlRewriter.dll</HintPath>
     </Reference>
-    <Reference Include="WebActivatorEx">
-      <HintPath>..\..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefaultSetupTask\AutoUmbracoConfigurator.cs" />
@@ -215,6 +209,7 @@
     <Compile Include="UmbracoServiceProvider.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
