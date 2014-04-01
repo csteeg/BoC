@@ -1,15 +1,7 @@
-using System;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using BoC.EventAggregator;
-using BoC.InversionOfControl;
 using BoC.Tasks;
-using BoC.Web.Events;
-using BoC.Web.Mvc.Attributes;
-using BoC.Web.Mvc.Binders;
-using IDependencyResolver = BoC.InversionOfControl.IDependencyResolver;
 
 namespace BoC.Web.Mvc.Init
 {
