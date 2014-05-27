@@ -120,6 +120,8 @@
     <Compile Include="Events\InsertingEvent.cs" />
     <Compile Include="Events\UpdatedEvent.cs" />
     <Compile Include="Events\UpdatingEvent.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Extensions\ExpressionExtensions.cs" />
     <Compile Include="Helpers\AppDomainHelper.cs" />

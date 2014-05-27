@@ -1,6 +1,8 @@
-﻿using System.Web.Routing;
+﻿using System;
+using System.Web;
+using System.Web.Routing;
 
-namespace System.Web
+namespace BoC.Web.Mvc.Extensions
 {
 	public enum ResponseType
 	{

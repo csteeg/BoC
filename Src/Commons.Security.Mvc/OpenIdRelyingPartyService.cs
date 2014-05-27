@@ -6,6 +6,7 @@ using DotNetOpenAuth.Messaging;
 using DotNetOpenAuth.OpenId;
 using DotNetOpenAuth.OpenId.Behaviors;
 using DotNetOpenAuth.OpenId.Extensions.SimpleRegistration;
+using DotNetOpenAuth.OpenId.Provider.Behaviors;
 using DotNetOpenAuth.OpenId.RelyingParty;
 
 namespace BoC.Security.Mvc

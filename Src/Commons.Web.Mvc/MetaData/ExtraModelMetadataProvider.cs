@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
+using BoC.Extensions;
 using ModelMetadataExtensions;
 using ModelMetadataExtensions.Extensions;
 
@@ -64,8 +65,8 @@ namespace BoC.Web.Mvc.MetaData
 
             var conventionType = containerType ?? modelType;
 
-            Type defaultResourceType = DefaultResourceType;
-            MetadataConventionsAttribute conventionAttribute = conventionType.GetAttributeOnTypeOrAssembly<MetadataConventionsAttribute>();
+            var defaultResourceType = DefaultResourceType;
+            var conventionAttribute = conventionType.GetAttributeOnTypeOrAssembly<MetadataConventionsAttribute>();
             if (conventionAttribute != null && conventionAttribute.ResourceType != null)
             {
                 defaultResourceType = conventionAttribute.ResourceType;
@@ -77,7 +78,7 @@ namespace BoC.Web.Mvc.MetaData
 
             ApplyConventionsToValidationAttributes(attributes, containerType, propertyName, defaultResourceType);
 
-            var foundDisplayAttribute = attributes.FirstOrDefault(a => typeof(DisplayAttribute) == a.GetType()) as DisplayAttribute;
+            var foundDisplayAttribute = attributes.FirstOrDefault(a => a is DisplayAttribute) as DisplayAttribute;
 
             if (foundDisplayAttribute.CanSupplyDisplayName())
             {

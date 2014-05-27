@@ -238,7 +238,7 @@ namespace BoC.Persistence.SitecoreGlass
                                     int count = int.MaxValue)
         {
             var sitecoreService = _sitecoreServiceProvider.GetSitecoreService();
-            var config = sitecoreService.GlassContext.GetTypeConfiguration(typeof (T)) as SitecoreTypeConfiguration;
+            var config = sitecoreService.GlassContext.GetTypeConfiguration < SitecoreTypeConfiguration>(typeof(T));
             totalResults = 0;
             if (config == null)
                 return null;

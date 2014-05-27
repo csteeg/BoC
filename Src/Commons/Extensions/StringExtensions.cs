@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
@@ -24,18 +25,18 @@ namespace BoC.Extensions
         private static readonly Regex emailExpression = new Regex(Expressions.Email, RegexOptions.Singleline | RegexOptions.Compiled);
         public static bool IsEmail(this string target)
         {
-            return !string.IsNullOrEmpty(target) && emailExpression.IsMatch(target);
+            return !String.IsNullOrEmpty(target) && emailExpression.IsMatch(target);
         }
 
         private static readonly Regex webUrlExpression = new Regex(Expressions.WebUrl, RegexOptions.Singleline | RegexOptions.Compiled);
         public static bool IsWebUrl(this string target)
         {
-            return !string.IsNullOrEmpty(target) && webUrlExpression.IsMatch(target);
+            return !String.IsNullOrEmpty(target) && webUrlExpression.IsMatch(target);
         }
 
         public static string NullSafe(this string target)
         {
-            return (target ?? string.Empty).Trim();
+            return (target ?? String.Empty).Trim();
         }
 
         public static string MD5(this string s)
@@ -52,18 +53,60 @@ namespace BoC.Extensions
             return builder.ToString();
         }
 
+        public static string SplitUpperCaseToString(this string source)
+        {
+            if (source == null)
+            {
+                return null;
+            }
+            return String.Join(" ", source.SplitUpperCase());
+        }
+
+        public static string[] SplitUpperCase(this string source)
+        {
+            if (source == null)
+                return new string[] { }; //Return empty array.
+
+            if (source.Length == 0)
+                return new string[] { "" };
+
+            StringCollection words = new StringCollection();
+            int wordStartIndex = 0;
+
+            char[] letters = source.ToCharArray();
+            char previousChar = Char.MinValue;
+            // Skip the first letter. we don't care what case it is.
+            for (int i = 1; i < letters.Length; i++)
+            {
+                if (Char.IsUpper(letters[i]) && !Char.IsWhiteSpace(previousChar))
+                {
+                    //Grab everything before the current index.
+                    words.Add(new String(letters, wordStartIndex, i - wordStartIndex));
+                    wordStartIndex = i;
+                }
+                previousChar = letters[i];
+            }
+            //We need to have the last word.
+            words.Add(new String(letters, wordStartIndex, letters.Length - wordStartIndex));
+
+            //Copy to a string array.
+            string[] wordArray = new string[words.Count];
+            words.CopyTo(wordArray, 0);
+            return wordArray;
+        }
+
         public static string FormatWith(this string target, params object[] args)
         {
             Check.Argument.IsNotEmpty(target, "target");
 
-            return string.Format(CultureInfo.CurrentCulture, target, args);
+            return String.Format(CultureInfo.CurrentCulture, target, args);
         }
 
         public static T ToEnum<T>(this string target, T defaultValue) where T : struct, IComparable, IFormattable
         {
             var convertedValue = defaultValue;
 
-            if (!string.IsNullOrEmpty(target))
+            if (!String.IsNullOrEmpty(target))
             {
                 try
                 {
@@ -217,14 +260,13 @@ namespace BoC.Extensions
             /// 
             /// The vectors where swaped one last time at the end of the last loop,
             /// that is why the result is now in v0 rather than in v1
-            System.Console.WriteLine("iDist=" + v0[RowLen]);
+            Console.WriteLine("iDist=" + v0[RowLen]);
             if (returnPercentage)
             {
-                int max = System.Math.Max(RowLen, ColLen);
+                int max = Math.Max(RowLen, ColLen);
                 return ((100*v0[RowLen])/max);
             }
             return v0[RowLen];
         }
-
     }
 }

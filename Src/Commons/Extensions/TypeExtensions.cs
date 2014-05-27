@@ -8,6 +8,15 @@ namespace BoC.Extensions
 {
     public static class TypeExtensions
     {
+        public static bool PropertyExists(this Type type, string propertyName)
+        {
+            if (type == null || propertyName == null)
+            {
+                return false;
+            }
+            return type.GetProperty(propertyName) != null;
+        }
+
         public static bool IsGenericAssignableFrom(this Type genericType, Type other)
         {
             if (genericType == null)
