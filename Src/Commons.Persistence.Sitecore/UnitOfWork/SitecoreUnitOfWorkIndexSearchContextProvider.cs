@@ -11,7 +11,7 @@ namespace BoC.Persistence.SitecoreGlass.UnitOfWork
             {
                 throw new UnitOfWorkException("You are using SitecoreUnitOfWorkIndexProvider but are accessing a session outside a unit of work");
             }
-            return ((SitecoreUnitOfWork)SitecoreUnitOfWork.OuterUnitOfWork).IndexSearchContext;
+            return ((SitecoreUnitOfWork)SitecoreUnitOfWork.CurrentUnitOfWork).IndexSearchContext;
 
         }
     }

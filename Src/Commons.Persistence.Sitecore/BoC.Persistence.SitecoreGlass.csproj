@@ -120,6 +120,7 @@
     <Compile Include="SitecoreRepository.cs" />
     <Compile Include="SitecoreServiceProvider.cs" />
     <Compile Include="SystemIndexNameProvider.cs" />
+    <Compile Include="UnitOfWork\SitecoreBucketUnitOfWork.cs" />
     <Compile Include="UnitOfWork\SitecoreUnitOfWork.cs" />
     <Compile Include="UnitOfWork\SitecoreUnitOfWorkIndexSearchContextProvider.cs" />
     <Compile Include="UnitOfWork\UnitOfWorkException.cs" />

@@ -1,10 +1,14 @@
 ﻿using System;
+using Sitecore.ContentSearch;
+using Sitecore.ContentSearch.Security;
+using Sitecore.Data;
+using Sitecore.Data.Items;
 
 namespace BoC.Persistence.SitecoreGlass.UnitOfWork
 {
 	public class SitecoreBucketUnitOfWork : SitecoreUnitOfWork
 	{
-		private readonly Item _item;
+		private Item _item;
 
 		private SitecoreBucketUnitOfWork(Item item) : base(null)
 		{
@@ -21,7 +25,7 @@ namespace BoC.Persistence.SitecoreGlass.UnitOfWork
 			get
 			{
 				if (this._index == null)
-					this._index = ContentSearchManager.GetIndex(((SitecoreIndexableItem)_item).CreateSearchContext((SearchSecurityOptions) 2);
+					this._index = ContentSearchManager.GetIndex((SitecoreIndexableItem)_item).CreateSearchContext();
 				return this._index;
 			}
 		}
