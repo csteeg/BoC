@@ -434,7 +434,7 @@
             </summary>
         </member>
         <member name="M:Glass.Mapper.Sc.Configuration.Attributes.SitecoreAttributeConfigurationLoader.#ctor(System.String[])">
-            <summary>
+            <summary> 
             Initializes a new instance of the <see cref="T:Glass.Mapper.Sc.Configuration.Attributes.SitecoreAttributeConfigurationLoader"/> class.
             </summary>
             <param name="assemblies">The assemblies.</param>
@@ -2231,6 +2231,11 @@
             </summary>
             <value>The types handled.</value>
         </member>
+        <member name="P:Glass.Mapper.Sc.DataMappers.AbstractSitecoreFieldMapper.DefaultValue">
+            <summary>
+            The default value to return if the field isn't found
+            </summary>
+        </member>
         <member name="T:Glass.Mapper.Sc.DataMappers.SitecoreIgnoreMapper">
             <summary>
             This mapped does nothing, used to ignore a property
@@ -2416,6 +2421,16 @@
             <param name="context">The context.</param>
             <returns>System.Object.</returns>
             <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Glass.Mapper.Sc.DataMappers.SitecoreFieldImageMapper.GetMediaUrlWithoutContentCheck(Sitecore.Data.Items.MediaItem,Sitecore.Resources.Media.MediaUrlOptions)">
+            <summary>
+            Gets a media URL.
+            
+            </summary>
+            <param name="item">The media item.</param><param name="options">The query string.</param>
+            <returns>
+            The media URL.
+            </returns>
         </member>
         <member name="T:Glass.Mapper.Sc.DataMappers.SitecoreFieldGuidMapper">
             <summary>
@@ -5124,6 +5139,11 @@
             <param name="item">The item to write to</param>
             <param name="target">The class to read from</param>
         </member>
+        <member name="T:Glass.Mapper.Sc.DisableItemHandler">
+            <summary>
+            Disables the itemhandler serializations
+            </summary>
+        </member>
         <member name="T:Glass.Mapper.Sc.LazyItemEnumerable`1">
             <summary>
             Class LazyItemEnumerable
@@ -5189,81 +5209,6 @@
             Executes the specified args.
             </summary>
             <param name="args">The args.</param>
-        </member>
-        <member name="T:Glass.Mapper.Sc.Pipelines.Response.GetModel">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Glass.Mapper.Sc.Pipelines.Response.GetModel.ModelTypeField">
-            <summary>
-            The model type field
-            </summary>
-        </member>
-        <member name="F:Glass.Mapper.Sc.Pipelines.Response.GetModel.ModelField">
-            <summary>
-            The model field
-            </summary>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Pipelines.Response.GetModel.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Glass.Mapper.Sc.Pipelines.Response.GetModel"/> class.
-            </summary>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Pipelines.Response.GetModel.Process(Sitecore.Mvc.Pipelines.Response.GetModel.GetModelArgs)">
-            <summary>
-            Processes the specified args.
-            </summary>
-            <param name="args">The args.</param>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Pipelines.Response.GetModel.GetFromField(Sitecore.Mvc.Presentation.Rendering,Sitecore.Mvc.Pipelines.Response.GetModel.GetModelArgs)">
-            <summary>
-            Gets from field.
-            </summary>
-            <param name="rendering">The rendering.</param>
-            <param name="args">The args.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Pipelines.Response.GetModel.GetFromPropertyValue(Sitecore.Mvc.Presentation.Rendering,Sitecore.Mvc.Pipelines.Response.GetModel.GetModelArgs)">
-            <summary>
-            Gets from property value.
-            </summary>
-            <param name="rendering">The rendering.</param>
-            <param name="args">The args.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Pipelines.Response.GetModel.GetFromLayout(Sitecore.Mvc.Presentation.Rendering,Sitecore.Mvc.Pipelines.Response.GetModel.GetModelArgs)">
-            <summary>
-            Gets from layout.
-            </summary>
-            <param name="rendering">The rendering.</param>
-            <param name="args">The args.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Pipelines.Response.GetModel.GetFromItem(Sitecore.Mvc.Presentation.Rendering,Sitecore.Mvc.Pipelines.Response.GetModel.GetModelArgs)">
-            <summary>
-            Gets from item.
-            </summary>
-            <param name="rendering">The rendering.</param>
-            <param name="args">The args.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Pipelines.Response.GetModel.GetObject(System.String,Sitecore.Data.Database,Sitecore.Mvc.Presentation.Rendering)">
-            <summary>
-            Gets the object.
-            </summary>
-            <param name="model">The model.</param>
-            <param name="db">The db.</param>
-            <returns></returns>
-            <exception cref="T:Glass.Mapper.MapperException">Failed to find context {0}.Formatted(ContextName)</exception>
-        </member>
-        <member name="P:Glass.Mapper.Sc.Pipelines.Response.GetModel.ContextName">
-            <summary>
-            Gets or sets the name of the context.
-            </summary>
-            <value>
-            The name of the context.
-            </value>
         </member>
         <member name="T:Glass.Mapper.Sc.Profilers.SitecoreProfiler">
             <summary>
@@ -6569,223 +6514,6 @@
             <param name="foundItems">The found items.</param>
             <param name="language">The language.</param>
             <returns>IEnumerable{Item}.</returns>
-        </member>
-        <member name="T:Glass.Mapper.Sc.Web.Mvc.GlassView`1">
-            <summary>
-            
-            </summary>
-            <typeparam name="TModel"></typeparam>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.GlassView`1.InitHelpers">
-            <summary>
-            Inits the helpers.
-            </summary>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.GlassView`1.Editable``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Object)">
-            <summary>
-            Makes the field editable using the Sitecore Page Editor. Using the specifed service to write data.
-            </summary>
-            <param name="field">The field that should be made editable</param>
-            <param name="parameters"> </param>
-            <returns>HTML output to either render the editable controls or normal HTML</returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.GlassView`1.Editable``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Linq.Expressions.Expression{System.Func{``0,System.String}},System.Object)">
-            <summary>
-            Makes the field editable using the Sitecore Page Editor. Using the specifed service to write data.
-            </summary>
-            <typeparam name="T">A class loaded by Glass.Sitecore.Mapper</typeparam>
-            <param name="target">The target object that contains the item to be edited</param>
-            <param name="field">The field that should be made editable</param>
-            <param name="standardOutput">The output to display when the Sitecore Page Editor is not being used</param>
-            <returns>HTML output to either render the editable controls or normal HTML</returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.GlassView`1.RenderImage``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Object,System.Boolean)">
-            <summary>
-            Renders an image allowing simple page editor support
-            </summary>
-            <typeparam name="T">The model type</typeparam>
-            <param name="model">The model that contains the image field</param>
-            <param name="field">A lambda expression to the image field, should be of type Glass.Mapper.Sc.Fields.Image</param>
-            <param name="parameters">Image parameters, e.g. width, height</param>
-            <param name="isEditable">Indicates if the field should be editable</param>
-            <returns></returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.GlassView`1.BeginRenderLink``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Object,System.Boolean)">
-            <summary>
-            Render HTML for a link with contents
-            </summary>
-            <typeparam name="T">The model type</typeparam>
-            <param name="model">The model</param>
-            <param name="field">The link field to user</param>
-            <param name="attributes">Any additional link attributes</param>
-            <param name="isEditable">Make the link editable</param>
-            <returns></returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.GlassView`1.RenderLink``1(``0,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Object,System.Boolean,System.String)">
-            <summary>
-            Render HTML for a link
-            </summary>
-            <typeparam name="T">The model type</typeparam>
-            <param name="model">The model</param>
-            <param name="field">The link field to user</param>
-            <param name="attributes">Any additional link attributes</param>
-            <param name="isEditable">Make the link editable</param>
-            <param name="contents">Content to override the default decription or item name</param>
-            <returns></returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.GlassView`1.Editable(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Object)">
-            <summary>
-            Makes the field editable using the Sitecore Page Editor. Using the specifed service to write data.
-            </summary>
-            <param name="field">The field that should be made editable</param>
-            <param name="parameters"></param>
-            <returns>HTML output to either render the editable controls or normal HTML</returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.GlassView`1.Editable(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Linq.Expressions.Expression{System.Func{`0,System.String}},System.Object)">
-            <summary>
-            Makes the field editable using the Sitecore Page Editor. Using the specifed service to write data.
-            </summary>
-            <param name="field">The field that should be made editable</param>
-            <param name="standardOutput">The output to display when the Sitecore Page Editor is not being used</param>
-            <returns>HTML output to either render the editable controls or normal HTML</returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.GlassView`1.RenderImage(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Object,System.Boolean)">
-            <summary>
-            Renders an image allowing simple page editor support
-            </summary>
-            <typeparam name="T">The model type</typeparam>
-            <param name="model">The model that contains the image field</param>
-            <param name="field">A lambda expression to the image field, should be of type Glass.Mapper.Sc.Fields.Image</param>
-            <param name="parameters">Image parameters, e.g. width, height</param>
-            <param name="isEditable">Indicates if the field should be editable</param>
-            <returns></returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.GlassView`1.BeginRenderLink(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Object,System.Boolean)">
-            <summary>
-            Render HTML for a link with contents
-            </summary>
-            <typeparam name="T">The model type</typeparam>
-            <param name="model">The model</param>
-            <param name="field">The link field to user</param>
-            <param name="attributes">Any additional link attributes</param>
-            <param name="isEditable">Make the link editable</param>
-            <returns></returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.GlassView`1.RenderLink(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Object,System.Boolean,System.String)">
-            <summary>
-            Render HTML for a link
-            </summary>
-            <typeparam name="T">The model type</typeparam>
-            <param name="model">The model</param>
-            <param name="field">The link field to user</param>
-            <param name="attributes">Any additional link attributes</param>
-            <param name="isEditable">Make the link editable</param>
-            <param name="contents">Content to override the default decription or item name</param>
-            <returns></returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.GlassView`1.BeginEditFrame(System.String,System.String)">
-            <summary>
-            Begins the edit frame.
-            </summary>
-            <param name="buttons">The buttons.</param>
-            <param name="dataSource">The data source.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.GlassView`1.BeginEditFrame(System.String)">
-            <summary>
-            Creates an Edit Frame using the Default Buttons list
-            </summary>
-            <param name="dataSource"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.GlassView`1.BeginEditFrame">
-            <summary>
-            Creates an edit frame using the current context item
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:Glass.Mapper.Sc.Web.Mvc.GlassView`1.GlassHtml">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Glass.Mapper.Sc.Web.Mvc.GlassView`1.IsInEditingMode">
-            <summary>
-            Gets a value indicating whether this instance is in editing mode.
-            </summary>
-            <value><c>true</c> if this instance is in editing mode; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="T:Glass.Mapper.Sc.Web.Mvc.HtmlHelperExtensions">
-            <summary>
-            HtmlHelperExtensions
-            </summary>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.HtmlHelperExtensions.BeginEditFrame(System.Web.Mvc.HtmlHelper)">
-            <summary>
-            Begins the edit frame.
-            </summary>
-            <param name="htmlHelper">The HTML helper.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.HtmlHelperExtensions.BeginEditFrame(System.Web.Mvc.HtmlHelper,Sitecore.Data.ID)">
-            <summary>
-            Begins the edit frame.
-            </summary>
-            <param name="htmlHelper">The HTML helper.</param>
-            <param name="dataSource">The data source.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.HtmlHelperExtensions.BeginEditFrame(System.Web.Mvc.HtmlHelper,System.String)">
-            <summary>
-            Begins the edit frame.
-            </summary>
-            <param name="htmlHelper">The HTML helper.</param>
-            <param name="dataSource">The data source.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.HtmlHelperExtensions.BeginEditFrame(System.Web.Mvc.HtmlHelper,Sitecore.Data.ID,Sitecore.Data.ID)">
-            <summary>
-            Begins the edit frame.
-            </summary>
-            <param name="htmlHelper">The HTML helper.</param>
-            <param name="dataSource">The data source.</param>
-            <param name="buttons">The buttons.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.HtmlHelperExtensions.BeginEditFrame(System.Web.Mvc.HtmlHelper,Sitecore.Data.ID,System.String)">
-            <summary>
-            Begins the edit frame.
-            </summary>
-            <param name="htmlHelper">The HTML helper.</param>
-            <param name="dataSource">The data source.</param>
-            <param name="buttons">The buttons.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.HtmlHelperExtensions.BeginEditFrame(System.Web.Mvc.HtmlHelper,System.String,Sitecore.Data.ID)">
-            <summary>
-            Begins the edit frame.
-            </summary>
-            <param name="htmlHelper">The HTML helper.</param>
-            <param name="dataSource">The data source.</param>
-            <param name="buttons">The buttons.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.HtmlHelperExtensions.BeginEditFrame(System.Web.Mvc.HtmlHelper,System.String,System.String)">
-            <summary>
-            Begins the edit frame.
-            </summary>
-            <param name="htmlHelper">The HTML helper.</param>
-            <param name="dataSource">The data source.</param>
-            <param name="buttons">The buttons.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Glass.Mapper.Sc.Web.Mvc.HtmlHelperExtensions.BeginEditFrame(System.Web.Mvc.HtmlHelper,Sitecore.Web.UI.WebControls.EditFrame)">
-            <summary>
-            Begins the edit frame.
-            </summary>
-            <param name="htmlHelper">The HTML helper.</param>
-            <param name="editFrame">The edit frame.</param>
-            <returns></returns>
         </member>
         <member name="T:Glass.Mapper.Sc.Web.Ui.AbstractGlassPage">
             <summary>

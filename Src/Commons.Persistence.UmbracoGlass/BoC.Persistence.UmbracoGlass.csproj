@@ -59,17 +59,14 @@
     <Reference Include="Examine">
       <HintPath>..\..\packages\UmbracoCms.Core.7.0.4\lib\Examine.dll</HintPath>
     </Reference>
-    <Reference Include="Glass.Mapper, Version=3.0.9.21, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\umbracoglass\Glass.Mapper.dll</HintPath>
+    <Reference Include="Glass.Mapper">
+      <HintPath>..\..\lib\Glass.mapper\Glass.Mapper.dll</HintPath>
     </Reference>
-    <Reference Include="Glass.Mapper.Umb, Version=3.0.3.5, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\umbracoglass\Glass.Mapper.Umb.dll</HintPath>
+    <Reference Include="Glass.Mapper.Umb">
+      <HintPath>..\..\lib\Glass.mapper\Glass.Mapper.Umb.dll</HintPath>
     </Reference>
-    <Reference Include="Glass.Mapper.Umb.CastleWindsor, Version=3.0.2.3, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\umbracoglass\Glass.Mapper.Umb.CastleWindsor.dll</HintPath>
+    <Reference Include="Glass.Mapper.Umb.CastleWindsor">
+      <HintPath>..\..\lib\Glass.mapper\Glass.Mapper.Umb.CastleWindsor.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
