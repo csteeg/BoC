@@ -50,7 +50,7 @@ namespace BoC.InversionOfControl
         private static void RunContainerInitializers(IDependencyResolver dependencyResolver)
         {
             var appdomainHelpers = dependencyResolver.ResolveAll<IAppDomainHelper>();
-            if (appdomainHelpers == null || appdomainHelpers.Count() == 0)
+            if (appdomainHelpers == null || ! appdomainHelpers.Any())
             {
                 appdomainHelpers = new[] {AppDomainHelper.CreateDefault()};
             }
@@ -64,20 +64,29 @@ namespace BoC.InversionOfControl
                 dependencyResolver.RegisterType(typeof(IContainerInitializer), taskType);
             }
             //run them:
-            var allTasks = dependencyResolver.ResolveAll<IContainerInitializer>();
-            if (allTasks != null)
+            var allTasks = dependencyResolver.ResolveAll<IContainerInitializer>()
+                                             .Where( it=> it != null )
+                                             .ToList();
+            //first user's tasks:
+            foreach (var task in allTasks.Where(t => !NamespaceStartsWith (t , "BoC.")))
             {
-                //first user's tasks:
-                foreach (var task in allTasks.Where(t => !t.GetType().Namespace.StartsWith("BoC.")))
-                {
-                    task.Execute();
-                }
-                //now ours:
-                foreach (var task in allTasks.Where(t => t.GetType().Namespace.StartsWith("BoC.")))
-                {
-                    task.Execute();
-                }
+                task.Execute();
             }
+            //now ours:
+            foreach (var task in allTasks.Where(t => NamespaceStartsWith(t,"BoC.")))
+            {
+                task.Execute();
+            }
+        }
+
+        private static bool NamespaceStartsWith(IContainerInitializer initializer, String startsWidth )
+        {
+            if (initializer == null) return false;
+
+            var typeofInitializerNameSpace = initializer.GetType().Namespace;
+            if (String.IsNullOrEmpty(typeofInitializerNameSpace)) return false;
+
+            return typeofInitializerNameSpace.StartsWith(startsWidth);
         }
     }
 }

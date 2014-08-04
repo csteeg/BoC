@@ -58,7 +58,9 @@ namespace BoC
                 }
 
                 IoC.InitializeWith(dependencyResolver);
-                dependencyResolver.Resolve<Bootstrapper>().Run();
+                var bootstrapper = dependencyResolver.Resolve<Bootstrapper>();
+                if (bootstrapper != null)
+                    bootstrapper.Run();
                 Executed = true;
             }
 
