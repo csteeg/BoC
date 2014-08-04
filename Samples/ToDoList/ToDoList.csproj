@@ -25,6 +25,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -165,10 +166,6 @@
     <ProjectReference Include="..\..\Src\Commons\BoC.csproj">
       <Project>{25C350AF-4957-47E8-960A-6C59794C5DEF}</Project>
       <Name>BoC</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Src\RazorSingleFileGenerator\RazorSingleFileGenerator.csproj">
-      <Project>{461089E7-008E-4737-BA17-E1FCD1CC3D0E}</Project>
-      <Name>RazorSingleFileGenerator</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

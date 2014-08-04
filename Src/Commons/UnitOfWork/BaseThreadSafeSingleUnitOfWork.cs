@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
 using System.Web;
 
 namespace BoC.UnitOfWork
@@ -10,8 +7,13 @@ namespace BoC.UnitOfWork
     public abstract class BaseThreadSafeSingleUnitOfWork: IUnitOfWork
     {
         [ThreadStatic]
-        private static IUnitOfWork _outerUnitOfWorkThreadstatic;
+        private static IUnitOfWork _outerUnitOfWorkThreadstatic;   
+        [ThreadStatic]
+        private static IUnitOfWork _currentUnitOfWorkThreadstatic;
+
+        private IUnitOfWork _previous;
         private const string Outerunitofworkmapkey = "IUnitOfWork.outerUnitOfWork";
+        private const string Currentunitofworkmapkey = "IUnitOfWork.currentUnitOfWork";
 
         protected BaseThreadSafeSingleUnitOfWork()
         {
@@ -19,6 +21,8 @@ namespace BoC.UnitOfWork
             {
                 OuterUnitOfWork = this;
             }
+            _previous = CurrentUnitOfWork;
+            CurrentUnitOfWork = this;
         }
 
         /// <summary>
@@ -58,6 +62,43 @@ namespace BoC.UnitOfWork
             }
         }
 
+        /// <summary>
+        /// Managed way to keep the outer unitofwork thread safe.
+        /// Threadstatic is not safe in asp.net environment :(
+        /// see: http://www.hanselman.com/blog/ATaleOfTwoTechniquesTheThreadStaticAttributeAndSystemWebHttpContextCurrentItems.aspx
+        /// </summary>
+        public static IUnitOfWork CurrentUnitOfWork
+        {
+            get
+            {
+                if (HttpContext.Current != null)
+                {
+                    return HttpContext.Current.Items[Currentunitofworkmapkey] as IUnitOfWork;
+                }
+                if (OperationContext.Current != null)
+                {
+                    return WcfOperationState.CurrentUnitOfWork as IUnitOfWork;
+                }
+                return _currentUnitOfWorkThreadstatic;
+            }
+            private set
+            {
+                if (HttpContext.Current != null)
+                {
+                    HttpContext.Current.Items[Currentunitofworkmapkey] = value;
+                }
+                else if (OperationContext.Current != null)
+                {
+                    WcfOperationState.CurrentUnitOfWork = value;
+                }
+                else
+                {
+                    _currentUnitOfWorkThreadstatic = value;
+                }
+
+            }
+        }
+
         ~BaseThreadSafeSingleUnitOfWork()
         {
             Dispose(false);
@@ -75,6 +116,7 @@ namespace BoC.UnitOfWork
                 CleanUpOuterUnitOfWork();
                 OuterUnitOfWork = null;
             }
+            CurrentUnitOfWork = _previous;
         }
 
         protected abstract void CleanUpOuterUnitOfWork();
@@ -100,6 +142,7 @@ namespace BoC.UnitOfWork
     public class WcfStateExtension : IExtension<OperationContext>
     {
         public IUnitOfWork OuterUnitOfWork { get; set; }
+        public IUnitOfWork CurrentUnitOfWork { get; set; }
 
         // we don't really need implementations for these methods in this case
         public void Attach(OperationContext owner) { }

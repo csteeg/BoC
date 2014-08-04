@@ -11,10 +11,10 @@ using FluentNHibernate.Mapping.Providers;
 using FluentNHibernate.Utils;
 
 namespace BoC.Persistence.NHibernate.FluentExtensions
-{
+{/* TODO: how to make this work in the new version (if it's still needed)
     public static class AutoMappingExtensions
     {
-        private static readonly FieldInfo fi = typeof(ComponentPartBase<IDictionary>).GetField("propertyName",
+        private static readonly FieldInfo fi = typeof(ComponentPartBase<IDictionary,>).GetField("propertyName",
                                                                                           BindingFlags.GetField |
                                                                                           BindingFlags.Instance |
                                                                                           BindingFlags.NonPublic);
@@ -46,5 +46,5 @@ namespace BoC.Persistence.NHibernate.FluentExtensions
             action(component);
             return component;
         }
-    }
+    }*/
 }

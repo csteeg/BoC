@@ -6,7 +6,6 @@ using System.Linq.Expressions;
 using BoC.Logging;
 using Glass.Mapper.Configuration;
 using Glass.Mapper.Sc.Configuration;
-using Glass.Mapper.Sc.Configuration.Attributes;
 using Lucene.Net.Search;
 using Sitecore.Data;
 using Sitecore.Data.Items;
@@ -28,6 +27,8 @@ namespace BoC.Persistence.SitecoreGlass
         private ParentConfiguration _parentProperty;
         private SitecoreInfoConfiguration _pathProperty;
         private SitecoreInfoConfiguration _nameProperty;
+        private SitecoreInfoConfiguration _templateIdsProperty;
+        private SitecoreInfoConfiguration _languageProperty;
 
         public SitecoreRepository(  IDatabaseProvider dbProvider, 
                                     ISitecoreServiceProvider sitecoreServiceProvider,
@@ -39,11 +40,31 @@ namespace BoC.Persistence.SitecoreGlass
             _searchContextProvider = searchContextProvider;
             _logger = logger;
 
-            var classInfo = _sitecoreServiceProvider.GetSitecoreService().GlassContext[typeof(T)];
-            _parentProperty = classInfo.Properties.OfType<ParentConfiguration>().FirstOrDefault();
+        }
 
-            _pathProperty = classInfo.Properties.OfType<SitecoreInfoConfiguration>().FirstOrDefault(p =>p.Type == SitecoreInfoType.FullPath || p.Type == SitecoreInfoType.Path);
-            _nameProperty = classInfo.Properties.OfType<SitecoreInfoConfiguration>().FirstOrDefault(p =>p.Type == SitecoreInfoType.Name);
+        protected SitecoreInfoConfiguration PathProperty
+        {
+            get { return _pathProperty ?? (_pathProperty = _sitecoreServiceProvider.GetSitecoreService().GlassContext[typeof(T)].Properties.OfType<SitecoreInfoConfiguration>().FirstOrDefault(p => p.Type == SitecoreInfoType.FullPath || p.Type == SitecoreInfoType.Path)); }
+        }
+
+        protected ParentConfiguration ParentProperty
+        {
+            get { return _parentProperty ?? (_parentProperty = _sitecoreServiceProvider.GetSitecoreService().GlassContext[typeof(T)].Properties.OfType<ParentConfiguration>().FirstOrDefault()); }
+        }
+
+        protected SitecoreInfoConfiguration NameProperty
+        {
+            get { return _nameProperty ?? (_nameProperty = _sitecoreServiceProvider.GetSitecoreService().GlassContext[typeof(T)].Properties.OfType<SitecoreInfoConfiguration>().FirstOrDefault(p => p.Type == SitecoreInfoType.Name)); }
+        }
+
+        protected SitecoreInfoConfiguration TemplateIdsProperty
+        {
+            get { return _templateIdsProperty ?? (_templateIdsProperty = _sitecoreServiceProvider.GetSitecoreService().GlassContext[typeof(T)].Properties.OfType<SitecoreInfoConfiguration>().FirstOrDefault(p => p.Type == SitecoreInfoType.BaseTemplateIds)); }
+        }
+
+        protected SitecoreInfoConfiguration LanguageProperty
+        {
+            get { return _languageProperty ?? (_languageProperty = _sitecoreServiceProvider.GetSitecoreService().GlassContext[typeof(T)].Properties.OfType<SitecoreInfoConfiguration>().FirstOrDefault(p => p.Type == SitecoreInfoType.Language)); }
         }
 
         private IBaseEntity<Guid> GetParent(T model)
@@ -51,9 +72,9 @@ namespace BoC.Persistence.SitecoreGlass
             if (model == null)
                 return null;
 
-            if (_parentProperty != null)
+            if (ParentProperty != null)
             {
-                return _parentProperty.PropertyInfo.GetValue(model, null) as IBaseEntity<Guid>;
+                return ParentProperty.PropertyInfo.GetValue(model, null) as IBaseEntity<Guid>;
             }
 
             if (model.Id != default(Guid))
@@ -66,9 +87,9 @@ namespace BoC.Persistence.SitecoreGlass
                         return result;
                 }
             }
-            if (_pathProperty != null)
+            if (PathProperty != null)
             {
-                var path = (_pathProperty.PropertyInfo.GetValue(model, null) + "").TrimEnd('/');
+                var path = (PathProperty.PropertyInfo.GetValue(model, null) + "").TrimEnd('/');
                 path = path.Substring(0, path.LastIndexOf('/')) + "/";
                 if (path != "/")
                 {
@@ -84,8 +105,8 @@ namespace BoC.Persistence.SitecoreGlass
         {
             if (model == null)
                 return null;
-            if (_nameProperty != null)
-                return _nameProperty.PropertyInfo.GetValue(model, null) as string;
+            if (NameProperty != null)
+                return NameProperty.PropertyInfo.GetValue(model, null) as string;
             if (model.Id != default(Guid))
             {
                 var item = _dbProvider.GetDatabase().GetItem(new ID(model.Id));
@@ -98,8 +119,8 @@ namespace BoC.Persistence.SitecoreGlass
         {
             if (model == null)
                 return null;
-            if (_pathProperty != null)
-                return _pathProperty.PropertyInfo.GetValue(model, null) + "";
+            if (PathProperty != null)
+                return PathProperty.PropertyInfo.GetValue(model, null) + "";
             if (model.Id != default(Guid))
             {
                 var item = _dbProvider.GetDatabase().GetItem(new ID(model.Id));
@@ -137,8 +158,8 @@ namespace BoC.Persistence.SitecoreGlass
                         if (sitecoreItem != null)
                         {
                             model.Id = sitecoreItem.ID.ToGuid();
-                            if (_pathProperty != null)
-                                _pathProperty.PropertyInfo.SetValue(model, sitecoreItem.Paths.Path, null);
+                            if (PathProperty != null)
+                                PathProperty.PropertyInfo.SetValue(model, sitecoreItem.Paths.Path, null);
                             sitecoreService.Save(model);
                             saved = true;
                         }
@@ -159,7 +180,12 @@ namespace BoC.Persistence.SitecoreGlass
 
         public virtual T Get(string path)
         {
-            return GetAndConvertItem<T>(path, GetLanguage(_dbProvider));
+            return Get(path, GetLanguage(_dbProvider));
+        }
+
+        public virtual T Get(string path, Language language)
+        {
+            return GetAndConvertItem<T>(path, language);
         }
 
         public virtual T Get(Guid id)
@@ -233,7 +259,7 @@ namespace BoC.Persistence.SitecoreGlass
                                     int count = int.MaxValue)
         {
             var sitecoreService = _sitecoreServiceProvider.GetSitecoreService();
-            var config = sitecoreService.GlassContext.GetTypeConfiguration(typeof (T)) as SitecoreTypeConfiguration;
+            var config = sitecoreService.GlassContext.GetTypeConfiguration < SitecoreTypeConfiguration>(typeof(T));
             totalResults = 0;
             if (config == null)
                 return null;
@@ -305,7 +331,55 @@ namespace BoC.Persistence.SitecoreGlass
 
         System.Linq.IQueryable<T> IRepository<T>.Query()
         {
-            return _searchContextProvider.GetProviderSearchContext().GetQueryable<T>();
+            var query = _searchContextProvider.GetProviderSearchContext()
+                .GetQueryable<T>(new CultureExecutionContext(GetLanguage(_dbProvider).CultureInfo));
+            return AddStandardQueries(query);
+        }
+
+
+        private IQueryable<T> AddStandardQueries(IQueryable<T> query)
+        {
+            //try to query the _templates field
+            if (TemplateIdsProperty != null && typeof(IEnumerable<>).IsAssignableFrom(TemplateIdsProperty.PropertyInfo.PropertyType.GetGenericTypeDefinition())
+                                                && TemplateIdsProperty.PropertyInfo.PropertyType.IsConstructedGenericType)
+            {
+                var collectionType = TemplateIdsProperty.PropertyInfo.PropertyType.GenericTypeArguments.First();
+                var isID = typeof(ID).IsAssignableFrom(collectionType);
+                var isGuid = typeof(Guid).IsAssignableFrom(collectionType);
+                if (isID || isGuid)
+                {
+                    var sitecoreService = _sitecoreServiceProvider.GetSitecoreService();
+                    var config = sitecoreService.GlassContext.GetTypeConfiguration<SitecoreTypeConfiguration>(typeof(T));
+
+                    var pe = Expression.Parameter(typeof(T));
+                    var me = Expression.Property(pe, TemplateIdsProperty.PropertyInfo);
+                    var ce = isGuid ? Expression.Constant(config.TemplateId.ToGuid()) : Expression.Constant(config.TemplateId);
+                    var call = Expression.Call(typeof(Enumerable), "Contains", new[] { collectionType }, me, ce);
+                    var lambda = Expression.Lambda<Func<T, bool>>(call, pe);
+                    query = query.Where(lambda);
+                }
+            }
+            //try to add language filter
+            if (LanguageProperty != null)
+            {
+                var isString = typeof(string).IsAssignableFrom(LanguageProperty.PropertyInfo.PropertyType);
+                var isLang = typeof(Language).IsAssignableFrom(LanguageProperty.PropertyInfo.PropertyType);
+                var isCult = typeof(CultureInfo).IsAssignableFrom(LanguageProperty.PropertyInfo.PropertyType);
+                if (isString || isLang || isCult)
+                {
+                    var sitecoreService = _sitecoreServiceProvider.GetSitecoreService();
+                    var config = sitecoreService.GlassContext.GetTypeConfiguration<SitecoreTypeConfiguration>(typeof(T));
+                    var currentLang = GetLanguage(_dbProvider);
+
+                    var pe = Expression.Parameter(typeof(T));
+                    var me = Expression.Property(pe, LanguageProperty.PropertyInfo);
+                    var ce = isString ? Expression.Constant(currentLang.Name) : isCult ? Expression.Constant(currentLang.CultureInfo) : Expression.Constant(currentLang);
+                    var call = Expression.Equal(me, ce);
+                    var lambda = Expression.Lambda<Func<T, bool>>(call, pe);
+                    query = query.Where(lambda);
+                }
+            }
+            return query;
         }
 
         T IRepository<T>.Save(T target)

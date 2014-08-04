@@ -120,6 +120,8 @@
     <Compile Include="Events\InsertingEvent.cs" />
     <Compile Include="Events\UpdatedEvent.cs" />
     <Compile Include="Events\UpdatingEvent.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Extensions\ExpressionExtensions.cs" />
     <Compile Include="Helpers\AppDomainHelper.cs" />
@@ -128,12 +130,14 @@
     <Compile Include="Initializer.cs" />
     <Compile Include="InversionOfControl\IContainerInitializer.cs" />
     <Compile Include="Linq\Dynamic.cs" />
+    <Compile Include="Logging\ILogContext.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="ComponentModel\TypeExtension\ExtendWithTypeAttribute.cs" />
     <Compile Include="ComponentModel\TypeExtension\ExtendedPropertyDescriptor.cs" />
     <Compile Include="ComponentModel\TypeExtension\ExtendedTypesRegistry.cs" />
     <Compile Include="ComponentModel\TypeExtension\ExtendedTypeDescriptionProvider.cs" />
     <Compile Include="ComponentModel\TypeExtension\IExtendedTypesRegistry.cs" />
+    <Compile Include="Logging\LogContext.cs" />
     <Compile Include="Persistence\Exceptions.cs" />
     <Compile Include="Persistence\RepositoryGenerator.cs" />
     <Compile Include="ServiceModel\ServiceErrorLoggerBehavior.cs" />
@@ -175,8 +179,6 @@
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
     <Compile Include="Validation\DataAnnotationsModelValidator.cs" />
-    <Compile Include="Validation\DataAnnotations\CompareAttribute.cs" />
-    <Compile Include="Validation\DataAnnotations\ValidatePasswordLengthAttribute.cs" />
     <Compile Include="Validation\DefaultSetupTasks\RegisterDefaultModelValidator.cs" />
     <Compile Include="Validation\ErrorInfo.cs" />
     <Compile Include="Validation\IModelValidator.cs" />

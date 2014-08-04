@@ -7,7 +7,7 @@ namespace BoC.Persistence.SitecoreGlass.UnitOfWork
     public class SitecoreUnitOfWork : BaseThreadSafeSingleUnitOfWork
     {
         private readonly IIndexNameProvider _indexNameProvider;
-        private IProviderSearchContext _index;
+        protected IProviderSearchContext _index;
         public SitecoreUnitOfWork(IIndexNameProvider indexNameProvider)
         {
             _indexNameProvider = indexNameProvider;
@@ -32,7 +32,7 @@ namespace BoC.Persistence.SitecoreGlass.UnitOfWork
             }
         }
 
-        public IProviderSearchContext IndexSearchContext
+        public virtual IProviderSearchContext IndexSearchContext
         {
             get
             {

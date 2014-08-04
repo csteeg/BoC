@@ -1,7 +1,6 @@
 using System;
 using System.Web.Mvc;
 using BoC.Security.Mvc.Controllers;
-using BoC.Web.Mvc.PrecompiledViews;
 
 namespace BoC.Security.Mvc
 {
@@ -9,7 +8,6 @@ namespace BoC.Security.Mvc
     {
         public override void RegisterArea(AreaRegistrationContext context)
         {
-			ApplicationPartRegistry.Register(this.GetType().Assembly, "~/Areas/Security/");
 			context.MapRoute("security_default", "Security/{controller}/{action}/{id}",
                              new {controller = "Home", action = "index", id = ""},
                              new [] {typeof(AccountController).Namespace});

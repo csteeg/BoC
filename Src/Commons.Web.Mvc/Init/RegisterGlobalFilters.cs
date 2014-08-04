@@ -13,7 +13,6 @@ namespace BoC.Web.Mvc.Init
 
         internal void Register(GlobalFilterCollection filters)
         {
-            filters.Add(new AjaxControllerAttribute());
             filters.Add(new EventTriggerAttribute());
             filters.Add(new HandleErrorAttribute());
         }

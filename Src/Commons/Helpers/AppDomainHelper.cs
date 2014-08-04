@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -53,11 +54,17 @@ namespace BoC.Helpers
             return GetAssemblies().SelectMany(
                 a =>
                     {
-                        try 
-                        { 
-                            return a.GetTypes().Where(t => where(t) && TypeFilters.All(func => func(t))); 
+                        try
+                        {
+                            return a.GetTypes().Where(t => where(t) && TypeFilters.All(func => func(t)));
                         }
-                        catch { return new Type[0]; }
+                        catch (Exception exception)
+                        {
+                            var msg = string.Format("Loading assembly {0} failed: \n{1}", a.FullName, exception);
+                            Trace.TraceWarning(msg);
+                            Debugger.Log((int)TraceLevel.Warning, "AppDomainHelper", msg);
+                            return new Type[0];
+                        }
                     });
         }
 

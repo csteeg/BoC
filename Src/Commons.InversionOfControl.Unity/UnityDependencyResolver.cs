@@ -28,7 +28,6 @@ namespace BoC.InversionOfControl.Unity
 
             this.container = container;
             this.container.AddExtension(new TypeTrackingExtension());
-            this.RegisterInstance<IDependencyResolver>(this);
         }
 
         public IUnityContainer Container { get { return container; } }

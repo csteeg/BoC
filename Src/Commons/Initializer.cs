@@ -46,7 +46,6 @@ namespace BoC
         {
             if (Executed)
                 return;
-
             lock (initializer_lock)
             {
                 if (appDomainHelpers != null)

@@ -9,3 +9,7 @@ Samples/*/App_Data/*
 /Samples/Commons.Sample.Web.NerdDinner
 *.suo
 **.svn**
+packages/
+lib/Sitecore/
+_ReSharper.BoC/
+UpgradeLog.*

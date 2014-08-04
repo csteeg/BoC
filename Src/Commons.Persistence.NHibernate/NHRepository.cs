@@ -101,9 +101,7 @@ namespace BoC.Persistence.NHibernate
 
         virtual public IQueryable<T> Query()
         {
-            var query = sessionManager.Session.Linq<T>();
-            query.QueryOptions.SetCachable(true);
-            return query;
+            return sessionManager.Session.Query<T>();
         }
 
         virtual public void Evict(T target)
