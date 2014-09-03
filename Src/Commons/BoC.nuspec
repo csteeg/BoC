@@ -10,6 +10,7 @@
 		<projectUrl>https://github.com/csteeg/BoC</projectUrl>
 		<iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>Set of usefull base abstractions (ioc, bootstrappers, persistency, repository pattern)</summary>
 		<description>
 			BoC needs some documentation, but contains lots of usefull stuff like
 			-EventAggregator pattern implementation

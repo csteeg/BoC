@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Glass.Mapper.Umb.CastleWindsor</name>
+    </assembly>
+    <members>
+        <member name="T:Glass.Mapper.Umb.CastleWindsor.Config">
+            <summary>
+            Config
+            </summary>
+        </member>
+        <member name="M:Glass.Mapper.Umb.CastleWindsor.Config.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Glass.Mapper.Umb.CastleWindsor.Config"/> class.
+            </summary>
+        </member>
+        <member name="P:Glass.Mapper.Umb.CastleWindsor.Config.UseWindsorContructor">
+            <summary>
+            Indicates that classes should be build using the Windsor dependency resolver. Default is False
+            </summary>
+        </member>
+        <member name="T:Glass.Mapper.Umb.CastleWindsor.DependencyResolver">
+            <summary>
+            Class DependencyResolver
+            </summary>
+        </member>
+        <member name="M:Glass.Mapper.Umb.CastleWindsor.DependencyResolver.CreateStandardResolver">
+            <summary>
+            Creates the standard resolver.
+            </summary>
+            <returns>
+            IDependencyResolver.
+            </returns>
+        </member>
+        <member name="M:Glass.Mapper.Umb.CastleWindsor.DependencyResolver.#ctor(Castle.Windsor.IWindsorContainer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Glass.Mapper.Umb.CastleWindsor.DependencyResolver"/> class.
+            </summary>
+            <param name="container">The container.</param>
+        </member>
+        <member name="M:Glass.Mapper.Umb.CastleWindsor.DependencyResolver.Resolve``1(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Resolves the specified args.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="args">The args.</param>
+            <returns>``0.</returns>
+        </member>
+        <member name="M:Glass.Mapper.Umb.CastleWindsor.DependencyResolver.ResolveAll``1">
+            <summary>
+            Resolves all.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns>IEnumerable{``0}.</returns>
+        </member>
+        <member name="P:Glass.Mapper.Umb.CastleWindsor.DependencyResolver.Container">
+            <summary>
+            Gets the container.
+            </summary>
+            <value>The container.</value>
+        </member>
+        <member name="T:Glass.Mapper.Umb.CastleWindsor.Pipelines.ObjectConstruction.WindsorConstruction">
+            <summary>
+            WindsorConstruction
+            </summary>
+        </member>
+        <member name="M:Glass.Mapper.Umb.CastleWindsor.Pipelines.ObjectConstruction.WindsorConstruction.Execute(Glass.Mapper.Pipelines.ObjectConstruction.ObjectConstructionArgs)">
+            <summary>
+            Executes the specified args.
+            </summary>
+            <param name="args">The args.</param>
+        </member>
+        <member name="T:Glass.Mapper.Umb.CastleWindsor.UmbracoInstaller">
+            <summary>
+            UmbracoInstaller
+            </summary>
+        </member>
+        <member name="M:Glass.Mapper.Umb.CastleWindsor.UmbracoInstaller.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Glass.Mapper.Umb.CastleWindsor.UmbracoInstaller"/> class.
+            </summary>
+        </member>
+        <member name="M:Glass.Mapper.Umb.CastleWindsor.UmbracoInstaller.#ctor(Glass.Mapper.Umb.CastleWindsor.Config)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Glass.Mapper.Umb.CastleWindsor.UmbracoInstaller"/> class.
+            </summary>
+            <param name="config">The config.</param>
+        </member>
+        <member name="M:Glass.Mapper.Umb.CastleWindsor.UmbracoInstaller.Install(Castle.Windsor.IWindsorContainer,Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore)">
+            <summary>
+            Performs the installation in the <see cref="T:Castle.Windsor.IWindsorContainer" />.
+            </summary>
+            <param name="container">The container.</param>
+            <param name="store">The configuration store.</param>
+        </member>
+        <member name="P:Glass.Mapper.Umb.CastleWindsor.UmbracoInstaller.Config">
+            <summary>
+            Gets the config.
+            </summary>
+            <value>
+            The config.
+            </value>
+        </member>
+        <member name="T:Glass.Mapper.Umb.CastleWindsor.DataMapperInstaller">
+            <summary>
+            Installs the components descended from AbstractDataMapper. These are used to map data
+            to and from the CMS.
+            </summary>
+        </member>
+        <member name="M:Glass.Mapper.Umb.CastleWindsor.DataMapperInstaller.#ctor(Glass.Mapper.Umb.CastleWindsor.Config)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Glass.Mapper.Umb.CastleWindsor.DataMapperInstaller"/> class.
+            </summary>
+            <param name="config">The config.</param>
+        </member>
+        <member name="M:Glass.Mapper.Umb.CastleWindsor.DataMapperInstaller.Install(Castle.Windsor.IWindsorContainer,Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore)">
+            <summary>
+            Performs the installation in the <see cref="T:Castle.Windsor.IWindsorContainer" />.
+            </summary>
+            <param name="container">The container.</param>
+            <param name="store">The configuration store.</param>
+        </member>
+        <member name="P:Glass.Mapper.Umb.CastleWindsor.DataMapperInstaller.Config">
+            <summary>
+            Gets the config.
+            </summary>
+            <value>
+            The config.
+            </value>
+        </member>
+        <member name="T:Glass.Mapper.Umb.CastleWindsor.DataMapperTasksInstaller">
+            <summary>
+            Data Mapper Resolver Tasks -
+            These tasks are run when Glass.Mapper tries to resolve which DataMapper should handle a given property, e.g.
+            </summary>
+        </member>
+        <member name="M:Glass.Mapper.Umb.CastleWindsor.DataMapperTasksInstaller.#ctor(Glass.Mapper.Umb.CastleWindsor.Config)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Glass.Mapper.Umb.CastleWindsor.DataMapperTasksInstaller"/> class.
+            </summary>
+            <param name="config">The config.</param>
+        </member>
+        <member name="M:Glass.Mapper.Umb.CastleWindsor.DataMapperTasksInstaller.Install(Castle.Windsor.IWindsorContainer,Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore)">
+            <summary>
+            Performs the installation in the <see cref="T:Castle.Windsor.IWindsorContainer" />.
+            </summary>
+            <param name="container">The container.</param>
+            <param name="store">The configuration store.</param>
+        </member>
+        <member name="P:Glass.Mapper.Umb.CastleWindsor.DataMapperTasksInstaller.Config">
+            <summary>
+            Gets the config.
+            </summary>
+            <value>
+            The config.
+            </value>
+        </member>
+        <member name="T:Glass.Mapper.Umb.CastleWindsor.ConfigurationResolverTaskInstaller">
+            <summary>
+            Configuration Resolver Tasks - These tasks are run when Glass.Mapper tries to find the configuration the user has requested based on the type passsed.
+            </summary>
+        </member>
+        <member name="M:Glass.Mapper.Umb.CastleWindsor.ConfigurationResolverTaskInstaller.#ctor(Glass.Mapper.Umb.CastleWindsor.Config)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Glass.Mapper.Umb.CastleWindsor.ConfigurationResolverTaskInstaller"/> class.
+            </summary>
+            <param name="config">The config.</param>
+        </member>
+        <member name="M:Glass.Mapper.Umb.CastleWindsor.ConfigurationResolverTaskInstaller.Install(Castle.Windsor.IWindsorContainer,Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore)">
+            <summary>
+            Performs the installation in the <see cref="T:Castle.Windsor.IWindsorContainer" />.
+            </summary>
+            <param name="container">The container.</param>
+            <param name="store">The configuration store.</param>
+        </member>
+        <member name="P:Glass.Mapper.Umb.CastleWindsor.ConfigurationResolverTaskInstaller.Config">
+            <summary>
+            Gets the config.
+            </summary>
+            <value>
+            The config.
+            </value>
+        </member>
+        <member name="T:Glass.Mapper.Umb.CastleWindsor.ObjectionConstructionTaskInstaller">
+            <summary>
+            Object Construction Tasks - These tasks are run when an a class needs to be instantiated by Glass.Mapper.
+            </summary>
+        </member>
+        <member name="M:Glass.Mapper.Umb.CastleWindsor.ObjectionConstructionTaskInstaller.#ctor(Glass.Mapper.Umb.CastleWindsor.Config)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Glass.Mapper.Umb.CastleWindsor.ObjectionConstructionTaskInstaller"/> class.
+            </summary>
+            <param name="config">The config.</param>
+        </member>
+        <member name="M:Glass.Mapper.Umb.CastleWindsor.ObjectionConstructionTaskInstaller.Install(Castle.Windsor.IWindsorContainer,Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore)">
+            <summary>
+            Performs the installation in the <see cref="T:Castle.Windsor.IWindsorContainer" />.
+            </summary>
+            <param name="container">The container.</param>
+            <param name="store">The configuration store.</param>
+        </member>
+        <member name="P:Glass.Mapper.Umb.CastleWindsor.ObjectionConstructionTaskInstaller.Config">
+            <summary>
+            Gets the config.
+            </summary>
+            <value>
+            The config.
+            </value>
+        </member>
+        <member name="T:Glass.Mapper.Umb.CastleWindsor.ObjectSavingTaskInstaller">
+            <summary>
+            Object Saving Tasks - These tasks are run when an a class needs to be saved by Glass.Mapper.
+            </summary>
+        </member>
+        <member name="M:Glass.Mapper.Umb.CastleWindsor.ObjectSavingTaskInstaller.#ctor(Glass.Mapper.Umb.CastleWindsor.Config)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Glass.Mapper.Umb.CastleWindsor.ObjectSavingTaskInstaller"/> class.
+            </summary>
+            <param name="config">The config.</param>
+        </member>
+        <member name="M:Glass.Mapper.Umb.CastleWindsor.ObjectSavingTaskInstaller.Install(Castle.Windsor.IWindsorContainer,Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore)">
+            <summary>
+            Performs the installation in the <see cref="T:Castle.Windsor.IWindsorContainer" />.
+            </summary>
+            <param name="container">The container.</param>
+            <param name="store">The configuration store.</param>
+        </member>
+        <member name="P:Glass.Mapper.Umb.CastleWindsor.ObjectSavingTaskInstaller.Config">
+            <summary>
+            Gets the config.
+            </summary>
+            <value>
+            The config.
+            </value>
+        </member>
+    </members>
+</doc>

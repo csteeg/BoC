@@ -119,31 +119,17 @@ namespace BoC.InversionOfControl.Unity
         public IEnumerable ResolveAll(Type t)
         {
             if (!CanResolve(t))
-                yield break;
+                return null;
 
-            var unnamedInstance = Resolve(t);
-            if (unnamedInstance != null)
-                yield return unnamedInstance;
-
-            foreach (var o in container.ResolveAll(t))
-            {
-                yield return o;
-            }
+            return container.ResolveAll(t);
         }
 
         public IEnumerable<T> ResolveAll<T>()
         {
             if (!CanResolve(typeof(T)))
-                yield break;
+                return null;
 
-            var unnamedInstance = Resolve<T>();
-            if (unnamedInstance != null)
-                yield return unnamedInstance;
-
-            foreach (var o in container.ResolveAll<T>())
-            {
-                yield return o;
-            }
+            return container.ResolveAll<T>();
         }
 
         public bool IsRegistered<T>()

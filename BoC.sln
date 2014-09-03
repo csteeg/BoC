@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.30626.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{D700FEE1-83DE-4496-9305-7651BEE8AAC8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoC", "Src\Commons\BoC.csproj", "{25C350AF-4957-47E8-960A-6C59794C5DEF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoC.Logging.Log4Net", "Src\Commons.Logging.Log4Net\BoC.Logging.Log4Net.csproj", "{77EAE608-5CFF-4EF4-A647-49C9757CB829}"
@@ -18,13 +16,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoC.Persistence.Xpo", "Src\Commons.Persistence.XPO\BoC.Persistence.Xpo.csproj", "{AC7DD1E6-616B-41CE-AA21-F31B5CA10379}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoC.Persistence.Norm", "Src\Commons.Persistence.NoRM\BoC.Persistence.Norm.csproj", "{EC5E1C97-41C1-4624-8CEE-0D1EC842D306}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList", "Samples\ToDoList\ToDoList.csproj", "{4CBF9499-F91D-4B95-976D-EE8CAB079C79}"
-	ProjectSection(ProjectDependencies) = postProject
-		{387BC181-5A33-4657-9C19-07A8FA48A916} = {387BC181-5A33-4657-9C19-07A8FA48A916}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Tests", "Samples\ToDoList.Tests\ToDoList.Tests.csproj", "{3C19162C-4815-4736-810A-237FDECF4146}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoC.InversionOfControl.Unity", "Src\Commons.InversionOfControl.Unity\BoC.InversionOfControl.Unity.csproj", "{5E953013-A5C4-4AB5-BF99-108C6D4D21CE}"
 EndProject
@@ -44,6 +35,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoC.Logging.Sitecore", "Src\Commons.Logging.Sitecore\BoC.Logging.Sitecore.csproj", "{0F35D97B-C923-4239-BA62-DB75583809BA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoC.Web.Mvc", "Src\Commons.Web.Mvc\BoC.Web.Mvc.csproj", "{D21291A8-98DB-48F0-A864-CC468BA44EB1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0FEDB9EA-1562-439A-9A5E-9AC8156B5145}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoC.InversionOfControl.Unity.Tests", "Tests\Commons.InversionOfControl.Unity.Tests\BoC.InversionOfControl.Unity.Tests.csproj", "{7C6C7E1E-8769-433B-9257-2C117DDA0DB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,18 +89,6 @@ Global
 		{EC5E1C97-41C1-4624-8CEE-0D1EC842D306}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC5E1C97-41C1-4624-8CEE-0D1EC842D306}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC5E1C97-41C1-4624-8CEE-0D1EC842D306}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4CBF9499-F91D-4B95-976D-EE8CAB079C79}..NET 3.5 DEBUG|Any CPU.ActiveCfg = Release|Any CPU
-		{4CBF9499-F91D-4B95-976D-EE8CAB079C79}..NET 3.5 DEBUG|Any CPU.Build.0 = Release|Any CPU
-		{4CBF9499-F91D-4B95-976D-EE8CAB079C79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4CBF9499-F91D-4B95-976D-EE8CAB079C79}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4CBF9499-F91D-4B95-976D-EE8CAB079C79}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4CBF9499-F91D-4B95-976D-EE8CAB079C79}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3C19162C-4815-4736-810A-237FDECF4146}..NET 3.5 DEBUG|Any CPU.ActiveCfg = Release|Any CPU
-		{3C19162C-4815-4736-810A-237FDECF4146}..NET 3.5 DEBUG|Any CPU.Build.0 = Release|Any CPU
-		{3C19162C-4815-4736-810A-237FDECF4146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3C19162C-4815-4736-810A-237FDECF4146}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3C19162C-4815-4736-810A-237FDECF4146}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3C19162C-4815-4736-810A-237FDECF4146}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5E953013-A5C4-4AB5-BF99-108C6D4D21CE}..NET 3.5 DEBUG|Any CPU.ActiveCfg = .NET 3.5 DEBUG|Any CPU
 		{5E953013-A5C4-4AB5-BF99-108C6D4D21CE}..NET 3.5 DEBUG|Any CPU.Build.0 = .NET 3.5 DEBUG|Any CPU
 		{5E953013-A5C4-4AB5-BF99-108C6D4D21CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -142,12 +125,17 @@ Global
 		{D21291A8-98DB-48F0-A864-CC468BA44EB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D21291A8-98DB-48F0-A864-CC468BA44EB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D21291A8-98DB-48F0-A864-CC468BA44EB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C6C7E1E-8769-433B-9257-2C117DDA0DB4}..NET 3.5 DEBUG|Any CPU.ActiveCfg = Release|Any CPU
+		{7C6C7E1E-8769-433B-9257-2C117DDA0DB4}..NET 3.5 DEBUG|Any CPU.Build.0 = Release|Any CPU
+		{7C6C7E1E-8769-433B-9257-2C117DDA0DB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C6C7E1E-8769-433B-9257-2C117DDA0DB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C6C7E1E-8769-433B-9257-2C117DDA0DB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C6C7E1E-8769-433B-9257-2C117DDA0DB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{4CBF9499-F91D-4B95-976D-EE8CAB079C79} = {D700FEE1-83DE-4496-9305-7651BEE8AAC8}
-		{3C19162C-4815-4736-810A-237FDECF4146} = {D700FEE1-83DE-4496-9305-7651BEE8AAC8}
+		{7C6C7E1E-8769-433B-9257-2C117DDA0DB4} = {0FEDB9EA-1562-439A-9A5E-9AC8156B5145}
 	EndGlobalSection
 EndGlobal

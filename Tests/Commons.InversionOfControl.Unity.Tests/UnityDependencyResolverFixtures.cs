@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BoC.InversionOfControl.Unity;
-using Xunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Commons.InverionOfControl.Unity.Tests
 {
+    [TestClass]
     public class UnityDependencyResolverFixture
     {
-        [Fact]
+        [TestMethod]
         public void ResolveAll_Should_Return_All_Registed_Types()
         {
             var resolver = new UnityDependencyResolver();
@@ -18,13 +19,13 @@ namespace Commons.InverionOfControl.Unity.Tests
             resolver.RegisterInstance<IFace1>(new Class3());
 
             var resolveAll = resolver.ResolveAll<IFace1>();
-            Assert.Equal(3, resolveAll.Count());
-            Assert.True(resolveAll.OfType<Class1>().Any());
-            Assert.True(resolveAll.OfType<Class2>().Any());
-            Assert.True(resolveAll.OfType<Class3>().Any());
+            Assert.AreEqual(3, resolveAll.Count());
+            Assert.IsTrue(resolveAll.OfType<Class1>().Any());
+            Assert.IsTrue(resolveAll.OfType<Class2>().Any());
+            Assert.IsTrue(resolveAll.OfType<Class3>().Any());
         }
 
-        [Fact]
+        [TestMethod]
         public void Array_Injector_Should_Inject_All_Registed_Types()
         {
             var resolver = new UnityDependencyResolver();
@@ -33,10 +34,10 @@ namespace Commons.InverionOfControl.Unity.Tests
             resolver.RegisterInstance<IFace1>(new Class3());
 
             var resolve = resolver.Resolve<Class4>();
-            Assert.Equal(3, resolve.Ifaces.Count());
-            Assert.True(resolve.Ifaces.OfType<Class1>().Any());
-            Assert.True(resolve.Ifaces.OfType<Class2>().Any());
-            Assert.True(resolve.Ifaces.OfType<Class3>().Any());
+            Assert.AreEqual(3, resolve.Ifaces.Count());
+            Assert.IsTrue(resolve.Ifaces.OfType<Class1>().Any());
+            Assert.IsTrue(resolve.Ifaces.OfType<Class2>().Any());
+            Assert.IsTrue(resolve.Ifaces.OfType<Class3>().Any());
         }
     }
 

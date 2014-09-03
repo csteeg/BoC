@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Reflection;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
@@ -43,20 +44,32 @@ namespace BoC.InversionOfControl.Unity
 
         private static object ResolveArray<T>(IBuilderContext context)
         {
-            var container = context.NewBuildUp<IUnityContainer>();
-            T firstItem;
-            try
+            IUnityContainer container = context.NewBuildUp<IUnityContainer>();
+
+            var registrations = container.Registrations;
+
+            if (typeof(T).IsGenericType)
             {
-                firstItem = container.Resolve<T>();
+                registrations = registrations
+                    .Where(registration => registration.RegisteredType == typeof(T)
+                                           || registration.RegisteredType == typeof(T).GetGenericTypeDefinition());
             }
-            catch(ResolutionFailedException)
+            else
             {
-                return null;
+                registrations = registrations
+                    .Where(registration => registration.RegisteredType == typeof(T));
             }
-            var results = new List<T>(container.ResolveAll<T>());
-            if (firstItem != null)
-                results.Insert(0, firstItem);
-            return results.ToArray();
+
+            var registeredNames = registrations
+                .Select(registration => registration.Name) // note: including empty ones
+                .Distinct()
+                .ToList();
+
+            var results = registeredNames
+                .Select(name => context.NewBuildUp<T>(name))
+                .ToArray();
+
+            return results;
         }
     }
 }
