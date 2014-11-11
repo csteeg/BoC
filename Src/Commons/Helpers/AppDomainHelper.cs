@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Web;
 using BoC.InversionOfControl;
 using BoC.Tasks;
 
@@ -16,13 +17,16 @@ namespace BoC.Helpers
         private List<Assembly> loadedAssemblies = new List<Assembly>();
         static private readonly object loadlock = new object();
 
-        ICollection<Func<Type, bool>> typeFilters = new List<Func<Type, bool>>()
-            { 
-                type => true
-            };
+        ICollection<Func<Type, bool>> typeFilters = new List<Func<Type, bool>>() { type => true };
+        ICollection<Func<Assembly, bool>> assemblyFilters = new List<Func<Assembly, bool>>() { a => true };
         public ICollection<Func<Type, bool>> TypeFilters
         {
             get { return typeFilters; }
+        }
+
+        public ICollection<Func<Assembly, bool>> AssemblyFilters
+        {
+            get { return assemblyFilters; }
         }
 
         public AppDomainHelper(string domainPath, string fileFilter)
@@ -46,7 +50,7 @@ namespace BoC.Helpers
         public IEnumerable<Assembly> GetAssemblies()
         {
             EnsureLoaded();
-            return loadedAssemblies;
+            return loadedAssemblies.Where(a => AssemblyFilters.All(func => func(a)));
         }
 
         public IEnumerable<Type> GetTypes(Func<Type, bool> where)
@@ -150,12 +154,14 @@ namespace BoC.Helpers
         }
 
 
-        public static AppDomainHelper CreateDefault()
+        public static IAppDomainHelper CreateDefault()
         {
             return
-                new AppDomainHelper(
-                    AppDomain.CurrentDomain.SetupInformation.PrivateBinPath ?? AppDomain.CurrentDomain.BaseDirectory,
-                    "*.dll|*.exe");
+                HttpContext.Current == null
+                    ? (IAppDomainHelper) new AppDomainHelper(
+                        AppDomain.CurrentDomain.SetupInformation.PrivateBinPath ?? AppDomain.CurrentDomain.BaseDirectory,
+                        "*.dll|*.exe")
+                    : new BuildManagerAppDomainHelper();
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using System.Web.Mvc;
 using BoC.Tasks;
@@ -17,8 +18,12 @@ namespace BoC.Web.Mvc.Init
         public void Execute()
         {
             DependencyResolver.SetResolver(
-                this.dependencyResolver.Resolve, 
-                (t) => this.dependencyResolver.ResolveAll(t).Cast<object>());
+                this.dependencyResolver.Resolve,
+                (t) =>
+                {
+                    IEnumerable resolveAll = this.dependencyResolver.ResolveAll(t);
+                    return resolveAll != null ? resolveAll.Cast<object>() : Enumerable.Empty<object>();
+                });
         }
 
     }

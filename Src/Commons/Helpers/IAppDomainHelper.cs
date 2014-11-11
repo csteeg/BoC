@@ -8,6 +8,7 @@ namespace BoC.Helpers
     {
         IEnumerable<Assembly> GetAssemblies();
         IEnumerable<Type> GetTypes(Func<Type, bool> where);
-        void Refresh();
+        ICollection<Func<Type, bool>> TypeFilters { get; }
+        ICollection<Func<Assembly, bool>> AssemblyFilters { get; }
     }
 }

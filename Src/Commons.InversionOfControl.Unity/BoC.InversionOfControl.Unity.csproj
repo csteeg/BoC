@@ -89,7 +89,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -117,8 +118,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeTrackingExtension.cs" />
     <Compile Include="UnityDependencyResolver.cs" />
-    <Compile Include="UnityPerWebRequestLifetimeManager.cs" />
-    <Compile Include="UnityPerWebRequestLifetimeModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Commons\BoC.csproj">
@@ -144,9 +143,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="BoC.InversionOfControl.Unity.nuspec" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

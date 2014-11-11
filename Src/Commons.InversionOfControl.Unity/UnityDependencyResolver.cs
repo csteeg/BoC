@@ -119,7 +119,7 @@ namespace BoC.InversionOfControl.Unity
         public IEnumerable ResolveAll(Type t)
         {
             if (!CanResolve(t))
-                return null;
+                return Enumerable.Empty<object>();
 
             return container.ResolveAll(t);
         }
@@ -127,7 +127,7 @@ namespace BoC.InversionOfControl.Unity
         public IEnumerable<T> ResolveAll<T>()
         {
             if (!CanResolve(typeof(T)))
-                return null;
+                return Enumerable.Empty<T>();
 
             return container.ResolveAll<T>();
         }
@@ -183,7 +183,7 @@ namespace BoC.InversionOfControl.Unity
         }
         protected void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && container != null)
             {
                 container.Dispose();
             }
