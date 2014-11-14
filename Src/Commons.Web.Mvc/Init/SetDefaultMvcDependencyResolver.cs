@@ -1,30 +1,26 @@
 using System.Collections;
 using System.Linq;
+using System.Web.Http;
 using System.Web.Mvc;
 using BoC.Tasks;
+using BoC.Web.Mvc.IoC;
 using IDependencyResolver = BoC.InversionOfControl.IDependencyResolver;
 
 namespace BoC.Web.Mvc.Init
 {
     public class SetDefaultMvcDependencyResolver : IBootstrapperTask
     {
-        private readonly IDependencyResolver dependencyResolver;
+        private BoCDependencyResolver _boCDependencyResolver;
 
         public SetDefaultMvcDependencyResolver(IDependencyResolver dependencyResolver)
         {
-            this.dependencyResolver = dependencyResolver;
+            _boCDependencyResolver = new BoCDependencyResolver(dependencyResolver);
         }
 
         public void Execute()
         {
-            DependencyResolver.SetResolver(
-                this.dependencyResolver.Resolve,
-                (t) =>
-                {
-                    IEnumerable resolveAll = this.dependencyResolver.ResolveAll(t);
-                    return resolveAll != null ? resolveAll.Cast<object>() : Enumerable.Empty<object>();
-                });
+            DependencyResolver.SetResolver(_boCDependencyResolver);
+            GlobalConfiguration.Configuration.DependencyResolver = _boCDependencyResolver;
         }
-
     }
 }

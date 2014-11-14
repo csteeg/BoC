@@ -51,7 +51,7 @@ namespace BoC.Web.Mvc.Attributes
 
         private void PublishEvent<T, TEventArgs>(Func<TEventArgs> args) where T : BaseEvent<TEventArgs>, new()
         {
-            var eventAggregator = IoC.Resolver.Resolve<IEventAggregator>();
+            var eventAggregator = InversionOfControl.IoC.Resolver.Resolve<IEventAggregator>();
             if (eventAggregator != null)
             {
                 eventAggregator.GetEvent<T>().Publish(args());
@@ -60,7 +60,7 @@ namespace BoC.Web.Mvc.Attributes
 
         private void PublishEvent(Type eventType, object args)
         {
-            var eventAggregator = IoC.Resolver.Resolve<IEventAggregator>();
+            var eventAggregator = InversionOfControl.IoC.Resolver.Resolve<IEventAggregator>();
             if (eventAggregator != null)
             {
                 eventAggregator.GetEvent(eventType).Publish(args);

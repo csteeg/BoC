@@ -28,8 +28,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F3AD6E4F-D7ED-473F-8F17-97850F1A5B47}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoC.Logging.Sitecore", "Src\Commons.Logging.Sitecore\BoC.Logging.Sitecore.csproj", "{0F35D97B-C923-4239-BA62-DB75583809BA}"

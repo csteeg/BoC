@@ -1,35 +1,35 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Ninject;
 using Ninject.Parameters;
+using Ninject.Syntax;
 
 namespace BoC.InversionOfControl.Ninject
 {
     public class NinjectDependencyResolver : IDependencyResolver
     {
-        private readonly IKernel _container;
+        private readonly IResolutionRoot _container;
+        private readonly IKernel _kernel;
         private const string DefaultBindingName = "";
 
-        protected NinjectDependencyResolver()
-            : this(new StandardKernel())
+        protected NinjectDependencyResolver(): this(new StandardKernel())
         {
         }
 
-        public NinjectDependencyResolver(IKernel container)
+        public NinjectDependencyResolver(IKernel kernel): this(kernel, kernel)
+        {
+        }
+
+        public NinjectDependencyResolver(IResolutionRoot container, IKernel kernel)
         {
             _container = container;
+            _kernel = kernel;
         }
 
         public T Resolve<T>()
         {
             return _container.Get<T>(DefaultBindingName);
-        }
-
-        public void Inject<T>(T existing)
-        {
-            throw new NotImplementedException();
         }
 
         public object Resolve(Type t)
@@ -49,24 +49,26 @@ namespace BoC.InversionOfControl.Ninject
 
         public void RegisterType<TRegisteredAs, TResolvedTo>() where TResolvedTo : TRegisteredAs
         {
+            var bind = _kernel.Bind<TRegisteredAs>().To<TResolvedTo>();
             if (IsRegistered(typeof(TRegisteredAs)))
             {
-                RegisterType<TRegisteredAs, TResolvedTo>(Guid.NewGuid().ToString());
+                bind.Named(Guid.NewGuid().ToString());
                 return;
             }
 
-            _container.Bind<TRegisteredAs>().To<TResolvedTo>().Named(DefaultBindingName);
+            bind.Named(DefaultBindingName);
         }
 
         public void RegisterType(Type from, Type to)
         {
+            var bind = _kernel.Bind(@from).To(to);
             if (IsRegistered(from))
             {
-                _container.Bind(from).To(to).Named(Guid.NewGuid().ToString());
+                bind.Named(Guid.NewGuid().ToString());
                 return;
             }
 
-            _container.Bind(from).To(to).Named(DefaultBindingName);
+            bind.Named(DefaultBindingName);
         }
 
         public bool IsRegistered(Type t)
@@ -81,29 +83,44 @@ namespace BoC.InversionOfControl.Ninject
             return IsRegistered(typeof (T));
         }
 
+        public void RegisterFactory(Type @from, Func<object> factory)
+        {
+            _kernel.Bind(@from).ToMethod(c => factory());
+        }
+
+        public void RegisterFactory<TFrom>(Func<TFrom> factory)
+        {
+            _kernel.Bind<TFrom>().ToMethod(c => factory());
+        }
+
+        public IDependencyResolver BeginScope()
+        {
+            return new NinjectDependencyResolver(_kernel.BeginBlock(), _kernel);
+        }
+
         public void RegisterType<TRegisteredAs, TResolvedTo>(string name) where TResolvedTo : TRegisteredAs
         {
-            _container.Bind<TRegisteredAs>().To<TResolvedTo>().Named(name);
+            _kernel.Bind<TRegisteredAs>().To<TResolvedTo>().Named(name);
         }
 
         public void RegisterInstance<TRegisteredAs>(TRegisteredAs instance)
         {
-            _container.Bind<TRegisteredAs>().ToMethod(x => instance).Named(DefaultBindingName);
+            _kernel.Bind<TRegisteredAs>().ToMethod(x => instance).Named(DefaultBindingName);
         }
 
         public void RegisterInstance<TRegisteredAs>(string name, TRegisteredAs instance)
         {
-            _container.Bind<TRegisteredAs>().ToMethod(x => instance).Named(name);
+            _kernel.Bind<TRegisteredAs>().ToMethod(x => instance).Named(name);
         }
 
         public void RegisterSingleton<TFrom, TTo>() where TTo : TFrom
         {
-            _container.Bind<TFrom>().To<TTo>().InSingletonScope();
+            _kernel.Bind<TFrom>().To<TTo>().InSingletonScope();
         }
 
         public void RegisterSingleton(Type @from, Type to)
         {
-            _container.Bind(@from).To(to).InSingletonScope();
+            _kernel.Bind(@from).To(to).InSingletonScope();
         }
 
         public IEnumerable<TResolvedTo> ResolveAll<TResolvedTo>()
@@ -128,9 +145,9 @@ namespace BoC.InversionOfControl.Ninject
 
         protected void Dispose(bool disposing)
         {
-            if (disposing && _container != null)
+            if (disposing && _kernel != null)
             {
-                _container.Dispose();
+                _kernel.Dispose();
             }
         }
     }

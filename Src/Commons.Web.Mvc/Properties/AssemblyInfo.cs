@@ -7,11 +7,11 @@ using System.Web;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("BoC.Web.Mvc")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("MVC stuff that you always need in a project")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Hewlett-Packard Company")]
+[assembly: AssemblyCompany("Chris van de steeg")]
 [assembly: AssemblyProduct("BoC.Web.Mvc")]
-[assembly: AssemblyCopyright("Copyright © Hewlett-Packard Company 2009")]
+[assembly: AssemblyCopyright("Chris van de Steeg 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,7 +33,7 @@ using System.Web;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.0.2.0")]
-[assembly: AssemblyFileVersion("2.0.2.0")]
+[assembly: AssemblyVersion("2.1.3.0")]
+[assembly: AssemblyFileVersion("2.1.3.0")]
 
 [assembly: AssemblyKeyFileAttribute("../../BoC.snk")]

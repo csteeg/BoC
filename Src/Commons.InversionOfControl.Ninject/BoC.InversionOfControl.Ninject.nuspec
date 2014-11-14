@@ -11,10 +11,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <copyright>Copyright 2014</copyright>
-    <tags>BoC,InversionOfControl,Unity</tags>
+    <tags>BoC,InversionOfControl,Ninject</tags>
     <dependencies>
       <dependency id="BoC" version="2.1.1" />
-      <dependency id="Unity" version="3.5.1404" />
+      <dependency id="Ninject" version="3.2.2.0" />
     </dependencies>
   </metadata>
 </package>

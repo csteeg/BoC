@@ -42,9 +42,9 @@ namespace BoC.Web.Mvc.ActionResults
             if (Data != null)
             {
                 JsonSerializerSettings settings = null;
-                if (IoC.Resolver.IsRegistered<JsonSerializerSettings>())
+                if (global::BoC.InversionOfControl.IoC.Resolver.IsRegistered<JsonSerializerSettings>())
                 {
-                    settings = IoC.Resolver.Resolve<JsonSerializerSettings>();
+                    settings = InversionOfControl.IoC.Resolver.Resolve<JsonSerializerSettings>();
                 }
                 response.Write(JsonConvert.SerializeObject(Data, Formatting.None, settings));
                 response.Flush();

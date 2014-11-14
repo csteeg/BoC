@@ -13,3 +13,4 @@ packages/
 lib/Sitecore/
 _ReSharper.BoC/
 UpgradeLog.*
+*.nupkg

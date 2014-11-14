@@ -39,6 +39,39 @@ namespace Commons.InverionOfControl.Unity.Tests
             Assert.IsTrue(resolve.Ifaces.OfType<Class2>().Any());
             Assert.IsTrue(resolve.Ifaces.OfType<Class3>().Any());
         }
+
+        [TestMethod]
+        public void IsRegistered_Should_Return_True()
+        {
+            var resolver = new UnityDependencyResolver();
+            resolver.RegisterType<IFace1, Class1>();
+            resolver.RegisterType<IFace1, Class2>();
+            resolver.RegisterInstance<IFace1>(new Class3());
+
+            var result = resolver.IsRegistered<IFace1>();
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void IsRegistered_Should_Return_False()
+        {
+            var resolver = new UnityDependencyResolver();
+            resolver.RegisterType<IFace1, Class1>();
+            resolver.RegisterType<IFace1, Class2>();
+            resolver.RegisterInstance<IFace1>(new Class3());
+
+            var result = resolver.IsRegistered<Class3>();
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void Unresolveable_Should_Return_Null()
+        {
+            var resolver = new UnityDependencyResolver();
+
+            var result = resolver.Resolve<IFace1>();
+            Assert.IsNull(result);
+        }
     }
 
     public interface IFace1 {}

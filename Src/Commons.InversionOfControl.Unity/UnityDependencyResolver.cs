@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Configuration;
-using System.Diagnostics;
 using System.Linq;
 using BoC.Helpers;
 using Microsoft.Practices.Unity;
@@ -54,19 +52,27 @@ namespace BoC.InversionOfControl.Unity
             container.RegisterType<TFrom, TTo>();
         }
 
+        public void RegisterFactory<TFrom>(Func<TFrom> factory)
+        {
+            container.RegisterType<TFrom>(new InjectionFactory(c => factory()));
+        }
+
+        public IDependencyResolver BeginScope()
+        {
+            return new UnityDependencyResolver(container.CreateChildContainer());
+        }
+
+        public void RegisterFactory(Type from, Func<object> factory)
+        {
+            container.RegisterType(from, new InjectionFactory(c => factory()));
+        }
+
         public virtual void RegisterType(Type from, Type to)
         {
             Check.Argument.IsNotNull(from, "from");
             Check.Argument.IsNotNull(to, "to");
 
             container.RegisterType(from, to);
-        }
-        
-        public void Inject<T>(T existing)
-        {
-            Check.Argument.IsNotNull(existing, "existing");
-
-            container.BuildUp(existing);
         }
         
         public object Resolve(Type type)
@@ -89,7 +95,7 @@ namespace BoC.InversionOfControl.Unity
             {
                 var result = container.Resolve(type, name);
                 if (typeof(IEnumerable).IsAssignableFrom(type) && 
-                    ((result == null) || ((IEnumerable)result).Cast<Object>().Count() == 0))
+                    ((result == null) || !((IEnumerable)result).Cast<Object>().Any()))
                 {
                     result = this.ResolveAll(type);
                 }
