@@ -11,9 +11,9 @@ namespace BoC.InversionOfControl.Ninject
     {
         private readonly IResolutionRoot _container;
         private readonly IKernel _kernel;
-        private const string DefaultBindingName = "";
 
-        protected NinjectDependencyResolver(): this(new StandardKernel())
+        public NinjectDependencyResolver()
+            : this(new StandardKernel(new NinjectSettings { AllowNullInjection = true }))
         {
         }
 
@@ -29,46 +29,32 @@ namespace BoC.InversionOfControl.Ninject
 
         public T Resolve<T>()
         {
-            return _container.Get<T>(DefaultBindingName);
+            return _container.TryGet<T>();
         }
 
         public object Resolve(Type t)
         {
-            return _container.Get(t, DefaultBindingName);
+            return _container.TryGet(t);
         }
 
         public object Resolve(Type t, string name)
         {
-            return _container.Get(t, name);
+            return _container.TryGet(t, name);
         }
 
         public T Resolve<T>(string name)
         {
-            return _container.Get<T>(name);
+            return _container.TryGet<T>(name);
         }
 
-        public void RegisterType<TRegisteredAs, TResolvedTo>() where TResolvedTo : TRegisteredAs
+        public void RegisterType<TRegisteredAs, TResolvedTo>(LifetimeScope scope = LifetimeScope.Transient) where TResolvedTo : TRegisteredAs
         {
-            var bind = _kernel.Bind<TRegisteredAs>().To<TResolvedTo>();
-            if (IsRegistered(typeof(TRegisteredAs)))
-            {
-                bind.Named(Guid.NewGuid().ToString());
-                return;
-            }
-
-            bind.Named(DefaultBindingName);
+            _kernel.Bind<TRegisteredAs>().To<TResolvedTo>().SetLifeStyle(scope);
         }
 
-        public void RegisterType(Type from, Type to)
+        public void RegisterType(Type from, Type to, LifetimeScope scope = LifetimeScope.Transient)
         {
-            var bind = _kernel.Bind(@from).To(to);
-            if (IsRegistered(from))
-            {
-                bind.Named(Guid.NewGuid().ToString());
-                return;
-            }
-
-            bind.Named(DefaultBindingName);
+            _kernel.Bind(@from).To(to).SetLifeStyle(scope);
         }
 
         public bool IsRegistered(Type t)
@@ -93,19 +79,19 @@ namespace BoC.InversionOfControl.Ninject
             _kernel.Bind<TFrom>().ToMethod(c => factory());
         }
 
-        public IDependencyResolver BeginScope()
+        public IDependencyResolver CreateChildResolver()
         {
             return new NinjectDependencyResolver(_kernel.BeginBlock(), _kernel);
         }
 
-        public void RegisterType<TRegisteredAs, TResolvedTo>(string name) where TResolvedTo : TRegisteredAs
+        public void RegisterType<TRegisteredAs, TResolvedTo>(string name, LifetimeScope scope = LifetimeScope.Transient) where TResolvedTo : TRegisteredAs
         {
-            _kernel.Bind<TRegisteredAs>().To<TResolvedTo>().Named(name);
+            _kernel.Bind<TRegisteredAs>().To<TResolvedTo>().SetLifeStyle(scope).Named(name);
         }
 
         public void RegisterInstance<TRegisteredAs>(TRegisteredAs instance)
         {
-            _kernel.Bind<TRegisteredAs>().ToMethod(x => instance).Named(DefaultBindingName);
+            _kernel.Bind<TRegisteredAs>().ToMethod(x => instance);
         }
 
         public void RegisterInstance<TRegisteredAs>(string name, TRegisteredAs instance)

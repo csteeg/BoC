@@ -3,7 +3,7 @@
 namespace BoC.Persistence
 {
     [Serializable]
-    abstract public class BaseEntity<Tkey> : IEquatable<BaseEntity<Tkey>>, IBaseEntity
+    abstract public class BaseEntity<Tkey> : IEquatable<BaseEntity<Tkey>>, IBaseEntity<Tkey>
     {
         public virtual Tkey Id { get; set; }
 

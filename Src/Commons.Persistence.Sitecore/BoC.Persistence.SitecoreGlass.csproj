@@ -127,6 +127,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextDatabaseProvider.cs" />
+    <Compile Include="DefaultSetupTasks\RegisterConfigLoader.cs" />
+    <Compile Include="GlassConfig\AppDomainHelperConfigLoader.cs" />
     <Compile Include="DefaultSetupTasks\RegisterValueProvider.cs" />
     <Compile Include="FixedSearchContext.cs" />
     <Compile Include="IIndexSearchContextProvider.cs" />
@@ -135,12 +137,14 @@
     <Compile Include="DefaultSetupTasks\AutoSitecoreRepositoryGenerator.cs" />
     <Compile Include="IDatabaseProvider.cs" />
     <Compile Include="IIndexNameProvider.cs" />
+    <Compile Include="Initialize\InitBoc.cs" />
+    <Compile Include="DefaultSetupTasks\InitGlass.cs" />
     <Compile Include="ISitecoreServiceProvider.cs" />
     <Compile Include="Mvc\SitecoreValueProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SitecoreRepository.cs" />
     <Compile Include="SitecoreServiceProvider.cs" />
-    <Compile Include="SystemIndexNameProvider.cs" />
+    <Compile Include="ContentSearchContextIndexNameProvider.cs" />
     <Compile Include="UnitOfWork\SitecoreBucketUnitOfWork.cs" />
     <Compile Include="UnitOfWork\SitecoreUnitOfWork.cs" />
     <Compile Include="UnitOfWork\SitecoreUnitOfWorkIndexSearchContextProvider.cs" />
@@ -154,6 +158,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Content Include="App_Config\Include\BoC\Glass.Mapper.Sc.CodeFirst.config.example" />
+    <Content Include="App_Config\Include\BoC\Glass.Mapper.Sc.Mvc.Config" />
     <None Include="BoC.Persistence.SitecoreGlass.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>

@@ -33,7 +33,7 @@ namespace BoC.Persistence.SitecoreGlass.DefaultSetupTasks
 
             if (!dependencyResolver.IsRegistered<IIndexNameProvider>())
             {
-                dependencyResolver.RegisterSingleton<IIndexNameProvider, SystemIndexNameProvider>();
+                dependencyResolver.RegisterSingleton<IIndexNameProvider, ContentSearchContextIndexNameProvider>();
             }
 
             if (!dependencyResolver.IsRegistered<IUnitOfWork>())

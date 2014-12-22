@@ -54,14 +54,29 @@ namespace BoC.Tests
             registered.Add(from);
         }
 
-        public void RegisterType<TFrom, TTo>() where TTo : TFrom
+        public void RegisterType<TFrom, TTo>(LifetimeScope scope = LifetimeScope.Transient) where TTo : TFrom
         {
             RegisterType(typeof(TFrom), typeof(TTo));
         }
 
-        public virtual void RegisterType(Type from, Type to)
+        public virtual void RegisterType(Type from, Type to, LifetimeScope scope = LifetimeScope.Transient)
         {
             registered.Add(from);
+        }
+
+        public void RegisterFactory(Type @from, Func<object> factory)
+        {
+            registered.Add(@from);
+        }
+
+        public void RegisterFactory<TFrom>(Func<TFrom> factory)
+        {
+            registered.Add(typeof(TFrom));
+        }
+
+        public IDependencyResolver BeginScope()
+        {
+            return this;
         }
 
         public virtual void Inject<T>(T existing)

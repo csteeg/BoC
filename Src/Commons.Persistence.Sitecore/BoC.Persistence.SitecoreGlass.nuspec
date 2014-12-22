@@ -14,14 +14,16 @@
     <copyright>Copyright 2014</copyright>
     <tags>BoC,Persistence,Glass,Mapper,ORM,Repository,Sitecore</tags>
     <dependencies>
-      <dependency id="BoC" version="2.0.0" />
-      <dependency id="BoC.Glass.Mapper" version="1.0.2" />
-      <dependency id="BoC.Glass.Mapper.Sc" version="1.0.2" />
-      <dependency id="BoC.Glass.Mapper.Sc.CastleWindsor" version="1.0.2" />
-      <dependency id="BoC.Glass.Mapper.Sc.ContentSearch" version="1.0.2" />
-      <dependency id="BoC.Glass.Mapper.Sc.ContentSearch.LuceneProvider" version="1.0.2" />
-      <dependency id="Castle.Core" version="3.2.0" />
-      <dependency id="Castle.Windsor" version="3.2.0" />
+      <dependency id="BoC" version="2.2.0" />
+      <dependency id="BoC.Logging.Sitecore" version="2.0.1" />
+      <dependency id="BoC.Glass.Mapper" version="1.0.3" />
+      <dependency id="BoC.Glass.Mapper.Sc" version="1.0.3" />
+      <dependency id="BoC.Glass.Mapper.Sc.Mvc-5" version="1.0.3" />
+      <dependency id="BoC.Glass.Mapper.Sc.CastleWindsor" version="1.0.3" />
+      <dependency id="BoC.Glass.Mapper.Sc.ContentSearch" version="1.0.3" />
+      <dependency id="BoC.Glass.Mapper.Sc.ContentSearch.LuceneProvider" version="1.0.3" />
+      <dependency id="Castle.Core" version="3.3.0" />
+      <dependency id="Castle.Windsor" version="3.3.0" />
       <dependency id="Lucene.Net" version="3.0.3" />
       <dependency id="Microsoft.AspNet.Mvc" version="5.2.2" />
       <dependency id="Microsoft.AspNet.Razor" version="3.1.2" />
@@ -31,4 +33,7 @@
       <dependency id="WebActivatorEx" version="2.0" />
     </dependencies>
   </metadata>
+  <files>
+    <file src="App_Config\Include\**.*" target="content\App_Config\Include\" />
+  </files>
 </package>

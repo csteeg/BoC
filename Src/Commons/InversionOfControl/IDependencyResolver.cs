@@ -9,11 +9,11 @@ namespace BoC.InversionOfControl
         void RegisterInstance<T>(T instance);
         void RegisterSingleton<TFrom, TTo>() where TTo : TFrom;
         void RegisterSingleton(Type from, Type to);
-        void RegisterType<TFrom, TTo>() where TTo : TFrom;
-        void RegisterType(Type from, Type to);
+        void RegisterType<TFrom, TTo>(LifetimeScope scope = LifetimeScope.Transient) where TTo : TFrom;
+        void RegisterType(Type from, Type to, LifetimeScope scope = LifetimeScope.Transient);
         void RegisterFactory(Type from, Func<object> factory);
         void RegisterFactory<TFrom>(Func<TFrom> factory);
-        IDependencyResolver BeginScope();
+        IDependencyResolver CreateChildResolver();
 
         object Resolve(Type type);
         object Resolve(Type type, string name);

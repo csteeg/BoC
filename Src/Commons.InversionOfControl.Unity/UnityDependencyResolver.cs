@@ -11,30 +11,30 @@ namespace BoC.InversionOfControl.Unity
 {
     public class UnityDependencyResolver : IDependencyResolver
     {
-        private readonly IUnityContainer container;
+        private readonly IUnityContainer _container;
 
         public UnityDependencyResolver() : this(new UnityContainer())
         {
             var configuration = (UnityConfigurationSection) ConfigurationManager.GetSection("unity");
             if (configuration != null)
-                configuration.Configure(container);
+                configuration.Configure(_container);
         }
         
         public UnityDependencyResolver(IUnityContainer container)
         {
             Check.Argument.IsNotNull(container, "container");
 
-            this.container = container;
-            this.container.AddExtension(new TypeTrackingExtension());
+            this._container = container;
+            this._container.AddExtension(new TypeTrackingExtension());
         }
 
-        public IUnityContainer Container { get { return container; } }
+        public IUnityContainer Container { get { return _container; } }
 
         public void RegisterInstance<T>(T instance)
         {
             Check.Argument.IsNotNull(instance, "instance");
 
-            container.RegisterInstance(instance);
+            _container.RegisterInstance(instance);
         }
 
         public void RegisterSingleton<TFrom, TTo>() where TTo : TFrom
@@ -44,43 +44,43 @@ namespace BoC.InversionOfControl.Unity
 
         public virtual void RegisterSingleton(Type from, Type to)
         {
-            container.RegisterType(from, to, new ContainerControlledLifetimeManager());
+            _container.RegisterType(from, to, new ContainerControlledLifetimeManager());
         }
 
-        public void RegisterType<TFrom, TTo>() where TTo : TFrom
+        public void RegisterType<TFrom, TTo>(LifetimeScope scope = LifetimeScope.Transient) where TTo : TFrom
         {
-            container.RegisterType<TFrom, TTo>();
+            _container.RegisterType<TFrom, TTo>(GetLifetimeManager(scope));
         }
 
         public void RegisterFactory<TFrom>(Func<TFrom> factory)
         {
-            container.RegisterType<TFrom>(new InjectionFactory(c => factory()));
+            _container.RegisterType<TFrom>(new InjectionFactory(c => factory()));
         }
 
-        public IDependencyResolver BeginScope()
+        public IDependencyResolver CreateChildResolver()
         {
-            return new UnityDependencyResolver(container.CreateChildContainer());
+            return new UnityDependencyResolver(_container.CreateChildContainer());
         }
 
         public void RegisterFactory(Type from, Func<object> factory)
         {
-            container.RegisterType(from, new InjectionFactory(c => factory()));
+            _container.RegisterType(from, new InjectionFactory(c => factory()));
         }
 
-        public virtual void RegisterType(Type from, Type to)
+        public virtual void RegisterType(Type from, Type to, LifetimeScope scope = LifetimeScope.Transient)
         {
             Check.Argument.IsNotNull(from, "from");
             Check.Argument.IsNotNull(to, "to");
 
-            container.RegisterType(from, to);
+            _container.RegisterType(from, to, GetLifetimeManager(scope));
         }
         
         public object Resolve(Type type)
         {
             Check.Argument.IsNotNull(type, "type");
-            if (container.Configure<TypeTrackingExtension>().CanResolve(type))
+            if (_container.Configure<TypeTrackingExtension>().CanResolve(type))
             {
-                return container.Resolve(type);
+                return _container.Resolve(type);
             }
             else
             {
@@ -93,7 +93,7 @@ namespace BoC.InversionOfControl.Unity
             Check.Argument.IsNotNull(type, "type");
             if (Container.Configure<TypeTrackingExtension>().CanResolve(type, name))
             {
-                var result = container.Resolve(type, name);
+                var result = _container.Resolve(type, name);
                 if (typeof(IEnumerable).IsAssignableFrom(type) && 
                     ((result == null) || !((IEnumerable)result).Cast<Object>().Any()))
                 {
@@ -127,7 +127,7 @@ namespace BoC.InversionOfControl.Unity
             if (!CanResolve(t))
                 return Enumerable.Empty<object>();
 
-            return container.ResolveAll(t);
+            return _container.ResolveAll(t);
         }
 
         public IEnumerable<T> ResolveAll<T>()
@@ -135,7 +135,7 @@ namespace BoC.InversionOfControl.Unity
             if (!CanResolve(typeof(T)))
                 return Enumerable.Empty<T>();
 
-            return container.ResolveAll<T>();
+            return _container.ResolveAll<T>();
         }
 
         public bool IsRegistered<T>()
@@ -145,7 +145,7 @@ namespace BoC.InversionOfControl.Unity
 
         public bool IsRegistered(Type type)
         {
-            return container.Configure<TypeTrackingExtension>().IsRegistered(type);
+            return _container.Configure<TypeTrackingExtension>().IsRegistered(type);
         }
 
         /// <summary>
@@ -178,6 +178,21 @@ namespace BoC.InversionOfControl.Unity
             return type.IsClass && !type.IsAbstract;
         }
 
+        private LifetimeManager GetLifetimeManager(LifetimeScope lifetimeScope)
+        {
+            switch (lifetimeScope)
+            {
+                case LifetimeScope.Unowned:
+                    return new TransientLifetimeManager();
+                case LifetimeScope.PerHttpRequest:
+                    return new PerRequestLifetimeManager();
+                case LifetimeScope.PerThread:
+                    return new PerThreadLifetimeManager();
+                default:
+                    return new TransientLifetimeManager();
+            }
+        }
+
 
         ~UnityDependencyResolver()
         {
@@ -189,9 +204,9 @@ namespace BoC.InversionOfControl.Unity
         }
         protected void Dispose(bool disposing)
         {
-            if (disposing && container != null)
+            if (disposing && _container != null)
             {
-                container.Dispose();
+                _container.Dispose();
             }
         }
     }

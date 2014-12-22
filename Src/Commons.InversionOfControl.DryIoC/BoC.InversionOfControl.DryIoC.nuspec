@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$-preview1</version>
+    <title>$title$</title>
+    <authors>Chris van de Steeg</authors>
+    <owners>Chris van de Steeg</owners>
+    <licenseUrl>https://github.com/csteeg/BoC/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/csteeg/boc</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <copyright>Copyright 2014</copyright>
+    <tags>BoC,InversionOfControl,DryIOC</tags>
+    <dependencies>
+      <dependency id="BoC" version="2.2.2" />
+    </dependencies>
+  </metadata>
+</package>

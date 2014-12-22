@@ -41,6 +41,8 @@ namespace BoC.Web
         public static void Shutdown()
         {
             PublishEvent<WebApplicationEndEvent>();
+            if (IoC.Resolver != null)
+                IoC.Resolver.Dispose();
         }
         private static void PublishEvent<T>() where T : BaseEvent<EventArgs>, new()
         {

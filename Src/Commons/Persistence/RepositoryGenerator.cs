@@ -97,7 +97,8 @@ namespace BoC.Persistence
                     }
                 }
                 dependencyResolver.RegisterType(interfaceType, repo);
-                dependencyResolver.RegisterType(toFind, repo);
+                if (interfaceType != toFind)
+                    dependencyResolver.RegisterType(toFind, repo);
             }
         }
 

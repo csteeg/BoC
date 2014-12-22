@@ -340,8 +340,8 @@ namespace BoC.Persistence.SitecoreGlass
         private IQueryable<T> AddStandardQueries(IQueryable<T> query)
         {
             //try to query the _templates field
-            if (TemplateIdsProperty != null && typeof(IEnumerable<>).IsAssignableFrom(TemplateIdsProperty.PropertyInfo.PropertyType.GetGenericTypeDefinition())
-                                                && TemplateIdsProperty.PropertyInfo.PropertyType.IsConstructedGenericType)
+            if (TemplateIdsProperty != null && TemplateIdsProperty.PropertyInfo.PropertyType.IsConstructedGenericType &&
+                typeof(IEnumerable<>).IsAssignableFrom(TemplateIdsProperty.PropertyInfo.PropertyType.GetGenericTypeDefinition()))
             {
                 var collectionType = TemplateIdsProperty.PropertyInfo.PropertyType.GenericTypeArguments.First();
                 var isID = typeof(ID).IsAssignableFrom(collectionType);
