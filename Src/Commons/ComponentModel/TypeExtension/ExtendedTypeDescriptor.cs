@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using BoC.Profiling;
 
 namespace BoC.ComponentModel.TypeExtension
 {
@@ -15,6 +16,7 @@ namespace BoC.ComponentModel.TypeExtension
 
         public override PropertyDescriptorCollection GetProperties()
         {
+            using (Profiler.StartContext("ExtendedTypeDescriptor.GetProperties() for {0}", componentType))
             return new PropertyDescriptorCollection(
                 base.GetProperties().Cast<PropertyDescriptor>()
                     .Union(TypeDescriptor.GetAttributes(componentType)
@@ -27,6 +29,7 @@ namespace BoC.ComponentModel.TypeExtension
 
         public override PropertyDescriptorCollection GetProperties(Attribute[] attributes)
         {
+            using (Profiler.StartContext("ExtendedTypeDescriptor.GetProperties() for {0}", componentType))
             return new PropertyDescriptorCollection(
                 base.GetProperties(attributes).Cast<PropertyDescriptor>()
                     .Union(TypeDescriptor.GetAttributes(componentType)

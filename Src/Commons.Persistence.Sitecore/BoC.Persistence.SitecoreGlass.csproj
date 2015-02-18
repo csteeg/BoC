@@ -127,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextDatabaseProvider.cs" />
+    <Compile Include="DefaultSetupTasks\EnableProfiling.cs" />
     <Compile Include="DefaultSetupTasks\RegisterConfigLoader.cs" />
     <Compile Include="GlassConfig\AppDomainHelperConfigLoader.cs" />
     <Compile Include="DefaultSetupTasks\RegisterValueProvider.cs" />
@@ -137,10 +138,12 @@
     <Compile Include="DefaultSetupTasks\AutoSitecoreRepositoryGenerator.cs" />
     <Compile Include="IDatabaseProvider.cs" />
     <Compile Include="IIndexNameProvider.cs" />
+    <Compile Include="DefaultSetupTasks\RegisterPerformanceProfilers.cs" />
     <Compile Include="Initialize\InitBoc.cs" />
     <Compile Include="DefaultSetupTasks\InitGlass.cs" />
     <Compile Include="ISitecoreServiceProvider.cs" />
     <Compile Include="Mvc\SitecoreValueProvider.cs" />
+    <Compile Include="Profiling\SitecorePerformanceProfiler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SitecoreRepository.cs" />
     <Compile Include="SitecoreServiceProvider.cs" />

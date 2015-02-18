@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Transactions;
-using BoC.InversionOfControl;
+﻿using BoC.InversionOfControl;
 
 namespace BoC.UnitOfWork
 {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using BoC.Helpers;
+using BoC.Profiling;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 
@@ -44,27 +45,32 @@ namespace BoC.InversionOfControl.Unity
 
         public virtual void RegisterSingleton(Type from, Type to)
         {
-            _container.RegisterType(from, to, new ContainerControlledLifetimeManager());
+            using (Profiler.StartContext("UnityDependencyResolver.RegisterSingleton({0},{1})", from, to))
+                _container.RegisterType(from, to, new ContainerControlledLifetimeManager());
         }
 
         public void RegisterType<TFrom, TTo>(LifetimeScope scope = LifetimeScope.Transient) where TTo : TFrom
         {
-            _container.RegisterType<TFrom, TTo>(GetLifetimeManager(scope));
+            using (Profiler.StartContext("UnityDependencyResolver.RegisterSingleton<{0},{1}>({2})", typeof(TFrom), typeof(TTo), scope))
+                _container.RegisterType<TFrom, TTo>(GetLifetimeManager(scope));
         }
 
         public void RegisterFactory<TFrom>(Func<TFrom> factory)
         {
-            _container.RegisterType<TFrom>(new InjectionFactory(c => factory()));
+            using (Profiler.StartContext("UnityDependencyResolver.RegisterFactory<{0}>()", typeof(TFrom)))
+                _container.RegisterType<TFrom>(new InjectionFactory(c => factory()));
         }
 
         public IDependencyResolver CreateChildResolver()
         {
-            return new UnityDependencyResolver(_container.CreateChildContainer());
+            using (Profiler.StartContext("UnityDependencyResolver.CreateChildResolver()"))
+                return new UnityDependencyResolver(_container.CreateChildContainer());
         }
 
         public void RegisterFactory(Type from, Func<object> factory)
         {
-            _container.RegisterType(from, new InjectionFactory(c => factory()));
+            using (Profiler.StartContext("UnityDependencyResolver.RegisterFactory({0})", from))
+                _container.RegisterType(from, new InjectionFactory(c => factory()));
         }
 
         public virtual void RegisterType(Type from, Type to, LifetimeScope scope = LifetimeScope.Transient)
@@ -72,39 +78,46 @@ namespace BoC.InversionOfControl.Unity
             Check.Argument.IsNotNull(from, "from");
             Check.Argument.IsNotNull(to, "to");
 
-            _container.RegisterType(from, to, GetLifetimeManager(scope));
+            using (Profiler.StartContext("UnityDependencyResolver.RegisterType({0},{1},{2})", from, to,scope))
+                _container.RegisterType(from, to, GetLifetimeManager(scope));
         }
         
         public object Resolve(Type type)
         {
             Check.Argument.IsNotNull(type, "type");
-            if (_container.Configure<TypeTrackingExtension>().CanResolve(type))
+            using (Profiler.StartContext("UnityDependencyResolver.Resolve({0})", type))
             {
-                return _container.Resolve(type);
-            }
-            else
-            {
-                return null;
+                if (_container.Configure<TypeTrackingExtension>().CanResolve(type))
+                {
+                    return _container.Resolve(type);
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
         
         public object Resolve(Type type, string name)
         {
             Check.Argument.IsNotNull(type, "type");
-            if (Container.Configure<TypeTrackingExtension>().CanResolve(type, name))
+            using (Profiler.StartContext("UnityDependencyResolver.Resolve({0},{1})", type, name))
             {
-                var result = _container.Resolve(type, name);
-                if (typeof(IEnumerable).IsAssignableFrom(type) && 
-                    ((result == null) || !((IEnumerable)result).Cast<Object>().Any()))
+                if (Container.Configure<TypeTrackingExtension>().CanResolve(type, name))
                 {
-                    result = this.ResolveAll(type);
-                }
+                    var result = _container.Resolve(type, name);
+                    if (typeof (IEnumerable).IsAssignableFrom(type) &&
+                        ((result == null) || !((IEnumerable) result).Cast<Object>().Any()))
+                    {
+                        result = this.ResolveAll(type);
+                    }
 
-                return result;
-            }
-            else
-            {
-                return null;
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -127,7 +140,8 @@ namespace BoC.InversionOfControl.Unity
             if (!CanResolve(t))
                 return Enumerable.Empty<object>();
 
-            return _container.ResolveAll(t);
+            using (Profiler.StartContext("UnityDependencyResolver.ResolveAll({0})", t))
+                return _container.ResolveAll(t);
         }
 
         public IEnumerable<T> ResolveAll<T>()
@@ -135,7 +149,8 @@ namespace BoC.InversionOfControl.Unity
             if (!CanResolve(typeof(T)))
                 return Enumerable.Empty<T>();
 
-            return _container.ResolveAll<T>();
+            using (Profiler.StartContext("UnityDependencyResolver.ResolveAll<{0}>()", typeof(T)))
+                return _container.ResolveAll<T>();
         }
 
         public bool IsRegistered<T>()
@@ -145,7 +160,8 @@ namespace BoC.InversionOfControl.Unity
 
         public bool IsRegistered(Type type)
         {
-            return _container.Configure<TypeTrackingExtension>().IsRegistered(type);
+            using (Profiler.StartContext("UnityDependencyResolver.IsRegistered({0})", type))
+                return _container.Configure<TypeTrackingExtension>().IsRegistered(type);
         }
 
         /// <summary>
@@ -168,9 +184,12 @@ namespace BoC.InversionOfControl.Unity
         /// </returns>
         public bool CanResolve(Type type)
         {
-            if (isResolvableClass(type))
-                return true;
-            return IsRegistered(type);
+            using (Profiler.StartContext("UnityDependencyResolver.CanResolve({0})", type))
+            {
+                if (isResolvableClass(type))
+                    return true;
+                return IsRegistered(type);
+            }
         }
 
         private bool isResolvableClass(Type type)

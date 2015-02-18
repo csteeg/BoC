@@ -149,6 +149,9 @@
     <Compile Include="Logging\LogContext.cs" />
     <Compile Include="Persistence\Exceptions.cs" />
     <Compile Include="Persistence\RepositoryGenerator.cs" />
+    <Compile Include="Profiling\DefaultSetupTasks\RegisterProfiler.cs" />
+    <Compile Include="Profiling\IPerformanceProfiler.cs" />
+    <Compile Include="Profiling\Profiler.cs" />
     <Compile Include="ServiceModel\ServiceErrorLoggerBehavior.cs" />
     <Compile Include="ServiceModel\IoCInstanceProvider.cs" />
     <Compile Include="ServiceModel\IoCServiceBehavior.cs" />

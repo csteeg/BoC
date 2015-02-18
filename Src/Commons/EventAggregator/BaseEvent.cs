@@ -2,13 +2,26 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using BoC.Profiling;
 
 namespace BoC.EventAggregator
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class BaseEvent
     {
+        /// <summary>
+        /// The _subscriptions
+        /// </summary>
         private readonly List<IEventSubscription> _subscriptions = new List<IEventSubscription>();
 
+        /// <summary>
+        /// Gets the subscriptions.
+        /// </summary>
+        /// <value>
+        /// The subscriptions.
+        /// </value>
         protected ICollection<IEventSubscription> Subscriptions
         {
             [DebuggerStepThrough]
@@ -18,6 +31,11 @@ namespace BoC.EventAggregator
             }
         }
 
+        /// <summary>
+        /// Subscribes the specified event subscription.
+        /// </summary>
+        /// <param name="eventSubscription">The event subscription.</param>
+        /// <returns></returns>
         protected virtual SubscriptionToken Subscribe(IEventSubscription eventSubscription)
         {
             eventSubscription.SubscriptionToken = new SubscriptionToken();
@@ -30,39 +48,67 @@ namespace BoC.EventAggregator
             return eventSubscription.SubscriptionToken;
         }
 
+        /// <summary>
+        /// Publishes the specified arguments.
+        /// </summary>
+        /// <param name="arguments">The arguments.</param>
         public virtual void Publish(params object[] arguments)
         {
-            List<Action<object[]>> executionStrategies = PruneAndReturnStrategies();
-
-            foreach (var executionStrategy in executionStrategies)
+            using (Profiler.StartContext("{0}.Publish()", this.GetType()))
             {
-                executionStrategy(arguments);
-            }
-        }
+                List<Action<object[]>> executionStrategies = PruneAndReturnStrategies();
 
-        public virtual void Unsubscribe(SubscriptionToken token)
-        {
-            lock (_subscriptions)
-            {
-                IEventSubscription subscription = _subscriptions.FirstOrDefault(evt => evt.SubscriptionToken == token);
-
-                if (subscription != null)
+                foreach (var executionStrategy in executionStrategies)
                 {
-                    _subscriptions.Remove(subscription);
+                    executionStrategy(arguments);
                 }
             }
         }
 
-        public virtual bool Contains(SubscriptionToken token)
+        /// <summary>
+        /// Unsubscribes the specified token.
+        /// </summary>
+        /// <param name="token">The token.</param>
+        public virtual void Unsubscribe(SubscriptionToken token)
         {
-            lock (_subscriptions)
+            using (Profiler.StartContext("{0}.Unsubscribe()", this.GetType()))
             {
-                IEventSubscription subscription = _subscriptions.FirstOrDefault(evt => evt.SubscriptionToken == token);
+                lock (_subscriptions)
+                {
+                    IEventSubscription subscription =
+                        _subscriptions.FirstOrDefault(evt => evt.SubscriptionToken == token);
 
-                return (subscription != null);
+                    if (subscription != null)
+                    {
+                        _subscriptions.Remove(subscription);
+                    }
+                }
             }
         }
 
+        /// <summary>
+        /// Determines whether [contains] [the specified token].
+        /// </summary>
+        /// <param name="token">The token.</param>
+        /// <returns></returns>
+        public virtual bool Contains(SubscriptionToken token)
+        {
+            using (Profiler.StartContext("{0}.Contains()", this.GetType()))
+            {
+                lock (_subscriptions)
+                {
+                    IEventSubscription subscription =
+                        _subscriptions.FirstOrDefault(evt => evt.SubscriptionToken == token);
+
+                    return (subscription != null);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Prunes the and return strategies.
+        /// </summary>
+        /// <returns></returns>
         private List<Action<object[]>> PruneAndReturnStrategies()
         {
             List<Action<object[]>> returnList = new List<Action<object[]>>();

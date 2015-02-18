@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using BoC.Logging;
+using BoC.Profiling;
 using Glass.Mapper.Configuration;
 using Glass.Mapper.Sc.Configuration;
 using Lucene.Net.Search;
@@ -71,110 +72,124 @@ namespace BoC.Persistence.SitecoreGlass
         {
             if (model == null)
                 return null;
-
-            if (ParentProperty != null)
+            using (Profiler.StartContext("SitecoreRepository.GetParent for {0}", model.Id))
             {
-                return ParentProperty.PropertyInfo.GetValue(model, null) as IBaseEntity<Guid>;
-            }
-
-            if (model.Id != default(Guid))
-            {
-                var item = _dbProvider.GetDatabase().GetItem(new ID(model.Id));
-                if (item != null && item.Parent != null)
+                if (ParentProperty != null)
                 {
-                    var result = ConvertItem<IBaseEntity<Guid>>(item.Parent);
-                    if (result != null)
-                        return result;
+                    return ParentProperty.PropertyInfo.GetValue(model, null) as IBaseEntity<Guid>;
                 }
-            }
-            if (PathProperty != null)
-            {
-                var path = (PathProperty.PropertyInfo.GetValue(model, null) + "").TrimEnd('/');
-                path = path.Substring(0, path.LastIndexOf('/')) + "/";
-                if (path != "/")
+
+                if (model.Id != default(Guid))
                 {
-                    var parent = GetAndConvertItem<IBaseEntity<Guid>>(path, GetLanguage(_dbProvider));
-                    if (parent != null)
-                        return parent;
+                    var item = _dbProvider.GetDatabase().GetItem(new ID(model.Id));
+                    if (item != null && item.Parent != null)
+                    {
+                        var result = ConvertItem<IBaseEntity<Guid>>(item.Parent);
+                        if (result != null)
+                            return result;
+                    }
                 }
+                if (PathProperty != null)
+                {
+                    var path = (PathProperty.PropertyInfo.GetValue(model, null) + "").TrimEnd('/');
+                    path = path.Substring(0, path.LastIndexOf('/')) + "/";
+                    if (path != "/")
+                    {
+                        var parent = GetAndConvertItem<IBaseEntity<Guid>>(path, GetLanguage(_dbProvider));
+                        if (parent != null)
+                            return parent;
+                    }
+                }
+                return null;
             }
-            return null;
         }
 
         private string GetSitecoreName(IBaseEntity<Guid> model)
         {
             if (model == null)
                 return null;
-            if (NameProperty != null)
-                return NameProperty.PropertyInfo.GetValue(model, null) as string;
-            if (model.Id != default(Guid))
+            using (Profiler.StartContext("SitecoreRepository.GetSitecoreName for {0}", model.Id))
             {
-                var item = _dbProvider.GetDatabase().GetItem(new ID(model.Id));
-                return item == null ? null : item.Name;
+                if (NameProperty != null)
+                    return NameProperty.PropertyInfo.GetValue(model, null) as string;
+                if (model.Id != default(Guid))
+                {
+                    var item = _dbProvider.GetDatabase().GetItem(new ID(model.Id));
+                    return item == null ? null : item.Name;
+                }
+                return null;
             }
-            return null;
         }
 
         private string GetPath(IBaseEntity<Guid> model)
         {
             if (model == null)
                 return null;
-            if (PathProperty != null)
-                return PathProperty.PropertyInfo.GetValue(model, null) + "";
-            if (model.Id != default(Guid))
+            using (Profiler.StartContext("SitecoreRepository.GetPath for {0}", model.Id))
             {
-                var item = _dbProvider.GetDatabase().GetItem(new ID(model.Id));
-                return item == null ? null : item.Paths.FullPath;
+                if (PathProperty != null)
+                    return PathProperty.PropertyInfo.GetValue(model, null) + "";
+                if (model.Id != default(Guid))
+                {
+                    var item = _dbProvider.GetDatabase().GetItem(new ID(model.Id));
+                    return item == null ? null : item.Paths.FullPath;
+                }
+                return null;
             }
-            return null;
         }
 
         public virtual T SaveOrUpdate(T model)
         {
-            var language = GetLanguage(_dbProvider);
-            var sitecoreService = _sitecoreServiceProvider.GetSitecoreService();
-            using (new LanguageSwitcher(language))
+            if (model == null)
+                return null;
+            using (Profiler.StartContext("SitecoreRepository.SaveOrUpdate for {0}", model.Id))
             {
-                var parent = GetParent(model);
-
-                _logger.Debug(String.Format("Saving {0} (id: {1}, language: {2}, displayname: {3}", typeof(T), model.Id, language, model));
-                if (model.Id == Guid.Empty)
+                var language = GetLanguage(_dbProvider);
+                var sitecoreService = _sitecoreServiceProvider.GetSitecoreService();
+                using (new LanguageSwitcher(language))
                 {
-                    //try to find an existing item based on path: sitecore creates two items with the same name otherwise
-                    var path = GetPath(model);
-                    string parentPath;
-                    string itemName;
-                    if (String.IsNullOrEmpty(path) && 
-                        parent != null &&
-                        !String.IsNullOrEmpty(itemName = GetSitecoreName(model)) && 
-                        !String.IsNullOrEmpty(parentPath = GetPath(parent)))
+                    var parent = GetParent(model);
+
+                    _logger.Debug(String.Format("Saving {0} (id: {1}, language: {2}, displayname: {3}", typeof (T),
+                        model.Id, language, model));
+                    if (model.Id == Guid.Empty)
                     {
-                        path = parentPath + "/" + ItemUtil.ProposeValidItemName(itemName);
-                    }
-                    var saved = false;
-                    if (!String.IsNullOrEmpty(path))
-                    {
-                        var sitecoreItem = _dbProvider.GetDatabase().GetItem(path);
-                        if (sitecoreItem != null)
+                        //try to find an existing item based on path: sitecore creates two items with the same name otherwise
+                        var path = GetPath(model);
+                        string parentPath;
+                        string itemName;
+                        if (String.IsNullOrEmpty(path) &&
+                            parent != null &&
+                            !String.IsNullOrEmpty(itemName = GetSitecoreName(model)) &&
+                            !String.IsNullOrEmpty(parentPath = GetPath(parent)))
                         {
-                            model.Id = sitecoreItem.ID.ToGuid();
-                            if (PathProperty != null)
-                                PathProperty.PropertyInfo.SetValue(model, sitecoreItem.Paths.Path, null);
-                            sitecoreService.Save(model);
-                            saved = true;
+                            path = parentPath + "/" + ItemUtil.ProposeValidItemName(itemName);
+                        }
+                        var saved = false;
+                        if (!String.IsNullOrEmpty(path))
+                        {
+                            var sitecoreItem = _dbProvider.GetDatabase().GetItem(path);
+                            if (sitecoreItem != null)
+                            {
+                                model.Id = sitecoreItem.ID.ToGuid();
+                                if (PathProperty != null)
+                                    PathProperty.PropertyInfo.SetValue(model, sitecoreItem.Paths.Path, null);
+                                sitecoreService.Save(model);
+                                saved = true;
+                            }
+                        }
+                        if (!saved)
+                        {
+                            model = sitecoreService.Create(parent, model);
                         }
                     }
-                    if (!saved)
+                    else
                     {
-                        model = sitecoreService.Create(parent, model);
+                        sitecoreService.Save(model);
                     }
-                }
-                else
-                {
-                    sitecoreService.Save(model);
-                }
 
-                return model;
+                    return model;
+                }
             }
         }
 
@@ -205,91 +220,68 @@ namespace BoC.Persistence.SitecoreGlass
             if (itemid == ID.Null && ID.IsID(id + ""))
                 itemid = new ID(id + "");
 
-            if (language == null)
+            using (Profiler.StartContext("SitecoreRepository.GetAndConvertItem for {0} ({1})", itemid, language))
             {
-                language = GetLanguage(_dbProvider);
-            }
-            
-            using (new LanguageSwitcher(language))
-            {
-                var sitecoreItem = itemid == ID.Null ?
-                        _dbProvider.GetDatabase().GetItem(id + "", language) :
-                        _dbProvider.GetDatabase().GetItem(itemid, language);
-                return ConvertItem<TargetClass>(sitecoreItem);
-            }
+                if (language == null)
+                {
+                    language = GetLanguage(_dbProvider);
+                }
 
+                using (new LanguageSwitcher(language))
+                {
+                    var sitecoreItem = itemid == ID.Null
+                        ? _dbProvider.GetDatabase().GetItem(id + "", language)
+                        : _dbProvider.GetDatabase().GetItem(itemid, language);
+                    return ConvertItem<TargetClass>(sitecoreItem);
+                }
+            }
         }
 
         private TargetClass ConvertItem<TargetClass>(Item sitecoreItem) where TargetClass : class
         {
-            return sitecoreItem != null && sitecoreItem.Versions.Count > 0
-                       ? _sitecoreServiceProvider.GetSitecoreService().CreateType<TargetClass>(sitecoreItem, true, true)
-                       : null;
+            using (Profiler.StartContext("SitecoreRepository.ConvertItem for {0})", sitecoreItem != null ? sitecoreItem.ID : ID.Null))
+            {
+                return sitecoreItem != null && sitecoreItem.Versions.Count > 0
+                    ? _sitecoreServiceProvider.GetSitecoreService().CreateType<TargetClass>(sitecoreItem, true, true)
+                    : null;
+            }
         }
 
         public Language GetLanguage(IDatabaseProvider dbProvider)
         {
-            if (dbProvider.GetCulture() == null || dbProvider.GetCulture().Equals(CultureInfo.InvariantCulture))
+            using (Profiler.StartContext("SitecoreRepository.GetLanguage"))
             {
-                try
+                if (dbProvider.GetCulture() == null || dbProvider.GetCulture().Equals(CultureInfo.InvariantCulture))
                 {
-                    var a = global::Sitecore.Context.Language;
-                } // TODO: for unittests: find out why Context.Language is loaded correctly the second time
-                catch
-                {
+                    try
+                    {
+                        var a = global::Sitecore.Context.Language;
+                    } // TODO: for unittests: find out why Context.Language is loaded correctly the second time
+                    catch
+                    {
+                    }
+                    return global::Sitecore.Context.Language;
                 }
-                return global::Sitecore.Context.Language;
+                return LanguageManager.GetLanguage(dbProvider.GetCulture().Name);
             }
-            return LanguageManager.GetLanguage(dbProvider.GetCulture().Name);
         }
 
         public IEnumerable<T> GetItems(IEnumerable<ItemUri> itemUris)
         {
-            var sitecoreService = _sitecoreServiceProvider.GetSitecoreService();
-            foreach (var itemUri in itemUris)
+            if (itemUris == null)
+                yield break;
+            using (Profiler.StartContext("SitecoreRepository.GetItems for {0}", string.Join(", ", itemUris.Select(i => i.ToString()))))
             {
-                var item = sitecoreService.Database.GetItem(itemUri.ItemID, itemUri.Language, itemUri.Version);
-                if (item == null) yield return null;
-                yield return sitecoreService.CreateType<T>(item, true, true);
-            }
-
-        }
-        [Obsolete("THIS SHOULD BE MADE LUCENE-INDEPENDENT!")]
-        public IEnumerable<T> Query(Query query, out int totalResults, Guid rootItemId = default(Guid), int start = 0,
-                                    int count = int.MaxValue)
-        {
-            var sitecoreService = _sitecoreServiceProvider.GetSitecoreService();
-            var config = sitecoreService.GlassContext.GetTypeConfiguration < SitecoreTypeConfiguration>(typeof(T));
-            totalResults = 0;
-            if (config == null)
-                return null;
-            var searchContext = new FixedSearchContext()
+                var sitecoreService = _sitecoreServiceProvider.GetSitecoreService();
+                foreach (var itemUri in itemUris)
                 {
-                    TemplateID = config.TemplateId.ToGuid()
-                };
-
-            var boolQuery = new BooleanQuery();
-            if (query != null)
-                boolQuery.Add(query, Occur.MUST);
-            if (rootItemId == (default(Guid)) && rootItemId != global::Sitecore.ItemIDs.RootID.ToGuid())
-            {
-                var rootItem = sitecoreService.Database.GetItem(ID.Parse(rootItemId));
-                searchContext.Item = rootItem;
-            }
-
-            searchContext.ContentLanguage = GetLanguage(_dbProvider);
-            using (var context = new IndexSearchContext(_searchContextProvider.GetProviderSearchContext().Index as ILuceneIndex))
-            {
-                var searchHits = context.Search(boolQuery, searchContext);
-
-                totalResults = searchHits.Length;
-                //var resultCollection = searchHits.FetchResults(start, count);
-                var hits = (count == int.MaxValue) ? searchHits.Slice(start) : searchHits.Slice(start, count);
-                return GetItems(
-                    hits.Select(hit => hit.Document.GetField(BuiltinFields.Url))
-                        .Where(uriField => uriField != null && !string.IsNullOrEmpty(uriField.StringValue))
-                        .Select(uriField => ItemUri.Parse(uriField.StringValue))
-                        .ToList());
+                    var item = sitecoreService.Database.GetItem(itemUri.ItemID, itemUri.Language, itemUri.Version);
+                    if (item == null) yield return null;
+                    using (Profiler.StartContext("SitecoreRepository.GetItems -> createtype for {0}", item.ID))
+                    {
+                        yield return sitecoreService.CreateType<T>(item, true, true);
+                    }
+                }
             }
         }
 
@@ -302,8 +294,11 @@ namespace BoC.Persistence.SitecoreGlass
         {
             var language = GetLanguage(_dbProvider);
             _logger.Debug(String.Format("Deleting {0} (id: {1}, language: {2}, displayname: {3}", typeof (T), model.Id, language, model));
-            using (new LanguageSwitcher(language))
-                _sitecoreServiceProvider.GetSitecoreService().Delete(model);
+            using (Profiler.StartContext("SitecoreRepository.Delete for {0}",model.Id))
+            {
+                using (new LanguageSwitcher(language))
+                    _sitecoreServiceProvider.GetSitecoreService().Delete(model);
+            }
         }
 
         #region IRepository implementation
@@ -331,9 +326,12 @@ namespace BoC.Persistence.SitecoreGlass
 
         System.Linq.IQueryable<T> IRepository<T>.Query()
         {
-            var query = _searchContextProvider.GetProviderSearchContext()
-                .GetQueryable<T>(new CultureExecutionContext(GetLanguage(_dbProvider).CultureInfo));
-            return AddStandardQueries(query);
+            using (Profiler.StartContext("SitecoreRepository.Query()"))
+            {
+                var query = _searchContextProvider.GetProviderSearchContext()
+                    .GetQueryable<T>(new CultureExecutionContext(GetLanguage(_dbProvider).CultureInfo));
+                return AddStandardQueries(query);
+            }
         }
 
 
