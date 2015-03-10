@@ -41,8 +41,9 @@
     <Reference Include="businesslogic">
       <HintPath>..\..\packages\UmbracoCms.Core.7.0.4\lib\businesslogic.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Core">
-      <HintPath>..\..\packages\Castle.Core.3.2.0\lib\net45\Castle.Core.dll</HintPath>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="ClientDependency.Core">
       <HintPath>..\..\packages\UmbracoCms.Core.7.0.4\lib\ClientDependency.Core.dll</HintPath>
@@ -62,8 +63,9 @@
     <Reference Include="Examine">
       <HintPath>..\..\packages\UmbracoCms.Core.7.0.4\lib\Examine.dll</HintPath>
     </Reference>
-    <Reference Include="Glass.Mapper">
-      <HintPath>..\..\packages\Glass.Mapper.3.0.13.25\lib\net45\Glass.Mapper.dll</HintPath>
+    <Reference Include="Glass.Mapper, Version=3.0.14.27, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Glass.Mapper.3.0.14.27\lib\net45\Glass.Mapper.dll</HintPath>
     </Reference>
     <Reference Include="Glass.Mapper.Umb">
       <HintPath>..\..\packages\Glass.Mapper.Umb.3.0.6.9\lib\net45\Glass.Mapper.Umb.dll</HintPath>
