@@ -16,12 +16,12 @@
     <dependencies>
       <dependency id="BoC" version="2.3.0" />
       <dependency id="BoC.Logging.Sitecore" version="2.2.0" />
-      <dependency id="BoC.Glass.Mapper" version="3.5.1" />
-      <dependency id="BoC.Glass.Mapper.Sc" version="3.5.1" />
-      <dependency id="BoC.Glass.Mapper.Sc.Mvc-5" version="3.5.1" />
-      <dependency id="BoC.Glass.Mapper.Sc.CastleWindsor" version="3.5.1" />
-      <dependency id="BoC.Glass.Mapper.Sc.ContentSearch" version="3.5.1" />
-      <dependency id="BoC.Glass.Mapper.Sc.ContentSearch.LuceneProvider" version="3.5.1" />
+      <dependency id="BoC.Glass.Mapper" version="3.5.2" />
+      <dependency id="BoC.Glass.Mapper.Sc" version="3.5.2" />
+      <dependency id="BoC.Glass.Mapper.Sc.Mvc-5" version="3.5.2" />
+      <dependency id="BoC.Glass.Mapper.Sc.CastleWindsor" version="3.5.2" />
+      <dependency id="BoC.Glass.Mapper.Sc.ContentSearch" version="3.5.2" />
+      <dependency id="BoC.Glass.Mapper.Sc.ContentSearch.LuceneProvider" version="3.5.2" />
       <dependency id="Castle.Core" version="3.3.3" />
       <dependency id="Castle.Windsor" version="3.3.0" />
       <dependency id="Lucene.Net" version="3.0.3" />
