@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http.Controllers;
 using System.Web.Http.Dependencies;
 using System.Web.Mvc;
 using BoC.EventAggregator;
@@ -12,7 +13,7 @@ namespace BoC.Web.Mvc.IoC
 {
     public class BoCDependencyResolver: System.Web.Mvc.IDependencyResolver, System.Web.Http.Dependencies.IDependencyResolver
     {
-        private readonly IDependencyResolver _resolver;
+        protected readonly IDependencyResolver _resolver;
         private readonly IEventAggregator _eventAggregator;
         private static readonly object HttpContextKey = new object();
         private SubscriptionToken _subscription;
@@ -25,28 +26,28 @@ namespace BoC.Web.Mvc.IoC
             _subscription = eventAggregator.GetEvent<WebRequestEndEvent>().Subscribe(DisposeOfChildContainer);
         }
 
-        private BoCDependencyResolver(IDependencyResolver resolver)
+        protected BoCDependencyResolver(IDependencyResolver resolver)
         {
             _resolver = resolver;
             _isChildContainer = true;
         }
 
-        public object GetService(Type serviceType)
+        public virtual object GetService(Type serviceType)
         {
-            if (!_isChildContainer && typeof(IController).IsAssignableFrom(serviceType))
+            if (!_isChildContainer && (typeof(IController).IsAssignableFrom(serviceType) || typeof(IHttpController).IsAssignableFrom(serviceType)))
             {
                 return HttpContextContainer.GetService(serviceType);
             } 
             return _resolver.Resolve(serviceType);
         }
 
-        public IEnumerable<object> GetServices(Type serviceType)
+        public virtual IEnumerable<object> GetServices(Type serviceType)
         {
             var resolveAll = _resolver.ResolveAll(serviceType);
             return resolveAll != null ? resolveAll.Cast<object>() : Enumerable.Empty<object>();
         }
 
-        public IDependencyScope BeginScope()
+        public virtual IDependencyScope BeginScope()
         {
             return new BoCDependencyResolver(_resolver.CreateChildResolver());
         }

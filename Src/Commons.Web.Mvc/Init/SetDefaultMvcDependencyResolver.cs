@@ -11,17 +11,21 @@ namespace BoC.Web.Mvc.Init
 {
     public class SetDefaultMvcDependencyResolver : IBootstrapperTask
     {
-        private BoCDependencyResolver _boCDependencyResolver;
+        public static bool Disabled = false;
+        private readonly BoCDependencyResolver _dependencyResolver;
 
         public SetDefaultMvcDependencyResolver(IDependencyResolver dependencyResolver, IEventAggregator eventAggregator)
         {
-            _boCDependencyResolver = new BoCDependencyResolver(dependencyResolver, eventAggregator);
+            _dependencyResolver = new BoCDependencyResolver(dependencyResolver, eventAggregator);
         }
 
         public void Execute()
         {
-            DependencyResolver.SetResolver(_boCDependencyResolver);
-            GlobalConfiguration.Configuration.DependencyResolver = _boCDependencyResolver;
+            if (!Disabled)
+            {
+                DependencyResolver.SetResolver(_dependencyResolver);
+                GlobalConfiguration.Configuration.DependencyResolver = _dependencyResolver;
+            }
         }
     }
 }

@@ -15,6 +15,7 @@
     <tags>BoC,Persistence,Glass,Mapper,ORM,Repository,Sitecore</tags>
     <dependencies>
       <dependency id="BoC" version="2.3.0" />
+      <dependency id="BoC.Sitecore.Mvc" version="2.0.3" />
       <dependency id="BoC.Logging.Sitecore" version="2.2.0" />
       <dependency id="BoC.Glass.Mapper" version="3.5.2" />
       <dependency id="BoC.Glass.Mapper.Sc" version="3.5.2" />

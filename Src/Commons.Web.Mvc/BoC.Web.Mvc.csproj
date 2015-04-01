@@ -189,7 +189,6 @@
     <Compile Include="Init\SetDefaultMvcDependencyResolver.cs" />
     <Compile Include="Init\RegisterGlobalFilters.cs" />
     <Compile Include="IoC\BoCDependencyResolver.cs" />
-    <Compile Include="IoC\IoCHttpControllerActivator.cs" />
     <Compile Include="MetaData\Extensions\AttributeExtensions.cs" />
     <Compile Include="MetaData\Extensions\DisplayAttributeExtensions.cs" />
     <Compile Include="MetaData\ExtraModelMetadataProvider.cs" />
