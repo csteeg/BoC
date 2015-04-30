@@ -27,7 +27,7 @@ namespace BoC.InversionOfControl.Ninject
             _kernel = kernel;
         }
 
-        public T Resolve<T>()
+        public T Resolve<T>() where T : class
         {
             return _container.TryGet<T>();
         }
@@ -47,7 +47,7 @@ namespace BoC.InversionOfControl.Ninject
             return _container.TryGet<T>(name);
         }
 
-        public void RegisterType<TRegisteredAs, TResolvedTo>(LifetimeScope scope = LifetimeScope.Transient) where TResolvedTo : TRegisteredAs
+        public void RegisterType<TRegisteredAs, TResolvedTo>(LifetimeScope scope = LifetimeScope.Transient) where TResolvedTo : class, TRegisteredAs where TRegisteredAs : class
         {
             _kernel.Bind<TRegisteredAs>().To<TResolvedTo>().SetLifeStyle(scope);
         }
@@ -64,7 +64,7 @@ namespace BoC.InversionOfControl.Ninject
                     true);
         }
 
-        public bool IsRegistered<T>()
+        public bool IsRegistered<T>() where T : class
         {
             return IsRegistered(typeof (T));
         }
@@ -74,7 +74,7 @@ namespace BoC.InversionOfControl.Ninject
             _kernel.Bind(@from).ToMethod(c => factory());
         }
 
-        public void RegisterFactory<TFrom>(Func<TFrom> factory)
+        public void RegisterFactory<TFrom>(Func<TFrom> factory) where TFrom : class
         {
             _kernel.Bind<TFrom>().ToMethod(c => factory());
         }
@@ -89,7 +89,7 @@ namespace BoC.InversionOfControl.Ninject
             _kernel.Bind<TRegisteredAs>().To<TResolvedTo>().SetLifeStyle(scope).Named(name);
         }
 
-        public void RegisterInstance<TRegisteredAs>(TRegisteredAs instance)
+        public void RegisterInstance<TRegisteredAs>(TRegisteredAs instance) where TRegisteredAs : class
         {
             _kernel.Bind<TRegisteredAs>().ToMethod(x => instance);
         }
@@ -99,7 +99,7 @@ namespace BoC.InversionOfControl.Ninject
             _kernel.Bind<TRegisteredAs>().ToMethod(x => instance).Named(name);
         }
 
-        public void RegisterSingleton<TFrom, TTo>() where TTo : TFrom
+        public void RegisterSingleton<TFrom, TTo>() where TTo : class, TFrom where TFrom : class
         {
             _kernel.Bind<TFrom>().To<TTo>().InSingletonScope();
         }
@@ -109,7 +109,7 @@ namespace BoC.InversionOfControl.Ninject
             _kernel.Bind(@from).To(to).InSingletonScope();
         }
 
-        public IEnumerable<TResolvedTo> ResolveAll<TResolvedTo>()
+        public IEnumerable<TResolvedTo> ResolveAll<TResolvedTo>() where TResolvedTo : class
         {
             return _container.GetAll<TResolvedTo>();
         }

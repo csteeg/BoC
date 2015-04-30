@@ -11,10 +11,12 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <copyright>Copyright 2014</copyright>
-    <tags>BoC,InversionOfControl,Unity</tags>
+    <tags>BoC,InversionOfControl,SimpleInjector</tags>
     <dependencies>
       <dependency id="BoC" version="2.4.0" />
-      <dependency id="Unity" version="3.5.1404" />
+      <dependency id="SimpleInjector" version="2.7.3" />
+      <dependency id="SimpleInjector.Integration.Web" version="2.7.3" />
+      <dependency id="SimpleInjector.Extensions.ExecutionContextScoping" version="2.7.3" />
     </dependencies>
   </metadata>
 </package>

@@ -14,7 +14,7 @@
     <copyright>Copyright 2014</copyright>
     <tags>BoC,Logging,Sitecore</tags>
     <dependencies>
-      <dependency id="BoC" version="2.2.0" />
+      <dependency id="BoC" version="2.4.0" />
     </dependencies>
   </metadata>
 </package>

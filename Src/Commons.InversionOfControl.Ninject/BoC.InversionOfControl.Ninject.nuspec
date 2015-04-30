@@ -13,7 +13,7 @@
     <copyright>Copyright 2014</copyright>
     <tags>BoC,InversionOfControl,Ninject</tags>
     <dependencies>
-      <dependency id="BoC" version="2.2.2" />
+      <dependency id="BoC" version="2.4.0" />
       <dependency id="Ninject" version="3.2.2.0" />
     </dependencies>
   </metadata>

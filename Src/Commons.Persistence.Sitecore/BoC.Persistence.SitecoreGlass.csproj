@@ -43,17 +43,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Glass.Mapper, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Glass.Mapper, Version=3.5.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\BoC.Glass.Mapper.3.5.0\lib\net45\Glass.Mapper.dll</HintPath>
+      <HintPath>..\..\packages\BoC.Glass.Mapper.3.5.3\lib\net45\Glass.Mapper.dll</HintPath>
     </Reference>
-    <Reference Include="Glass.Mapper.Sc, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Glass.Mapper.Sc, Version=3.5.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\BoC.Glass.Mapper.Sc.3.5.0\lib\net45\Glass.Mapper.Sc.dll</HintPath>
+      <HintPath>..\..\packages\BoC.Glass.Mapper.Sc.3.5.3\lib\net45\Glass.Mapper.Sc.dll</HintPath>
     </Reference>
     <Reference Include="Glass.Mapper.Sc.CastleWindsor, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\BoC.Glass.Mapper.Sc.CastleWindsor.3.5.0\lib\net45\Glass.Mapper.Sc.CastleWindsor.dll</HintPath>
+    </Reference>
+    <Reference Include="Glass.Mapper.Sc.ContentSearch, Version=3.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\BoC.Glass.Mapper.Sc.ContentSearch.3.5.3\lib\net45\Glass.Mapper.Sc.ContentSearch.dll</HintPath>
     </Reference>
     <Reference Include="Glass.Mapper.Sc.ContentSearch.LuceneProvider, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -144,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="App_Config\Include\Glass.Mapper.Sc.CodeFirst.config.exclude" />
     <None Include="App_Config\Include\Glass\Glass.Mapper.Sc.CodeFirst.config.example" />
     <None Include="App_Config\Include\Glass\Glass.Mapper.Sc.Mvc.config" />
     <None Include="BoC.Persistence.SitecoreGlass.nuspec" />

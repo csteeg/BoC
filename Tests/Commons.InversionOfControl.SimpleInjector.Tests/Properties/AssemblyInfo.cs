@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BoC.InversionOfControl.Ninject")]
-[assembly: AssemblyDescription("Assign Ninject to the BoC IOC abstraction layer")]
+[assembly: AssemblyTitle("Commons.InverionOfControl.Unity.Tests")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BoC.InverionOfControl.Ninject")]
-[assembly: AssemblyCopyright("Copyright ©  2009")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("Commons.InverionOfControl.Unity.Tests")]
+[assembly: AssemblyCopyright("Copyright © Microsoft 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("83d72e94-1e3f-4472-910d-5f83cd5fa992")]
+[assembly: Guid("e1cfde05-b9a1-472b-a7cf-91017821b3dd")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,7 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.4.1.0")]
-[assembly: AssemblyFileVersion("2.4.1.0")]
-
-[assembly: AssemblyKeyFileAttribute("../../BoC.snk")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

@@ -32,7 +32,7 @@ namespace BoC.InversionOfControl.DryIoC
 
         }
 
-        public T Resolve<T>()
+        public T Resolve<T>() where T : class
         {
             
             return _container.Resolve<T>(IfUnresolved.ReturnDefault);
@@ -53,7 +53,7 @@ namespace BoC.InversionOfControl.DryIoC
             return _container.Resolve<T>(name, IfUnresolved.ReturnDefault);
         }
 
-        public void RegisterType<TRegisteredAs, TResolvedTo>(LifetimeScope scope = LifetimeScope.Transient) where TResolvedTo : TRegisteredAs
+        public void RegisterType<TRegisteredAs, TResolvedTo>(LifetimeScope scope = LifetimeScope.Transient) where TResolvedTo : class, TRegisteredAs where TRegisteredAs : class
         {
             _container.Register<TRegisteredAs, TResolvedTo>(GetReuse(scope));
         }
@@ -69,7 +69,7 @@ namespace BoC.InversionOfControl.DryIoC
                 _container.IsRegistered(t);
         }
 
-        public bool IsRegistered<T>()
+        public bool IsRegistered<T>() where T : class
         {
             return IsRegistered(typeof (T));
         }
@@ -80,7 +80,7 @@ namespace BoC.InversionOfControl.DryIoC
             _container.RegisterDelegate(@from, resolver => lambda, named: name);
         }
 
-        public void RegisterFactory<TFrom>(Func<TFrom> factory)
+        public void RegisterFactory<TFrom>(Func<TFrom> factory) where TFrom : class
         {
             string name = IsRegistered<TFrom>() ? Guid.NewGuid().ToString() : null;
             _container.RegisterDelegate<TFrom>(r => factory(), named: name);
@@ -96,7 +96,7 @@ namespace BoC.InversionOfControl.DryIoC
             _container.Register<TRegisteredAs, TResolvedTo>(named: name);
         }
 
-        public void RegisterInstance<TRegisteredAs>(TRegisteredAs instance)
+        public void RegisterInstance<TRegisteredAs>(TRegisteredAs instance) where TRegisteredAs : class
         {
             string name = IsRegistered<TRegisteredAs>() ? Guid.NewGuid().ToString() : null;
             _container.RegisterInstance<TRegisteredAs>(instance, named: name);
@@ -107,7 +107,7 @@ namespace BoC.InversionOfControl.DryIoC
             _container.RegisterInstance<TRegisteredAs>(instance, named: name);
         }
 
-        public void RegisterSingleton<TFrom, TTo>() where TTo : TFrom
+        public void RegisterSingleton<TFrom, TTo>() where TTo : class, TFrom where TFrom : class
         {
             string name = IsRegistered<TFrom>() ? Guid.NewGuid().ToString() : null;
             _container.Register<TFrom, TTo>(Reuse.Singleton, named: name);
@@ -119,7 +119,7 @@ namespace BoC.InversionOfControl.DryIoC
             _container.Register(@from, to, Reuse.Singleton, named: name);
         }
 
-        public IEnumerable<TResolvedTo> ResolveAll<TResolvedTo>()
+        public IEnumerable<TResolvedTo> ResolveAll<TResolvedTo>() where TResolvedTo : class
         {
             return _container.Resolve<IEnumerable<TResolvedTo>>(IfUnresolved.ReturnDefault) as IEnumerable<TResolvedTo>;
         }

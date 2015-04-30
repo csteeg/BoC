@@ -31,14 +31,14 @@ namespace BoC.InversionOfControl.Unity
 
         public IUnityContainer Container { get { return _container; } }
 
-        public void RegisterInstance<T>(T instance)
+        public void RegisterInstance<T>(T instance) where T : class
         {
             Check.Argument.IsNotNull(instance, "instance");
 
             _container.RegisterInstance(instance);
         }
 
-        public void RegisterSingleton<TFrom, TTo>() where TTo : TFrom
+        public void RegisterSingleton<TFrom, TTo>() where TTo : class, TFrom where TFrom : class
         {
             RegisterSingleton(typeof(TFrom), typeof(TTo));
         }
@@ -49,13 +49,13 @@ namespace BoC.InversionOfControl.Unity
                 _container.RegisterType(from, to, new ContainerControlledLifetimeManager());
         }
 
-        public void RegisterType<TFrom, TTo>(LifetimeScope scope = LifetimeScope.Transient) where TTo : TFrom
+        public void RegisterType<TFrom, TTo>(LifetimeScope scope = LifetimeScope.Transient) where TTo : class, TFrom where TFrom : class
         {
             using (Profiler.StartContext("UnityDependencyResolver.RegisterSingleton<{0},{1}>({2})", typeof(TFrom), typeof(TTo), scope))
                 _container.RegisterType<TFrom, TTo>(GetLifetimeManager(scope));
         }
 
-        public void RegisterFactory<TFrom>(Func<TFrom> factory)
+        public void RegisterFactory<TFrom>(Func<TFrom> factory) where TFrom : class
         {
             using (Profiler.StartContext("UnityDependencyResolver.RegisterFactory<{0}>()", typeof(TFrom)))
                 _container.RegisterType<TFrom>(new InjectionFactory(c => factory()));
@@ -122,7 +122,7 @@ namespace BoC.InversionOfControl.Unity
         }
 
         
-        public T Resolve<T>()
+        public T Resolve<T>() where T : class
         {
             return (T) Resolve(typeof(T));
         }
@@ -144,7 +144,7 @@ namespace BoC.InversionOfControl.Unity
                 return _container.ResolveAll(t);
         }
 
-        public IEnumerable<T> ResolveAll<T>()
+        public IEnumerable<T> ResolveAll<T>() where T : class
         {
             if (!CanResolve(typeof(T)))
                 return Enumerable.Empty<T>();
@@ -153,7 +153,7 @@ namespace BoC.InversionOfControl.Unity
                 return _container.ResolveAll<T>();
         }
 
-        public bool IsRegistered<T>()
+        public bool IsRegistered<T>() where T : class
         {
             return IsRegistered(typeof (T));
         }
