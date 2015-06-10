@@ -8,9 +8,11 @@ namespace BoC.InversionOfControl
     {
         private static readonly object resolverLock = new object();
 
-        public static void InitializeWith(IDependencyResolver resolver)
+        public static void InitializeWith(IDependencyResolver resolver, params IAppDomainHelper[] appDomainHelpers)
         {
             Check.Argument.IsNotNull(resolver, "resolver");
+            if (IoC.Resolver != null)
+                throw new ApplicationException("IoC already initialized");
             lock (resolverLock)
             {
                 if (IoC.Resolver != null)
@@ -18,7 +20,7 @@ namespace BoC.InversionOfControl
                 
                 IoC.Resolver = resolver;
                 resolver.RegisterInstance<IDependencyResolver>(resolver);
-                RunContainerInitializers(resolver);
+                RunContainerInitializers(resolver, appDomainHelpers);
             }
         }
 
@@ -48,37 +50,62 @@ namespace BoC.InversionOfControl
             }
         }
 
-        private static void RunContainerInitializers(IDependencyResolver dependencyResolver)
+        private static void RunContainerInitializers(IDependencyResolver dependencyResolver, IAppDomainHelper[] appdomainHelpers)
         {
-            var appdomainHelpers = dependencyResolver.ResolveAll<IAppDomainHelper>();
             if (appdomainHelpers == null || appdomainHelpers.Count() == 0)
             {
-                appdomainHelpers = new[] {AppDomainHelper.CreateDefault()};
+                var helper = AppDomainHelper.CreateDefault();
+                appdomainHelpers = new[] {helper};
             }
 
-            var initTasks =
+            if (!dependencyResolver.IsRegistered(typeof (IAppDomainHelper)))
+            {
+                foreach (var helper in appdomainHelpers)
+                {
+                    dependencyResolver.RegisterInstance<IAppDomainHelper>(helper);
+                }
+            }
+
+            var allTasks =
                 appdomainHelpers.SelectMany(helper => helper.GetTypes(
                     t => t.IsClass && !t.IsAbstract && typeof (IContainerInitializer).IsAssignableFrom(t)));
-            //register them:
-            foreach (var taskType in initTasks)
-            {
-                dependencyResolver.RegisterType(typeof(IContainerInitializer), taskType);
-            }
             //run them:
-            var allTasks = dependencyResolver.ResolveAll<IContainerInitializer>();
             if (allTasks != null)
             {
                 //first user's tasks:
-                foreach (var task in allTasks.Where(t => !t.GetType().Namespace.StartsWith("BoC.")))
+                foreach (var type in allTasks.Where(t => !t.Namespace.StartsWith("BoC.")))
                 {
+                    var task = CreateTask(dependencyResolver, type, appdomainHelpers);
                     task.Execute();
                 }
                 //now ours:
-                foreach (var task in allTasks.Where(t => t.GetType().Namespace.StartsWith("BoC.")))
+                foreach (var type in allTasks.Where(t => t.Namespace.StartsWith("BoC.")))
                 {
+                    var task = CreateTask(dependencyResolver, type, appdomainHelpers);
                     task.Execute();
                 }
             }
+        }
+
+        private static IContainerInitializer CreateTask(IDependencyResolver dependencyResolver, Type type, IAppDomainHelper[] appDomainHelpers)
+        {
+            var constructor = type.GetConstructors().First();
+            var parameters = constructor.GetParameters();
+            if (!parameters.Any())
+                return  Activator.CreateInstance(type) as IContainerInitializer;
+            var parameterValues = new object[parameters.Length];
+            for (var i=0;i<parameters.Length;i++)
+            {
+                if (typeof (IDependencyResolver).IsAssignableFrom(parameters[i].ParameterType))
+                    parameterValues[i] = dependencyResolver;
+                else if (parameters[i].ParameterType == typeof (IAppDomainHelper[]))
+                    parameterValues[i] = appDomainHelpers;
+                else
+                {
+                    parameterValues[i] = Activator.CreateInstance(parameters[i].ParameterType);
+                }
+            }
+            return constructor.Invoke(parameterValues) as IContainerInitializer;
         }
     }
 }

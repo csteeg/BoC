@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("BoC.Security.NHibernate")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Hewlett-Packard Company")]
+[assembly: AssemblyCompany("Chris van de Steeg")]
 [assembly: AssemblyProduct("BoC.Security.NHibernate")]
-[assembly: AssemblyCopyright("Copyright © Hewlett-Packard Company 2009")]
+[assembly: AssemblyCopyright("Chris van de Steeg")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

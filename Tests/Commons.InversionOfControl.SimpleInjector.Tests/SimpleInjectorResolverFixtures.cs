@@ -41,6 +41,47 @@ namespace Commons.InverionOfControl.SimpleInjector.Tests
         }
 
         [TestMethod]
+        public void Array_Injector_Should_Inject_All_Registed_Types_As_Enumerable()
+        {
+            var resolver = new SimpleInjectorDependencyResolver();
+            resolver.RegisterType<IFace1, Class1>();
+            resolver.RegisterType<IFace1, Class2>();
+            resolver.RegisterInstance<IFace1>(new Class3());
+
+            var resolve = resolver.Resolve<Class5>();
+            Assert.AreEqual(3, resolve.Ifaces.Count());
+            Assert.IsTrue(resolve.Ifaces.OfType<Class1>().Any());
+            Assert.IsTrue(resolve.Ifaces.OfType<Class2>().Any());
+            Assert.IsTrue(resolve.Ifaces.OfType<Class3>().Any());
+        }
+
+        [TestMethod]
+        public void Array_Injector_Should_Inject_One_Registed_Type()
+        {
+            var resolver = new SimpleInjectorDependencyResolver();
+            resolver.RegisterType<IFace1, Class1>();
+
+            var resolve = resolver.Resolve<Class4>();
+            Assert.AreEqual(1, resolve.Ifaces.Count());
+            Assert.IsTrue(resolve.Ifaces.OfType<Class1>().Any());
+            Assert.IsFalse(resolve.Ifaces.OfType<Class2>().Any());
+            Assert.IsFalse(resolve.Ifaces.OfType<Class3>().Any());
+        }
+
+        [TestMethod]
+        public void Array_Injector_Should_Inject_One_Registed_Type_As_Enumerable()
+        {
+            var resolver = new SimpleInjectorDependencyResolver();
+            resolver.RegisterType<IFace1, Class1>();
+
+            var resolve = resolver.Resolve<Class5>();
+            Assert.AreEqual(1, resolve.Ifaces.Count());
+            Assert.IsTrue(resolve.Ifaces.OfType<Class1>().Any());
+            Assert.IsFalse(resolve.Ifaces.OfType<Class2>().Any());
+            Assert.IsFalse(resolve.Ifaces.OfType<Class3>().Any());
+        }
+
+        [TestMethod]
         public void IsRegistered_Should_Return_True()
         {
             var resolver = new SimpleInjectorDependencyResolver();
@@ -93,6 +134,16 @@ namespace Commons.InverionOfControl.SimpleInjector.Tests
         public IFace1[] Ifaces { get; set; }
 
         public Class4(IFace1[] ifaces)
+        {
+            Ifaces = ifaces;
+        }
+    }
+
+    public class Class5
+    {
+        public IEnumerable<IFace1> Ifaces { get; set; }
+
+        public Class5(IEnumerable<IFace1> ifaces)
         {
             Ifaces = ifaces;
         }

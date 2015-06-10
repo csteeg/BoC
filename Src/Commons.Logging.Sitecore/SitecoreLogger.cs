@@ -150,7 +150,7 @@ namespace BoC.Logging.Sitecore
 
         public void ErrorFormat(Exception exception, String format, params Object[] args)
         {
-            Log.Error(formatException(String.Format(format, args), exception), this);
+            Log.Error(formatException(String.Format(format, args), exception), exception, this);
         }
 
         public void ErrorFormat(IFormatProvider formatProvider, String format, params Object[] args)
@@ -160,7 +160,7 @@ namespace BoC.Logging.Sitecore
 
         public void ErrorFormat(Exception exception, IFormatProvider formatProvider, String format, params Object[] args)
         {
-            Log.Error(formatException(String.Format(formatProvider, format, args), exception), this);
+            Log.Error(formatException(String.Format(formatProvider, format, args), exception), exception, this);
         }
         #endregion
 
@@ -184,7 +184,7 @@ namespace BoC.Logging.Sitecore
 
         public void FatalFormat(Exception exception, String format, params Object[] args)
         {
-            Log.Fatal(formatException(String.Format(format, args), exception), this);
+            Log.Fatal(formatException(String.Format(format, args), exception),exception, this);
         }
 
         public void FatalFormat(IFormatProvider formatProvider, String format, params Object[] args)

@@ -13,7 +13,7 @@
     <copyright>Copyright 2014</copyright>
     <tags>BoC,Logging,Log4net</tags>
     <dependencies>
-      <dependency id="BoC" version="2.4.0" />
+      <dependency id="BoC" version="2.4.2" />
       <dependency id="Microsoft.AspNet.Mvc" version="5.2.2" />
       <dependency id="Microsoft.AspNet.Razor" version="3.2.2" />
       <dependency id="Microsoft.AspNet.WebPages" version="3.2.2" />

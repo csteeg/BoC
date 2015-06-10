@@ -10,7 +10,7 @@ namespace BoC.Persistence
 {
     public static class RepositoryGenerator
     {
-        public static void GenerateRepositories(IDependencyResolver dependencyResolver, Type defaultBaseType, Type[] constructorParams)
+        public static void GenerateRepositories(IDependencyResolver dependencyResolver, Type defaultBaseType, Type[] constructorParams, IAppDomainHelper[] appDomainHelpers)
         {
             const string idPropertyName = "Id";
             var interfaceToFind = typeof(IRepository<>);
@@ -21,7 +21,7 @@ namespace BoC.Persistence
 
             //below should work fine for all situations :)
             ModuleBuilder mb = null;
-            var types = dependencyResolver.ResolveAll<IAppDomainHelper>().SelectMany(
+            var types = appDomainHelpers.SelectMany(
                 helper => helper.GetTypes(t => true)).ToArray();
 
             var entities = from t in types

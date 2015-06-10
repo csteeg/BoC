@@ -22,20 +22,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-using System;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Threading;
-
 namespace DryIoc
 {
+    using System;
+    using System.Linq.Expressions;
+    using System.Reflection;
+    using System.Reflection.Emit;
+    using System.Threading;
+    
     public static partial class FactoryCompiler
     {
+        /// <summary>Dynamic assembly name.</summary>
         public const string DYNAMIC_ASSEMBLY_NAME = "DryIoc.DynamicAssemblyWithCompiledFactories";
+
+        /// <summary>Dynamic assembly name with public key.</summary>
         public const string DYNAMIC_ASSEMBLY_NAME_WITH_PUBLIC_KEY =
             DYNAMIC_ASSEMBLY_NAME + ",PublicKey=" + STRONG_NAME_PUBLIC_KEY;
 
+        /// <summary>Public key for strong signed assembly.</summary>
         public const string STRONG_NAME_PUBLIC_KEY =
             "0024000004800000940000000602000000240000525341310004000001000100c3ee5dd15505ae" +
             "d491f6effe157e3ec3694e4ec3a532d3c16e497ab1b0c3ca9fb2959d870e24831b600b576e66b8" +
@@ -43,6 +47,7 @@ namespace DryIoc
             "48c796b22ebb70472c5412c997f68d6e5a044de3b0de7b95d1569ee57bf72469f23c748f5879e5" +
             "0a8d50b2";
 
+        /// <summary>Strong name in bytes.</summary>
         public static byte[] StrongNameKeyPairBytes { get { return new byte[]
         {
             0x07, 0x02, 0x00, 0x00, 0x00, 0x24, 0x00, 0x00, 0x52, 0x53, 0x41, 0x32, 0x00, 0x04, 0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0xC3, 0xEE, 0x5D, 0xD1, 
@@ -74,7 +79,7 @@ namespace DryIoc
 
         static partial void CompileToMethod(Expression<FactoryDelegate> factoryExpression, Rules rules, ref FactoryDelegate result)
         {
-            if (!rules.CompilationToDynamicAssemblyEnabled)
+            if (!rules.FactoryDelegateCompilationToDynamicAssembly)
                 return;
 
             result.ThrowIf(result != null);
@@ -86,7 +91,7 @@ namespace DryIoc
                 "GetService", 
                 MethodAttributes.Public | MethodAttributes.Static,
                 typeof(object),
-                new[] { typeof(AppendableArray<object>), typeof(ContainerWeakRef), typeof(IScope) });
+                new[] { typeof(AppendableArray), typeof(IResolverContextProvider), typeof(IScope) });
 
             factoryExpression.CompileToMethod(methodBuilder);
 
@@ -130,14 +135,19 @@ namespace DryIoc
     /// <remarks>Resolution rules to enable/disable compiling to Dynamic Assembly.</remarks>
     public sealed partial class Rules
     {
-        public bool CompilationToDynamicAssemblyEnabled
+        /// <summary>Rule indicating that factory delegates should be compiled to dynamic assembly methods.</summary>
+        public bool FactoryDelegateCompilationToDynamicAssembly
         {
-            get { return _compilationToDynamicAssemblyEnabled; }
+            get { return _factoryDelegateCompilationToDynamicAssembly; }
         }
 
-        public Rules EnableCompilationToDynamicAssembly(bool enable)
+        /// <summary>Sets <see cref="FactoryDelegateCompilationToDynamicAssembly"/> to True.</summary>
+        /// <returns>New rules with set flag.</returns>
+        public Rules WithFactoryDelegateCompilationToDynamicAssembly()
         {
-            return new Rules(this) { _compilationToDynamicAssemblyEnabled = enable };
+            var rules = (Rules)MemberwiseClone();
+            rules._factoryDelegateCompilationToDynamicAssembly = true;
+            return rules;
         }
     }
 }

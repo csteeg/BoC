@@ -33,17 +33,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="SimpleInjector">
-      <HintPath>..\..\packages\SimpleInjector.2.7.3\lib\net45\SimpleInjector.dll</HintPath>
+    <Reference Include="SimpleInjector, Version=2.8.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\SimpleInjector.2.8.0\lib\net45\SimpleInjector.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector.Diagnostics">
-      <HintPath>..\..\packages\SimpleInjector.2.7.3\lib\net45\SimpleInjector.Diagnostics.dll</HintPath>
+    <Reference Include="SimpleInjector.Extensions.ExecutionContextScoping, Version=2.4.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\SimpleInjector.Extensions.ExecutionContextScoping.2.8.0\lib\net45\SimpleInjector.Extensions.ExecutionContextScoping.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector.Extensions.ExecutionContextScoping">
-      <HintPath>..\..\packages\SimpleInjector.Extensions.ExecutionContextScoping.2.7.3\lib\net45\SimpleInjector.Extensions.ExecutionContextScoping.dll</HintPath>
-    </Reference>
-    <Reference Include="SimpleInjector.Integration.Web">
-      <HintPath>..\..\packages\SimpleInjector.Integration.Web.2.7.3\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
+    <Reference Include="SimpleInjector.Integration.Web, Version=2.8.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\SimpleInjector.Integration.Web.2.8.0\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -58,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="BoC.InversionOfControl.SimpleInjector.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>

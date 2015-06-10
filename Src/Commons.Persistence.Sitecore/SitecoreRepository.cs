@@ -89,18 +89,16 @@ namespace BoC.Persistence.SitecoreGlass
                             return result;
                     }
                 }
-                if (PathProperty != null)
-                {
-                    var path = (PathProperty.PropertyInfo.GetValue(model, null) + "").TrimEnd('/');
-                    path = path.Substring(0, path.LastIndexOf('/')) + "/";
-                    if (path != "/")
-                    {
-                        var parent = GetAndConvertItem<IBaseEntity<Guid>>(path, GetLanguage(_dbProvider));
-                        if (parent != null)
-                            return parent;
-                    }
-                }
-                return null;
+                if (PathProperty == null) 
+                    return null;
+                
+                var path = (PathProperty.PropertyInfo.GetValue(model, null) + "").TrimEnd('/');
+                path = path.Substring(0, path.LastIndexOf('/')) + "/";
+                if (path == "/") 
+                    return null;
+                
+                var parent = GetAndConvertItem<IBaseEntity<Guid>>(path, GetLanguage(_dbProvider));
+                return parent;
             }
         }
 
@@ -242,7 +240,7 @@ namespace BoC.Persistence.SitecoreGlass
             using (Profiler.StartContext("SitecoreRepository.ConvertItem for {0})", sitecoreItem != null ? sitecoreItem.ID : ID.Null))
             {
                 return sitecoreItem != null && sitecoreItem.Versions.Count > 0
-                    ? _sitecoreServiceProvider.GetSitecoreService().CreateType<TargetClass>(sitecoreItem, true, true)
+                    ? _sitecoreServiceProvider.GetSitecoreService().Cast<TargetClass>(sitecoreItem, true, true)
                     : null;
             }
         }
@@ -279,7 +277,7 @@ namespace BoC.Persistence.SitecoreGlass
                     if (item == null) yield return null;
                     using (Profiler.StartContext("SitecoreRepository.GetItems -> createtype for {0}", item.ID))
                     {
-                        yield return sitecoreService.CreateType<T>(item, true, true);
+                        yield return sitecoreService.Cast<T>(item, true, true);
                     }
                 }
             }

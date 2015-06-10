@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Web.Http.Controllers;
 using System.Web.Http.Dependencies;
-using System.Web.Mvc;
 using BoC.EventAggregator;
 using BoC.Web.Mvc.IoC;
 using IDependencyResolver = BoC.InversionOfControl.IDependencyResolver;

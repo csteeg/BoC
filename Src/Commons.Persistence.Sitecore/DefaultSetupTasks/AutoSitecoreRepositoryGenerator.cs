@@ -1,5 +1,6 @@
 using System;
 using System.Configuration;
+using BoC.Helpers;
 using BoC.InversionOfControl;
 using BoC.Logging;
 
@@ -8,10 +9,12 @@ namespace BoC.Persistence.SitecoreGlass.DefaultSetupTasks
     public class AutoSitecoreRepositoryGenerator : IContainerInitializer
     {
         private readonly IDependencyResolver dependencyResolver;
+        private readonly IAppDomainHelper[] _appDomainHelpers;
 
-        public AutoSitecoreRepositoryGenerator(IDependencyResolver dependencyResolver)
+        public AutoSitecoreRepositoryGenerator(IDependencyResolver dependencyResolver, IAppDomainHelper[] appDomainHelpers)
         {
             this.dependencyResolver = dependencyResolver;
+            _appDomainHelpers = appDomainHelpers;
         }
 
         public void Execute()
@@ -23,7 +26,7 @@ namespace BoC.Persistence.SitecoreGlass.DefaultSetupTasks
             var defaultBaseType = typeof(SitecoreRepository<>);
             var constructorParams = new[] { typeof(IDatabaseProvider), typeof(ISitecoreServiceProvider), typeof(IProviderSearchContextProvider), typeof(ILogger) };
 
-            RepositoryGenerator.GenerateRepositories(dependencyResolver, defaultBaseType, constructorParams);
+            RepositoryGenerator.GenerateRepositories(dependencyResolver, defaultBaseType, constructorParams, _appDomainHelpers);
         }
     }
 }
