@@ -5,8 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using BoC.InversionOfControl;
-using BoC.Persistence.db4o.UnitOfWork;
-using BoC.UnitOfWork;
+using BoC.Persistence.db4o.DataContext;
+using BoC.DataContext;
 
 namespace BoC.Persistence.db4o.DefaultSetupTasks
 {
@@ -33,12 +33,12 @@ namespace BoC.Persistence.db4o.DefaultSetupTasks
 
             if (!_dependencyResolver.IsRegistered<ISessionManager>())
             {
-                _dependencyResolver.RegisterSingleton<ISessionManager, Db4oUnitOfWorkSessionManager>();
+                _dependencyResolver.RegisterSingleton<ISessionManager, Db4oDataContextSessionManager>();
             }
 
-            if (!_dependencyResolver.IsRegistered<IUnitOfWork>())
+            if (!_dependencyResolver.IsRegistered<IDataContext>())
             {
-                _dependencyResolver.RegisterType<IUnitOfWork, Db4oUnitOfWork>();
+                _dependencyResolver.RegisterType<IDataContext, Db4oDataContext>();
             }
         }
     }

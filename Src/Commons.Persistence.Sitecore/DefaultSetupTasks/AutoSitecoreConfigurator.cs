@@ -1,8 +1,8 @@
 using System;
 using System.Configuration;
 using BoC.InversionOfControl;
-using BoC.Persistence.SitecoreGlass.UnitOfWork;
-using BoC.UnitOfWork;
+using BoC.Persistence.SitecoreGlass.DataContext;
+using BoC.DataContext;
 
 namespace BoC.Persistence.SitecoreGlass.DefaultSetupTasks
 {
@@ -23,7 +23,7 @@ namespace BoC.Persistence.SitecoreGlass.DefaultSetupTasks
 
             if (!dependencyResolver.IsRegistered<IDatabaseProvider>())
             {
-                dependencyResolver.RegisterSingleton<IDatabaseProvider, ContextDatabaseProvider>();
+                dependencyResolver.RegisterSingleton<IDatabaseProvider, SitecoreDataContextDatabaseProvider>();
             }
 
             if (!dependencyResolver.IsRegistered<ISitecoreServiceProvider>())
@@ -36,14 +36,14 @@ namespace BoC.Persistence.SitecoreGlass.DefaultSetupTasks
                 dependencyResolver.RegisterSingleton<IIndexNameProvider, ContentSearchContextIndexNameProvider>();
             }
 
-            if (!dependencyResolver.IsRegistered<IUnitOfWork>())
+            if (!dependencyResolver.IsRegistered<IDataContext>())
             {
-                dependencyResolver.RegisterType<IUnitOfWork, SitecoreUnitOfWork>();
+                dependencyResolver.RegisterType<IDataContext, SitecoreDataContext>();
             }
 
             if (!dependencyResolver.IsRegistered<IProviderSearchContextProvider>())
             {
-                dependencyResolver.RegisterSingleton<IProviderSearchContextProvider, SitecoreUnitOfWorkIndexSearchContextProvider>();
+                dependencyResolver.RegisterSingleton<IProviderSearchContextProvider, SitecoreDataContextIndexSearchContextProvider>();
             }
             
         }

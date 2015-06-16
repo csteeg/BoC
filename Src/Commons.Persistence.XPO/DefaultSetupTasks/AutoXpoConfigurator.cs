@@ -1,6 +1,6 @@
 using BoC.InversionOfControl;
-using BoC.Persistence.Xpo.UnitOfWork;
-using BoC.UnitOfWork;
+using BoC.Persistence.Xpo.DataContext;
+using BoC.DataContext;
 
 namespace BoC.Persistence.Xpo.DefaultSetupTasks
 {
@@ -17,18 +17,18 @@ namespace BoC.Persistence.Xpo.DefaultSetupTasks
         {
             if (!dependencyResolver.IsRegistered<ISessionFactory>())
             {
-                dependencyResolver.RegisterType<ISessionFactory, XpoUnitOfWorkSessionFactory>();
+                dependencyResolver.RegisterType<ISessionFactory, XpoDataContextSessionFactory>();
             }
 
             if (!dependencyResolver.IsRegistered<ISessionManager>())
             {
                 //IoC.RegisterSingleton<ISessionManager, CurrentContextSessionManager>();
-                dependencyResolver.RegisterSingleton<ISessionManager, XpoUnitOfWorkSessionManager>();
+                dependencyResolver.RegisterSingleton<ISessionManager, XpoDataContextSessionManager>();
             }
 
-            if (!dependencyResolver.IsRegistered<IUnitOfWork>())
+            if (!dependencyResolver.IsRegistered<IDataContext>())
             {
-                dependencyResolver.RegisterType<IUnitOfWork, XpoUnitOfWork>();
+                dependencyResolver.RegisterType<IDataContext, XpoDataContext>();
             }
         }
     }

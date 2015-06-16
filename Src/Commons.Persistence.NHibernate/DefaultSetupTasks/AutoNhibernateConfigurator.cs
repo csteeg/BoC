@@ -3,8 +3,8 @@ using System.Configuration;
 using System.Web;
 using BoC.InversionOfControl;
 using BoC.Persistence.NHibernate;
-using BoC.Persistence.NHibernate.UnitOfWork;
-using BoC.UnitOfWork;
+using BoC.Persistence.NHibernate.DataContext;
+using BoC.DataContext;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Caches.SysCache2;
@@ -67,12 +67,12 @@ namespace BoC.Persistence.DefaultSetupTasks
             if (!dependencyResolver.IsRegistered<ISessionManager>())
             {
                 //IoC.RegisterSingleton<ISessionManager, CurrentContextSessionManager>();
-                dependencyResolver.RegisterSingleton<ISessionManager, UnitOfWorkSessionManager>();
+                dependencyResolver.RegisterSingleton<ISessionManager, DataContextSessionManager>();
             }
 
-            if (!dependencyResolver.IsRegistered<IUnitOfWork>())
+            if (!dependencyResolver.IsRegistered<IDataContext>())
             {
-                dependencyResolver.RegisterType<IUnitOfWork, NHibernateUnitOfWork>();
+                dependencyResolver.RegisterType<IDataContext, NHibernateDataContext>();
             }
         }
     }

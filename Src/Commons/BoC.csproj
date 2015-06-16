@@ -186,9 +186,9 @@
     <Compile Include="Persistence\IBaseEntity.cs" />
     <Compile Include="Persistence\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitOfWork\BaseThreadSafeSingleUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\UnitOfWork.cs" />
+    <Compile Include="DataContext\BaseThreadSafeSingleDataContext.cs" />
+    <Compile Include="DataContext\IDataContext.cs" />
+    <Compile Include="DataContext\DataContext.cs" />
     <Compile Include="Validation\DataAnnotationsModelValidator.cs" />
     <Compile Include="Validation\DefaultSetupTasks\RegisterDefaultModelValidator.cs" />
     <Compile Include="Validation\ErrorInfo.cs" />
@@ -202,7 +202,7 @@
     <Compile Include="Web\EventTriggeringHttpModule.cs" />
     <Compile Include="Web\Events.cs" />
     <Compile Include="Web\PreApplicationStartCode.cs" />
-    <Compile Include="Web\UnitOfWorkPerRequestHttpModule.cs" />
+    <Compile Include="Web\DataContextPerRequestHttpModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />

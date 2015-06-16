@@ -2,8 +2,8 @@ using System;
 using System.Configuration;
 using BoC.InversionOfControl;
 using BoC.Persistence.Norm;
-using BoC.Persistence.Norm.UnitOfWork;
-using BoC.UnitOfWork;
+using BoC.Persistence.Norm.DataContext;
+using BoC.DataContext;
 
 namespace BoC.Persistence.Norm.DefaultSetupTasks
 {
@@ -30,12 +30,12 @@ namespace BoC.Persistence.Norm.DefaultSetupTasks
             if (!dependencyResolver.IsRegistered<ISessionManager>())
             {
                 //IoC.RegisterSingleton<ISessionManager, CurrentContextSessionManager>();
-                dependencyResolver.RegisterSingleton<ISessionManager, NormUnitOfWorkSessionManager>();
+                dependencyResolver.RegisterSingleton<ISessionManager, NormDataContextSessionManager>();
             }
 
-            if (!dependencyResolver.IsRegistered<IUnitOfWork>())
+            if (!dependencyResolver.IsRegistered<IDataContext>())
             {
-                dependencyResolver.RegisterType<IUnitOfWork, NormUnitOfWork>();
+                dependencyResolver.RegisterType<IDataContext, NormDataContext>();
             }
         }
     }

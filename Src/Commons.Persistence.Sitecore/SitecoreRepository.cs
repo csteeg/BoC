@@ -7,14 +7,13 @@ using BoC.Logging;
 using BoC.Profiling;
 using Glass.Mapper.Configuration;
 using Glass.Mapper.Sc.Configuration;
-using Lucene.Net.Search;
+using Sitecore;
+using Sitecore.Caching;
+using Sitecore.ContentSearch;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Data.Managers;
 using Sitecore.Globalization;
-using Sitecore.Search;
-using Sitecore.ContentSearch;
-using BuiltinFields = Sitecore.Search.BuiltinFields;
 
 namespace BoC.Persistence.SitecoreGlass
 {
@@ -253,12 +252,12 @@ namespace BoC.Persistence.SitecoreGlass
                 {
                     try
                     {
-                        var a = global::Sitecore.Context.Language;
+                        var a = Context.Language;
                     } // TODO: for unittests: find out why Context.Language is loaded correctly the second time
                     catch
                     {
                     }
-                    return global::Sitecore.Context.Language;
+                    return Context.Language;
                 }
                 return LanguageManager.GetLanguage(dbProvider.GetCulture().Name);
             }
@@ -322,7 +321,7 @@ namespace BoC.Persistence.SitecoreGlass
                 this.Delete(item);
         }
 
-        System.Linq.IQueryable<T> IRepository<T>.Query()
+        IQueryable<T> IRepository<T>.Query()
         {
             using (Profiler.StartContext("SitecoreRepository.Query()"))
             {
@@ -396,7 +395,7 @@ namespace BoC.Persistence.SitecoreGlass
 
         void IRepository<T>.Evict(T target)
         {
-            global::Sitecore.Caching.CacheManager.GetItemCache(this._dbProvider.GetDatabase()).RemoveItem(new ID(target.Id));
+            CacheManager.GetItemCache(this._dbProvider.GetDatabase()).RemoveItem(new ID(target.Id));
         }
 
         object IRepository.Get(object id)
@@ -437,7 +436,7 @@ namespace BoC.Persistence.SitecoreGlass
         {
             var t = target as T;
             if (t != null)
-                global::Sitecore.Caching.CacheManager.GetItemCache(this._dbProvider.GetDatabase()).RemoveItem(new ID(t.Id));
+                CacheManager.GetItemCache(this._dbProvider.GetDatabase()).RemoveItem(new ID(t.Id));
         }
         #endregion
 

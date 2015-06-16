@@ -8,7 +8,7 @@ namespace BoC.Logging
         private const string Currentlogcontextmapkey = "LogContext.Current";
 
         [ThreadStatic]
-        private static ILogContext _outerUnitOfWorkThreadstatic;
+        private static ILogContext _outerDataContextThreadstatic;
         private ILogContext _previous;
 
         public string Name { get; set; }
@@ -21,7 +21,7 @@ namespace BoC.Logging
                 {
                     return HttpContext.Current.Items[Currentlogcontextmapkey] as ILogContext;
                 }
-                return _outerUnitOfWorkThreadstatic;
+                return _outerDataContextThreadstatic;
             }
             private set
             {
@@ -31,7 +31,7 @@ namespace BoC.Logging
                 }
                 else
                 {
-                    _outerUnitOfWorkThreadstatic = value;
+                    _outerDataContextThreadstatic = value;
                 }
 
             }

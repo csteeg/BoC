@@ -3,7 +3,7 @@ using System.Net.Mime;
 using System.Web;
 using BoC.EventAggregator;
 using BoC.InversionOfControl;
-using BoC.UnitOfWork;
+using BoC.DataContext;
 using BoC.Web;
 using BoC.Web.Events;
 using Microsoft.Web.Infrastructure;

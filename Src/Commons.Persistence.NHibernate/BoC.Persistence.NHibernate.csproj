@@ -123,8 +123,8 @@
     <Compile Include="NHibernateConfigHelper.cs" />
     <Compile Include="NHRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitOfWork\UnitOfWorkSessionManager.cs" />
-    <Compile Include="UnitOfWork\NHibernateUnitOfWork.cs" />
+    <Compile Include="DataContext\DataContextWorkSessionManager.cs" />
+    <Compile Include="DataContext\NHibernateDataContext.cs" />
     <Compile Include="WebSessionManager.cs" />
   </ItemGroup>
   <ItemGroup>

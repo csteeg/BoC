@@ -77,10 +77,10 @@
     <Compile Include="DefaultSetupTasks\AutoXpoConfigurator.cs" />
     <Compile Include="DefaultSetupTasks\AutoXpoRepositoryGenerator.cs" />
     <Compile Include="ISessionManager.cs" />
-    <Compile Include="UnitOfWork\XpoUnitOfWorkSessionFactory.cs" />
+    <Compile Include="DataContext\XpoDataContextSessionFactory.cs" />
     <Compile Include="ISessionFactory.cs" />
-    <Compile Include="UnitOfWork\XpoUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\XpoUnitOfWorkSessionManager.cs" />
+    <Compile Include="DataContext\XpoDataContext.cs" />
+    <Compile Include="DataContext\XpoDataContextSessionManager.cs" />
     <Compile Include="XpoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

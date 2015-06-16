@@ -96,8 +96,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Db4oEnlist.cs" />
     <Compile Include="Repository\Db4oRepository.cs" />
-    <Compile Include="UnitOfWork\Db4oUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\Db4oUnitOfWorkSessionManager.cs" />
+    <Compile Include="DataContext\Db4oDataContext.cs" />
+    <Compile Include="DataContext\Db4oDataContextSessionManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

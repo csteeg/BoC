@@ -134,6 +134,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContext\SitecoreDataContextDatabaseProvider.cs" />
     <Compile Include="ContextDatabaseProvider.cs" />
     <Compile Include="DefaultSetupTasks\EnableProfiling.cs" />
     <Compile Include="DefaultSetupTasks\RegisterConfigLoader.cs" />
@@ -156,10 +157,10 @@
     <Compile Include="SitecoreRepository.cs" />
     <Compile Include="SitecoreServiceProvider.cs" />
     <Compile Include="ContentSearchContextIndexNameProvider.cs" />
-    <Compile Include="UnitOfWork\SitecoreBucketUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\SitecoreUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\SitecoreUnitOfWorkIndexSearchContextProvider.cs" />
-    <Compile Include="UnitOfWork\UnitOfWorkException.cs" />
+    <Compile Include="DataContext\SitecoreBucketDataContext.cs" />
+    <Compile Include="DataContext\SitecoreDataContext.cs" />
+    <Compile Include="DataContext\SitecoreDataContextIndexSearchContextProvider.cs" />
+    <Compile Include="DataContext\DataContextException.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Commons.Web.Mvc\BoC.Web.Mvc.csproj">

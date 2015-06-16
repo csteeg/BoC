@@ -13,7 +13,7 @@
     <copyright>Copyright 2014</copyright>
     <tags>BoC,InversionOfControl,DryIOC</tags>
     <dependencies>
-      <dependency id="BoC" version="2.4.2" />
+      <dependency id="BoC" version="4.0.0" />
       <dependency id="DryIoC" version="2.0.0-rc1build286" />
     </dependencies>
   </metadata>

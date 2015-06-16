@@ -34,8 +34,6 @@ namespace BoC.Persistence
             int typeNum = 0;
             foreach (var type in entities.ToArray())
             {
-                var idProp = type.GetProperty(idPropertyName);
-                var idType = idProp == null ? typeof(object) : idProp.PropertyType;
                 var interfaceType = interfaceToFind.MakeGenericType(new Type[] { type });
 
                 if (interfaceType == null)

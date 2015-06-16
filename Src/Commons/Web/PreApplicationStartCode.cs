@@ -19,7 +19,7 @@ namespace BoC.Web
         public static IList<Type> RegisterModules = new List<Type>(
             new Type[]
                 {
-                    typeof(UnitOfWorkPerRequestHttpModule), 
+                    typeof(DataContextPerRequestHttpModule), 
                     typeof(ApplicationStarterHttpModule), 
                     typeof(EventTriggeringHttpModule)
                 });

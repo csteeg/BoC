@@ -53,8 +53,8 @@
     <Compile Include="ISessionFactory.cs" />
     <Compile Include="ISessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitOfWork\NormUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\NormUnitOfWorkSessionManager.cs" />
+    <Compile Include="DataContext\NormDataContext.cs" />
+    <Compile Include="DataContext\NormDataContextSessionManager.cs" />
     <Compile Include="NoRMRepository.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Transactions;
-using BoC.UnitOfWork;
+using BoC.DataContext;
 using Db4objects.Db4o;
 
-namespace BoC.Persistence.db4o.UnitOfWork
+namespace BoC.Persistence.db4o.DataContext
 {
-    public class Db4oUnitOfWork : BaseThreadSafeSingleUnitOfWork
+    public class Db4oDataContext : BaseThreadSafeSingleDataContext
     {
         private readonly ISessionFactory _sessionFactory;
         private IObjectContainer _sessionObjectContainer;
 
-        public Db4oUnitOfWork(ISessionFactory sessionFactory)
+        public Db4oDataContext(ISessionFactory sessionFactory)
         {
             _sessionFactory = sessionFactory;
         }
 
-        protected override void CleanUpOuterUnitOfWork()
+        protected override void CleanUpOuterDataContext()
         {
             if (_sessionObjectContainer == null)
                 return;
@@ -45,13 +45,13 @@ namespace BoC.Persistence.db4o.UnitOfWork
         {
             get
             {
-                if (OuterUnitOfWork == this)
+                if (OuterDataContext == this)
                 {
                     return _sessionObjectContainer ?? (_sessionObjectContainer = _sessionFactory.CreateSession());
                 }
-                else if (OuterUnitOfWork != null)
+                else if (OuterDataContext != null)
                 {
-                    return ((Db4oUnitOfWork)OuterUnitOfWork).Session;
+                    return ((Db4oDataContext)OuterDataContext).Session;
                 }
                 else
                 {
