@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BoC.Helpers;
 
@@ -8,9 +9,11 @@ namespace BoC.InversionOfControl
     {
         private static readonly object resolverLock = new object();
 
-        public static void InitializeWith(IDependencyResolver resolver)
+        public static void InitializeWith(IDependencyResolver resolver, params IAppDomainHelper[] appDomainHelpers)
         {
             Check.Argument.IsNotNull(resolver, "resolver");
+            if (IoC.Resolver != null)
+                throw new ApplicationException("IoC already initialized");
             lock (resolverLock)
             {
                 if (IoC.Resolver != null)
@@ -18,7 +21,7 @@ namespace BoC.InversionOfControl
                 
                 IoC.Resolver = resolver;
                 resolver.RegisterInstance<IDependencyResolver>(resolver);
-                RunContainerInitializers(resolver);
+                RunContainerInitializers(resolver, appDomainHelpers);
             }
         }
 
@@ -48,46 +51,64 @@ namespace BoC.InversionOfControl
             }
         }
 
-        private static void RunContainerInitializers(IDependencyResolver dependencyResolver)
+        private static void RunContainerInitializers(IDependencyResolver dependencyResolver, IAppDomainHelper[] appdomainHelpers)
         {
-            var appdomainHelpers = dependencyResolver.ResolveAll<IAppDomainHelper>();
-            if (appdomainHelpers == null || ! appdomainHelpers.Any())
+            if (appdomainHelpers == null || appdomainHelpers.Any() )
             {
-                appdomainHelpers = new[] {AppDomainHelper.CreateDefault()};
+                var helper = AppDomainHelper.CreateDefault();
+                appdomainHelpers = new[] {helper};
             }
 
-            var initTasks =
+            if (!dependencyResolver.IsRegistered(typeof (IAppDomainHelper)))
+            {
+                foreach (var helper in appdomainHelpers)
+                {
+                    dependencyResolver.RegisterInstance<IAppDomainHelper>(helper);
+                }
+            }
+
+            var allTasks =
                 appdomainHelpers.SelectMany(helper => helper.GetTypes(
                     t => t.IsClass && !t.IsAbstract && typeof (IContainerInitializer).IsAssignableFrom(t)));
-            //register them:
-            foreach (var taskType in initTasks)
-            {
-                dependencyResolver.RegisterType(typeof(IContainerInitializer), taskType);
-            }
             //run them:
-            var allTasks = dependencyResolver.ResolveAll<IContainerInitializer>()
-                                             .Where( it=> it != null )
-                                             .ToList();
+            var allTasksList = allTasks as IList<Type> ?? allTasks.ToList();
+            
+            var nonbocHelpers = allTasksList.Where(t => t.Namespace != null && !t.Namespace.StartsWith("BoC."));
+            var bocHelpers = allTasksList.Where(t => t.Namespace != null && t.Namespace.StartsWith("BoC."));
+
             //first user's tasks:
-            foreach (var task in allTasks.Where(t => !NamespaceStartsWith (t , "BoC.")))
+            foreach (var type in nonbocHelpers)
             {
+                var task = CreateTask(dependencyResolver, type, appdomainHelpers);
                 task.Execute();
             }
             //now ours:
-            foreach (var task in allTasks.Where(t => NamespaceStartsWith(t,"BoC.")))
+            foreach (var type in bocHelpers )
             {
+                var task = CreateTask(dependencyResolver, type, appdomainHelpers);
                 task.Execute();
             }
         }
 
-        private static bool NamespaceStartsWith(IContainerInitializer initializer, String startsWidth )
+        private static IContainerInitializer CreateTask(IDependencyResolver dependencyResolver, Type type, IAppDomainHelper[] appDomainHelpers)
         {
-            if (initializer == null) return false;
-
-            var typeofInitializerNameSpace = initializer.GetType().Namespace;
-            if (String.IsNullOrEmpty(typeofInitializerNameSpace)) return false;
-
-            return typeofInitializerNameSpace.StartsWith(startsWidth);
+            var constructor = type.GetConstructors().First();
+            var parameters = constructor.GetParameters();
+            if (!parameters.Any())
+                return  Activator.CreateInstance(type) as IContainerInitializer;
+            var parameterValues = new object[parameters.Length];
+            for (var i=0;i<parameters.Length;i++)
+            {
+                if (typeof (IDependencyResolver).IsAssignableFrom(parameters[i].ParameterType))
+                    parameterValues[i] = dependencyResolver;
+                else if (parameters[i].ParameterType == typeof (IAppDomainHelper[]))
+                    parameterValues[i] = appDomainHelpers;
+                else
+                {
+                    parameterValues[i] = Activator.CreateInstance(parameters[i].ParameterType);
+                }
+            }
+            return constructor.Invoke(parameterValues) as IContainerInitializer;
         }
     }
 }
