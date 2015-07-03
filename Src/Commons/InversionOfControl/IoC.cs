@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BoC.Helpers;
 
@@ -52,7 +53,7 @@ namespace BoC.InversionOfControl
 
         private static void RunContainerInitializers(IDependencyResolver dependencyResolver, IAppDomainHelper[] appdomainHelpers)
         {
-            if (appdomainHelpers == null || appdomainHelpers.Count() == 0)
+            if (appdomainHelpers == null || appdomainHelpers.Any() )
             {
                 var helper = AppDomainHelper.CreateDefault();
                 appdomainHelpers = new[] {helper};
@@ -70,20 +71,22 @@ namespace BoC.InversionOfControl
                 appdomainHelpers.SelectMany(helper => helper.GetTypes(
                     t => t.IsClass && !t.IsAbstract && typeof (IContainerInitializer).IsAssignableFrom(t)));
             //run them:
-            if (allTasks != null)
+            var allTasksList = allTasks as IList<Type> ?? allTasks.ToList();
+            
+            var nonbocHelpers = allTasksList.Where(t => t.Namespace != null && !t.Namespace.StartsWith("BoC."));
+            var bocHelpers = allTasksList.Where(t => t.Namespace != null && t.Namespace.StartsWith("BoC."));
+
+            //first user's tasks:
+            foreach (var type in nonbocHelpers)
             {
-                //first user's tasks:
-                foreach (var type in allTasks.Where(t => !t.Namespace.StartsWith("BoC.")))
-                {
-                    var task = CreateTask(dependencyResolver, type, appdomainHelpers);
-                    task.Execute();
-                }
-                //now ours:
-                foreach (var type in allTasks.Where(t => t.Namespace.StartsWith("BoC.")))
-                {
-                    var task = CreateTask(dependencyResolver, type, appdomainHelpers);
-                    task.Execute();
-                }
+                var task = CreateTask(dependencyResolver, type, appdomainHelpers);
+                task.Execute();
+            }
+            //now ours:
+            foreach (var type in bocHelpers )
+            {
+                var task = CreateTask(dependencyResolver, type, appdomainHelpers);
+                task.Execute();
             }
         }
 
