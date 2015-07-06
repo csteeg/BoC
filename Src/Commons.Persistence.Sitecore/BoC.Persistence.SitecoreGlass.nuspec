@@ -15,15 +15,10 @@
     <tags>BoC,Persistence,Glass,Mapper,ORM,Repository,Sitecore</tags>
     <dependencies>
       <dependency id="BoC" version="4.0.0" />
-      <dependency id="BoC.Sitecore.Mvc" version="4.0.0" />
-      <dependency id="BoC.Logging.Sitecore" version="4.0.0" />
       <dependency id="BoC.Glass.Mapper.Sc" version="4.0.0" />
       <dependency id="BoC.Glass.Mapper.Sc.ContentSearch.LuceneProvider" version="4.0.0" />
       <dependency id="Castle.Core" version="3.3.3" />
       <dependency id="Lucene.Net" version="3.0.3" />
-      <dependency id="Microsoft.AspNet.Mvc" version="5.2.2" />
-      <dependency id="Microsoft.AspNet.Razor" version="3.2.2" />
-      <dependency id="Microsoft.AspNet.WebPages" version="3.2.2" />
       <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
       <dependency id="SharpZipLib" version="0.86.0" />
       <dependency id="WebActivatorEx" version="2.0" />
