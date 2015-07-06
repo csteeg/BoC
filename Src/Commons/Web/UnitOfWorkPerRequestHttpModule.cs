@@ -2,17 +2,17 @@
 using System.Web;
 using BoC.EventAggregator;
 using BoC.Tasks;
-using BoC.UnitOfWork;
+using BoC.DataContext;
 using BoC.Web.Events;
 
 namespace BoC.Web
 {
     //we have to use an httpmodule instead of subscribing to our own eventmanager, since this absolutely has to be started
     //immediately after the request starts.
-    public class UnitOfWorkPerRequestHttpModule : IHttpModule
+    public class DataContextPerRequestHttpModule : IHttpModule
     {
-        private const string unitofworkkey = "BoC.UnitOfWork.Web.OuterUnitOfWork";
-        public static bool Enabled = false;
+        private const string DataContextkey = "BoC.DataContext.Web.OuterDataContext";
+        public static bool Enabled = true;
 
         public void Init(HttpApplication context)
         {
@@ -31,18 +31,18 @@ namespace BoC.Web
                 return;
             }
 
-            var unitOfWork = ((HttpApplication)sender).Context.Items[unitofworkkey] as IUnitOfWork;
-            if (unitOfWork != null)
+            var DataContext = ((HttpApplication)sender).Context.Items[DataContextkey] as IDataContext;
+            if (DataContext != null)
             {
-                unitOfWork.Dispose();
+                DataContext.Dispose();
             }
-            ((HttpApplication)sender).Context.Items.Remove(unitofworkkey);
+            ((HttpApplication)sender).Context.Items.Remove(DataContextkey);
         }
 
         private void OnBeginRequest(object sender, EventArgs eventArgs)
         {
             if (Enabled)
-                ((HttpApplication)sender).Context.Items[unitofworkkey] = UnitOfWork.UnitOfWork.BeginUnitOfWork();
+                ((HttpApplication)sender).Context.Items[DataContextkey] = DataContext.DataContext.BeginDataContext();
         }
 
     }
