@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Chris van de Steeg</authors>
+    <owners>Chris van de Steeg</owners>
+    <licenseUrl>https://github.com/csteeg/BoC/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/csteeg/boc</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>BoC,Persistence,Glass,Mapper,ORM,Repository,Sitecore</tags>
+    <dependencies>
+      <dependency id="BoC" version="4.0.0" />
+      <dependency id="BoC.Glass.Mapper.Sc" version="4.0.0" />
+      <dependency id="BoC.Glass.Mapper.Sc.ContentSearch.LuceneProvider" version="4.0.0" />
+      <dependency id="Castle.Core" version="3.3.3" />
+      <dependency id="Lucene.Net" version="3.0.3" />
+      <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
+      <dependency id="SharpZipLib" version="0.86.0" />
+      <dependency id="WebActivatorEx" version="2.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="App_Start\**.*" target="content\App_Start\" />
+  </files>
+</package>
