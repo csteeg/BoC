@@ -12,7 +12,7 @@ namespace BoC.Web
     public class DataContextPerRequestHttpModule : IHttpModule
     {
         private const string DataContextkey = "BoC.DataContext.Web.OuterDataContext";
-        public static bool Enabled = false;
+        public static bool Enabled = true;
 
         public void Init(HttpApplication context)
         {
