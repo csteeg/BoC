@@ -6,6 +6,6 @@
 -Logging wrapper (see BoC.Logging.log4net for implementation)
 -Persistence repository and service pattern implementation (see other BoC packages like BoC.Persistence.NHibernate for implementations)
 
-'BoC and Sitecore
+#BoC and Sitecore
 If you would like to get started with the BoC and Sitecore, follow this excellent tutorial by Guido van Tricht:
 http://guidovtricht.nl/2015/07/sitecore-mvc-musicstore-part-1/
