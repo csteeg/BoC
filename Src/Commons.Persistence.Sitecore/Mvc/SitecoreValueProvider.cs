@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using BoC.InversionOfControl;
+using BoC.Persistence;
 using BoC.Services;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Mvc.Presentation;
 
-namespace BoC.Persistence.SitecoreGlass.Mvc
+namespace BoC.Sitecore.Mvc
 {
     public class SitecoreValueProviderFactory : ValueProviderFactory
     {
@@ -25,6 +25,7 @@ namespace BoC.Persistence.SitecoreGlass.Mvc
                 return
                     "contextItem".Equals(prefix, StringComparison.OrdinalIgnoreCase)
                     || "renderingItem".Equals(prefix, StringComparison.OrdinalIgnoreCase)
+                    || "pageContextItem".Equals(prefix, StringComparison.OrdinalIgnoreCase)
                     || "dataSource".Equals(prefix, StringComparison.OrdinalIgnoreCase);
             }
 
@@ -42,6 +43,11 @@ namespace BoC.Persistence.SitecoreGlass.Mvc
                         if (context.ContextItem == null)
                             return new ValueProviderResult(null, "contextitem", CultureInfo.CurrentCulture);
                         return GetValueResult(context.ContextItem, property);
+
+                    case "pagecontextitem":
+                        if (context.PageContext == null || context.PageContext.Item == null)
+                            return new ValueProviderResult(null, "contextitem", CultureInfo.CurrentCulture);
+                        return GetValueResult(context.PageContext.Item, property);
 
                     case "renderingitem":
                         if (context.Rendering == null || context.Rendering.RenderingItem == null)
