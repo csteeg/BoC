@@ -16,9 +16,9 @@ namespace $rootnamespace$.App_Start
     public static  class GlassMapperScCustom
     {
 		public static IDependencyResolver CreateResolver(){
-			BoC.Persistence.SitecoreGlass.Initialize.InitBoc.Start();
+			global::BoC.Persistence.SitecoreGlass.Initialize.InitBoc.Start();
 
-			var config = new Glass.Mapper.Sc.Config();
+			var config = new global::Glass.Mapper.Sc.Config();
 
 			var resolver = new DependencyResolver(config);
 			//trigger addtypes
@@ -43,13 +43,13 @@ namespace $rootnamespace$.App_Start
              * 
              */
 
-			return IoC.Resolver.ResolveAll<IConfigurationLoader>().ToArray();
+			return global::BoC.InversionOfControl.IoC.Resolver.ResolveAll<IConfigurationLoader>().ToArray();
 		}
 		public static void PostLoad(){
 			//Set config property to true in Glass.Mapper.Sc.CodeFirst.config to enable codefirst
 			if (!global::Sitecore.Configuration.Settings.GetBoolSetting("Glass.CodeFirst", false)) return;
 
-            var dbs = Sitecore.Configuration.Factory.GetDatabases();
+            var dbs = global::Sitecore.Configuration.Factory.GetDatabases();
             foreach (var db in dbs)
             {
                 var provider = db.GetDataProviders().FirstOrDefault(x => x is GlassDataProvider) as GlassDataProvider;

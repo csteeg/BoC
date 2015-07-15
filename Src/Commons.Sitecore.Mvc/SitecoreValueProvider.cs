@@ -25,6 +25,7 @@ namespace BoC.Sitecore.Mvc
                 return
                     "contextItem".Equals(prefix, StringComparison.OrdinalIgnoreCase)
                     || "renderingItem".Equals(prefix, StringComparison.OrdinalIgnoreCase)
+                    || "pageContextItem".Equals(prefix, StringComparison.OrdinalIgnoreCase)
                     || "dataSource".Equals(prefix, StringComparison.OrdinalIgnoreCase);
             }
 
@@ -42,6 +43,11 @@ namespace BoC.Sitecore.Mvc
                         if (context.ContextItem == null)
                             return new ValueProviderResult(null, "contextitem", CultureInfo.CurrentCulture);
                         return GetValueResult(context.ContextItem, property);
+
+                    case "pagecontextitem":
+                        if (context.PageContext == null || context.PageContext.Item == null)
+                            return new ValueProviderResult(null, "contextitem", CultureInfo.CurrentCulture);
+                        return GetValueResult(context.PageContext.Item, property);
 
                     case "renderingitem":
                         if (context.Rendering == null || context.Rendering.RenderingItem == null)

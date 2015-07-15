@@ -66,7 +66,7 @@ namespace BoC.Persistence.SitecoreGlass.DataContext
             {
                 return ((SitecoreDataContext) OuterDataContext).GetCultureInfo();
             }
-            return Context.Culture;
+            return Context.Language.CultureInfo;
         }
 
 
