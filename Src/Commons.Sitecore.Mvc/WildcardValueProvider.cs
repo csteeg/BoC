@@ -48,7 +48,7 @@ namespace BoC.Sitecore.Mvc
             using (new SecurityDisabler())
             {
                 var currentWild = wildcardItem.Paths.FullPath.Count(c => c == '*')-1;
-                if (currentWild <= 0)
+                if (currentWild < 0)
                     return null;
                 while (wildcardItem != null)
                 {
