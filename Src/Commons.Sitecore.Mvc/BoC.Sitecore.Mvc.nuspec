@@ -14,10 +14,10 @@
     <copyright>Copyright 2014</copyright>
     <tags>BoC,Persistence,Glass,Mapper,ORM,Repository,Sitecore</tags>
     <dependencies>
-      <dependency id="BoC" version="4.0.0" />
+      <dependency id="BoC" version="4.0.1" />
       <dependency id="BoC.Web.Mvc" version="4.0.0" />
-      <dependency id="Microsoft.AspNet.Mvc" version="5.2.2" />
-      <dependency id="Microsoft.AspNet.WebApi.WebHost" version="5.2.2" />
+      <dependency id="Microsoft.AspNet.Mvc" version="5.2.3" />
+      <dependency id="Microsoft.AspNet.WebApi.WebHost" version="5.2.3" />
     </dependencies>
   </metadata>
 </package>
