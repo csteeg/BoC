@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Glass.Mapper.Sc.Configuration;
 using Glass.Mapper.Sc.Configuration.Attributes;
 using Sitecore.ContentSearch;
@@ -35,6 +36,10 @@ namespace BoC.Persistence.SitecoreGlass.Models
 
         [SitecoreParent(InferType = true, IsLazy = true)]
         ISitecoreItem Parent { get; set; }
+
+        [ScaffoldColumn(false)]
+        [IndexField(BuiltinFields.Path)]
+        IEnumerable<Guid> ParentIds { get; set; }
 
         [SitecoreField("{BA3F86A2-4A1C-4D78-B63D-91C2779C1B5E}", SitecoreFieldType.Integer, "Data", false)]
         int SortOrder { get; set; }

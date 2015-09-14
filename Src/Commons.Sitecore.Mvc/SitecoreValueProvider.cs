@@ -32,7 +32,6 @@ namespace BoC.Sitecore.Mvc
             public ValueProviderResult GetValue(string key)
             {
                 var context = RenderingContext.CurrentOrNull;
-                if (context == null) return null;
 
                 var keyval = key.Split(new[] {'.'}, StringSplitOptions.RemoveEmptyEntries);
                 var prefix = keyval[0];
@@ -40,22 +39,24 @@ namespace BoC.Sitecore.Mvc
                 switch (prefix.ToLowerInvariant())
                 {
                     case "contextitem":
-                        if (context.ContextItem == null)
+                        var contextItem = context == null ? global::Sitecore.Context.Item : context.ContextItem;
+                        if (contextItem == null)
                             return new ValueProviderResult(null, "contextitem", CultureInfo.CurrentCulture);
-                        return GetValueResult(context.ContextItem, property);
+                        return GetValueResult(contextItem, property);
 
                     case "pagecontextitem":
-                        if (context.PageContext == null || context.PageContext.Item == null)
+                        if (context == null || context.PageContext == null || context.PageContext.Item == null)
                             return new ValueProviderResult(null, "contextitem", CultureInfo.CurrentCulture);
                         return GetValueResult(context.PageContext.Item, property);
 
                     case "renderingitem":
-                        if (context.Rendering == null || context.Rendering.RenderingItem == null)
+                        
+                        if (context == null || context.Rendering == null || context.Rendering.RenderingItem == null)
                             return new ValueProviderResult(null, "renderingitem", CultureInfo.CurrentCulture);;
                         return GetValueResult(context.Rendering.RenderingItem.InnerItem, property);
 
                     case "datasource":
-                        if (context.Rendering == null || string.IsNullOrEmpty(context.Rendering.DataSource))
+                        if (context == null || context.Rendering == null || string.IsNullOrEmpty(context.Rendering.DataSource))
                             return new ValueProviderResult(null, "datasource", CultureInfo.CurrentCulture);
                         if (!ID.IsID(context.Rendering.DataSource))
                             return new ValueProviderResult(context.Rendering.DataSource, context.Rendering.DataSource, CultureInfo.CurrentCulture);;
