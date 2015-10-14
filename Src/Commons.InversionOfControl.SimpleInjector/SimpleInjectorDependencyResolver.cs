@@ -310,7 +310,7 @@ namespace BoC.InversionOfControl.SimpleInjector
                 var serviceType = e.UnregisteredServiceType;
                 if (serviceType.IsGenericType && serviceType.GetGenericTypeDefinition() == typeof (IEnumerable<>))
                 {
-                    var producer = container.GetRegistration(serviceType.GetGenericArguments()[0]);
+                    var producer = container.GetRegistration(serviceType.GetGenericArguments()[0], false);
                     if (producer != null)
                     {
                         var listType = typeof (List<>).MakeGenericType(serviceType.GetGenericArguments()[0]);

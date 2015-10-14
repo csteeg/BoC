@@ -344,7 +344,7 @@ namespace BoC.Persistence.SitecoreGlass
                 if (isID || isGuid)
                 {
                     var sitecoreService = _sitecoreServiceProvider.GetSitecoreService();
-                    var config = sitecoreService.GlassContext.GetTypeConfiguration<SitecoreTypeConfiguration>(typeof(T));
+                    var config = sitecoreService.GlassContext.GetTypeConfigurationFromType<SitecoreTypeConfiguration>(typeof(T));
 
                     var pe = Expression.Parameter(typeof(T));
                     var me = Expression.Property(pe, TemplateIdsProperty.PropertyInfo);
@@ -363,7 +363,7 @@ namespace BoC.Persistence.SitecoreGlass
                 if (isString || isLang || isCult)
                 {
                     var sitecoreService = _sitecoreServiceProvider.GetSitecoreService();
-                    var config = sitecoreService.GlassContext.GetTypeConfiguration<SitecoreTypeConfiguration>(typeof(T));
+                    var config = sitecoreService.GlassContext.GetTypeConfigurationFromType<SitecoreTypeConfiguration>(typeof(T));
                     var currentLang = GetLanguage(_dbProvider);
 
                     var pe = Expression.Parameter(typeof(T));

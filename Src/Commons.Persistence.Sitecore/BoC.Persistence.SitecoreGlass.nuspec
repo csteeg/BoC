@@ -10,13 +10,12 @@
     <projectUrl>https://github.com/csteeg/boc</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>BoC,Persistence,Glass,Mapper,ORM,Repository,Sitecore</tags>
     <dependencies>
       <dependency id="Microsoft.AspNet.Mvc" version="5.2.3" />
       <dependency id="BoC" version="4.0.1" />
-      <dependency id="BoC.Glass.Mapper.Sc" version="4.0.0" />
+      <dependency id="BoC.Glass.Mapper.Sc" version="4.0.3" />
       <dependency id="BoC.Glass.Mapper.Sc.ContentSearch.LuceneProvider" version="4.0.0" />
       <dependency id="Castle.Core" version="3.3.3" />
       <dependency id="Lucene.Net" version="3.0.3" />
