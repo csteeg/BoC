@@ -119,6 +119,7 @@
     <Compile Include="ComponentModel\TypeExtension\DefaultSetupTasks\RegisterExtentedTypesRegistry.cs" />
     <Compile Include="ComponentModel\TypeExtension\DefaultSetupTasks\RegisterTypeDescriptor.cs" />
     <Compile Include="ComponentModel\TypeExtension\ExtendedTypeDescriptor.cs" />
+    <Compile Include="Dynamic\NullingExpandoObject.cs" />
     <Compile Include="EventAggregator\DefaultSetupTasks\InitEventAggregatorTask.cs" />
     <Compile Include="Events\DeletedEvent.cs" />
     <Compile Include="Events\DeletingEvent.cs" />

@@ -1,4 +1,5 @@
 using System;
+using log4net;
 using Sitecore.Diagnostics;
 
 namespace BoC.Logging.Sitecore
@@ -6,18 +7,57 @@ namespace BoC.Logging.Sitecore
     [Serializable]
     public class SitecoreLogger : ILogger
     {
-        private Type ownerType = typeof(SitecoreLogger);
-        public Type OwnerType
+        public bool IsDebugEnabled { get { return Log.IsDebugEnabled; } }
+
+        public bool IsInfoEnabled
         {
-            get { return ownerType; }
-            set { ownerType = value; }
+            get
+            {
+                if (!Log.Enabled)
+                    return false;
+                ILog logger = LoggerFactory.GetLogger(typeof(Log));
+                if (logger != null)
+                    return logger.IsInfoEnabled;
+                return false;
+            }
         }
 
-        public bool IsDebugEnabled { get { return true; } }
-        public bool IsInfoEnabled { get { return true; } }
-        public bool IsWarnEnabled { get { return true; } }
-        public bool IsErrorEnabled { get { return true; } }
-        public bool IsFatalEnabled { get { return true; } }
+        public bool IsWarnEnabled
+        {
+            get
+            {
+                if (!Log.Enabled)
+                    return false;
+                ILog logger = LoggerFactory.GetLogger(typeof(Log));
+                if (logger != null)
+                    return logger.IsWarnEnabled;
+                return false;
+            }
+        }
+        public bool IsErrorEnabled
+        {
+            get
+            {
+                if (!Log.Enabled)
+                    return false;
+                ILog logger = LoggerFactory.GetLogger(typeof(Log));
+                if (logger != null)
+                    return logger.IsErrorEnabled;
+                return false;
+            }
+        }
+        public bool IsFatalEnabled
+        {
+            get
+            {
+                if (!Log.Enabled)
+                    return false;
+                ILog logger = LoggerFactory.GetLogger(typeof(Log));
+                if (logger != null)
+                    return logger.IsErrorEnabled;
+                return false;
+            }
+        }
 
         public IDisposable Stack(string name)
         {

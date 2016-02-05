@@ -57,7 +57,6 @@ namespace BoC.Logging
     /// </remarks>
     public interface ILogger
     {
-        Type OwnerType { get; set; }
         IDisposable Stack(string name);
 
         #region Debug

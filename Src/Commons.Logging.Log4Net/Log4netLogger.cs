@@ -22,12 +22,7 @@ namespace BoC.Logging
     [Serializable]
     public class Log4netLogger : ILogger
     {
-        private Type ownerType = typeof(Log4netLogger);
-        public Type OwnerType
-        {
-            get { return ownerType; }
-            set { ownerType = value; }
-        }
+        private static Type ownerType = typeof(ILogger);
 
         public IDisposable Stack(string name)
         {

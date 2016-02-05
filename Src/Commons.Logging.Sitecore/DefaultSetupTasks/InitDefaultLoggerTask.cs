@@ -16,7 +16,7 @@ namespace BoC.Logging.Sitecore.DefaultSetupTasks
             if (!dependencyResolver.IsRegistered<ILogger>())
             {
                 log4net.Config.XmlConfigurator.Configure();
-                dependencyResolver.RegisterType<ILogger, SitecoreLogger>();
+                dependencyResolver.RegisterSingleton<ILogger, SitecoreLogger>();
             }
         }
     }
