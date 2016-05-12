@@ -27,9 +27,9 @@ namespace BoC.Persistence.DefaultSetupTasks
             if (orm != null && !orm.Equals("nhibernate", StringComparison.InvariantCultureIgnoreCase))
                 return;
 
-            IPersistenceConfigurer db = null;
-            if (!dependencyResolver.IsRegistered<IPersistenceConfigurer>())
+            if (!dependencyResolver.IsRegistered<ISessionFactory>())
             {
+                IPersistenceConfigurer db = null;
                 foreach (ConnectionStringSettings connectionString in ConfigurationManager.ConnectionStrings)
                 {
                     if (!String.IsNullOrEmpty(connectionString.Name) && connectionString.Name.EndsWith("nhibernate", StringComparison.InvariantCultureIgnoreCase))
@@ -47,21 +47,12 @@ namespace BoC.Persistence.DefaultSetupTasks
                         break;
                     }
                 }
-            }
-            else
-            {
-                db = dependencyResolver.Resolve<IPersistenceConfigurer>();
-            }
+                if (db == null)
+                {
+                    throw new Exception("Could not find a connectionstring that ends with 'nhibernate'. If you want to configure your own db connection, you should register an IPersistenceConfigurer");
+                }
 
-            if (db == null)
-            {
-                throw new Exception("Could not find a connectionstring that ends with 'nhibernate'. If you want to configure your own db connection, you should register an IPersistenceConfigurer");
-            }
-
-            dependencyResolver.RegisterInstance<IPersistenceConfigurer>(db);
-            if (!dependencyResolver.IsRegistered<ISessionFactory>())
-            {
-                NHibernateConfigHelper.SetupAutoMapperForEntities(dependencyResolver);
+                NHibernateConfigHelper.SetupAutoMapperForEntities(db, dependencyResolver);
             }
 
             if (!dependencyResolver.IsRegistered<ISessionManager>())

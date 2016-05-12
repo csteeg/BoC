@@ -15,8 +15,8 @@
     <dependencies>
       <dependency id="Microsoft.AspNet.Mvc" version="5.2.3" />
       <dependency id="BoC" version="4.0.1" />
-      <dependency id="BoC.Glass.Mapper.Sc" version="4.1.2" />
-      <dependency id="BoC.Glass.Mapper.Sc.ContentSearch.LuceneProvider" version="4.1.2" />
+      <dependency id="BoC.Glass.Mapper.Sc" version="4.1.9" />
+      <dependency id="BoC.Glass.Mapper.Sc.ContentSearch.LuceneProvider" version="4.1.9" />
       <dependency id="Castle.Core" />
       <dependency id="Lucene.Net" version="3.0.3" />
       <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
