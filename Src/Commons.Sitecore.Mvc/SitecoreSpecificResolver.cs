@@ -17,17 +17,21 @@ namespace BoC.Sitecore.Mvc
         }
 
 
-        public override object GetService(Type serviceType)
+      public override object GetService(Type serviceType)
+      {
+        //sitecore "injects" it's own dependencies in it's controllers (and others), so don't resolve sitecore classes, just construct them
+        //now habitat also uses sitecore.* names for their dll's, let's skip those as much as possible
+        if (!serviceType.Assembly.FullName.StartsWith("sitecore.feature.", StringComparison.InvariantCultureIgnoreCase)
+            && !serviceType.Assembly.FullName.StartsWith("sitecore.foundation.", StringComparison.InvariantCultureIgnoreCase)
+            && !serviceType.Assembly.FullName.StartsWith("sitecore.common.", StringComparison.InvariantCultureIgnoreCase)
+            && serviceType.Assembly.FullName.StartsWith("sitecore.", StringComparison.InvariantCultureIgnoreCase))
         {
-            //sitecore "injects" it's own dependencies in it's controllers (and others), so don't resolve sitecore classes, just construct them
-            if (serviceType.Assembly.FullName.StartsWith("sitecore.", StringComparison.InvariantCultureIgnoreCase))
-            {
-                return Activator.CreateInstance(serviceType);
-            }
-            return base.GetService(serviceType);
+          return Activator.CreateInstance(serviceType);
         }
+        return base.GetService(serviceType);
+      }
 
-        public override IDependencyScope BeginScope()
+      public override IDependencyScope BeginScope()
         {
             return new SitecoreSpecificResolver(_resolver.CreateChildResolver());
         }
