@@ -15,7 +15,7 @@ namespace BoC.Profiling.DefaultSetupTasks
 
         public void Execute()
         {
-            _resolver.RegisterSingleton<Profiler, Profiler>();
+            _resolver.RegisterType<Profiler, Profiler>();
         }
    }
 }

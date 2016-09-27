@@ -37,7 +37,7 @@ namespace BoC.InversionOfControl.SimpleInjector
         /// Initializes a new instance of the <see cref="SimpleInjectorDependencyResolver"/> class.
         /// </summary>
         public SimpleInjectorDependencyResolver()
-            : this(AllowResolveSingleAsEnumerable(AllowToResolveArraysAndLists(new Container())))
+            : this(AllowEmptyCollections(AllowMultipleConstructors(AllowResolveSingleAsEnumerable(new Container() { }))))
         {
         }
 
@@ -55,8 +55,16 @@ namespace BoC.InversionOfControl.SimpleInjector
             }
         }
 
+      /// <summary>
+      /// The _container
+      /// </summary>
+      public Container Container
+      {
+        get { return _container; }
+      }
 
-        /// <summary>
+
+      /// <summary>
         /// Resolves this instance.
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -226,7 +234,7 @@ namespace BoC.InversionOfControl.SimpleInjector
                     }) as Registration);
             }
             else
-                _container.RegisterSingle<TRegisteredAs>(instance);
+                _container.RegisterSingleton<TRegisteredAs>(instance);
         }
 
         /// <summary>
@@ -252,7 +260,7 @@ namespace BoC.InversionOfControl.SimpleInjector
                 _container.AppendToCollection(@from, Lifestyle.Singleton.CreateRegistration(@from, to, _container));
             }
             else
-                _container.RegisterSingle(@from, to);
+                _container.RegisterSingleton(@from, to);
         }
 
         /// <summary>
@@ -303,6 +311,18 @@ namespace BoC.InversionOfControl.SimpleInjector
             }
         }
 
+        public static Container AllowMultipleConstructors(Container container)
+        {
+          container.Options.ConstructorResolutionBehavior = new AllowMultipleConstructorResolutionBehavior();
+          return container;
+        }
+
+        public static Container AllowEmptyCollections(Container container)
+        {
+          container.Options.ResolveUnregisteredCollections = true;
+          return container;
+        }
+
         public static Container AllowResolveSingleAsEnumerable(Container container)
         {
             container.ResolveUnregisteredType += (sender, e) =>
@@ -325,33 +345,6 @@ namespace BoC.InversionOfControl.SimpleInjector
             };
             return container;
         }
-
-        public static Container AllowToResolveArraysAndLists(Container container)
-        {
-            container.ResolveUnregisteredType += (sender, e) =>
-            {
-                var serviceType = e.UnregisteredServiceType;
-
-                if (serviceType.IsArray)
-                {
-                    RegisterArrayResolver(e, container, serviceType.GetElementType());
-                }
-                else if (serviceType.IsGenericType && serviceType.GetGenericTypeDefinition() == typeof(IList<>))
-                {
-                    RegisterArrayResolver(e, container, serviceType.GetGenericArguments()[0]);
-                }
-            };
-            return container;
-        }
-
-        private static void RegisterArrayResolver(UnregisteredTypeEventArgs e, Container container, Type elementType)
-        {
-            var producer = container.GetRegistration(typeof(IEnumerable<>).MakeGenericType(elementType));
-            var enumerableExpression = producer.BuildExpression();
-            var arrayMethod = typeof(Enumerable).GetMethod("ToArray").MakeGenericMethod(elementType);
-            var arrayExpression = Expression.Call(arrayMethod, enumerableExpression);
-
-            e.Register(arrayExpression);
-        }
+    
     }
 }

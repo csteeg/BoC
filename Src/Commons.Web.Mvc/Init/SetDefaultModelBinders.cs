@@ -10,10 +10,14 @@ namespace BoC.Web.Mvc.Init
     {
         public void Execute()
         {
-            ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder());
-            ModelBinders.Binders.Add(typeof(DateTime?), new DateTimeModelBinder());
-			ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
-			ModelBinders.Binders.Add(typeof(decimal?), new DecimalModelBinder());
+            if (!ModelBinders.Binders.ContainsKey(typeof(DateTime)))
+                ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder());
+            if (!ModelBinders.Binders.ContainsKey(typeof(DateTime?)))
+                ModelBinders.Binders.Add(typeof(DateTime?), new DateTimeModelBinder());
+            if (!ModelBinders.Binders.ContainsKey(typeof(decimal)))
+                ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
+            if (!ModelBinders.Binders.ContainsKey(typeof(decimal?)))
+                ModelBinders.Binders.Add(typeof(decimal?), new DecimalModelBinder());
 
         }
 
