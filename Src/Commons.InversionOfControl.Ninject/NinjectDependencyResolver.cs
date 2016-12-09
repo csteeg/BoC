@@ -69,14 +69,24 @@ namespace BoC.InversionOfControl.Ninject
             return IsRegistered(typeof (T));
         }
 
-        public void RegisterFactory(Type @from, Func<object> factory)
+	    public void RegisterFactory(Type @from, Func<object> factory)
+	    {
+		    RegisterFactory(@from, factory, LifetimeScope.Transient);
+	    }
+
+		public void RegisterFactory(Type @from, Func<object> factory, LifetimeScope scope)
         {
-            _kernel.Bind(@from).ToMethod(c => factory());
+            _kernel.Bind(@from).ToMethod(c => factory()).SetLifeStyle(scope);
         }
 
-        public void RegisterFactory<TFrom>(Func<TFrom> factory) where TFrom : class
-        {
-            _kernel.Bind<TFrom>().ToMethod(c => factory());
+	    public void RegisterFactory<TFrom>(Func<TFrom> factory) where TFrom : class
+	    {
+			RegisterFactory<TFrom>(factory, LifetimeScope.Transient);
+	    }
+
+		public void RegisterFactory<TFrom>(Func<TFrom> factory, LifetimeScope scope) where TFrom : class
+		{ 
+			_kernel.Bind<TFrom>().ToMethod(c => factory()).SetLifeStyle(scope);
         }
 
         public IDependencyResolver CreateChildResolver()

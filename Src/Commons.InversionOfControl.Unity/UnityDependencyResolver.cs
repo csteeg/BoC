@@ -55,10 +55,15 @@ namespace BoC.InversionOfControl.Unity
                 _container.RegisterType<TFrom, TTo>(GetLifetimeManager(scope));
         }
 
-        public void RegisterFactory<TFrom>(Func<TFrom> factory) where TFrom : class
+	    public void RegisterFactory<TFrom>(Func<TFrom> factory) where TFrom : class
+	    {
+		    RegisterFactory<TFrom>(factory, LifetimeScope.Transient);
+	    }
+
+		public void RegisterFactory<TFrom>(Func<TFrom> factory, LifetimeScope scope) where TFrom : class
         {
             using (Profiler.StartContext("UnityDependencyResolver.RegisterFactory<{0}>()", typeof(TFrom)))
-                _container.RegisterType<TFrom>(new InjectionFactory(c => factory()));
+                _container.RegisterType<TFrom>(GetLifetimeManager(scope), new InjectionFactory(c => factory()));
         }
 
         public IDependencyResolver CreateChildResolver()
@@ -67,10 +72,16 @@ namespace BoC.InversionOfControl.Unity
                 return new UnityDependencyResolver(_container.CreateChildContainer());
         }
 
-        public void RegisterFactory(Type from, Func<object> factory)
+	    public void RegisterFactory(Type from, Func<object> factory)
+	    {
+		    RegisterFactory(@from, factory, LifetimeScope.Transient);
+	    }
+
+
+		public void RegisterFactory(Type from, Func<object> factory, LifetimeScope scope)
         {
             using (Profiler.StartContext("UnityDependencyResolver.RegisterFactory({0})", from))
-                _container.RegisterType(from, new InjectionFactory(c => factory()));
+                _container.RegisterType(from, GetLifetimeManager(scope), new InjectionFactory(c => factory()));
         }
 
         public virtual void RegisterType(Type from, Type to, LifetimeScope scope = LifetimeScope.Transient)

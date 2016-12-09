@@ -174,30 +174,39 @@ namespace BoC.InversionOfControl.SimpleInjector
             return IsRegistered(typeof (T));
         }
 
-        /// <summary>
-        /// Registers the factory.
-        /// </summary>
-        /// <param name="from">From.</param>
-        /// <param name="factory">The factory.</param>
-        public void RegisterFactory(Type @from, Func<object> factory)
+	    public void RegisterFactory(Type @from, Func<object> factory)
+	    {
+		    RegisterFactory(@from, factory, LifetimeScope.Transient);
+	    }
+		/// <summary>
+		/// Registers the factory.
+		/// </summary>
+		/// <param name="from">From.</param>
+		/// <param name="factory">The factory.</param>
+		public void RegisterFactory(Type @from, Func<object> factory, LifetimeScope scope)
         {
             if (IsRegistered(from))
             {
                 RegisterFirstInCollection(from);
-                _container.AppendToCollection(@from, Lifestyle.Transient.CreateRegistration(@from, factory, _container));
+                _container.AppendToCollection(@from, GetLifestyle(scope).CreateRegistration(@from, factory, _container));
             }
             else
-                _container.AddRegistration(@from, Lifestyle.Transient.CreateRegistration(@from, factory, _container));
+                _container.AddRegistration(@from, GetLifestyle(scope).CreateRegistration(@from, factory, _container));
         }
 
-        /// <summary>
-        /// Registers the factory.
-        /// </summary>
-        /// <typeparam name="TFrom">The type of from.</typeparam>
-        /// <param name="factory">The factory.</param>
-        public void RegisterFactory<TFrom>(Func<TFrom> factory) where TFrom : class
+	    public void RegisterFactory<TFrom>(Func<TFrom> factory)
+		    where TFrom : class
+	    {
+		    RegisterFactory<TFrom>(factory, LifetimeScope.Transient);
+	    }
+		/// <summary>
+		/// Registers the factory.
+		/// </summary>
+		/// <typeparam name="TFrom">The type of from.</typeparam>
+		/// <param name="factory">The factory.</param>
+		public void RegisterFactory<TFrom>(Func<TFrom> factory, LifetimeScope scope) where TFrom : class
         {
-            this.RegisterFactory(typeof(TFrom), factory);
+            this.RegisterFactory(typeof(TFrom), factory, scope);
         }
 
         /// <summary>
@@ -323,7 +332,13 @@ namespace BoC.InversionOfControl.SimpleInjector
           return container;
         }
 
-        public static Container AllowResolveSingleAsEnumerable(Container container)
+	    public void AllowLifestyleMismatchVerification()
+	    {
+		    _container.Options.SuppressLifestyleMismatchVerification = true;
+	    }
+
+
+		public static Container AllowResolveSingleAsEnumerable(Container container)
         {
             container.ResolveUnregisteredType += (sender, e) =>
             {

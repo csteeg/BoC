@@ -55,14 +55,15 @@ namespace BoC.InversionOfControl.Unity
         }
         private void OnNewType(object sender, RegisterEventArgs e)
         {
-            if (e.TypeFrom == null)
+	        var type = e.TypeFrom ?? e.TypeTo;
+			if (type == null)
                 return;
 
             HashSet<string> names;
             string name = string.IsNullOrEmpty(e.Name) ? string.Empty : e.Name;
-            if (!registeredTypes.TryGetValue(e.TypeFrom, out names))
+            if (!registeredTypes.TryGetValue(type, out names))
             { //  not found, so add it
-                registeredTypes.Add(e.TypeFrom, new HashSet<string> { name });
+                registeredTypes.Add(type, new HashSet<string> { name });
             }
             else
             { //  already added type, so add name
