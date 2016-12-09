@@ -43,7 +43,7 @@ namespace BoC.Persistence.NHibernate
                 ;
         }
 
-        public static void SetupAutoMapperForEntities(IPersistenceConfigurer database, IDependencyResolver dependencyResolver, params Assembly[] assemblies)
+        public static Configuration SetupAutoMapperForEntities(IPersistenceConfigurer database, IDependencyResolver dependencyResolver, params Assembly[] assemblies)
         {
             var config = Fluently.Configure().Database(database)
                 .Cache(cache => cache.UseQueryCache().ProviderClass<SysCacheProvider>().QueryCacheFactory<ProjectionEnabledQueryCacheFactory>())
@@ -123,12 +123,7 @@ namespace BoC.Persistence.NHibernate
 #endif
             );
 
-            var nhconfig = config.BuildConfiguration();
-            var sessionFactory = nhconfig.BuildSessionFactory();
-            //dependencyResolver.RegisterInstance<Configuration>(nhconfig);
-            dependencyResolver.RegisterInstance<ISessionFactory>(sessionFactory);
-
-            new SchemaUpdate(nhconfig).Execute(true, true);
+            return config.BuildConfiguration();
         }
     }
 }

@@ -9,6 +9,7 @@ using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Caches.SysCache2;
 using NHibernate.Context;
+using NHibernate.Tool.hbm2ddl;
 
 namespace BoC.Persistence.DefaultSetupTasks
 {
@@ -52,7 +53,13 @@ namespace BoC.Persistence.DefaultSetupTasks
                     throw new Exception("Could not find a connectionstring that ends with 'nhibernate'. If you want to configure your own db connection, you should register an IPersistenceConfigurer");
                 }
 
-                NHibernateConfigHelper.SetupAutoMapperForEntities(db, dependencyResolver);
+                var nhconfig = NHibernateConfigHelper.SetupAutoMapperForEntities(db, dependencyResolver);
+                var sessionFactory = nhconfig.BuildSessionFactory();
+                //dependencyResolver.RegisterInstance<Configuration>(nhconfig);
+                dependencyResolver.RegisterInstance<ISessionFactory>(sessionFactory);
+                if (!"false".Equals(ConfigurationManager.AppSettings["BoC.Persistence.Nhibernate.SchemaUpdate"], StringComparison.InvariantCultureIgnoreCase))
+                    new SchemaUpdate(nhconfig).Execute(true, true);
+
             }
 
             if (!dependencyResolver.IsRegistered<ISessionManager>())
