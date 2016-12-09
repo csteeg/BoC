@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{81534C53-EB1A-48D0-A814-786F57B32F4D}</ProjectGuid>
+    <ProjectGuid>{254CCEF0-FB8C-4E93-9245-635CC9CDCD3E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BoC.Persistence.SitecoreGlass</RootNamespace>
-    <AssemblyName>BoC.Persistence.SitecoreGlass</AssemblyName>
+    <AssemblyName>BoC.Persistence.SitecoreGlass.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -35,14 +35,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BoC, Version=4.0.2.1, Culture=neutral, PublicKeyToken=b66b1a10e1d96b4d, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BoC.4.0.2.1\lib\net40\BoC.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="BoC.Persistence.SitecoreGlass.Core, Version=4.3.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BoC.Persistence.SitecoreGlass.Core.4.3.2.0\lib\net45\BoC.Persistence.SitecoreGlass.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="BoC.Persistence.SitecoreGlass.Models, Version=4.3.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\BoC.Persistence.SitecoreGlass.Models.4.3.2.0\lib\net45\BoC.Persistence.SitecoreGlass.Models.dll</HintPath>
       <Private>True</Private>
@@ -140,33 +132,37 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefaultSetupTasks\EnableProfiling.cs" />
-    <Compile Include="DefaultSetupTasks\RegisterValueProvider.cs">
-      <SubType>
-      </SubType>
-    </Compile>
-    <Compile Include="DefaultSetupTasks\RegisterConfigLoader.cs" />
-    <Compile Include="DefaultSetupTasks\BaseModelConfigurationLoader.cs" />
-    <Compile Include="GlassConfig\AppDomainHelperConfigLoader.cs" />
-    <Compile Include="DefaultSetupTasks\AutoSitecoreConfigurator.cs" />
-    <Compile Include="DefaultSetupTasks\AutoSitecoreRepositoryGenerator.cs" />
-    <Compile Include="DefaultSetupTasks\RegisterPerformanceProfilers.cs" />
-    <Compile Include="Initialize\InitBoc.cs" />
+    <Compile Include="DataContext\SitecoreDataContextDatabaseProvider.cs" />
+    <Compile Include="ContextDatabaseProvider.cs" />
+    <Compile Include="IIndexSearchContextProvider.cs" />
+    <Compile Include="CustomDatabaseProvider.cs" />
+    <Compile Include="IDatabaseProvider.cs" />
+    <Compile Include="IIndexNameProvider.cs" />
+    <Compile Include="ISitecoreServiceProvider.cs" />
+    <Compile Include="TemplateParametersValueProviderFactory.cs" />
+    <Compile Include="Profiling\SitecorePerformanceProfiler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SitecoreRepository.cs" />
+    <Compile Include="SitecoreServiceProvider.cs" />
+    <Compile Include="ContentSearchContextIndexNameProvider.cs" />
+    <Compile Include="DataContext\SitecoreBucketDataContext.cs" />
+    <Compile Include="DataContext\SitecoreDataContext.cs" />
+    <Compile Include="DataContext\SitecoreDataContextIndexSearchContextProvider.cs" />
+    <Compile Include="DataContext\DataContextException.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Commons\BoC.csproj">
+      <Project>{25c350af-4957-47e8-960a-6c59794c5def}</Project>
+      <Name>BoC</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="App_Config\Include\Glass\Glass.Mapper.Sc.ContentSearch.Lucene.Config" />
-    <None Include="App_Start\GlassMapperScCustom.BoC.cs.pp" />
-    <None Include="BoC.Persistence.SitecoreGlass.nuspec">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="BoC.Persistence.SitecoreGlass.Core.nuspec" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="License.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

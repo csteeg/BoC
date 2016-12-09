@@ -1,6 +1,10 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using BoC.Persistence.SitecoreGlass;
+using BoC.Persistence.SitecoreGlass.DataContext;
+using BoC.Persistence.SitecoreGlass.Models;
+using BoC.Persistence.SitecoreGlass.Profiling;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -32,5 +36,25 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("4.2.0.2")]
-[assembly: AssemblyFileVersion("4.2.0.2")]
+[assembly: AssemblyVersion("4.3.3.2")]
+[assembly: AssemblyFileVersion("4.3.3.2")]
+
+[assembly: TypeForwardedTo(typeof(DataContextException))]
+[assembly: TypeForwardedTo(typeof(SitecoreBucketDataContext))]
+[assembly: TypeForwardedTo(typeof(SitecoreDataContext))]
+[assembly: TypeForwardedTo(typeof(SitecoreDataContextDatabaseProvider))]
+[assembly: TypeForwardedTo(typeof(SitecoreDataContextIndexSearchContextProvider))]
+[assembly: TypeForwardedTo(typeof(ContentSearchContextIndexNameProvider))]
+[assembly: TypeForwardedTo(typeof(SitecorePerformanceProfiler))]
+[assembly: TypeForwardedTo(typeof(ContextDatabaseProvider))]
+[assembly: TypeForwardedTo(typeof(CustomDatabaseProvider))]
+[assembly: TypeForwardedTo(typeof(IDatabaseProvider))]
+[assembly: TypeForwardedTo(typeof(IIndexNameProvider))]
+[assembly: TypeForwardedTo(typeof(IProviderSearchContextProvider))]
+[assembly: TypeForwardedTo(typeof(ISitecoreServiceProvider))]
+[assembly: TypeForwardedTo(typeof(SitecoreRepository<>))]
+[assembly: TypeForwardedTo(typeof(SitecoreServiceProvider))]
+[assembly: TypeForwardedTo(typeof(ParametersTemplateValueProviderFactory))]
+[assembly: TypeForwardedTo(typeof(ISearchable))]
+[assembly: TypeForwardedTo(typeof(ISitecoreItem))]
+[assembly: TypeForwardedTo(typeof(SitecoreItem))]

@@ -10,6 +10,7 @@ using Glass.Mapper.Sc.Configuration;
 using Sitecore;
 using Sitecore.Caching;
 using Sitecore.ContentSearch;
+using Sitecore.ContentSearch.Utilities;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Data.Managers;
@@ -17,8 +18,7 @@ using Sitecore.Globalization;
 
 namespace BoC.Persistence.SitecoreGlass
 {
-
-    public class SitecoreRepository<T> : IRepository<T> where T : class, IBaseEntity<Guid>, new()
+    public class SitecoreRepository<T> : IRepository<T> where T : class, IBaseEntity<Guid>, ISearchResult, new()
     {
         private readonly IDatabaseProvider _dbProvider;
         private readonly ISitecoreServiceProvider _sitecoreServiceProvider;
@@ -30,7 +30,7 @@ namespace BoC.Persistence.SitecoreGlass
         private SitecoreInfoConfiguration _templateIdsProperty;
         private SitecoreInfoConfiguration _languageProperty;
 
-        public SitecoreRepository(  IDatabaseProvider dbProvider, 
+        public SitecoreRepository(IDatabaseProvider dbProvider,
                                     ISitecoreServiceProvider sitecoreServiceProvider,
                                     IProviderSearchContextProvider searchContextProvider,
                                     ILogger logger)
@@ -88,14 +88,14 @@ namespace BoC.Persistence.SitecoreGlass
                             return result;
                     }
                 }
-                if (PathProperty == null) 
+                if (PathProperty == null)
                     return null;
-                
+
                 var path = (PathProperty.PropertyInfo.GetValue(model, null) + "").TrimEnd('/');
                 path = path.Substring(0, path.LastIndexOf('/')) + "/";
-                if (path == "/") 
+                if (path == "/")
                     return null;
-                
+
                 var parent = GetAndConvertItem<IBaseEntity<Guid>>(path, GetLanguage(_dbProvider));
                 return parent;
             }
@@ -147,7 +147,7 @@ namespace BoC.Persistence.SitecoreGlass
                 {
                     var parent = GetParent(model);
 
-                    _logger.Debug(String.Format("Saving {0} (id: {1}, language: {2}, displayname: {3}", typeof (T),
+                    _logger.Debug(String.Format("Saving {0} (id: {1}, language: {2}, displayname: {3}", typeof(T),
                         model.Id, language, model));
                     if (model.Id == Guid.Empty)
                     {
@@ -211,7 +211,7 @@ namespace BoC.Persistence.SitecoreGlass
             return GetAndConvertItem<T>(id, language);
         }
 
-        protected virtual TargetClass GetAndConvertItem<TargetClass>(object id, Language language) where TargetClass: class
+        protected virtual TargetClass GetAndConvertItem<TargetClass>(object id, Language language) where TargetClass : class
         {
             ID itemid = id is ID ? (ID)id : (id is Guid ? new ID((Guid)id) : ID.Null);
             if (itemid == ID.Null && ID.IsID(id + ""))
@@ -266,8 +266,8 @@ namespace BoC.Persistence.SitecoreGlass
         public virtual void Delete(T model)
         {
             var language = GetLanguage(_dbProvider);
-            _logger.Debug(String.Format("Deleting {0} (id: {1}, language: {2}, displayname: {3}", typeof (T), model.Id, language, model));
-            using (Profiler.StartContext("SitecoreRepository.Delete for {0}",model.Id))
+            _logger.Debug(String.Format("Deleting {0} (id: {1}, language: {2}, displayname: {3}", typeof(T), model.Id, language, model));
+            using (Profiler.StartContext("SitecoreRepository.Delete for {0}", model.Id))
             {
                 using (new LanguageSwitcher(language))
                     _sitecoreServiceProvider.GetSitecoreService().Delete(model);
@@ -280,6 +280,17 @@ namespace BoC.Persistence.SitecoreGlass
             {
                 var query = _searchContextProvider.GetProviderSearchContext()
                     .GetQueryable<T>(new CultureExecutionContext(GetLanguage(_dbProvider).CultureInfo));
+                return AddStandardQueries(query);
+            }
+
+        }
+
+        public virtual IQueryable<T> Query(string luceneQuery)
+        {
+            using (Profiler.StartContext("SitecoreRepository.Query()"))
+            {
+                var context = _searchContextProvider.GetProviderSearchContext();
+                var query = LinqHelper.CreateQuery<T>(context, luceneQuery);
                 return AddStandardQueries(query);
             }
 
@@ -335,10 +346,10 @@ namespace BoC.Persistence.SitecoreGlass
         T IRepository<T>.Get(object id)
         {
             if (id is Guid)
-                return this.Get((Guid) id);
+                return this.Get((Guid)id);
             if (ID.IsID(id + ""))
                 return this.Get(new ID(id + "").ToGuid());
-            
+
             return this.Get(id + "");
         }
 

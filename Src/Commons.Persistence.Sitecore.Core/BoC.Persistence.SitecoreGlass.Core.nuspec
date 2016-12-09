@@ -14,9 +14,9 @@
     <tags>BoC,Persistence,Glass,Mapper,ORM,Repository,Sitecore</tags>
     <dependencies>
       <dependency id="Microsoft.AspNet.Mvc" version="5.2.3" />
-      <dependency id="BoC" version="4.0.4" />
-      <dependency id="BoC.Persistence.SitecoreGlass.Core" version="4.3.2.0" />
-      <dependency id="BoC.Glass.Mapper.Sc" version="4.2.4.2" />
+      <dependency id="BoC" version="4.0.2.1" />
+      <dependency id="BoC.Persistence.SitecoreGlass.Models" version="4.3.2.0" />
+      <dependency id="BoC.Glass.Mapper.Sc.Core" version="4.2.4.2" />
       <dependency id="BoC.Glass.Mapper.Sc.ContentSearch.LuceneProvider" version="4.2.4.2" />
       <dependency id="Castle.Core" version="3.3.3"  />
       <dependency id="Lucene.Net" version="3.0.3" />
@@ -25,7 +25,4 @@
       <dependency id="WebActivatorEx" version="2.0" />
     </dependencies>
   </metadata>
-  <files>
-    <file src="App_Start\**.*" target="content\App_Start\" />
-  </files>
 </package>
