@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>$version$-preview1</version>
+    <version>$version$</version>
     <title>$title$</title>
     <authors>Chris van de Steeg</authors>
     <owners>Chris van de Steeg</owners>
@@ -13,8 +13,8 @@
     <copyright>Copyright 2014</copyright>
     <tags>BoC,InversionOfControl,DryIOC</tags>
     <dependencies>
-      <dependency id="BoC" version="4.0.0" />
-      <dependency id="DryIoC" version="2.0.0-rc1build286" />
+      <dependency id="BoC" version="4.0.3.2" />
+      <dependency id="DryIoC" version="2.7.1" />
     </dependencies>
   </metadata>
 </package>

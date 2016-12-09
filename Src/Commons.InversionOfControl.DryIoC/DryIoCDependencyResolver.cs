@@ -31,7 +31,7 @@ namespace BoC.InversionOfControl.DryIoC
             var container = new Container(
                 rules => rules
                     .With(FactoryMethod.ConstructorWithResolvableArguments)
-                    .WithUnknownServiceResolver(GetUnregisteredFactory)
+					.WithUnknownServiceResolvers(GetUnregisteredFactory)
             );
             _container = container;
         }
@@ -137,14 +137,18 @@ namespace BoC.InversionOfControl.DryIoC
             return IsRegistered(typeof (T));
         }
 
-        /// <summary>
-        /// Registers the factory.
-        /// </summary>
-        /// <param name="from">From.</param>
-        /// <param name="lambda">The lambda.</param>
-        public void RegisterFactory(Type @from, Func<object> lambda)
+	    public void RegisterFactory(Type @from, Func<object> lambda)
+	    {
+			RegisterFactory(@from, lambda, LifetimeScope.Transient);
+	    }
+		/// <summary>
+		/// Registers the factory.
+		/// </summary>
+		/// <param name="from">From.</param>
+		/// <param name="lambda">The lambda.</param>
+		public void RegisterFactory(Type @from, Func<object> lambda, LifetimeScope scope)
         {
-            _container.RegisterDelegate(@from, resolver => lambda);
+            _container.RegisterDelegate(@from, resolver => lambda, GetReuse(scope));
         }
 
         /// <summary>
@@ -152,16 +156,21 @@ namespace BoC.InversionOfControl.DryIoC
         /// </summary>
         /// <typeparam name="TFrom">The type of from.</typeparam>
         /// <param name="factory">The factory.</param>
-        public void RegisterFactory<TFrom>(Func<TFrom> factory) where TFrom : class
+        public void RegisterFactory<TFrom>(Func<TFrom> factory, LifetimeScope scope) where TFrom : class
         {
-            _container.RegisterDelegate<TFrom>(r => factory());
+            _container.RegisterDelegate<TFrom>(r => factory(), GetReuse(scope));
         }
 
-        /// <summary>
-        /// Creates the child resolver.
-        /// </summary>
-        /// <returns></returns>
-        public IDependencyResolver CreateChildResolver()
+		public void RegisterFactory<TFrom>(Func<TFrom> factory) where TFrom : class
+		{
+			RegisterFactory<TFrom>(factory, LifetimeScope.Transient);
+		}
+
+		/// <summary>
+		/// Creates the child resolver.
+		/// </summary>
+		/// <returns></returns>
+		public IDependencyResolver CreateChildResolver()
         {
             return new DryIoCDependencyResolver(_container.OpenScope());
         }
