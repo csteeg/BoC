@@ -11,7 +11,10 @@ namespace BoC.Web.Mvc.Init
 {
     public class SetDefaultModelMetaDataProvider : IContainerInitializer
     {
-        private readonly IDependencyResolver dependencyResolver;
+		public static bool SkipRegisterModelMetadataProvider { get; set; }
+		public static bool SkipRegisterExtendedTypesRegistry { get; set; }
+
+		private readonly IDependencyResolver dependencyResolver;
 
         public SetDefaultModelMetaDataProvider(IDependencyResolver dependencyResolver)
         {
@@ -20,11 +23,11 @@ namespace BoC.Web.Mvc.Init
 
         public void Execute()
         {
-            if (!(dependencyResolver.IsRegistered(typeof(IExtendedTypesRegistry))))
+            if (!SkipRegisterExtendedTypesRegistry && !(dependencyResolver.IsRegistered(typeof(IExtendedTypesRegistry))))
             {
                 dependencyResolver.RegisterSingleton<IExtendedTypesRegistry, ExtendedTypesRegistry>();
             }
-            if (!(dependencyResolver.IsRegistered(typeof(ModelMetadataProvider))))
+            if (!SkipRegisterModelMetadataProvider && !(dependencyResolver.IsRegistered(typeof(ModelMetadataProvider))))
             {
                 dependencyResolver.RegisterSingleton<ModelMetadataProvider, ExtraModelMetadataProvider>();
             }

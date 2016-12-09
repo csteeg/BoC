@@ -1,5 +1,6 @@
 _ReSharper.**.suo
 *.ReSharper
+_ReSharper.Caches/
 *.user
 Build/
 bin/

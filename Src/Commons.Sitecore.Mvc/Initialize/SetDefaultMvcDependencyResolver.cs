@@ -14,8 +14,11 @@ namespace BoC.Sitecore.Mvc.Initialize
 
         public SetDefaultMvcDependencyResolver(IDependencyResolver dependencyResolver, IEventAggregator eventAggregator)
         {
-            global::BoC.Web.Mvc.Init.SetDefaultMvcDependencyResolver.Disabled = true;
-            _dependencyResolver = new SitecoreSpecificResolver(dependencyResolver, eventAggregator);
+	        if (!Disabled)
+	        {
+		        global::BoC.Web.Mvc.Init.SetDefaultMvcDependencyResolver.Disabled = true;
+		        _dependencyResolver = new SitecoreSpecificResolver(dependencyResolver, eventAggregator);
+	        }
         }
 
         public void Execute()
