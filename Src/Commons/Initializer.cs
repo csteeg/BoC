@@ -25,24 +25,27 @@ namespace BoC
             if (Executed)
                 return;
 
-            var depResolverTypeName = ConfigurationManager.AppSettings["BoC.IoC.ResolverTypeName"];
-            Type depresolverType = null;
-            if (depResolverTypeName != null)
-            {
-                depresolverType = Type.GetType(depResolverTypeName, false);
-            }
-            if (depresolverType == null && appDomainHelpers != null)
-            {
-                depresolverType = appDomainHelpers.SelectMany(
-                    a => a.GetTypes(t => typeof(IDependencyResolver).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract && t.IsPublic)).FirstOrDefault();
-            }
-            if (depresolverType != null)
-            {
-                Execute(Activator.CreateInstance(depresolverType) as IDependencyResolver, appDomainHelpers);
-            }
+            Execute(CreateDependencyResolver(appDomainHelpers), appDomainHelpers);
         }
 
-        public static void Execute(IDependencyResolver dependencyResolver, params IAppDomainHelper[] appDomainHelpers)
+	    public static IDependencyResolver CreateDependencyResolver(IAppDomainHelper[] appDomainHelpers)
+	    {
+		    var depResolverTypeName = ConfigurationManager.AppSettings["BoC.IoC.ResolverTypeName"];
+		    Type depresolverType = null;
+		    if (depResolverTypeName != null)
+		    {
+			    depresolverType = Type.GetType(depResolverTypeName, false);
+		    }
+		    if (depresolverType == null && appDomainHelpers != null)
+		    {
+			    depresolverType = appDomainHelpers.SelectMany(a =>
+							    a.GetTypes(t => typeof(IDependencyResolver).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract && t.IsPublic))
+				    .FirstOrDefault();
+		    }
+		    return depresolverType == null ? null : Activator.CreateInstance(depresolverType) as IDependencyResolver;
+	    }
+
+	    public static void Execute(IDependencyResolver dependencyResolver, params IAppDomainHelper[] appDomainHelpers)
         {
             if (Executed)
                 return;

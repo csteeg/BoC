@@ -12,8 +12,10 @@ namespace BoC.InversionOfControl
         void RegisterType<TFrom, TTo>(LifetimeScope scope = LifetimeScope.Transient) where TTo : class, TFrom  where TFrom : class;
         void RegisterType(Type from, Type to, LifetimeScope scope = LifetimeScope.Transient);
         void RegisterFactory(Type from, Func<object> factory);
-        void RegisterFactory<TFrom>(Func<TFrom> factory) where TFrom: class;
-        IDependencyResolver CreateChildResolver();
+        void RegisterFactory(Type from, Func<object> factory, LifetimeScope scope);
+        void RegisterFactory<TFrom>(Func<TFrom> factory, LifetimeScope scope) where TFrom: class;
+		void RegisterFactory<TFrom>(Func<TFrom> factory) where TFrom : class;
+		IDependencyResolver CreateChildResolver();
 
         object Resolve(Type type);
         T Resolve<T>() where T:class;
