@@ -12,7 +12,7 @@ namespace BoC
     public static class Initializer
     {
         private static object initializer_lock = new object();
-        public static bool Executed { get; private set; }
+        public static bool Executed { get; set; }
         public static void Execute()
         {
             if (Executed)

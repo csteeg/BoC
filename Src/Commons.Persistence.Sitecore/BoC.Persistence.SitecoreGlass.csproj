@@ -51,25 +51,25 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Glass.Mapper, Version=4.2.4.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\BoC.Glass.Mapper.Sc.Core.4.2.4.2\lib\net45\Glass.Mapper.dll</HintPath>
+    <Reference Include="Glass.Mapper, Version=4.3.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\BoC.Glass.Mapper.Sc.Core.4.3.0.1\lib\net45\Glass.Mapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Glass.Mapper.Sc, Version=4.2.4.2, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Glass.Mapper.Sc, Version=4.3.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\BoC.Glass.Mapper.Sc.Core.4.2.4.2\lib\80\Glass.Mapper.Sc.dll</HintPath>
+      <HintPath>..\..\packages\BoC.Glass.Mapper.Sc.Core.4.3.0.1\lib\80\Glass.Mapper.Sc.dll</HintPath>
     </Reference>
-    <Reference Include="Glass.Mapper.Sc.ContentSearch, Version=4.2.4.2, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Glass.Mapper.Sc.ContentSearch, Version=4.3.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\BoC.Glass.Mapper.Sc.ContentSearch.LuceneProvider.4.2.4.2\lib\80\Glass.Mapper.Sc.ContentSearch.dll</HintPath>
+      <HintPath>..\..\packages\BoC.Glass.Mapper.Sc.ContentSearch.LuceneProvider.4.3.0.1\lib\80\Glass.Mapper.Sc.ContentSearch.dll</HintPath>
     </Reference>
-    <Reference Include="Glass.Mapper.Sc.ContentSearch.LuceneProvider, Version=4.2.4.2, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Glass.Mapper.Sc.ContentSearch.LuceneProvider, Version=4.3.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\BoC.Glass.Mapper.Sc.ContentSearch.LuceneProvider.4.2.4.2\lib\80\Glass.Mapper.Sc.ContentSearch.LuceneProvider.dll</HintPath>
+      <HintPath>..\..\packages\BoC.Glass.Mapper.Sc.ContentSearch.LuceneProvider.4.3.0.1\lib\80\Glass.Mapper.Sc.ContentSearch.LuceneProvider.dll</HintPath>
     </Reference>
-    <Reference Include="Glass.Mapper.Sc.Mvc, Version=4.2.4.2, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Glass.Mapper.Sc.Mvc, Version=4.3.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\BoC.Glass.Mapper.Sc.Core.4.2.4.2\lib\Mvc52\Glass.Mapper.Sc.Mvc.dll</HintPath>
+      <HintPath>..\..\packages\BoC.Glass.Mapper.Sc.Core.4.3.0.1\lib\Mvc52\Glass.Mapper.Sc.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -140,7 +140,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefaultSetupTasks\EnableProfiling.cs" />
     <Compile Include="DefaultSetupTasks\RegisterValueProvider.cs">
       <SubType>
       </SubType>

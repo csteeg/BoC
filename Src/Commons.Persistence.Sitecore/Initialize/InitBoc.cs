@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using BoC.Helpers;
 using BoC.Persistence.SitecoreGlass.Initialize;
 using BoC.Web;

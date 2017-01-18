@@ -16,11 +16,16 @@ namespace $rootnamespace$.App_Start
     public static  class GlassMapperScCustom
     {
 		public static IDependencyResolver CreateResolver(){
+			Glass.Mapper.Configuration.Defaults.OverallConfiguration.InferType = true;
+			Glass.Mapper.Configuration.Defaults.OverallConfiguration.IsLazy = true;
 			global::BoC.Persistence.SitecoreGlass.Initialize.InitBoc.Start();
 
 			var config = new global::Glass.Mapper.Sc.Config();
+			config.AutoImportBaseClasses = true;
+			config.UseProxiesForLazyEnumerables = true;
 
 			var resolver = new DependencyResolver(config);
+			resolver.DataMapperResolverFactory.Add(() => new AbstractDataMapperFieldsWithSpace());
 			//trigger addtypes
 			var items = resolver.ObjectConstructionFactory.GetItems().ToArray();
 			var index = 0;
@@ -46,6 +51,7 @@ namespace $rootnamespace$.App_Start
 			return global::BoC.InversionOfControl.IoC.Resolver.ResolveAll<IConfigurationLoader>().ToArray();
 		}
 		public static void PostLoad(){
+			global::BoC.Profiling.Profiler.Enabled = global::Sitecore.Configuration.Settings.GetBoolSetting("BoC.Profiler.Enabled", false);
 			//Set config property to true in Glass.Mapper.Sc.CodeFirst.config to enable codefirst
 			if (!global::Sitecore.Configuration.Settings.GetBoolSetting("Glass.CodeFirst", false)) return;
 
