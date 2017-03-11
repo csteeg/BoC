@@ -129,6 +129,8 @@ namespace BoC.InversionOfControl.SimpleInjector
                     return WebRequestWithDisposal;
                 case LifetimeScope.PerThread:
                     return ExecutionContextWithDisposal;
+                case LifetimeScope.Singleton:
+                    return SingletonLifestyle;
                 default:
                     return Lifestyle.Transient;
             }
@@ -226,6 +228,24 @@ namespace BoC.InversionOfControl.SimpleInjector
         /// The singleton instance lifestyle registration constructor
         /// </summary>
         private static readonly ConstructorInfo SingletonInstanceLifestyleRegistrationConstructor = SingletonInstanceLifestyleRegistration.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[]{typeof (Type), typeof (Type), typeof (object), typeof (Lifestyle), typeof (Container)}, null);
+
+        /// <summary>
+        /// The SingletonLifetime type it's an internal class
+        /// </summary>
+        private static readonly Type SingletonLifestyleType = typeof(Container).Assembly.GetType("SimpleInjector.Lifestyles.SingletonLifestyle");
+
+        private static Lifestyle _singletonLifestyle;
+        /// <summary>
+        /// Creates an instance of the SingletonLifetime
+        /// </summary>
+        public static Lifestyle SingletonLifestyle
+        {
+            get
+            {
+                if (_singletonLifestyle != null) return _singletonLifestyle;
+                return _singletonLifestyle = (Lifestyle)SingletonLifestyleType.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { }, null)?.Invoke(null);
+            }
+        }
         /// <summary>
         /// Registers the instance.
         /// </summary>
