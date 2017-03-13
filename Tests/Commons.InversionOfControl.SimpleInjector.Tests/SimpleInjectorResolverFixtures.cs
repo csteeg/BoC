@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BoC.InversionOfControl;
 using BoC.InversionOfControl.SimpleInjector;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -122,6 +123,19 @@ namespace Commons.InverionOfControl.SimpleInjector.Tests
             var result = resolver.Resolve<Class3>();
             Assert.IsNotNull(result);
         }
+        [TestMethod]
+        public void RegisterFactory_WithSingleton_Should_Return_OneInstance()
+        {
+            var resolver = new SimpleInjectorDependencyResolver();
+            resolver.RegisterFactory(typeof(Class6), () => new Class6(), LifetimeScope.Singleton);
+
+            var result = resolver.Resolve<Class6>();
+            var anotherResult = resolver.Resolve<Class6>();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result, anotherResult);
+            Assert.AreEqual(1, Class6.Instances);
+        }
     }
 
     public interface IFace1 {}
@@ -146,6 +160,15 @@ namespace Commons.InverionOfControl.SimpleInjector.Tests
         public Class5(IEnumerable<IFace1> ifaces)
         {
             Ifaces = ifaces;
+        }
+    }
+    public class Class6
+    {
+        public static int Instances;
+        public Class6()
+        {
+            Instances++;
+
         }
     }
 }

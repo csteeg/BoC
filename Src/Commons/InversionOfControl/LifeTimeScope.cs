@@ -10,6 +10,7 @@ namespace BoC.InversionOfControl
         Transient,
         PerHttpRequest,
         PerThread,
+        Singleton,
         Unowned
     }
 }
