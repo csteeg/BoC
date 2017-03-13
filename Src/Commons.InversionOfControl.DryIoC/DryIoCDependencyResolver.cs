@@ -290,6 +290,8 @@ namespace BoC.InversionOfControl.DryIoC
                     return Reuse.InWebRequest;
                 case LifetimeScope.PerThread:
                     return Reuse.InThread;
+                case LifetimeScope.Singleton:
+                    return Reuse.Singleton;
                 default:
                     return Reuse.Transient;
             }

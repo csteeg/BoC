@@ -20,6 +20,8 @@ namespace BoC.InversionOfControl.Ninject
                     return registration.InRequestScope();
                 case LifetimeScope.PerThread:
                     return registration.InThreadScope();
+                case LifetimeScope.Singleton:
+                    return registration.InSingletonScope();
                 default:
                     return registration.InTransientScope();
             }

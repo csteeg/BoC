@@ -218,6 +218,8 @@ namespace BoC.InversionOfControl.Unity
                     return new PerRequestLifetimeManager();
                 case LifetimeScope.PerThread:
                     return new PerThreadLifetimeManager();
+                case LifetimeScope.Singleton:
+                    return new ContainerControlledLifetimeManager();
                 default:
                     return new TransientLifetimeManager();
             }

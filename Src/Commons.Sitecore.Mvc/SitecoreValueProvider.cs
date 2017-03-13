@@ -93,12 +93,10 @@ namespace BoC.Sitecore.Mvc
     internal class SitecoreValueProviderResult : ValueProviderResult
     {
         private readonly Item _item;
-        private readonly string _stringValue;
 
-        public SitecoreValueProviderResult(Item item, string stringValue, CultureInfo currentCulture)
+        public SitecoreValueProviderResult(Item item, string stringValue, CultureInfo currentCulture): base(item, stringValue, currentCulture)
         {
             _item = item;
-            _stringValue = stringValue;
         }
 
         public override object ConvertTo(Type type, CultureInfo culture)
