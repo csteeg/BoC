@@ -51,10 +51,18 @@ namespace BoC
                 return;
             lock (initializer_lock)
             {
-                if (Executed)
-                    return;
-                IoC.InitializeWith(dependencyResolver, appDomainHelpers);
-                new Bootstrapper(dependencyResolver, appDomainHelpers).Run();
+                if (appDomainHelpers != null)
+                {
+                    foreach (var appDomainHelper in appDomainHelpers)
+                    {
+                        dependencyResolver.RegisterInstance<IAppDomainHelper>(appDomainHelper);
+                    }
+                }
+
+                IoC.InitializeWith(dependencyResolver);
+                var bootstrapper = dependencyResolver.Resolve<Bootstrapper>();
+                if (bootstrapper != null)
+                    bootstrapper.Run();
                 Executed = true;
             }
 

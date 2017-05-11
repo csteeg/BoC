@@ -96,29 +96,11 @@ namespace BoC.Helpers
                         var filters = FileFilter.Split('|');
                         foreach (var path in paths)
                         {
-                            try
-                            {
-                                loadedAssemblies.AddRange(
-                                    filters.SelectMany(s => Directory.GetFiles(path, s)).Select(Assembly.LoadFrom));
-                                Loaded = true;
-                            }
-                                // Files should always exists but don't blow up here if they don't
-                            catch (FileNotFoundException)
-                            {
-                            }
-                                // File was found but could not be loaded
-                            catch (FileLoadException)
-                            {
-                            }
-                                // Dlls that contain native code are not loaded, but do not invalidate the Directory
-                            catch (BadImageFormatException)
-                            {
-                            }
-                                // Dlls that have missing Managed dependencies are not loaded, but do not invalidate the Directory 
-                            catch (ReflectionTypeLoadException)
-                            {
-                            }
-
+                            loadedAssemblies.AddRange(
+                                filters.SelectMany(s => Directory.GetFiles(path, s))
+                                       .Select(TryLoadAssembly)
+                                       .Where(it => it != null ));
+                            Loaded = true;
                         }
 
                     }
@@ -127,6 +109,31 @@ namespace BoC.Helpers
         }
 
 
+        private Assembly TryLoadAssembly(String path)
+        {
+            try
+            {
+                return Assembly.LoadFrom(path);
+            }
+                // Files should always exists but don't blow up here if they don't
+            catch (FileNotFoundException)
+            {
+            }
+                // File was found but could not be loaded
+            catch (FileLoadException)
+            {
+            }
+                // Dlls that contain native code are not loaded, but do not invalidate the Directory
+            catch (BadImageFormatException)
+            {
+            }
+                // Dlls that have missing Managed dependencies are not loaded, but do not invalidate the Directory 
+            catch (ReflectionTypeLoadException)
+            {
+            }
+
+            return null;
+        }
         /// <summary>
         ///     Releases the unmanaged resources used by the <see cref="AppDomainHelper"/> and 
         ///     optionally releases the managed resources.
