@@ -162,6 +162,7 @@
     <Compile Include="Services\ModelQuery.cs" />
     <Compile Include="Services\DefaultSetupTasks\AutoRegisterModelServices.cs" />
     <Compile Include="Tasks\BaseBackgroundTask.cs" />
+    <Compile Include="Tasks\RegisterBootstrapTasks.cs" />
     <Compile Include="Tasks\RegisterBackgroundTasks.cs" />
     <Compile Include="Tasks\Bootstrapper.cs" />
     <Compile Include="Tasks\BaseThreadedBackgroundTask.cs" />

@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using BoC.Helpers;
 using BoC.InversionOfControl;
 
 namespace BoC.Tasks
@@ -9,43 +7,37 @@ namespace BoC.Tasks
     public class Bootstrapper
     {
         private readonly IDependencyResolver dependencyResolver;
-        private readonly IAppDomainHelper[] appDomainHelpers;
+        private static object bootstrapper_lock = new object();
+        public bool Executed { get; set; }
 
-        public Bootstrapper(IDependencyResolver dependencyResolver, IAppDomainHelper[] appDomainHelpers)
+        public Bootstrapper(IDependencyResolver dependencyResolver)
         {
             this.dependencyResolver = dependencyResolver;
-            this.appDomainHelpers = appDomainHelpers;
         }
 
-        ICollection<Func<Type, bool>> taskFilters = new List<Func<Type, bool>>() 
+        public static readonly ICollection<Func<Type, bool>> TaskFilters = new List<Func<Type, bool>>() 
             { 
                 type => typeof(IBootstrapperTask).IsAssignableFrom(type),
                 type => !type.IsAbstract,
                 type => type.IsClass
             };
 
-        private void RegisterAllTasks()
+        public virtual void Run()
         {
-            var tasks = appDomainHelpers.SelectMany(helper => helper.GetTypes(t => taskFilters.All(func => func(t))));
-            foreach (var t in tasks)
+            if (Executed)
+                return;
+            lock (bootstrapper_lock)
             {
-                dependencyResolver.RegisterType(typeof(IBootstrapperTask), t);
-            }
-        }
+                if (Executed)
+                    return;
 
-        private void ExecuteTasks()
-        {
-            var tasks = dependencyResolver.ResolveAll<IBootstrapperTask>();
-            foreach (var task in tasks)
-            {
-                task.Execute();
+                var tasks = dependencyResolver.ResolveAll<IBootstrapperTask>();
+                foreach (var task in tasks)
+                {
+                    task.Execute();
+                }
+                Executed = true;
             }
-        }
-
-        public void Run()
-        {
-            RegisterAllTasks();
-            ExecuteTasks();
         }
     }
 }
